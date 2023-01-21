@@ -1,13 +1,33 @@
-interface Props {
-  width?: number;
-}
-const NavigationBar = ({ width = 80 }: Props) => {
+// TODO - 기능 붙이기
+const NavigationBar = () => {
   return (
     <div
-      className={`flex flex-col h-screen fixed min-w-${width} top-0 left-0 bg-gray-200`}
+      className={`flex flex-col h-screen fixed w-20 top-0 left-0 bg-gray-200 justify-between`}
     >
-      <div>1</div>
-      <div>2</div>
+      {/** top */}
+      <div>
+        <div className="w-full h-20 bg-gray-300 border-b flex items-center justify-center">
+          Icon
+        </div>
+        <div className="w-full h-20 bg-gray-300 border-b flex items-center justify-center">
+          Icon
+        </div>
+        <div className="w-full h-20 bg-gray-300 border-b flex items-center justify-center">
+          Icon
+        </div>
+      </div>
+      {/** bottom */}
+      <div>
+        <div className="w-full h-20 bg-gray-300 border-b flex items-center justify-center">
+          Icon
+        </div>
+        <div className="w-full h-20 bg-gray-300 border-b flex items-center justify-center">
+          Icon
+        </div>
+        <div className="w-full h-20 bg-gray-300 border-b flex items-center justify-center">
+          Icon
+        </div>
+      </div>
     </div>
   );
 };
