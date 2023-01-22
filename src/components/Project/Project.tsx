@@ -3,11 +3,11 @@ import classes from "./Project.module.css";
 
 const Project = () => {
   return (
-    <div className="flex relative gap-2">
-      <div className="sticky self-start top-1 w-60">
-        <h2 className="font-bold text-3xl py-1">Title</h2>
+    <div className="flex relative md:flex-row flex-col gap-2">
+      <div className="md:sticky self-start top-1 md:w-60">
+        <h2 className="font-bold text-3xl py-1 break-all">Title</h2>
         <p className="pt-4 text-zinc-400">2022-10 ~ </p>
-        <div className="flex gap-2 pt-4">
+        <div className="flex gap-2 pt-4 mb-4">
           <div className="bg-zinc-300 w-8 h-8" />
           <div className="bg-zinc-300 w-8 h-8" />
           <div className="bg-zinc-300 w-8 h-8" />
@@ -40,6 +40,10 @@ const Project = () => {
           <div className="border py-1 px-4 rounded-full cursor-pointer hover:bg-rose-400 hover:text-white select-none transition-all whitespace-nowrap">
             Styled Components
           </div>
+        </div>
+        <div>
+          <h4 className="font-bold text-lg my-2">React</h4>
+          <p>사용 기술에 대한 설명입니다.</p>
         </div>
         <h3 className="font-bold text-xl my-4">링크</h3>
         Project Component
