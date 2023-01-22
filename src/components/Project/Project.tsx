@@ -3,8 +3,8 @@ import classes from "./Project.module.css";
 
 const Project = () => {
   return (
-    <div className="flex relative md:flex-row flex-col gap-2">
-      <div className="md:sticky self-start top-1 md:w-60">
+    <div className="flex relative md:flex-row flex-col gap-2 w-full">
+      <div className="md:sticky self-start top-1 md:w-60 shrink-0">
         <h2 className="font-bold text-3xl py-1 break-all">Title</h2>
         <p className="pt-4 text-zinc-400">2022-10 ~ </p>
         <div className="flex gap-2 pt-4 mb-4">
@@ -14,8 +14,10 @@ const Project = () => {
         </div>
       </div>
       <div className="w-full">
+        {/** Project Image */}
         <h3 className="font-bold text-xl mb-4">
-          퀴즈를 통한 지식 체크 서비스를 제공합니다.
+          퀴즈를 통한 지식 체크 서비스를 제공합니다.퀴즈를 통한 지식 체크
+          서비스를 제공합니다.퀴즈를 통한 지식 체크 서비스를 제공합니다.
         </h3>
         <ul className="my-4">
           <li>세부 사항 1</li>
@@ -24,7 +26,12 @@ const Project = () => {
           <li>세부 사항 4</li>
         </ul>
         {/** 기술 스택 */}
-        <h3 className="font-bold text-xl my-4">사용 기술</h3>
+        <div className="flex items-center gap-8">
+          <h3 className="font-bold text-xl my-4">사용 기술</h3>
+          <span className=" text-gray-300">
+            버튼 클릭시 설명을 볼 수 있습니다.
+          </span>
+        </div>
         <div
           className={`flex gap-2 my-4 overflow-x-auto ${classes["scroll-hide"]}`}
         >
