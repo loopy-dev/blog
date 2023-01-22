@@ -8,7 +8,7 @@ const ProjectPageLayout = ({ children }: Props) => {
   return (
     <>
       <NavigationBar />
-      <main className="ml-20">{children}</main>
+      <main className="md:ml-20">{children}</main>
     </>
   );
 };
