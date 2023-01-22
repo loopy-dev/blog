@@ -2,7 +2,7 @@
 const NavigationBar = () => {
   return (
     <div
-      className={`flex sticky md:flex-col md:h-screen md:fixed md:w-20 top-0 md:left-0 bg-gray-200 justify-between z-10`}
+      className={`flex sticky md:flex-col md:h-screen md:fixed md:w-20 top-0 md:left-0 bg-gray-200 justify-between z-10 shadow-md`}
     >
       {/** top */}
       <div className="flex md:flex-col">
