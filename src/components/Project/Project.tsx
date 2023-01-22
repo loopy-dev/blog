@@ -41,6 +41,10 @@ const Project = () => {
             Styled Components
           </div>
         </div>
+        <div>
+          <h4 className="font-bold text-lg my-2">React</h4>
+          <p>사용 기술에 대한 설명입니다.</p>
+        </div>
         <h3 className="font-bold text-xl my-4">링크</h3>
         Project Component
         <p>long text</p>
