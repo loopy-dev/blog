@@ -1,0 +1,11 @@
+.scroll-hide::-webkit-scrollbar {
+  display: none;
+}
+
+.left {
+  flex: 3 1 0%;
+}
+
+.right {
+  flex: 7 1 0%;
+}

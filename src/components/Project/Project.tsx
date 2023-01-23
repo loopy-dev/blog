@@ -1,7 +1,8 @@
 // TODO - prop으로 데이터 전달받아서 컴포넌트 재사용
 import Link from "next/link";
 import { Project } from "../../models/Project";
-import classes from "./Project.module.css";
+import Skeleton from "../common/Skeleton";
+import classes from "./Project.module.scss";
 
 interface Props {
   project: Project;
@@ -10,21 +11,23 @@ interface Props {
 const Project = ({ project }: Props) => {
   return (
     <div className="flex relative md:flex-row flex-col gap-2 w-full">
-      <div className="md:sticky self-start top-1 md:w-60 shrink-0">
+      <div className={`${classes.left} md:sticky self-start top-1`}>
         <h2 className="font-bold text-3xl py-1 break-all">{project.title}</h2>
         {/** TODO - Date format 후 사용하기 */}
         <p className="pt-4 text-zinc-400">
           {project.startDate} ~ {project.endDate || ""}
         </p>
         <div className="flex gap-2 pt-4 mb-4">
-          <div className="bg-zinc-300 w-8 h-8" />
-          <div className="bg-zinc-300 w-8 h-8" />
-          <div className="bg-zinc-300 w-8 h-8" />
+          <Skeleton height={8} width={8} />
+          <Skeleton height={8} width={8} />
+          <Skeleton height={8} width={8} />
         </div>
       </div>
-      <div className="w-full">
+      <div className={`${classes.right} break-all`}>
         {/** Project Image */}
-        <h3 className="font-bold text-xl mb-4">{project.introduction}</h3>
+        <h3 className="font-bold text-xl mb-4 break-all">
+          {project.introduction}
+        </h3>
         <ul className="my-4 list-disc pl-4">
           {project.description.map((description) =>
             typeof description === "string" ? (
@@ -39,14 +42,14 @@ const Project = ({ project }: Props) => {
           )}
         </ul>
         {/** 기술 스택 */}
-        <div className="flex items-center gap-8">
+        <div className="flex items-baseline gap-8">
           <h3 className="font-bold text-xl my-4">사용 기술</h3>
-          <span className=" text-gray-300">
+          <span className="text-rose-400">
             버튼 클릭시 설명을 볼 수 있습니다.
           </span>
         </div>
         <div
-          className={`flex gap-2 my-4 overflow-x-auto ${classes["scroll-hide"]}`}
+          className={`flex flex-wrap gap-2 mb-4 overflow-x-auto ${classes["scroll-hide"]}`}
         >
           {project.skills.map((skill) => (
             <div
@@ -59,7 +62,9 @@ const Project = ({ project }: Props) => {
         </div>
         <div>
           {/** TODO - 현재 선택한 스택을 기준으로 표시하기 */}
-          <h4 className="font-bold text-lg my-2">{project.skills[0].name}</h4>
+          <h4 className="font-bold text-lg mt-2 mb-4">
+            {project.skills[0].name}
+          </h4>
           <p>{project.skills[0].description}</p>
         </div>
         {project.otherLinks ? (
