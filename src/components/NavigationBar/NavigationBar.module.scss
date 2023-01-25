@@ -1,0 +1,7 @@
+.navbar-icon {
+  &:hover {
+    span {
+      @apply fill-gray-900;
+    }
+  }
+}
