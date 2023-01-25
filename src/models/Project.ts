@@ -20,7 +20,7 @@ interface Skill {
   description: string;
 }
 
-interface PersonalLink {
+export interface PersonalLink {
   github: Link;
   website: Link;
   portfolio: Link;

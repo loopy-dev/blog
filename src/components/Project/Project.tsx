@@ -1,9 +1,7 @@
 // TODO - prop으로 데이터 전달받아서 컴포넌트 재사용
 import Link from 'next/link';
-import GithubIcon from '../../components/icons/GithubIcon';
 import { Project } from '../../models/Project';
-import Skeleton from '../common/Skeleton';
-import WebIcon from '../icons/WebIcon';
+import PersonalInfo from './PersonalInfo';
 import classes from './Project.module.scss';
 
 interface Props {
@@ -17,13 +15,9 @@ const Project = ({ project }: Props) => {
         <h2 className="font-bold text-3xl py-1 break-all">{project.title}</h2>
         {/** TODO - Date format 후 사용하기 */}
         <p className="pt-4 text-zinc-400">
-          {project.startDate} ~ {project.endDate || ''}
+          {project.startDate} ~ {project.endDate || '진행 중'}
         </p>
-        <div className="flex flex-wrap gap-3 my-4">
-          <GithubIcon />
-          <WebIcon />
-          <Skeleton height={8} width={8} />
-        </div>
+        <PersonalInfo links={project.links} />
       </div>
       <div className={`${classes.right} break-all`}>
         {/** Project Image */}
