@@ -1,4 +1,3 @@
-import { getTailwindWidth, getTailwindHeight } from './helper';
 interface Props {
   width: number;
   height: number;
