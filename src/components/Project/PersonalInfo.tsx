@@ -10,17 +10,17 @@ const PersonalInfo = ({ links }: Props) => {
     <div className="flex flex-wrap gap-3 my-4">
       {links.github && (
         <a href={links.github.url} rel="noopener noreferrer" target="_blank">
-          <Icon type="github" />
+          <Icon tooltip="github" type="github" />
         </a>
       )}
       {links.website && (
         <a href={links.website.url} rel="noopener noreferrer" target="_blank">
-          <Icon type="website" />
+          <Icon tooltip="website" type="website" />
         </a>
       )}
       {links.portfolio && (
         <a href={links.portfolio.url} rel="noopener noreferrer" target="_blank">
-          <Icon type="portfolio" />
+          <Icon tooltip="portfolio" type="portfolio" />
         </a>
       )}
     </div>
