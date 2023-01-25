@@ -4,7 +4,7 @@ export interface Project {
   endDate?: string;
   introduction: string;
   description: Array<string | Link>;
-  links: Link[];
+  links: Partial<PersonalLink>;
   otherLinks?: Link[];
   images?: string[];
   skills: Skill[];
@@ -18,4 +18,10 @@ interface Link {
 interface Skill {
   name: string;
   description: string;
+}
+
+interface PersonalLink {
+  github: Link;
+  website: Link;
+  portfolio: Link;
 }
