@@ -3,12 +3,20 @@ const nextConfig = {
   reactStrictMode: true,
   swcMinify: true,
   images: {
-    domains: ["user-images.githubusercontent.com"],
+    domains: ['user-images.githubusercontent.com'],
   },
   webpack(config) {
     config.module.rules.push({
       test: /\.svg$/,
-      use: "@svgr/webpack",
+      use: [
+        {
+          loader: '@svgr/webpack',
+          options: {
+            typescript: true,
+            ext: 'tsx',
+          },
+        },
+      ],
     });
 
     return config;

@@ -1,6 +1,4 @@
-import GithubIcon from '../icons/GithubIcon';
-import PortfolioIcon from '../icons/PortfolioIcon';
-import WebIcon from '../icons/WebIcon';
+import Icon from '../icons/Icon';
 import type { PersonalLink } from '../../models/Project';
 
 interface Props {
@@ -12,17 +10,17 @@ const PersonalInfo = ({ links }: Props) => {
     <div className="flex flex-wrap gap-3 my-4">
       {links.github && (
         <a href={links.github.url} rel="noopener noreferrer" target="_blank">
-          <GithubIcon />
+          <Icon type="github" />
         </a>
       )}
       {links.website && (
         <a href={links.website.url} rel="noopener noreferrer" target="_blank">
-          <WebIcon />
+          <Icon type="website" />
         </a>
       )}
       {links.portfolio && (
         <a href={links.portfolio.url} rel="noopener noreferrer" target="_blank">
-          <PortfolioIcon />
+          <Icon type="portfolio" />
         </a>
       )}
     </div>
