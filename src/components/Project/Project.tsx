@@ -3,6 +3,7 @@ import Link from 'next/link';
 import { Project } from '../../models/Project';
 import PersonalInfo from './PersonalInfo';
 import classes from './Project.module.scss';
+import Skills from './Skills';
 
 interface Props {
   project: Project;
@@ -38,31 +39,7 @@ const Project = ({ project }: Props) => {
           )}
         </ul>
         {/** 기술 스택 */}
-        <div className="flex items-baseline gap-8">
-          <h3 className="font-bold text-xl my-4">사용 기술</h3>
-          <span className="text-rose-400">
-            버튼 클릭시 설명을 볼 수 있습니다.
-          </span>
-        </div>
-        <div
-          className={`flex flex-wrap gap-2 mb-4 overflow-x-auto ${classes['scroll-hide']}`}
-        >
-          {project.skills.map((skill) => (
-            <div
-              key={skill.name}
-              className="border py-1 px-4 rounded-full cursor-pointer hover:bg-rose-400 hover:text-white select-none transition-all whitespace-nowrap"
-            >
-              {skill.name}
-            </div>
-          ))}
-        </div>
-        <div>
-          {/** TODO - 현재 선택한 스택을 기준으로 표시하기 */}
-          <h4 className="font-bold text-lg mt-2 mb-4">
-            {project.skills[0].name}
-          </h4>
-          <p>{project.skills[0].description}</p>
-        </div>
+        <Skills skills={project.skills} />
         {project.otherLinks ? (
           <h3 className="font-bold text-xl my-4">링크</h3>
         ) : null}
