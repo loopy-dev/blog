@@ -1,3 +1,4 @@
+import { getTailwindWidth, getTailwindHeight } from "./helper";
 interface Props {
   width: number;
   height: number;
@@ -10,7 +11,13 @@ interface Props {
  * TODO - improve reusability
  */
 const Skeleton = ({ width, height }: Props) => {
-  return <div className={`bg-zinc-300 w-${width} h-${height}`} />;
+  return (
+    <div
+      className={`bg-zinc-300 ${getTailwindWidth(width)} ${getTailwindHeight(
+        height
+      )} h-8`}
+    />
+  );
 };
 
 export default Skeleton;
