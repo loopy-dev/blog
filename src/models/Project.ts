@@ -15,7 +15,7 @@ interface Link {
   url: string;
 }
 
-interface Skill {
+export interface Skill {
   name: string;
   description: string;
 }

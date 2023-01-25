@@ -1,3 +1,11 @@
+import {
+  react,
+  styledComponents,
+  jest,
+  storybook,
+  githubActions,
+  django,
+} from './skills';
 import type { Project } from '../models/Project';
 
 const mock: Project = {
@@ -15,17 +23,7 @@ const mock: Project = {
     'Jest를 이용하여 유틸리티 함수들에 대해 엣지 케이스 구성하고 테스트를 진행',
     'github actions을 통한 빌드 - 테스트과정 자동화',
   ],
-  skills: [
-    { name: 'React', description: 'React 사용 이유 입니다.' },
-    {
-      name: 'Styled-Components',
-      description: 'Styled-Component 사용 이유 입니다.',
-    },
-    { name: 'Jest', description: 'Jest 사용 이유 입니다.' },
-    { name: 'Storybook', description: 'Storybook 사용 이유 입니다.' },
-    { name: 'github-actions', description: 'github-actions 사용 이유 입니다.' },
-    { name: 'Django', description: 'Django 사용 이유 입니다.' },
-  ],
+  skills: [react, styledComponents, jest, storybook, githubActions, django],
   startDate: '2022-10',
   links: {
     github: { name: 'Github', url: 'https://github.com/mrbartrns/chulcheck' },
