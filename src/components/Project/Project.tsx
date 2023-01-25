@@ -9,6 +9,7 @@ interface Props {
   project: Project;
 }
 
+// TODO - refactoring(template)
 const Project = ({ project }: Props) => {
   return (
     <div className="flex relative md:flex-row flex-col gap-4 w-full">
@@ -20,11 +21,9 @@ const Project = ({ project }: Props) => {
         </p>
         <PersonalInfo links={project.links} />
       </div>
-      <div className={`${classes.right} break-all`}>
+      <div className={`${classes.right}`}>
         {/** Project Image */}
-        <h3 className="font-bold text-xl mb-4 break-all">
-          {project.introduction}
-        </h3>
+        <h3 className="font-bold text-xl mb-4">{project.introduction}</h3>
         <ul className="my-4 list-disc pl-4">
           {project.description.map((description) =>
             typeof description === 'string' ? (

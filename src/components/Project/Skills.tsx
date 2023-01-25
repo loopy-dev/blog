@@ -14,7 +14,7 @@ const Skills = ({ skills }: Props) => {
     <>
       <div className="flex items-baseline gap-8">
         <h3 className="font-bold text-xl my-4">사용 기술</h3>
-        <span className="text-rose-400">
+        <span className="text-rose-400 hidden sm:block">
           버튼 클릭시 설명을 볼 수 있습니다.
         </span>
       </div>
