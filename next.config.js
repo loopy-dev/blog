@@ -21,6 +21,16 @@ const nextConfig = {
 
     return config;
   },
+  // TODO - remove this section
+  async redirects() {
+    return [
+      {
+        source: '/',
+        destination: '/projects',
+        permanent: false,
+      },
+    ];
+  },
 };
 
 module.exports = nextConfig;
