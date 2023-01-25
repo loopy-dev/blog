@@ -1,8 +1,10 @@
 // TODO - prop으로 데이터 전달받아서 컴포넌트 재사용
-import Link from "next/link";
-import { Project } from "../../models/Project";
-import Skeleton from "../common/Skeleton";
-import classes from "./Project.module.scss";
+import Link from 'next/link';
+import GithubIcon from '../../components/icons/GithubIcon';
+import { Project } from '../../models/Project';
+import Skeleton from '../common/Skeleton';
+import WebIcon from '../icons/WebIcon';
+import classes from './Project.module.scss';
 
 interface Props {
   project: Project;
@@ -11,15 +13,15 @@ interface Props {
 const Project = ({ project }: Props) => {
   return (
     <div className="flex relative md:flex-row flex-col gap-2 w-full">
-      <div className={`${classes.left} md:sticky self-start top-1`}>
+      <div className={`${classes.left} md:sticky self-start top-4`}>
         <h2 className="font-bold text-3xl py-1 break-all">{project.title}</h2>
         {/** TODO - Date format 후 사용하기 */}
         <p className="pt-4 text-zinc-400">
-          {project.startDate} ~ {project.endDate || ""}
+          {project.startDate} ~ {project.endDate || ''}
         </p>
-        <div className="flex gap-2 pt-4 mb-4">
-          <Skeleton height={8} width={8} />
-          <Skeleton height={8} width={8} />
+        <div className="flex flex-wrap gap-3 my-4">
+          <GithubIcon />
+          <WebIcon />
           <Skeleton height={8} width={8} />
         </div>
       </div>
@@ -30,7 +32,7 @@ const Project = ({ project }: Props) => {
         </h3>
         <ul className="my-4 list-disc pl-4">
           {project.description.map((description) =>
-            typeof description === "string" ? (
+            typeof description === 'string' ? (
               <li key={description} className="py-1">
                 {description}
               </li>
@@ -49,7 +51,7 @@ const Project = ({ project }: Props) => {
           </span>
         </div>
         <div
-          className={`flex flex-wrap gap-2 mb-4 overflow-x-auto ${classes["scroll-hide"]}`}
+          className={`flex flex-wrap gap-2 mb-4 overflow-x-auto ${classes['scroll-hide']}`}
         >
           {project.skills.map((skill) => (
             <div
