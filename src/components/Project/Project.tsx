@@ -1,8 +1,9 @@
 // TODO - prop으로 데이터 전달받아서 컴포넌트 재사용
-import Link from "next/link";
-import { Project } from "../../models/Project";
-import Skeleton from "../common/Skeleton";
-import classes from "./Project.module.scss";
+import { Project } from '../../models/Project';
+import OtherLinks from './OtherLinks';
+import PersonalInfo from './PersonalInfo';
+import classes from './Project.module.scss';
+import Skills from './Skills';
 
 interface Props {
   project: Project;
@@ -10,18 +11,14 @@ interface Props {
 
 const Project = ({ project }: Props) => {
   return (
-    <div className="flex relative md:flex-row flex-col gap-2 w-full">
-      <div className={`${classes.left} md:sticky self-start top-1`}>
-        <h2 className="font-bold text-3xl py-1 break-all">{project.title}</h2>
+    <div className="flex relative md:flex-row flex-col gap-4 w-full">
+      <div className={`${classes.left} md:sticky self-start top-4`}>
+        <h2 className="font-bold text-3xl py-1">{project.title}</h2>
         {/** TODO - Date format 후 사용하기 */}
         <p className="pt-4 text-zinc-400">
-          {project.startDate} ~ {project.endDate || ""}
+          {project.startDate} ~ {project.endDate || '진행 중'}
         </p>
-        <div className="flex gap-2 pt-4 mb-4">
-          <Skeleton height={8} width={8} />
-          <Skeleton height={8} width={8} />
-          <Skeleton height={8} width={8} />
-        </div>
+        <PersonalInfo links={project.links} />
       </div>
       <div className={`${classes.right} break-all`}>
         {/** Project Image */}
@@ -30,7 +27,7 @@ const Project = ({ project }: Props) => {
         </h3>
         <ul className="my-4 list-disc pl-4">
           {project.description.map((description) =>
-            typeof description === "string" ? (
+            typeof description === 'string' ? (
               <li key={description} className="py-1">
                 {description}
               </li>
@@ -42,84 +39,8 @@ const Project = ({ project }: Props) => {
           )}
         </ul>
         {/** 기술 스택 */}
-        <div className="flex items-baseline gap-8">
-          <h3 className="font-bold text-xl my-4">사용 기술</h3>
-          <span className="text-rose-400">
-            버튼 클릭시 설명을 볼 수 있습니다.
-          </span>
-        </div>
-        <div
-          className={`flex flex-wrap gap-2 mb-4 overflow-x-auto ${classes["scroll-hide"]}`}
-        >
-          {project.skills.map((skill) => (
-            <div
-              key={skill.name}
-              className="border py-1 px-4 rounded-full cursor-pointer hover:bg-rose-400 hover:text-white select-none transition-all whitespace-nowrap"
-            >
-              {skill.name}
-            </div>
-          ))}
-        </div>
-        <div>
-          {/** TODO - 현재 선택한 스택을 기준으로 표시하기 */}
-          <h4 className="font-bold text-lg mt-2 mb-4">
-            {project.skills[0].name}
-          </h4>
-          <p>{project.skills[0].description}</p>
-        </div>
-        {project.otherLinks ? (
-          <h3 className="font-bold text-xl my-4">링크</h3>
-        ) : null}
-        {project.otherLinks ? (
-          <ul className="list-disc pl-4">
-            {project.otherLinks.map((link) => (
-              <li key={link.url} className="py-1">
-                <Link href={link.url}>{link.name}</Link>
-              </li>
-            ))}
-          </ul>
-        ) : null}
-        Project Component
-        <p>long text</p>
-        <p>long text</p>
-        <p>long text</p>
-        <p>long text</p>
-        <p>long text</p>
-        <p>long text</p>
-        <p>long text</p>
-        <p>long text</p>
-        <p>long text</p>
-        <p>long text</p>
-        <p>long text</p>
-        <p>long text</p>
-        <p>long text</p>
-        <p>long text</p>
-        <p>long text</p>
-        <p>long text</p>
-        <p>long text</p>
-        <p>long text</p>
-        <p>long text</p>
-        <p>long text</p>
-        <p>long text</p>
-        <p>long text</p>
-        <p>long text</p>
-        <p>long text</p>
-        <p>long text</p>
-        <p>long text</p>
-        <p>long text</p>
-        <p>long text</p>
-        <p>long text</p>
-        <p>long text</p>
-        <p>long text</p>
-        <p>long text</p>
-        <p>long text</p>
-        <p>long text</p>
-        <p>long text</p>
-        <p>long text</p>
-        <p>long text</p>
-        <p>long text</p>
-        <p>long text</p>
-        <p>long text</p>
+        <Skills skills={project.skills} />
+        <OtherLinks otherLinks={project.otherLinks} />
       </div>
     </div>
   );

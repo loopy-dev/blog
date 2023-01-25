@@ -10,7 +10,7 @@ interface Props {
  * TODO - improve reusability
  */
 const Skeleton = ({ width, height }: Props) => {
-  return <div className={`bg-zinc-300 w-${width} h-${height}`} />;
+  return <div className={`bg-zinc-300 w-8 h-8}`} />;
 };
 
 export default Skeleton;
