@@ -10,7 +10,7 @@ export interface Project {
   skills: Skill[];
 }
 
-interface Link {
+export interface Link {
   name: string;
   url: string;
 }

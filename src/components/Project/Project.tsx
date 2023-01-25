@@ -1,6 +1,6 @@
 // TODO - prop으로 데이터 전달받아서 컴포넌트 재사용
-import Link from 'next/link';
 import { Project } from '../../models/Project';
+import OtherLinks from './OtherLinks';
 import PersonalInfo from './PersonalInfo';
 import classes from './Project.module.scss';
 import Skills from './Skills';
@@ -11,9 +11,9 @@ interface Props {
 
 const Project = ({ project }: Props) => {
   return (
-    <div className="flex relative md:flex-row flex-col gap-2 w-full">
+    <div className="flex relative md:flex-row flex-col gap-4 w-full">
       <div className={`${classes.left} md:sticky self-start top-4`}>
-        <h2 className="font-bold text-3xl py-1 break-all">{project.title}</h2>
+        <h2 className="font-bold text-3xl py-1">{project.title}</h2>
         {/** TODO - Date format 후 사용하기 */}
         <p className="pt-4 text-zinc-400">
           {project.startDate} ~ {project.endDate || '진행 중'}
@@ -40,59 +40,7 @@ const Project = ({ project }: Props) => {
         </ul>
         {/** 기술 스택 */}
         <Skills skills={project.skills} />
-        {project.otherLinks ? (
-          <h3 className="font-bold text-xl my-4">링크</h3>
-        ) : null}
-        {project.otherLinks ? (
-          <ul className="list-disc pl-4">
-            {project.otherLinks.map((link) => (
-              <li key={link.url} className="py-1">
-                <Link href={link.url}>{link.name}</Link>
-              </li>
-            ))}
-          </ul>
-        ) : null}
-        Project Component
-        <p>long text</p>
-        <p>long text</p>
-        <p>long text</p>
-        <p>long text</p>
-        <p>long text</p>
-        <p>long text</p>
-        <p>long text</p>
-        <p>long text</p>
-        <p>long text</p>
-        <p>long text</p>
-        <p>long text</p>
-        <p>long text</p>
-        <p>long text</p>
-        <p>long text</p>
-        <p>long text</p>
-        <p>long text</p>
-        <p>long text</p>
-        <p>long text</p>
-        <p>long text</p>
-        <p>long text</p>
-        <p>long text</p>
-        <p>long text</p>
-        <p>long text</p>
-        <p>long text</p>
-        <p>long text</p>
-        <p>long text</p>
-        <p>long text</p>
-        <p>long text</p>
-        <p>long text</p>
-        <p>long text</p>
-        <p>long text</p>
-        <p>long text</p>
-        <p>long text</p>
-        <p>long text</p>
-        <p>long text</p>
-        <p>long text</p>
-        <p>long text</p>
-        <p>long text</p>
-        <p>long text</p>
-        <p>long text</p>
+        <OtherLinks otherLinks={project.otherLinks} />
       </div>
     </div>
   );
