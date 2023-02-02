@@ -19,6 +19,7 @@ const NavigationBar = () => {
           >
             <div className="m-2">
               <Image
+                priority
                 alt="profile"
                 className="cursor-pointer"
                 height={64}
