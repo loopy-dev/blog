@@ -12,6 +12,7 @@ interface Props extends HTMLAttributes<HTMLSpanElement> {
   type: TypeofIcon;
   children?: React.ReactNode;
   tooltip?: string;
+  color?: 'transparent' | 'white';
 }
 
 type TypeofIcon =
@@ -25,11 +26,11 @@ type TypeofIcon =
 const CLASSNAMES =
   'fill-zinc-300 hover:fill-gray-900 transition-all cursor-pointer';
 
-const Icon = ({ tooltip, type, ...props }: Props) => {
+const Icon = ({ tooltip, type, color, ...props }: Props) => {
   const [isHover, setIsHover] = useState(false);
   const classNames = (props.className || '').concat(CLASSNAMES);
   return (
-    <div className="relative">
+    <div className={`relative ${color === 'white' ? 'text-white' : ''}`}>
       <span
         className={classNames}
         onMouseEnter={() => setIsHover(true)}
