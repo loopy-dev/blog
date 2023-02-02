@@ -1,6 +1,6 @@
 import Head from 'next/head';
 import Project from '../../components/Project';
-import ProjectPageLayout from '../../components/ProjectPageLayout';
+import GlobalLayout from '../../components/layouts/GlobalLayout';
 import projects from '../../data/projects';
 
 const Projects = () => {
@@ -10,7 +10,7 @@ const Projects = () => {
         <title>Projects - Portfolio</title>
         <meta key="title" content="Projects - Portfolio" property="og:title" />
       </Head>
-      <ProjectPageLayout>
+      <GlobalLayout>
         <article className="mx-auto max-w-4xl">
           <header className="p-8">
             <h1 className="font-bold text-5xl py-1 break-all">Projects</h1>
@@ -21,7 +21,7 @@ const Projects = () => {
             ))}
           </section>
         </article>
-      </ProjectPageLayout>
+      </GlobalLayout>
     </>
   );
 };

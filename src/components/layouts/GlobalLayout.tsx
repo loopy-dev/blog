@@ -1,10 +1,10 @@
-import NavigationBar from './NavigationBar';
+import NavigationBar from '../NavigationBar';
 
 interface Props {
   children: React.ReactNode;
 }
 
-const ProjectPageLayout = ({ children }: Props) => {
+const GlobalLayout = ({ children }: Props) => {
   return (
     <>
       <NavigationBar />
@@ -13,4 +13,4 @@ const ProjectPageLayout = ({ children }: Props) => {
   );
 };
 
-export default ProjectPageLayout;
+export default GlobalLayout;
