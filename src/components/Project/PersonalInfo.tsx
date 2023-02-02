@@ -1,3 +1,4 @@
+import WithTooltip from '../common/WithTooltip';
 import Icon from '../icons/Icon';
 import type { PersonalLink } from '../../models/Project';
 
@@ -10,17 +11,23 @@ const PersonalInfo = ({ links }: Props) => {
     <div className="flex flex-wrap gap-3 my-4">
       {links.github && (
         <a href={links.github.url} rel="noopener noreferrer" target="_blank">
-          <Icon tooltip="github" type="github" />
+          <WithTooltip tooltip="github">
+            <Icon type="github" />
+          </WithTooltip>
         </a>
       )}
       {links.website && (
         <a href={links.website.url} rel="noopener noreferrer" target="_blank">
-          <Icon tooltip="website" type="website" />
+          <WithTooltip tooltip="website">
+            <Icon type="website" />
+          </WithTooltip>
         </a>
       )}
       {links.portfolio && (
         <a href={links.portfolio.url} rel="noopener noreferrer" target="_blank">
-          <Icon tooltip="portfolio" type="portfolio" />
+          <WithTooltip tooltip="portfolio">
+            <Icon type="portfolio" />
+          </WithTooltip>
         </a>
       )}
     </div>
