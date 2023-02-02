@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
 import type { HTMLAttributes } from 'react';
 import Tooltip from './Tooltip';
 
@@ -14,15 +14,22 @@ const WithTooltip = ({
   ...props
 }: Props) => {
   const [isHover, setIsHover] = useState(false);
-  const classNames = (props.className || '').concat(CLASSNAMES);
+
+  const childrenWithProps = React.isValidElement(children)
+    ? React.cloneElement(children, {
+        ...children.props,
+        'data-ishover': isHover,
+      })
+    : children;
+
   return (
     <div className="relative">
       <span
-        className={classNames}
         onMouseEnter={() => setIsHover(true)}
         onMouseLeave={() => setIsHover(false)}
+        {...props}
       >
-        {children}
+        {childrenWithProps}
       </span>
       {tooltip ? (
         <Tooltip content={tooltip} hover={isHover} position={position} />
@@ -32,6 +39,3 @@ const WithTooltip = ({
 };
 
 export default WithTooltip;
-
-const CLASSNAMES =
-  'fill-zinc-300 hover:fill-gray-900 transition-all cursor-pointer';

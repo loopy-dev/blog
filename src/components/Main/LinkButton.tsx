@@ -8,7 +8,7 @@ const LinkButton = ({ children, ...props }: Props) => {
   return (
     <a
       {...props}
-      className={`inline-flex items-center py-4 px-8 bg-gray-800 text-gray-50 text-lg rounded-lg`}
+      className={`inline-flex items-center py-4 px-8 bg-gray-800 text-gray-50 text-lg rounded-lg hover:bg-gray-700 select-none`}
     >
       {children}
     </a>

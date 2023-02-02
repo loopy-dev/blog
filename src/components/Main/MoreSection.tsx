@@ -10,7 +10,7 @@ const MoreSection = () => {
     <section>
       <LinkButton href="https://github.com/mrbartrns" target="_blank">
         <span className="inline-flex gap-2 justify-center items-center">
-          <Icon color="white" type="github" />
+          <Icon type="github" />
           Github에서 더 알아보기
         </span>
       </LinkButton>
