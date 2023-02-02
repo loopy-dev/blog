@@ -10,7 +10,7 @@ const characteristics = [
 const Greetings = () => {
   return (
     <FadeInUp>
-      <div className="my-24 font-bold text-7xl leading-normal">
+      <div className="my-24 font-bold sm:text-4xl md:text-7xl text-2xl sm:leading-normal md:leading-normal leading-normal">
         <h1>안녕하세요,</h1>
         <h1>저는</h1>
         <h1>

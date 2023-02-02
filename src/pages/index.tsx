@@ -10,7 +10,7 @@ const Home = () => {
         <meta key="title" content="About Me - Portfolio" property="og:title" />
       </Head>
       <GlobalLayout>
-        <article className="mx-auto max-w-4xl">
+        <article className="mx-auto max-w-4xl p-8">
           <Greetings />
         </article>
       </GlobalLayout>
