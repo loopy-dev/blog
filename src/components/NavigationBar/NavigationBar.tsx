@@ -13,8 +13,9 @@ const NavigationBar = () => {
       {/** top */}
       <div className="flex md:flex-col">
         <WithTooltip position="right" tooltip="About Me">
-          <a
+          <Link
             className={`${classes['navbar-icon']} flex justify-center items-center w-16 h-16 hover:bg-gray-300 transition-all rounded-lg`}
+            href="/"
           >
             <div className="m-2">
               <Image
@@ -25,7 +26,7 @@ const NavigationBar = () => {
                 width={64}
               />
             </div>
-          </a>
+          </Link>
         </WithTooltip>
         <WithTooltip position="right" tooltip="Projects">
           <Link
