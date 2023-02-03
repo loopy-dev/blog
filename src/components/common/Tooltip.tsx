@@ -7,7 +7,7 @@ interface Props {
 }
 
 const DEFAULT_CLASSNAMES =
-  'absolute transition-all bg-gray-900 text-gray-50 rounded-md text-xs py-1 px-2 select-none z-10';
+  'absolute transition-all bg-gray-900 text-gray-50 rounded-md text-xs py-1 px-2 select-none z-10 hidden md:block';
 
 // FIXME - tooltip width can be over navbar width but it isn't.
 const Tooltip = ({ hover, content, position = 'bottom' }: Props) => {
