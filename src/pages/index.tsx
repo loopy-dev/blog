@@ -1,6 +1,5 @@
 import Head from 'next/head';
-import Greetings from '../components/Main/Greetings';
-import MoreSection from '../components/Main/MoreSection';
+import Introduction from '../components/Main/Introduction';
 import GlobalLayout from '../components/layouts/GlobalLayout';
 
 const Home = () => {
@@ -12,8 +11,9 @@ const Home = () => {
       </Head>
       <GlobalLayout>
         <article className="mx-auto max-w-4xl p-8">
-          <Greetings />
-          <MoreSection />
+          {/** first part of main page, introduction */}
+          <Introduction />
+          <section>{/** introduction */}</section>
         </article>
       </GlobalLayout>
     </>

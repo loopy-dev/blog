@@ -4,7 +4,7 @@ import Slider from './Slider';
 const characteristics = [
   '호기심 많은',
   '글 쓰는 것을 좋아하는',
-  '항상 최선을 다하는',
+  '작성한 코드를 자식처럼 생각하는',
 ];
 
 const Greetings = () => {
