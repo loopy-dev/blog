@@ -18,6 +18,7 @@ export interface Link {
 export interface Skill {
   name: string;
   description: string;
+  subDescription?: string;
 }
 
 export interface PersonalLink {

@@ -1,8 +1,10 @@
 import Head from 'next/head';
 import Introduction from '../components/Main/Introduction';
+import { Projects } from '../components/Project';
+import FadeInUp from '../components/common/FadeInUp';
 import GlobalLayout from '../components/layouts/GlobalLayout';
 
-const Home = () => {
+const Page = () => {
   return (
     <>
       <Head>
@@ -10,14 +12,15 @@ const Home = () => {
         <meta key="title" content="About Me - Portfolio" property="og:title" />
       </Head>
       <GlobalLayout>
-        <article className="mx-auto max-w-4xl p-8">
-          {/** first part of main page, introduction */}
+        {/** first part of main page, introduction */}
+        <FadeInUp>
           <Introduction />
-          <section>{/** introduction */}</section>
-        </article>
+        </FadeInUp>
+        <Projects />
+        {/** Projects - temporary projects(same with projects page) */}
       </GlobalLayout>
     </>
   );
 };
 
-export default Home;
+export default Page;
