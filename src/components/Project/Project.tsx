@@ -16,7 +16,7 @@ const Project = ({ project }: Props) => {
       sticky
       left={
         <>
-          <h2 className="font-bold text-2xl py-1">{project.title}</h2>
+          <h2 className="font-bold text-xl py-1">{project.title}</h2>
           {/** TODO - Date format 후 사용하기 */}
           <p className="pt-4 text-zinc-400">
             {project.startDate} ~ {project.endDate || '진행 중'}
@@ -26,7 +26,7 @@ const Project = ({ project }: Props) => {
       }
       right={
         <>
-          <h3 className="font-bold text-xl mb-4">{project.introduction}</h3>
+          <h3 className="font-bold mb-4 text-xl">{project.introduction}</h3>
           <ul className="my-4 list-disc pl-4">
             {project.description.map((description) =>
               typeof description === 'string' ? (
