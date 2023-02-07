@@ -20,14 +20,14 @@ const FadeInUp = ({ children, ...props }: HTMLAttributes<HTMLDivElement>) => {
         }
       });
     },
-    { threshold: 0.5 }
+    { threshold: 0.1 }
   );
 
   return (
     <div
       ref={ref}
-      className={`${isIntersecting ? classNames.active : 'invisible'} ${
-        props.className
+      className={`${props.className || ''} ${
+        isIntersecting ? classNames.active : classNames.inactive
       }`}
       {...props}
     >

@@ -18,6 +18,7 @@ export interface Link {
 export interface Skill {
   name: string;
   description: string;
+  subDescription?: string;
 }
 
 export interface PersonalLink {
@@ -25,3 +26,12 @@ export interface PersonalLink {
   website: Link;
   portfolio: Link;
 }
+
+export type Education = Pick<
+  Project,
+  'title' | 'startDate' | 'endDate' | 'introduction'
+> & {
+  description?: Array<string | Link>;
+  links?: Partial<PersonalLink>;
+  otherLinks?: Link[];
+};

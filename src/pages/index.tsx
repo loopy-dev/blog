@@ -1,9 +1,12 @@
 import Head from 'next/head';
-import Greetings from '../components/Main/Greetings';
-import MoreSection from '../components/Main/MoreSection';
+import Activities from '../components/Main/Activities';
+import Educations from '../components/Main/Educations';
+import Introduction from '../components/Main/Introduction';
+import { Projects } from '../components/Project';
+import FadeInUp from '../components/common/FadeInUp';
 import GlobalLayout from '../components/layouts/GlobalLayout';
 
-const Home = () => {
+const Page = () => {
   return (
     <>
       <Head>
@@ -11,13 +14,17 @@ const Home = () => {
         <meta key="title" content="About Me - Portfolio" property="og:title" />
       </Head>
       <GlobalLayout>
-        <article className="mx-auto max-w-4xl p-8">
-          <Greetings />
-          <MoreSection />
-        </article>
+        {/** first part of main page, introduction */}
+        <FadeInUp>
+          <Introduction />
+        </FadeInUp>
+        <Projects />
+        <Educations />
+        <Activities />
+        {/** Projects - temporary projects(same with projects page) */}
       </GlobalLayout>
     </>
   );
 };
 
-export default Home;
+export default Page;
