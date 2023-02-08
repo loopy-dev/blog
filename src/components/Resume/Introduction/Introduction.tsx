@@ -1,5 +1,5 @@
-import Icon from '../icons';
-import LinkButton from './LinkButton';
+import LinkButton from '../../Main/LinkButton';
+import Icon from '../../icons';
 
 const Introduction = () => {
   return (

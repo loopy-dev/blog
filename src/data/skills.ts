@@ -1,4 +1,4 @@
-import type { Skill } from '../models/Project';
+import type { Skill } from '../models/Resume';
 
 export const react: Skill = {
   name: 'React',

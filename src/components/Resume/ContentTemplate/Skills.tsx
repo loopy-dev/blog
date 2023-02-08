@@ -1,7 +1,7 @@
 import { useState } from 'react';
-import classes from './Project.module.scss';
-import SkillButton from './SkillButton';
-import type { Skill } from '../../models/Project';
+import SkillButton from '../ContentTemplate/SkillButton';
+import classes from './Skills.module.scss';
+import type { Skill } from '../../../models/Resume';
 
 interface Props {
   skills: Skill[];

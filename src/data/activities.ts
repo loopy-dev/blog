@@ -1,4 +1,4 @@
-import type { Education } from '../models/Project';
+import type { Education } from '../models/Resume';
 
 export const speakAndLearn: Education = {
   title: '말하면서 배워요 스터디',

@@ -35,3 +35,5 @@ export type Education = Pick<
   links?: Partial<PersonalLink>;
   otherLinks?: Link[];
 };
+
+export type Resume = Partial<Project>;

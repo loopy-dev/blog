@@ -11,7 +11,7 @@ import {
   babel,
   vanillaJS,
 } from './skills';
-import type { Project } from '../models/Project';
+import type { Project } from '../models/Resume';
 
 export const chulcheck: Project = {
   title: '출첵(chulcheck)',

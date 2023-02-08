@@ -1,4 +1,4 @@
-import type { Link as LinkModel } from '../../models/Project';
+import type { Link as LinkModel } from '../../../models/Resume';
 
 interface Props {
   otherLinks?: LinkModel[];

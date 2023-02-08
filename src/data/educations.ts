@@ -1,4 +1,4 @@
-import type { Education } from '../models/Project';
+import type { Education } from '../models/Resume';
 
 export const feDevCourse: Education = {
   title: '프로그래머스 프론트엔드 데브코스(2기)',
