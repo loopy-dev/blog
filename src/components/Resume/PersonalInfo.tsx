@@ -1,6 +1,6 @@
-import WithTooltip from '../../common/WithTooltip';
-import Icon from '../../icons/Icon';
-import type { PersonalLink } from '../../../models/Resume';
+import WithTooltip from '../common/WithTooltip';
+import Icon from '../icons';
+import type { PersonalLink } from '../../models/Resume';
 
 interface Props {
   links?: Partial<PersonalLink>;
