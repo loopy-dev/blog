@@ -1,5 +1,5 @@
-import { activities } from '../../data/activities';
-import Activity from './Activity';
+import { activities } from '../../../data/activities';
+import ContentTemplate from '../ContentTemplate';
 
 const Activities = () => {
   return (
@@ -9,7 +9,7 @@ const Activities = () => {
       </header>
       <section className="flex flex-col gap-40">
         {activities.map((activity) => (
-          <Activity key={activity.title} activity={activity} />
+          <ContentTemplate key={activity.title} content={activity} />
         ))}
       </section>
     </article>

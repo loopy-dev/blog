@@ -1,9 +1,5 @@
 import Head from 'next/head';
-import Activities from '../components/Main/Activities';
-import Educations from '../components/Main/Educations';
-import Introduction from '../components/Main/Introduction';
-import { Projects } from '../components/Project';
-import FadeInUp from '../components/common/FadeInUp';
+import Resume from '../components/Resume';
 import GlobalLayout from '../components/layouts/GlobalLayout';
 
 const Page = () => {
@@ -15,12 +11,7 @@ const Page = () => {
       </Head>
       <GlobalLayout>
         {/** first part of main page, introduction */}
-        <FadeInUp>
-          <Introduction />
-        </FadeInUp>
-        <Projects />
-        <Educations />
-        <Activities />
+        <Resume />
         {/** Projects - temporary projects(same with projects page) */}
       </GlobalLayout>
     </>

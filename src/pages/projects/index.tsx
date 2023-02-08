@@ -1,5 +1,5 @@
 import Head from 'next/head';
-import Projects from '../../components/Project/Projects';
+import Projects from '../../components/Resume/Projects';
 import GlobalLayout from '../../components/layouts/GlobalLayout';
 
 const Page = () => {

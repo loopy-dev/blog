@@ -1,5 +1,5 @@
-import { educations } from '../../data/educations';
-import Education from './Education';
+import { educations } from '../../../data/educations';
+import ContentTemplate from '../ContentTemplate';
 
 const Educations = () => {
   return (
@@ -9,7 +9,7 @@ const Educations = () => {
       </header>
       <section className="flex flex-col gap-40">
         {educations.map((education) => (
-          <Education key={education.title} education={education} />
+          <ContentTemplate key={education.title} content={education} />
         ))}
       </section>
     </article>
