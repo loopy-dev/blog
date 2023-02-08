@@ -5,4 +5,6 @@ export default {
   title: 'Components/Input',
 } as ComponentMeta<typeof Input>;
 
-export const Default: ComponentStory<typeof Input> = () => <Input />;
+export const Default: ComponentStory<typeof Input> = () => (
+  <Input id="label" label="label" placeholder="label" />
+);

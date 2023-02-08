@@ -1,10 +1,10 @@
-import type { InputHTMLAttributes } from 'react';
+import type { TextareaHTMLAttributes } from 'react';
 
-interface Props extends InputHTMLAttributes<HTMLInputElement> {
+interface Props extends TextareaHTMLAttributes<HTMLTextAreaElement> {
   label?: string;
 }
 
-const Input = ({ label, ...props }: Props) => {
+const TextArea = ({ label, ...props }: Props) => {
   return (
     <div>
       <label
@@ -14,7 +14,7 @@ const Input = ({ label, ...props }: Props) => {
         {label}
       </label>
       <div className="relative mt-1 rounded-md shadow-sm">
-        <input
+        <textarea
           {...props}
           className={`block w-full rounded-md border-gray-300 border min-w-0 outline-none pl-3 py-2 focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 sm:text-sm`}
         />
@@ -23,4 +23,4 @@ const Input = ({ label, ...props }: Props) => {
   );
 };
 
-export default Input;
+export default TextArea;

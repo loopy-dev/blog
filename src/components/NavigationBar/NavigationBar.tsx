@@ -29,10 +29,10 @@ const NavigationBar = () => {
             </div>
           </Link>
         </WithTooltip>
-        <WithTooltip position="right" tooltip="Projects">
+        <WithTooltip position="right" tooltip="Feedback">
           <Link
             className={`${classes['navbar-icon']} flex justify-center items-center w-16 h-16 hover:bg-gray-300 transition-all rounded-lg`}
-            href="/projects"
+            href="/feedback"
           >
             <Icon type="project" />
           </Link>
