@@ -1,10 +1,26 @@
 import type { TextareaHTMLAttributes } from 'react';
+import React from 'react';
+
+type Color = 'default' | 'error';
 
 interface Props extends TextareaHTMLAttributes<HTMLTextAreaElement> {
   label?: string;
+  variant?: Color;
 }
 
-const TextArea = ({ label, ...props }: Props) => {
+type Settings = {
+  [key in Color]: string;
+};
+
+const SETTINGS: Settings = {
+  default: 'focus:border-indigo-500 focus:ring-indigo-500 border-gray-300',
+  error: 'focus:border-red-500 focus:ring-red-500 border-red-500',
+};
+
+const TextArea = (
+  { label, variant = 'default', ...props }: Props,
+  ref: React.ForwardedRef<HTMLTextAreaElement>
+) => {
   return (
     <div>
       <label
@@ -15,12 +31,13 @@ const TextArea = ({ label, ...props }: Props) => {
       </label>
       <div className="relative mt-1 rounded-md shadow-sm">
         <textarea
+          ref={ref}
           {...props}
-          className={`block w-full rounded-md border-gray-300 border min-w-0 outline-none pl-3 py-2 focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 sm:text-sm`}
+          className={`block w-full rounded-md border min-w-0 outline-none pl-3 py-2 sm:text-sm ${SETTINGS[variant]}`}
         />
       </div>
     </div>
   );
 };
 
-export default TextArea;
+export default React.forwardRef(TextArea);
