@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import notion from '../../notion';
+import notion from '../../services/notion';
 import type { GetServerSideProps } from 'next';
 
 interface Props {

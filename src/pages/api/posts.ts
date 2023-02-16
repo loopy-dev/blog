@@ -1,5 +1,5 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
-import notion from '../../notion';
+import notion from '../../services/notion';
 import type { NextApiRequest, NextApiResponse } from 'next';
 
 const databaseId = process.env.NEXT_PUBLIC_DATABASE_ID;

@@ -1,4 +1,4 @@
-import notion from '../../notion';
+import notion from '../../services/notion';
 import type { NextApiRequest, NextApiResponse } from 'next';
 
 // temporary api for client side rendering

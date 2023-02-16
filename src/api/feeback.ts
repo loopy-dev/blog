@@ -1,5 +1,5 @@
 import { addDoc, collection } from 'firebase/firestore';
-import { database } from '../firebase';
+import { database } from '../services/firebase';
 import type { FeebackForm } from '../models/Feeback';
 
 const feedbackCol = collection(database, 'feedback');
