@@ -21,10 +21,11 @@ export interface Post {
   lastEditedTime: Timestamp;
   icon: Icon | null;
   title: string;
+  description: string;
   content: string;
   tags?: string[];
 }
 
-export type PostListResponse = Omit<Post, 'content'>;
+export type PostMetaData = Omit<Post, 'content'>;
 
 export type PostContentResponse = Pick<Post, 'content'>;
