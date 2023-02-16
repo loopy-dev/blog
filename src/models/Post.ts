@@ -12,6 +12,7 @@ export interface Icon {
 type Timestamp = string;
 
 export interface Post {
+  id: string;
   object: 'page';
   cover: string | null;
   archived: boolean;
@@ -20,4 +21,11 @@ export interface Post {
   lastEditedTime: Timestamp;
   icon: Icon | null;
   title: string;
+  description: string;
+  content: string;
+  tags?: string[];
 }
+
+export type PostMetaData = Omit<Post, 'content'>;
+
+export type PostContentResponse = Pick<Post, 'content'>;

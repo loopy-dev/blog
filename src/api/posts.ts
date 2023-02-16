@@ -1,8 +1,9 @@
 import instance from './instance';
+import type { PostMetaData } from '~/models/Post';
 
 const getPosts = async () => {
-  const response = await instance.get('/api/posts');
-  return response;
+  const { data } = await instance.get<PostMetaData[]>('/api/logs');
+  return data;
 };
 
 export default getPosts;

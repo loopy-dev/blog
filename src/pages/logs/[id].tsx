@@ -1,38 +1,29 @@
 import { useEffect } from 'react';
-import notion from '../../notion';
-import type { GetServerSideProps } from 'next';
+import { useRouter } from 'next/router';
+import getPost from '~/api/post';
+import type { Post } from '~/models/Post';
 
 interface Props {
-  post: any;
+  post: Post;
 }
 
-export const getServerSideProps: GetServerSideProps = async (context) => {
-  try {
-    const id = context.params?.id;
+const Page = () => {
+  const router = useRouter();
+  const id = router.query.id;
 
-    if (typeof id !== 'string')
-      return {
-        notFound: true,
-      };
-    const response = await notion.pages.retrieve({ page_id: id });
-
-    return {
-      props: {
-        post: response,
-      },
-    };
-  } catch {
-    return {
-      notFound: true,
-    };
-  }
-};
-
-const Page = (props: Props) => {
   useEffect(() => {
-    console.log(props.post);
-  }, [props.post]);
-  return <div>SubPage</div>;
+    if (typeof id !== 'string') return;
+
+    (async () => {
+      try {
+        const response = await getPost(id);
+        console.log(response);
+      } catch (error) {
+        console.error(error);
+      }
+    })();
+  }, [id]);
+  return <div>{id}</div>;
 };
 
 export default Page;
