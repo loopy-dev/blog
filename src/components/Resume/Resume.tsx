@@ -1,6 +1,7 @@
 import FadeInUp from '../common/FadeInUp';
 import Activities from './Activities';
 import Educations from './Educations';
+import Hobbies from './Hobbies';
 import Introduction from './Introduction';
 import Projects from './Projects';
 
@@ -13,6 +14,7 @@ const Resume = () => {
       <Projects />
       <Educations />
       <Activities />
+      <Hobbies />
     </>
   );
 };

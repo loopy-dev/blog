@@ -36,4 +36,8 @@ export type Education = Pick<
   otherLinks?: Link[];
 };
 
+export type Hobby = Pick<Project, 'title' | 'introduction'> & {
+  description?: Array<string | Link>;
+};
+
 export type Resume = Partial<Project>;

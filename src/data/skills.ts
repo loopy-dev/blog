@@ -13,6 +13,18 @@ export const styledComponents: Skill = {
   `,
 };
 
+export const tailwind: Skill = {
+  name: 'Tailwind CSS',
+  description:
+    '보다 빠르게 통일감 있는 디자인을 구현하기 위하여 TailwindCSS를 사용하였습니다.',
+};
+
+export const next: Skill = {
+  name: 'nextJS',
+  description:
+    'React의 프레임워크 중 하나로 페이지 라우팅을 지원하며, 서버 사이드 렌더링을 지원하기 때문에 검색 엔진 최적화에 용이합니다.',
+};
+
 export const jest: Skill = {
   name: 'Jest',
   description: `유틸 함수들에 대한 검증을 위하여 Jest를 이용하여 테스트 코드를 작성하였습니다.`,
