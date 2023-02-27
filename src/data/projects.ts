@@ -10,8 +10,24 @@ import {
   webpack,
   babel,
   vanillaJS,
+  tailwind,
+  next,
 } from './skills';
 import type { Project } from '../models/Resume';
+
+export const portfolio: Project = {
+  title: '포트폴리오(Blog)',
+  introduction:
+    '진행한 프로젝트를 모아두고 자체적인 블로그를 만들기 위해 진행 중인 프로젝트입니다.',
+  startDate: '2023-01',
+  skills: [typescript, react, next, tailwind],
+  description: [
+    '기존에 사용하던 블로그 플랫폼을 대체하기 위한 목적 및 공개 포트폴리오를 보여주기 위한 프로젝트',
+  ],
+  links: {
+    github: { name: 'Github', url: 'https://github.com/mrbartrns/portfolio' },
+  },
+};
 
 export const chulcheck: Project = {
   title: '출첵(chulcheck)',
@@ -38,6 +54,7 @@ export const chulcheck: Project = {
     django,
   ],
   startDate: '2022-10',
+  endDate: '2022-02',
   links: {
     github: { name: 'Github', url: 'https://github.com/mrbartrns/chulcheck' },
     portfolio: {
@@ -128,6 +145,6 @@ const vanillaEditor: Project = {
   ],
 };
 
-const projects: Project[] = [chulcheck, chequiz, vanillaEditor];
+const projects: Project[] = [portfolio, chulcheck, chequiz, vanillaEditor];
 
 export default projects;
