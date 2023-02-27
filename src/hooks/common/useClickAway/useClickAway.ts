@@ -11,6 +11,8 @@ const useClickAway = <T extends HTMLElement>(
 
       if (!current) return;
 
+      e.stopPropagation();
+
       if (!current.contains(e.target as Element)) onClick?.(e);
     },
     [onClick]
@@ -22,6 +24,8 @@ const useClickAway = <T extends HTMLElement>(
       document.removeEventListener('click', handleClick);
     };
   });
+
+  return elementRef;
 };
 
 export default useClickAway;
