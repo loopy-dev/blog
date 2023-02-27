@@ -1,5 +1,5 @@
-import Modal from './Modal';
+import ModalBackground from './Modal';
 import ModalProvider, { useModalContext } from './ModalContext';
 
 export { ModalProvider, useModalContext };
-export default Modal;
+export default ModalBackground;
