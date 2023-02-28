@@ -13,7 +13,9 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
     const posts = await postService.retrievePosts(databaseId);
 
     return res.status(200).json(posts);
-  } catch {
+  } catch (error) {
+    console.error(error);
+
     return res.status(400).json({
       message: 'bad request.',
     });

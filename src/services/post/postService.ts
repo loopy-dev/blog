@@ -4,6 +4,21 @@ import type { Client } from '@notionhq/client';
 import type { NotionToMarkdown } from 'notion-to-md';
 import type { Post as PostInterface, PostMetaData } from '~/models/Post';
 
+const getTitle = (result: any): string => {
+  try {
+    return result.properties['이름'].title[0].plain_text;
+  } catch {
+    return '';
+  }
+};
+
+const getDescription = (result: any): string => {
+  try {
+    return result.properties.description.rich_text[0].plain_text;
+  } catch {
+    return '';
+  }
+};
 /**
  * @description
  * parse post from notion client and notion to markdown.
@@ -59,8 +74,8 @@ class Post {
 
   private decodeMetaData(result: any): PostMetaData {
     /** dirty */
-    const title = result.properties['이름'].title[0].plain_text;
-    const description = result.properties.description.rich_text[0].plain_text;
+    const title = getTitle(result);
+    const description = getDescription(result);
 
     return {
       object: 'page',
