@@ -17,7 +17,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
     console.error(error);
 
     return res.status(400).json({
-      message: 'bad request.',
+      message: `databaseId: ${databaseId}`,
     });
   }
 };

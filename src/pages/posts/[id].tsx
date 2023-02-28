@@ -4,6 +4,7 @@ import ReactMarkdown from 'react-markdown';
 import { getPostMarkdown, getPostMetaData } from '~/api/post';
 import ContentLayout from '~/components/layouts/ContentLayout';
 import useLoading from '~/hooks/common/useLoading';
+import postService from '~/services/post';
 import type { GetServerSideProps } from 'next';
 import type { Post } from '~/models/Post';
 
@@ -18,22 +19,23 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     if (typeof id !== 'string') {
       return {
         notFound: true,
+        message: id,
       };
     }
 
-    const response = await getPostMetaData(id);
-
+    const response = await postService.getMetaData(id);
     return {
       props: {
         postMetaData: response,
       },
     };
-  } catch {
+  } catch (error) {
     return {
       notFound: true,
     };
   }
 };
+// };
 
 const Page = ({ postMetaData }: Props) => {
   const router = useRouter();
@@ -55,6 +57,14 @@ const Page = ({ postMetaData }: Props) => {
       })()
     );
   }, [id, startTransition]);
+
+  useEffect(() => {
+    console.log(postMetaData);
+  }, [postMetaData]);
+
+  useEffect(() => {
+    console.log(isLoading);
+  }, [isLoading]);
   return (
     <ContentLayout>
       <ReactMarkdown>{content}</ReactMarkdown>

@@ -1,11 +1,9 @@
-import ContentLayout from '~/components/layouts/ContentLayout';
 import ItemSkeleton from '~/components/Post/ItemSkeleton';
-import PostListItem from '~/components/Post/ListItem';
+import ContentLayout from '~/components/layouts/ContentLayout';
 
 const Page = () => {
   return (
     <ContentLayout>
-      <PostListItem />
       <ItemSkeleton />
     </ContentLayout>
   );
