@@ -1,9 +1,14 @@
 import instance from './instance';
+import type { PostMetaData } from '~/models/Post';
 
-const getPost = async (id: string) => {
-  const response = await instance.get(`/api/posts/${id}`);
+export const getPostMetaData = async (id: string) => {
+  const response = await instance.get<PostMetaData>(`/api/posts/${id}`);
 
   return response.data;
 };
 
-export default getPost;
+export const getPostMarkdown = async (id: string) => {
+  const response = await instance.get<string>(`/api/posts/content/${id}`);
+
+  return response.data;
+};
