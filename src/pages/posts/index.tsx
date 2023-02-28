@@ -1,4 +1,8 @@
 import { useState, useEffect } from 'react';
+import Head from 'next/head';
+import ItemSkeleton from '~/components/Post/ItemSkeleton';
+import ListItem from '~/components/Post/ListItem';
+import DefferredComponent from '~/components/common/DeferredComponent';
 import ContentLayout from '~/components/layouts/ContentLayout';
 import GlobalLayout from '~/components/layouts/GlobalLayout';
 import useLoading from '~/hooks/common/useLoading';
@@ -22,9 +26,28 @@ const Page = () => {
     );
   }, [startTransition]);
   return (
-    <GlobalLayout>
-      <ContentLayout>{JSON.stringify(posts)}</ContentLayout>
-    </GlobalLayout>
+    <>
+      <Head>
+        <title>Blog - Portfolio</title>
+        <meta key="title" content="Blog - Portfolio" property="og:title" />
+      </Head>
+      <GlobalLayout>
+        <ContentLayout>
+          <div>
+            {isLoading ? (
+              <DefferredComponent>
+                <ItemSkeleton />
+                <ItemSkeleton />
+                <ItemSkeleton />
+                <ItemSkeleton />
+              </DefferredComponent>
+            ) : (
+              posts.map((post) => <ListItem key={post.id} post={post} />)
+            )}
+          </div>
+        </ContentLayout>
+      </GlobalLayout>
+    </>
   );
 };
 

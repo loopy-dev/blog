@@ -1,20 +1,30 @@
+import Link from 'next/link';
 import classNames from './Post.module.scss';
+import type { PostMetaData } from '~/models/Post';
+
+interface Props {
+  post: PostMetaData;
+}
 
 // TODO - add props
-const ListItem = () => {
+const ListItem = ({ post }: Props) => {
   return (
-    <div className="flex gap-2 border rounded-md flex-col-reverse sm:flex-row">
-      {/** TODO - left: title, description; right: cover image */}
-      <div className="flex flex-col gap-4 p-4 sm:p-8">
-        <h3 className="font-bold text-xl">포스트 제목</h3>
-        <p className="text-zinc-400">
-          포스트 설명 포스트 설명 포스트 설명 포스트 설명 포스트 설명 포스트
-          설명 포스트 설명 포스트 설명 포스트 설명 포스트 설명 포스트 설명
-          포스트 설명
-        </p>
+    <Link href={`/posts/${post.id}`}>
+      <div className={classNames['list-item']}>
+        {/** TODO - left: title, description; right: cover image */}
+        <div className="flex flex-col gap-4 w-full">
+          <h3 className={classNames['list-item__title']}>{post.title}</h3>
+          <p
+            className={`text-zinc-400 ${classNames['list-item__description']}`}
+          >
+            {post.description}
+          </p>
+        </div>
+        {post.cover && (
+          <div className={`${classNames.img} border-l shrink-0`}>사진</div>
+        )}
       </div>
-      <div className={`${classNames.img} border-l shrink-0`}>사진</div>
-    </div>
+    </Link>
   );
 };
 
