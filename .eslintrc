@@ -46,6 +46,7 @@
         "selector": "typeLike"
       }
     ],
+    "@typescript-eslint/no-explicit-any": "off",
     "@typescript-eslint/no-unused-vars": ["warn", { "ignoreRestSiblings": true }],
     "@typescript-eslint/no-use-before-define": "off",
     "import/order": [

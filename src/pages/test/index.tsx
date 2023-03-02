@@ -1,17 +1,11 @@
-import DefferredComponent from '~/components/common/DeferredComponent';
-import Modal, { useModalContext } from '~/components/common/Modal';
-import Skeleton, { SkeletonAnimation } from '~/components/common/Skeleton';
+import ItemSkeleton from '~/components/Post/ItemSkeleton';
+import ContentLayout from '~/components/layouts/ContentLayout';
 
 const Page = () => {
-  const { open } = useModalContext();
   return (
-    <div>
-      <DefferredComponent>
-        <SkeletonAnimation>
-          <Skeleton className="h-3 w-20" />
-        </SkeletonAnimation>
-      </DefferredComponent>
-    </div>
+    <ContentLayout>
+      <ItemSkeleton />
+    </ContentLayout>
   );
 };
 

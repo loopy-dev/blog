@@ -1,0 +1,28 @@
+.img {
+  max-width: 200px;
+  height: 150px;
+}
+
+.list-item {
+  padding: 4px 4px 12px;
+  margin-bottom: 12px;
+  min-height: 150px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+
+  &:last-of-type {
+    border-bottom: none;
+  }
+
+  &__title {
+    font-weight: bold;
+    font-size: 1.5rem;
+    margin-top: 1.5rem;
+    margin-bottom: 0.3rem;
+  }
+
+  &__description {
+    font-size: 90%;
+    margin-bottom: 0.8125rem;
+    line-height: 1.4;
+  }
+}
