@@ -20,6 +20,9 @@
     "react-hook-form": "^7.43.1",
     "react-markdown": "^8.0.5",
     "react-slick": "^0.29.0",
+    "react-syntax-highlighter": "^15.5.0",
+    "rehype-raw": "^6.1.1",
+    "remark-gfm": "^3.0.1",
     "slick-carousel": "^1.8.1"
   },
   "devDependencies": {
@@ -38,6 +41,7 @@
     "@types/react": "18.0.27",
     "@types/react-dom": "18.0.10",
     "@types/react-slick": "^0.23.10",
+    "@types/react-syntax-highlighter": "^15.5.6",
     "@typescript-eslint/eslint-plugin": "^5.48.2",
     "@typescript-eslint/parser": "^5.48.2",
     "autoprefixer": "^10.4.13",
