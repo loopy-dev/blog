@@ -1,10 +1,10 @@
-import ItemSkeleton from '~/components/Post/ItemSkeleton';
+import ContentSkeleton from '~/components/Post/ContentSkeleton';
 import ContentLayout from '~/components/layouts/ContentLayout';
 
 const Page = () => {
   return (
     <ContentLayout>
-      <ItemSkeleton />
+      <ContentSkeleton />
     </ContentLayout>
   );
 };

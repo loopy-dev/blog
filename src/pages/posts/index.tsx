@@ -25,6 +25,7 @@ const Page = () => {
       })()
     );
   }, [startTransition]);
+
   return (
     <>
       <Head>

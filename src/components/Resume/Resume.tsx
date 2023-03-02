@@ -7,7 +7,7 @@ import Projects from './Projects';
 
 const Resume = () => {
   return (
-    <>
+    <div style={{ fontFamily: 'Pretendard-Regular' }}>
       <FadeInUp>
         <Introduction />
       </FadeInUp>
@@ -15,7 +15,7 @@ const Resume = () => {
       <Educations />
       <Activities />
       <Hobbies />
-    </>
+    </div>
   );
 };
 
