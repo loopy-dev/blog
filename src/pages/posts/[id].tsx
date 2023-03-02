@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import Head from 'next/head';
+import Image from 'next/image';
 import { useRouter } from 'next/router';
 import ReactMarkdown from 'react-markdown';
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
@@ -188,8 +189,7 @@ const Page = ({ postMetaData }: Props) => {
                   <ul
                     style={{
                       listStyleType: 'disc',
-                      marginLeft: '16px',
-                      padding: '3px 2px',
+                      padding: '3px 0 3px 32px',
                       caretColor: 'rgb(55, 53, 47)',
                       marginTop: '1px',
                     }}
@@ -205,7 +205,7 @@ const Page = ({ postMetaData }: Props) => {
                     style={{
                       listStyleType: 'decimal',
                       marginLeft: '16px',
-                      padding: '3px 2px',
+                      padding: '3px 0 3px 32px',
                       caretColor: 'rgb(55, 53, 47)',
                       marginTop: '1px',
                     }}
@@ -367,6 +367,18 @@ const Page = ({ postMetaData }: Props) => {
                   >
                     {children}
                   </td>
+                );
+              },
+              a({ node, className, children, ...props }) {
+                return (
+                  <a
+                    className="text-blue-500"
+                    rel="noreferrer noopener"
+                    target="_blank"
+                    {...props}
+                  >
+                    {children}
+                  </a>
                 );
               },
             }}
