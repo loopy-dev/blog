@@ -1,5 +1,4 @@
 import fs from 'fs';
-import path from 'path';
 import remarkFrontMatter from 'remark-frontmatter';
 import remarkParse from 'remark-parse';
 import remarkParseFrontMatter from 'remark-parse-frontmatter';
@@ -7,7 +6,7 @@ import remarkStringify from 'remark-stringify';
 import { unified } from 'unified';
 import type { FrontMatter } from '~models/Post';
 
-class PostService {
+export class PostService {
   // need relative path
   currentPath: string;
 
@@ -16,7 +15,7 @@ class PostService {
   }
 
   getFile(fileName: string) {
-    return fs.readFileSync(path.resolve(this.currentPath, fileName), {
+    return fs.readFileSync(this.currentPath + fileName, {
       encoding: 'utf-8',
     });
   }
@@ -34,9 +33,13 @@ class PostService {
     return result.data.frontmatter as FrontMatter;
   }
 
+  getPostList() {
+    return fs.readdirSync(this.currentPath);
+  }
+
   // TODO - add filters
-  async getPostList() {
-    const fileList = fs.readdirSync(path.resolve(this.currentPath));
+  async getPostListMetaData() {
+    const fileList = this.getPostList();
 
     const frontMatters = await Promise.all(
       fileList.map(async (file) => await this.decodeMetaData(file))
@@ -55,4 +58,7 @@ class PostService {
   }
 }
 
-export default PostService;
+const dir = 'content/posts/';
+const postService = new PostService(dir);
+
+export default postService;
