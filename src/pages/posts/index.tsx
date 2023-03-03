@@ -2,7 +2,6 @@ import { useState, useEffect } from 'react';
 import dynamic from 'next/dynamic';
 import Head from 'next/head';
 import ItemSkeleton from '~/components/Post/ItemSkeleton';
-import ListItem from '~/components/Post/ListItem';
 import DefferredComponent from '~/components/common/DeferredComponent';
 import ContentLayout from '~/components/layouts/ContentLayout';
 import GlobalLayout from '~/components/layouts/GlobalLayout';

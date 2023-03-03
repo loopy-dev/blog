@@ -56,7 +56,6 @@ const Page = ({ postMetaData }: Props) => {
   const id = router.query.id;
   const [isLoading, startTransition] = useLoading();
   const [content, setContent] = useState<string>('');
-  const date = new Date(postMetaData.createdTime);
 
   useEffect(() => {
     if (typeof id !== 'string') return;

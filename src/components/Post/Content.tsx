@@ -274,26 +274,6 @@ const Content = ({ content }: Props) => {
             </a>
           );
         },
-        img({
-          node,
-          className,
-          src,
-          alt,
-          width,
-          height,
-          placeholder,
-          ...props
-        }) {
-          return (
-            <Image
-              height={height ? (height as any) : '600'}
-              width={width ? (width as any) : '600'}
-              {...props}
-              alt={alt || ''}
-              src={src || ''}
-            />
-          );
-        },
       }}
     >
       {content}
