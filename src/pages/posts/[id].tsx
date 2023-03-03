@@ -35,6 +35,11 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
       };
     }
 
+    context.res.setHeader(
+      'Cache-Control',
+      'public, s-maxage=10, stale-while-revalidate=59'
+    );
+
     const response = await postService.getMetaData(id);
     return {
       props: {
