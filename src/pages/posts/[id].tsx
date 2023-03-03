@@ -18,7 +18,7 @@ interface Props {
 
 const LazyLoadedContent = dynamic(
   () => import('../../components/Post/Content'),
-  { loading: () => <ContentSkeleton />, ssr: false }
+  { ssr: false }
 );
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
@@ -81,7 +81,11 @@ const Page = ({ postMetaData }: Props) => {
       <GlobalLayout>
         <ContentLayout>
           <ContentTitle postMetaData={postMetaData} />
-          <LazyLoadedContent content={content} />
+          {isLoading ? (
+            <ContentSkeleton />
+          ) : (
+            <LazyLoadedContent content={content} />
+          )}
         </ContentLayout>
       </GlobalLayout>
     </>
