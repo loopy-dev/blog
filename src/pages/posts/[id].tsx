@@ -4,6 +4,7 @@ import Head from 'next/head';
 import { useRouter } from 'next/router';
 import { getPostMarkdown } from '~/api/post';
 import ContentSkeleton from '~/components/Post/ContentSkeleton';
+import ContentTitle from '~/components/Post/ContentTitle';
 import ContentLayout from '~/components/layouts/ContentLayout';
 import GlobalLayout from '~/components/layouts/GlobalLayout';
 import useLoading from '~/hooks/common/useLoading';
@@ -18,10 +19,6 @@ interface Props {
 const LazyLoadedContent = dynamic(
   () => import('../../components/Post/Content'),
   { loading: () => <ContentSkeleton />, ssr: false }
-);
-
-const LazyLoadedTitle = dynamic(
-  () => import('../../components/Post/ContentTitle')
 );
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
@@ -83,7 +80,7 @@ const Page = ({ postMetaData }: Props) => {
       </Head>
       <GlobalLayout>
         <ContentLayout>
-          <LazyLoadedTitle postMetaData={postMetaData} />
+          <ContentTitle postMetaData={postMetaData} />
           <LazyLoadedContent content={content} />
         </ContentLayout>
       </GlobalLayout>
