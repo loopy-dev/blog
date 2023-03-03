@@ -1,4 +1,3 @@
-import Image from 'next/image';
 import ReactMarkdown from 'react-markdown';
 import { dracula } from 'react-syntax-highlighter/dist/cjs/styles/prism';
 import rehypeRaw from 'rehype-raw';
