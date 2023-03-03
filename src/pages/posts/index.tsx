@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import dynamic from 'next/dynamic';
 import Head from 'next/head';
 import ItemSkeleton from '~/components/Post/ItemSkeleton';
 import ListItem from '~/components/Post/ListItem';
@@ -8,6 +9,18 @@ import GlobalLayout from '~/components/layouts/GlobalLayout';
 import useLoading from '~/hooks/common/useLoading';
 import getPosts from '../../api/posts';
 import type { PostMetaData } from '~/models/Post';
+
+const Posts = dynamic(() => import('../../components/Post/PostList'), {
+  ssr: false,
+  loading: () => (
+    <DefferredComponent>
+      <ItemSkeleton />
+      <ItemSkeleton />
+      <ItemSkeleton />
+      <ItemSkeleton />
+    </DefferredComponent>
+  ),
+});
 
 const Page = () => {
   const [isLoading, startTransition] = useLoading();
@@ -43,7 +56,7 @@ const Page = () => {
                 <ItemSkeleton />
               </DefferredComponent>
             ) : (
-              posts.map((post) => <ListItem key={post.id} post={post} />)
+              <Posts posts={posts} />
             )}
           </div>
         </ContentLayout>
