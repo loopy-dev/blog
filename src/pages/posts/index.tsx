@@ -39,6 +39,10 @@ const Page = () => {
     );
   }, [startTransition]);
 
+  useEffect(() => {
+    console.log(isLoading);
+  }, [isLoading]);
+
   return (
     <>
       <Head>
@@ -48,16 +52,7 @@ const Page = () => {
       <GlobalLayout>
         <ContentLayout>
           <div>
-            {isLoading ? (
-              <DefferredComponent>
-                <ItemSkeleton />
-                <ItemSkeleton />
-                <ItemSkeleton />
-                <ItemSkeleton />
-              </DefferredComponent>
-            ) : (
-              <Posts posts={posts} />
-            )}
+            <Posts posts={posts} />
           </div>
         </ContentLayout>
       </GlobalLayout>
