@@ -38,10 +38,6 @@ const Page = () => {
     );
   }, [startTransition]);
 
-  useEffect(() => {
-    console.log(isLoading);
-  }, [isLoading]);
-
   return (
     <>
       <Head>

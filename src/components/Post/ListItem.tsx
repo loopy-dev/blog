@@ -20,9 +20,6 @@ const ListItem = ({ post }: Props) => {
             {post.description}
           </p>
         </div>
-        {post.cover && (
-          <div className={`${classNames.img} border-l shrink-0`}>사진</div>
-        )}
       </div>
     </Link>
   );
