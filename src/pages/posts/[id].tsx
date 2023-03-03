@@ -80,7 +80,7 @@ const Page = ({ postMetaData }: Props) => {
       <GlobalLayout>
         <ContentLayout>
           <ContentTitle postMetaData={postMetaData} />
-          {isLoading ? (
+          {!content ? (
             <ContentSkeleton />
           ) : (
             <LazyLoadedContent content={content} />
