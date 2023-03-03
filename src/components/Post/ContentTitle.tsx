@@ -1,7 +1,7 @@
-import type { PostMetaData } from '~/models/Post';
+import type { FrontMatter } from '~/models/Post';
 
 interface Props {
-  postMetaData: PostMetaData;
+  postMetaData: FrontMatter;
 }
 
 const ContentTitle = ({ postMetaData }: Props) => {
