@@ -1,23 +1,20 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
-import postService from '~/services/post';
+import path from 'path';
+import PostService from '~/services/post';
 import type { NextApiRequest, NextApiResponse } from 'next';
-
-const databaseId = process.env.NEXT_PUBLIC_DATABASE_ID;
-const apiKey = process.env.NEXT_PUBLIC_PRIVATE_NOTION_API_KEY;
 
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   try {
-    if (!databaseId || !apiKey)
-      throw new Error('Missing notion api key or DB id.');
-
-    const posts = await postService.retrievePosts(databaseId);
+    const dir = path.resolve(__dirname, '../../../../content/posts');
+    const postService = new PostService(dir);
+    const posts = await postService.getPostList();
 
     return res.status(200).json(posts);
   } catch (error) {
     console.error(error);
 
     return res.status(400).json({
-      message: `databaseId: ${databaseId}`,
+      message: 'bad request.',
     });
   }
 };

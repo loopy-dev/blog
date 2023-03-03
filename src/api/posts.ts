@@ -1,8 +1,8 @@
 import instance from './instance';
-import type { PostMetaData } from '~/models/Post';
+import type { FrontMatter } from '~/models/Post';
 
 const getPosts = async () => {
-  const { data } = await instance.get<PostMetaData[]>('/api/posts');
+  const { data } = await instance.get<FrontMatter[]>('/api/posts');
   return data;
 };
 

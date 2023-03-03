@@ -1,15 +1,15 @@
 import Link from 'next/link';
 import classNames from './Post.module.scss';
-import type { PostMetaData } from '~/models/Post';
+import type { FrontMatter } from '~/models/Post';
 
 interface Props {
-  post: PostMetaData;
+  post: FrontMatter;
 }
 
 // TODO - add props
 const ListItem = ({ post }: Props) => {
   return (
-    <Link href={`/posts/${post.id}`}>
+    <Link href={`/posts/${post.title}`}>
       <div className={classNames['list-item']}>
         {/** TODO - left: title, description; right: cover image */}
         <div className="flex flex-col gap-4 w-full">
@@ -20,9 +20,6 @@ const ListItem = ({ post }: Props) => {
             {post.description}
           </p>
         </div>
-        {post.cover && (
-          <div className={`${classNames.img} border-l shrink-0`}>사진</div>
-        )}
       </div>
     </Link>
   );

@@ -1,15 +1,24 @@
-import postService from '~/services/post';
+import path from 'path';
+import PostService from '~/services/post';
 import type { NextApiRequest, NextApiResponse } from 'next';
 
 // temporary api for client side rendering
-const apiKey = process.env.NEXT_PUBLIC_PRIVATE_NOTION_API_KEY;
 
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   try {
-    const id = req.query.id as string;
-    if (!id || !apiKey) throw new Error('Missing notion api key or id.');
+    const fileName = req.query.id;
 
-    const response = await postService.getMetaData(id);
+    if (typeof fileName !== 'string') {
+      return res.status(400).json({
+        message: 'bad request.',
+      });
+    }
+
+    const uri = decodeURI(fileName);
+    const dir = path.resolve(__dirname, '../../../../content/posts');
+    const postService = new PostService(dir);
+
+    const response = await postService.decodeMetaData(`${uri}.md`);
 
     return res.status(200).json(response);
   } catch (error) {

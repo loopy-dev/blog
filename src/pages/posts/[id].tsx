@@ -1,3 +1,4 @@
+import path from 'path';
 import { useEffect, useState } from 'react';
 import dynamic from 'next/dynamic';
 import Head from 'next/head';
@@ -7,7 +8,7 @@ import ContentSkeleton from '~/components/Post/ContentSkeleton';
 import ContentLayout from '~/components/layouts/ContentLayout';
 import GlobalLayout from '~/components/layouts/GlobalLayout';
 import useLoading from '~/hooks/common/useLoading';
-import postService from '~/services/post';
+import PostService from '~/services/post';
 import type { GetServerSideProps } from 'next';
 import type { Post } from '~/models/Post';
 
@@ -34,8 +35,9 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
         message: id,
       };
     }
-
-    const response = await postService.getMetaData(id);
+    const dir = path.resolve(__dirname, '../../../../content/posts');
+    const postService = new PostService(dir);
+    const response = await postService.decodeMetaData(`${id}.md`);
     return {
       props: {
         postMetaData: response,
@@ -54,7 +56,6 @@ const Page = ({ postMetaData }: Props) => {
   const id = router.query.id;
   const [isLoading, startTransition] = useLoading();
   const [content, setContent] = useState<string>('');
-  const date = new Date(postMetaData.createdTime);
 
   useEffect(() => {
     if (typeof id !== 'string') return;

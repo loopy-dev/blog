@@ -2,6 +2,7 @@ import Image from 'next/image';
 import ReactMarkdown from 'react-markdown';
 import { dracula } from 'react-syntax-highlighter/dist/cjs/styles/prism';
 import rehypeRaw from 'rehype-raw';
+import remarkFrontMatter from 'remark-frontmatter';
 import remarkGfm from 'remark-gfm';
 import SyntaxHighlighter from './SyntaxHighlighter';
 
@@ -13,7 +14,7 @@ const Content = ({ content }: Props) => {
   return (
     <ReactMarkdown
       rehypePlugins={[rehypeRaw]}
-      remarkPlugins={[remarkGfm]}
+      remarkPlugins={[remarkGfm, remarkFrontMatter]}
       components={{
         h1({ node, className, children, ...props }) {
           return (
