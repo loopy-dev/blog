@@ -7,11 +7,11 @@ import ContentLayout from '~/components/layouts/ContentLayout';
 import GlobalLayout from '~/components/layouts/GlobalLayout';
 import useLoading from '~/hooks/common/useLoading';
 import getPosts from '../../api/posts';
-import type { PostMetaData } from '~/models/Post';
+import type { FrontMatter } from '~/models/Post';
 
 const Page = () => {
   const [isLoading, startTransition] = useLoading();
-  const [posts, setPosts] = useState<PostMetaData[]>([]);
+  const [posts, setPosts] = useState<FrontMatter[]>([]);
 
   useEffect(() => {
     startTransition(
@@ -43,7 +43,7 @@ const Page = () => {
                 <ItemSkeleton />
               </DefferredComponent>
             ) : (
-              posts.map((post) => <ListItem key={post.id} post={post} />)
+              posts.map((post) => <ListItem key={post.title} post={post} />)
             )}
           </div>
         </ContentLayout>

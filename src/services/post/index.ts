@@ -1,3 +1,3 @@
-import postService from './postService';
+import PostService from './postService';
 
-export default postService;
+export default PostService;
