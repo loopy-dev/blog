@@ -1,5 +1,4 @@
-import path from 'path';
-import PostService from '~/services/post';
+import postService from '~/services/post';
 import type { NextApiRequest, NextApiResponse } from 'next';
 
 // temporary api for client side rendering
@@ -15,8 +14,6 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
     }
 
     const uri = decodeURI(fileName);
-    const dir = path.resolve(__dirname, '../../../../content/posts');
-    const postService = new PostService(dir);
 
     const response = await postService.decodeMetaData(`${uri}.md`);
 

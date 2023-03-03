@@ -1,5 +1,4 @@
-import path from 'path';
-import PostService from '~/services/post';
+import postService from '~/services/post';
 import type { NextApiRequest, NextApiResponse } from 'next';
 
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
@@ -13,9 +12,8 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
 
   try {
     const uri = decodeURI(fileName);
-    const dir = path.resolve(__dirname, '../../../../../../content/posts');
+    /** TEST */
 
-    const postService = new PostService(dir);
     const file = postService.decode(`${uri}.md`);
 
     return res.status(200).json(file);

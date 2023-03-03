@@ -6,25 +6,47 @@ import DefferredComponent from '~/components/common/DeferredComponent';
 import ContentLayout from '~/components/layouts/ContentLayout';
 import GlobalLayout from '~/components/layouts/GlobalLayout';
 import useLoading from '~/hooks/common/useLoading';
+import postService from '~/services/post';
 import getPosts from '../../api/posts';
+import type { GetStaticProps } from 'next';
 import type { FrontMatter } from '~/models/Post';
 
-const Page = () => {
-  const [isLoading, startTransition] = useLoading();
-  const [posts, setPosts] = useState<FrontMatter[]>([]);
+interface Props {
+  posts: FrontMatter[];
+}
 
-  useEffect(() => {
-    startTransition(
-      (async () => {
-        try {
-          const response = await getPosts();
-          setPosts(response);
-        } catch (error) {
-          console.error(error);
-        }
-      })()
-    );
-  }, [startTransition]);
+export const getStaticProps: GetStaticProps = async () => {
+  try {
+    const posts = await postService.getPostListMetaData();
+
+    return {
+      props: {
+        posts,
+      },
+    };
+  } catch {
+    return {
+      notFound: true,
+    };
+  }
+};
+
+const Page = ({ posts }: Props) => {
+  const [isLoading, startTransition] = useLoading();
+  // const [posts, setPosts] = useState<FrontMatter[]>([]);
+
+  // useEffect(() => {
+  //   startTransition(
+  //     (async () => {
+  //       try {
+  //         const response = await getPosts();
+  //         setPosts(response);
+  //       } catch (error) {
+  //         console.error(error);
+  //       }
+  //     })()
+  //   );
+  // }, [startTransition]);
 
   return (
     <>
