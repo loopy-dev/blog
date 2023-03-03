@@ -18,7 +18,7 @@ interface Props {
 
 const LazyLoadedContent = dynamic(
   () => import('../../components/Post/Content'),
-  { ssr: false }
+  { ssr: false, loading: () => <ContentSkeleton /> }
 );
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
