@@ -147,7 +147,7 @@ const Content = ({ content }: Props) => {
               : match[1] === 'javascript'
               ? 'jsx'
               : match[1]
-            : '';
+            : 'text';
           return !inline && match ? (
             <SyntaxHighlighter
               PreTag="div"
