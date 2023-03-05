@@ -6,6 +6,17 @@ import remarkStringify from 'remark-stringify';
 import { unified } from 'unified';
 import type { FrontMatter } from '~models/Post';
 
+/**
+ *
+ * @param fullFileName fileName endsWith extension
+ * @example
+ * fullFileName: `example.md`
+ * @returns fileName without extension `example.md` -> `example`
+ */
+export const parseFileName = (fullFileName: string, extension: string) => {
+  return fullFileName.slice(0, -(extension.length + 1));
+};
+
 export class PostService {
   // need relative path
   currentPath: string;
@@ -14,12 +25,13 @@ export class PostService {
     this.currentPath = directory;
   }
 
-  getFile(fileName: string) {
+  private getFile(fileName: string) {
     return fs.readFileSync(this.currentPath + fileName, {
       encoding: 'utf-8',
     });
   }
 
+  /** fileName ends with `.md` */
   async decodeMetaData(fileName: string): Promise<FrontMatter> {
     const file = this.getFile(fileName);
 
@@ -30,14 +42,18 @@ export class PostService {
       .use(remarkParseFrontMatter)
       .process(file);
 
-    return result.data.frontmatter as FrontMatter;
+    return {
+      ...(result.data.frontmatter as FrontMatter),
+      title: parseFileName(fileName, 'md'),
+    };
   }
 
   getPostList() {
-    return fs.readdirSync(this.currentPath);
+    return fs
+      .readdirSync(this.currentPath)
+      .filter((file) => file.endsWith('.md'));
   }
 
-  // TODO - add filters
   async getPostListMetaData() {
     const fileList = this.getPostList();
 
