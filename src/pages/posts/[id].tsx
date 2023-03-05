@@ -4,6 +4,7 @@ import ContentSkeleton from '~/components/Post/ContentSkeleton';
 import ContentLayout from '~/components/layouts/ContentLayout';
 import GlobalLayout from '~/components/layouts/GlobalLayout';
 import postService from '~/services/post';
+import { parseFileName } from '~/services/post/postService';
 import type { GetStaticPaths, GetStaticProps } from 'next';
 import type { FrontMatter } from '~/models/Post';
 
@@ -26,7 +27,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
 
   return {
     paths: posts.map((post) => ({
-      params: { id: post.slice(0, -3) },
+      params: { id: parseFileName(post, 'md') },
     })),
     fallback: false,
   };

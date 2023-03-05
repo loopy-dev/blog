@@ -182,14 +182,14 @@ const Content = ({ content }: Props) => {
               {...props}
               style={{
                 display: 'flex',
-                margin: '4px 0',
+                margin: '16px 0',
                 width: '100%',
-                borderRadius: '3px',
-                border: '1px solid rgba(55, 53, 47, 0.16)',
+                borderLeft: '2px solid rgb(139, 108, 239)',
                 backgroundColor: 'transparent',
-                padding: '16px 16px 16px 12px',
+                padding: '8px 16px',
                 color: 'rgb(120, 119, 116)',
                 fill: 'rgb(120, 119, 116)',
+                fontSize: '1em',
               }}
             >
               {children}
