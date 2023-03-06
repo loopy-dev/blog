@@ -275,24 +275,16 @@ const Content = ({ content }: Props) => {
             </a>
           );
         },
-        img({
-          node,
-          className,
-          src,
-          alt,
-          width,
-          height,
-          placeholder,
-          ...props
-        }) {
+        img({ node, className, placeholder, ...props }) {
           return (
-            <Image
-              height={height ? (height as any) : '600'}
-              width={width ? (width as any) : '600'}
-              {...props}
-              alt={alt || ''}
-              src={src || ''}
-            />
+            <div
+              style={{
+                margin: '16px auto',
+              }}
+            >
+              {/* eslint-disable-next-line @next/next/no-img-element, jsx-a11y/alt-text */}
+              <img style={{ margin: '0 auto' }} {...props} />
+            </div>
           );
         },
       }}
