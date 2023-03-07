@@ -29,12 +29,12 @@ const NavigationBar = () => {
             </div>
           </Link>
         </WithTooltip>
-        <WithTooltip position="right" tooltip="Feedback">
+        <WithTooltip position="right" tooltip="blog">
           <Link
             className={`${classes['navbar-icon']} flex justify-center items-center w-16 h-16 hover:bg-gray-300 transition-all rounded-lg`}
-            href="/feedback"
+            href="/posts"
           >
-            <Icon type="project" />
+            <Icon type="blog" />
           </Link>
         </WithTooltip>
       </div>
@@ -58,15 +58,13 @@ const NavigationBar = () => {
             <Icon type="mail" />
           </a>
         </WithTooltip>
-        <WithTooltip position="right" tooltip="blog">
-          <a
+        <WithTooltip position="right" tooltip="Feedback">
+          <Link
             className={`${classes['navbar-icon']} flex justify-center items-center w-16 h-16 hover:bg-gray-300 transition-all rounded-lg`}
-            href="https://velog.io/@mrbartrns"
-            rel="noopener noreferrer"
-            target="_blank"
+            href="/feedback"
           >
-            <Icon type="blog" />
-          </a>
+            <Icon type="project" />
+          </Link>
         </WithTooltip>
       </div>
     </div>

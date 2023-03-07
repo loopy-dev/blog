@@ -1,26 +1,37 @@
 import dynamic from 'next/dynamic';
 import Head from 'next/head';
-import ContentSkeleton from '~/components/Post/ContentSkeleton';
+import PostSkeleton from '~/components/Post/PostSkeleton';
 import ContentLayout from '~/components/layouts/ContentLayout';
 import GlobalLayout from '~/components/layouts/GlobalLayout';
 import postService from '~/services/post';
 import { parseFileName } from '~/services/post/postService';
 import type { GetStaticPaths, GetStaticProps } from 'next';
-import type { FrontMatter } from '~/models/Post';
+import type { Post as PostModel } from '~/models/Post';
 
 interface Props {
-  post: string;
-  postMetaData: FrontMatter;
+  post: PostModel;
 }
 
-const LazyLoadedContent = dynamic(
-  () => import('../../components/Post/Content'),
-  { loading: () => <ContentSkeleton /> }
-);
+const Page = ({ post }: Props) => {
+  return (
+    <>
+      <Head>
+        <title>{`${post.title} - Blog`}</title>
+      </Head>
+      <GlobalLayout>
+        <ContentLayout>
+          <LazyLoadedPost post={post} />
+        </ContentLayout>
+      </GlobalLayout>
+    </>
+  );
+};
 
-const LazyLoadedTitle = dynamic(
-  () => import('../../components/Post/ContentTitle')
-);
+export default Page;
+
+const LazyLoadedPost = dynamic(() => import('../../components/Post'), {
+  loading: () => <PostSkeleton />,
+});
 
 export const getStaticPaths: GetStaticPaths = async () => {
   const posts = postService.getPostList();
@@ -47,8 +58,10 @@ export const getStaticProps: GetStaticProps = async (context) => {
 
     return {
       props: {
-        post,
-        postMetaData,
+        post: {
+          content: post,
+          ...postMetaData,
+        },
       },
     };
   } catch {
@@ -57,21 +70,3 @@ export const getStaticProps: GetStaticProps = async (context) => {
     };
   }
 };
-
-const Page = ({ post, postMetaData }: Props) => {
-  return (
-    <>
-      <Head>
-        <title>{`${postMetaData.title} - Blog`}</title>
-      </Head>
-      <GlobalLayout>
-        <ContentLayout>
-          <LazyLoadedTitle postMetaData={postMetaData} />
-          <LazyLoadedContent content={post} />
-        </ContentLayout>
-      </GlobalLayout>
-    </>
-  );
-};
-
-export default Page;

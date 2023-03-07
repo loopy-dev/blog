@@ -28,6 +28,7 @@
     "remark-parse-frontmatter": "^1.0.3",
     "remark-stringify": "^10.0.2",
     "slick-carousel": "^1.8.1",
+    "styled-components": "^5.3.8",
     "unified": "^10.1.2"
   },
   "devDependencies": {
@@ -47,6 +48,7 @@
     "@types/react-dom": "18.0.10",
     "@types/react-slick": "^0.23.10",
     "@types/react-syntax-highlighter": "^15.5.6",
+    "@types/styled-components": "^5.1.26",
     "@typescript-eslint/eslint-plugin": "^5.48.2",
     "@typescript-eslint/parser": "^5.48.2",
     "autoprefixer": "^10.4.13",
