@@ -1,10 +1,10 @@
-import PostSkeleton from '~/components/Post/PostSkeleton';
+import Footer from '~/components/common/Footer';
 import ContentLayout from '~/components/layouts/ContentLayout';
 
 const Page = () => {
   return (
     <ContentLayout>
-      <PostSkeleton />
+      <Footer />
     </ContentLayout>
   );
 };
