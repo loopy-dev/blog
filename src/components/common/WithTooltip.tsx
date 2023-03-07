@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
 import type { HTMLAttributes } from 'react';
+import styled from 'styled-components';
 import Tooltip from './Tooltip';
 
 interface Props extends HTMLAttributes<HTMLDivElement> {
@@ -13,29 +13,26 @@ const WithTooltip = ({
   position = 'bottom',
   ...props
 }: Props) => {
-  const [isHover, setIsHover] = useState(false);
-
-  const childrenWithProps = React.isValidElement(children)
-    ? React.cloneElement(children, {
-        ...children.props,
-        'data-ishover': isHover,
-      })
-    : children;
-
   return (
-    <div className="relative">
-      <span
-        onMouseEnter={() => setIsHover(true)}
-        onMouseLeave={() => setIsHover(false)}
-        {...props}
-      >
-        {childrenWithProps}
-      </span>
+    <Block className="relative">
+      <span {...props}>{children}</span>
       {tooltip ? (
-        <Tooltip content={tooltip} hover={isHover} position={position} />
+        <Tooltip className="tooltip" content={tooltip} position={position} />
       ) : null}
-    </div>
+    </Block>
   );
 };
 
 export default WithTooltip;
+
+const Block = styled.div`
+  & .tooltip {
+    display: none;
+  }
+
+  &:hover {
+    & .tooltip {
+      display: block;
+    }
+  }
+`;

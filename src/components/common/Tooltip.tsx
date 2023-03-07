@@ -4,35 +4,23 @@ interface Props {
   hover?: boolean;
   content: string;
   position?: Position;
+  className?: string;
 }
 
 const DEFAULT_CLASSNAMES =
-  'absolute transition-all bg-gray-900 text-gray-50 rounded-md text-xs py-1 px-2 select-none z-10 hidden md:block';
+  'absolute transition-all bg-gray-900 text-gray-50 rounded-md text-xs py-1 px-2 select-none z-10 min-w-max';
 
 // FIXME - tooltip width can be over navbar width but it isn't.
-const Tooltip = ({ hover, content, position = 'bottom' }: Props) => {
+const Tooltip = ({ className, content, position = 'bottom' }: Props) => {
   return (
-    <div
-      className={`${CONFIG[hover ? 'enter' : 'leave']} ${
-        POSITION[position]
-      } ${DEFAULT_CLASSNAMES}`}
-    >
+    <div className={`${className} ${POSITION[position]} ${DEFAULT_CLASSNAMES}`}>
       {content}
     </div>
   );
 };
 
-type Config = {
-  [key: string | number]: string;
-};
-
 type PositionProps = {
   [key in Position]: string;
-};
-
-const CONFIG: Config = {
-  enter: `opacity-100`,
-  leave: `opacity-0`,
 };
 
 /** TODO - fill top and right position */
