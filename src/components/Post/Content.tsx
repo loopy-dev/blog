@@ -275,16 +275,8 @@ const Content = ({ content }: Props) => {
           );
         },
         img({ node, className, placeholder, ...props }) {
-          return (
-            <div
-              style={{
-                margin: '16px auto',
-              }}
-            >
-              {/* eslint-disable-next-line @next/next/no-img-element, jsx-a11y/alt-text */}
-              <img style={{ margin: '0 auto' }} {...props} />
-            </div>
-          );
+          // eslint-disable-next-line @next/next/no-img-element, jsx-a11y/alt-text
+          return <img style={{ margin: '16px auto' }} {...props} />;
         },
       }}
     >

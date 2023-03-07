@@ -1,21 +1,20 @@
 import dynamic from 'next/dynamic';
 import Head from 'next/head';
-import ContentSkeleton from '~/components/Post/ContentSkeleton';
+import PostSkeleton from '~/components/Post/ContentSkeleton';
 import ContentLayout from '~/components/layouts/ContentLayout';
 import GlobalLayout from '~/components/layouts/GlobalLayout';
 import postService from '~/services/post';
 import { parseFileName } from '~/services/post/postService';
 import type { GetStaticPaths, GetStaticProps } from 'next';
-import type { FrontMatter } from '~/models/Post';
+import type { FrontMatter, Post } from '~/models/Post';
 
 interface Props {
-  post: string;
-  postMetaData: FrontMatter;
+  post: Post;
 }
 
 const LazyLoadedContent = dynamic(
   () => import('../../components/Post/Content'),
-  { loading: () => <ContentSkeleton /> }
+  { loading: () => <PostSkeleton /> }
 );
 
 const LazyLoadedTitle = dynamic(
@@ -47,8 +46,10 @@ export const getStaticProps: GetStaticProps = async (context) => {
 
     return {
       props: {
-        post,
-        postMetaData,
+        post: {
+          content: post,
+          ...postMetaData,
+        },
       },
     };
   } catch {
@@ -58,16 +59,23 @@ export const getStaticProps: GetStaticProps = async (context) => {
   }
 };
 
-const Page = ({ post, postMetaData }: Props) => {
+const Page = ({ post }: Props) => {
+  const frontMatter: FrontMatter = {
+    title: post.title,
+    tags: post.tags,
+    createdTime: post.createdTime,
+    description: post.description,
+  };
+
   return (
     <>
       <Head>
-        <title>{`${postMetaData.title} - Blog`}</title>
+        <title>{`${post.title} - Blog`}</title>
       </Head>
       <GlobalLayout>
         <ContentLayout>
-          <LazyLoadedTitle postMetaData={postMetaData} />
-          <LazyLoadedContent content={post} />
+          <LazyLoadedTitle postMetaData={{ ...frontMatter }} />
+          <LazyLoadedContent content={post.content} />
         </ContentLayout>
       </GlobalLayout>
     </>
