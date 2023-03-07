@@ -1,4 +1,3 @@
-import Image from 'next/image';
 import ReactMarkdown from 'react-markdown';
 import { dracula } from 'react-syntax-highlighter/dist/cjs/styles/prism';
 import rehypeRaw from 'rehype-raw';
@@ -209,7 +208,7 @@ const Content = ({ content }: Props) => {
         },
         table({ node, className, children, ...props }) {
           return (
-            <div className="my-">
+            <div className="my-4">
               <table
                 className={`border-collapse table-auto w-full text-sm ${className}`}
                 {...props}

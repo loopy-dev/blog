@@ -22,9 +22,6 @@ const ItemSkeleton = () => {
           </div>
         </div>
       </div>
-      <div className="">
-        <Skeleton animate="none" className="w-48 h-full" />
-      </div>
     </div>
   );
 };
