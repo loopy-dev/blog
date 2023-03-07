@@ -29,7 +29,7 @@ const SkeletonParagraph = (
   </div>
 );
 
-const ContentSkeleton = () => {
+const PostSkeleton = () => {
   return (
     <Block>
       {/** post title */}
@@ -67,7 +67,7 @@ const ContentSkeleton = () => {
   );
 };
 
-export default ContentSkeleton;
+export default PostSkeleton;
 
 const Block = styled.div`
   h1 {

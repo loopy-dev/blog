@@ -1,25 +1,37 @@
 import dynamic from 'next/dynamic';
 import Head from 'next/head';
-import PostSkeleton from '~/components/Post/ContentSkeleton';
+import PostSkeleton from '~/components/Post/PostSkeleton';
 import ContentLayout from '~/components/layouts/ContentLayout';
 import GlobalLayout from '~/components/layouts/GlobalLayout';
 import postService from '~/services/post';
 import { parseFileName } from '~/services/post/postService';
 import type { GetStaticPaths, GetStaticProps } from 'next';
-import type { FrontMatter, Post } from '~/models/Post';
+import type { Post as PostModel } from '~/models/Post';
 
 interface Props {
-  post: Post;
+  post: PostModel;
 }
 
-const LazyLoadedContent = dynamic(
-  () => import('../../components/Post/Content'),
-  { loading: () => <PostSkeleton /> }
-);
+const Page = ({ post }: Props) => {
+  return (
+    <>
+      <Head>
+        <title>{`${post.title} - Blog`}</title>
+      </Head>
+      <GlobalLayout>
+        <ContentLayout>
+          <LazyLoadedPost post={post} />
+        </ContentLayout>
+      </GlobalLayout>
+    </>
+  );
+};
 
-const LazyLoadedTitle = dynamic(
-  () => import('../../components/Post/ContentTitle')
-);
+export default Page;
+
+const LazyLoadedPost = dynamic(() => import('../../components/Post'), {
+  loading: () => <PostSkeleton />,
+});
 
 export const getStaticPaths: GetStaticPaths = async () => {
   const posts = postService.getPostList();
@@ -58,28 +70,3 @@ export const getStaticProps: GetStaticProps = async (context) => {
     };
   }
 };
-
-const Page = ({ post }: Props) => {
-  const frontMatter: FrontMatter = {
-    title: post.title,
-    tags: post.tags,
-    createdTime: post.createdTime,
-    description: post.description,
-  };
-
-  return (
-    <>
-      <Head>
-        <title>{`${post.title} - Blog`}</title>
-      </Head>
-      <GlobalLayout>
-        <ContentLayout>
-          <LazyLoadedTitle postMetaData={{ ...frontMatter }} />
-          <LazyLoadedContent content={post.content} />
-        </ContentLayout>
-      </GlobalLayout>
-    </>
-  );
-};
-
-export default Page;
