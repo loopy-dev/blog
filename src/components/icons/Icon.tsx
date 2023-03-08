@@ -24,9 +24,7 @@ type TypeofIcon =
 const Icon = ({ type, color, isHover, ...props }: Props) => {
   return (
     <span
-      className={`transition-all ${
-        isHover || props['data-ishover'] ? 'fill-gray-900' : 'fill-zinc-300'
-      }`}
+      className={`transition-all fill-zinc-300 hover:fill-gray-900`}
       {...props}
     >
       {getChild(type)}
