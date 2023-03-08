@@ -1,12 +1,26 @@
+import Link from 'next/link';
 import styled from 'styled-components';
 
 const Footer = () => {
   return (
     <Block>
-      <a>{"© Ben's Blog"}</a>
+      <Link href="/">{"© Ben's Blog"}</Link>
       <SubBlock>
-        <li>이전 블로그</li>
-        <li>Github</li>
+        <li>
+          <a href="https://velog.io/@mrbartrns">이전 블로그</a>
+        </li>
+        <li>
+          <a
+            href="httsp://github.com/mrbartrns"
+            rel="noopener noreferrer"
+            target="_blank"
+          >
+            Github
+          </a>
+        </li>
+        <li>
+          <Link href="/feedback">의견 제출하기</Link>
+        </li>
       </SubBlock>
     </Block>
   );
