@@ -17,7 +17,11 @@ const WithTooltip = ({
     <Block className="relative">
       <span {...props}>{children}</span>
       {tooltip ? (
-        <Tooltip className="tooltip" content={tooltip} position={position} />
+        <Tooltip
+          className="tooltip hidden md:block"
+          content={tooltip}
+          position={position}
+        />
       ) : null}
     </Block>
   );
@@ -30,9 +34,11 @@ const Block = styled.div`
     display: none;
   }
 
-  &:hover {
-    & .tooltip {
-      display: block;
+  @media (min-width: 768px) {
+    &:hover {
+      & .tooltip {
+        display: block;
+      }
     }
   }
 `;
