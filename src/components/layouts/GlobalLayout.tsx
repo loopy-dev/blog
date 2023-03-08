@@ -1,4 +1,3 @@
-import dynamic from 'next/dynamic';
 import styled from 'styled-components';
 import NavigationBar from '../NavigationBar';
 
@@ -6,7 +5,7 @@ interface Props {
   children: React.ReactNode;
 }
 
-const Footer = dynamic(() => import('../common/Footer'));
+// const Footer = dynamic(() => import('../common/Footer'));
 
 const GlobalLayout = ({ children }: Props) => {
   return (
