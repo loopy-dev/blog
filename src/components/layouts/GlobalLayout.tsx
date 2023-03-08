@@ -8,13 +8,11 @@ interface Props {
 
 const GlobalLayout = ({ children }: Props) => {
   return (
-    <>
+    <Container>
       <NavigationBar />
-      <Container className="md:ml-16">
-        <Main>{children}</Main>
-        <Footer />
-      </Container>
-    </>
+      <Main>{children}</Main>
+      <Footer />
+    </Container>
   );
 };
 
@@ -23,7 +21,7 @@ export default GlobalLayout;
 const Container = styled.div`
   display: flex;
   flex-direction: column;
-  height: 100%;
+  position: relative;
 `;
 
 const Main = styled.main`
