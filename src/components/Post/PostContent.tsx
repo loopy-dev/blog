@@ -1,11 +1,15 @@
+import dynamic from 'next/dynamic';
 import ReactMarkdown from 'react-markdown';
 import { dracula } from 'react-syntax-highlighter/dist/cjs/styles/prism';
 import rehypeRaw from 'rehype-raw';
 import remarkFrontMatter from 'remark-frontmatter';
 import remarkGfm from 'remark-gfm';
+import Skeleton from '../common/Skeleton';
 import { Block } from './MarkdownComponents';
-import SyntaxHighlighter from './SyntaxHighlighter';
 
+const SyntaxHighlighter = dynamic(() => import('./SyntaxHighlighter'), {
+  loading: () => <Skeleton noSpacing height="220px" width="100%" />,
+});
 interface Props {
   content: string;
 }
