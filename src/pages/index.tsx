@@ -1,6 +1,8 @@
+import dynamic from 'next/dynamic';
 import Head from 'next/head';
-import Resume from '../components/Resume';
 import GlobalLayout from '../components/layouts/GlobalLayout';
+
+const Resume = dynamic(() => import('../components/Resume'));
 
 const Page = () => {
   return (

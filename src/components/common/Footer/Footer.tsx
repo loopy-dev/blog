@@ -35,6 +35,7 @@ const Block = styled.footer`
   justify-content: center;
   align-items: center;
   min-height: 100px;
+  box-shadow: inset 0 1px 0 0 rgba(0, 0, 0, 0.1);
 `;
 
 const SubBlock = styled.ul`

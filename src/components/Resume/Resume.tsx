@@ -1,13 +1,15 @@
+import dynamic from 'next/dynamic';
 import FadeInUp from '../common/FadeInUp';
-import Activities from './Activities';
-import Educations from './Educations';
-import Hobbies from './Hobbies';
-import Introduction from './Introduction';
-import Projects from './Projects';
+
+const Introduction = dynamic(() => import('./Introduction'));
+const Projects = dynamic(() => import('./Projects'));
+const Educations = dynamic(() => import('./Educations'));
+const Activities = dynamic(() => import('./Activities'));
+const Hobbies = dynamic(() => import('./Hobbies'));
 
 const Resume = () => {
   return (
-    <div>
+    <>
       <FadeInUp>
         <Introduction />
       </FadeInUp>
@@ -15,7 +17,7 @@ const Resume = () => {
       <Educations />
       <Activities />
       <Hobbies />
-    </div>
+    </>
   );
 };
 

@@ -14,14 +14,14 @@ interface Props {
 const ExperienceLayout = ({ left, right, sticky }: Props) => {
   return (
     <div className="flex relative md:flex-row flex-col gap-4 w-full">
-      <div
+      <aside
         className={`${classes.left} ${
           sticky ? 'md:sticky' : ''
-        } self-start top-4`}
+        } self-start top-16`}
       >
         {left}
-      </div>
-      <div className={`${classes.right}`}>{right}</div>
+      </aside>
+      <article className={`${classes.right}`}>{right}</article>
     </div>
   );
 };
