@@ -8,10 +8,10 @@ interface Props {
 const ArticleLayout = ({ title, children }: Props) => {
   return (
     <ContentLayout>
-      <header>
+      <div>
         <h1 className="font-bold text-3xl my-8 break-all">{title}</h1>
-      </header>
-      <section className="flex flex-col gap-40">{children}</section>
+      </div>
+      <div className="flex flex-col gap-40">{children}</div>
     </ContentLayout>
   );
 };

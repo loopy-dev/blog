@@ -64,10 +64,15 @@ export default NavigationBar;
 const Container = styled.nav`
   display: flex;
   justify-content: space-between;
-  position: sticky;
-  top: 0;
   box-shadow: inset 0 -1px 0 0 rgba(0, 0, 0, 0.1);
   background-color: hsla(0, 0%, 100%, 0.8);
   backdrop-filter: saturate(180%) blur(5px);
   z-index: 99;
+  transition: all 0.1s;
+
+  @media (min-width: 768px) {
+    position: sticky;
+    top: 0;
+    backdrop-filter: saturate(180%) blur(5px);
+  }
 `;
