@@ -1,18 +1,39 @@
-import type { AnchorHTMLAttributes } from 'react';
+import styled, { css } from 'styled-components';
 
-interface Props extends AnchorHTMLAttributes<HTMLAnchorElement> {
-  children?: React.ReactNode;
+interface Props {
+  color?: 'black' | 'turquoise';
 }
 
-const LinkButton = ({ children, ...props }: Props) => {
-  return (
-    <a
-      {...props}
-      className={`inline-flex items-center py-4 px-8 bg-gray-900 text-gray-50 text-lg rounded-lg hover:bg-gray-800 select-none`}
-    >
-      {children}
-    </a>
-  );
-};
+const LinkButton = styled.a<Props>`
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  padding: 1rem 2rem;
+  color: rgb(249, 250, 251);
+  user-select: none;
+  font-size: 1.125rem /* 18px */;
+  line-height: 1.75rem /* 28px */;
+  border-radius: 8px;
+
+  ${({ color }) =>
+    color === 'black'
+      ? css`
+          background-color: rgb(17 24 39);
+        `
+      : css`
+          background-color: #20c997;
+        `}
+
+  @media (max-width: 640px) {
+    padding: 1rem;
+    font-size: 0.8rem;
+    line-height: 1.3rem;
+    flex: 1;
+  }
+
+  &:hover {
+    box-shadow: rgba(0, 0, 0, 0.06) 0px 0px 0px 10000px inset;
+  }
+`;
 
 export default LinkButton;
