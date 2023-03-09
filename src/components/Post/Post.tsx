@@ -1,3 +1,4 @@
+import Comments from './Comments';
 import Content from './PostContent';
 import ContentTitle from './PostTitle';
 import type { FrontMatter, Post as PostModel } from '~/models/Post';
@@ -17,6 +18,7 @@ const Post = ({ post }: Props) => {
     <>
       <ContentTitle postMetaData={{ ...frontMatter }} />
       <Content content={post.content} />
+      <Comments />
     </>
   );
 };

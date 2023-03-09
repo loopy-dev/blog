@@ -1,7 +1,9 @@
-import type { HTMLAttributes } from 'react';
+import styled from 'styled-components';
 
-const ContentLayout = ({ ...props }: HTMLAttributes<HTMLElement>) => {
-  return <div className="mx-auto max-w-4xl sm:p-8 p-4" {...props} />;
-};
+const ContentLayout = styled.div`
+  margin: 0 auto;
+  max-width: 56rem;
+  padding: 24px;
+`;
 
 export default ContentLayout;
