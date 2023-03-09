@@ -12,7 +12,6 @@ const GlobalLayout = ({ children }: Props) => {
     <Container>
       <NavigationBar />
       <Main>{children}</Main>
-      {/* <Footer /> */}
     </Container>
   );
 };
