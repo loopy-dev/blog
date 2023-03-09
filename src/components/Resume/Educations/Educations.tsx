@@ -1,18 +1,14 @@
+import ArticleLayout from '~/components/layouts/ArticleLayout';
 import { educations } from '../../../data/educations';
 import ContentTemplate from '../ContentTemplate';
 
 const Educations = () => {
   return (
-    <article className="mx-auto max-w-4xl p-8">
-      <header>
-        <h1 className="font-bold text-3xl my-8 break-all">Educations</h1>
-      </header>
-      <section className="flex flex-col gap-40">
-        {educations.map((education) => (
-          <ContentTemplate key={education.title} content={education} />
-        ))}
-      </section>
-    </article>
+    <ArticleLayout title="Educations">
+      {educations.map((education) => (
+        <ContentTemplate key={education.title} content={education} />
+      ))}
+    </ArticleLayout>
   );
 };
 
