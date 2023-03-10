@@ -51,19 +51,19 @@ const ContentContainer = styled.div`
   padding: 8px 24px;
   margin: 0 auto;
 
-  @media (max-width: 768px) {
+  @media (max-width: 640px) {
     .right {
       display: none;
     }
   }
 `;
 
-const ItemWrapper = styled.ul`
+const ItemWrapper = styled.div`
   display: flex;
   align-items: center;
 `;
 
-const Item = styled.li`
+const Item = styled.div`
   padding: 8px 16px;
   border-radius: 4px;
   user-select: none;

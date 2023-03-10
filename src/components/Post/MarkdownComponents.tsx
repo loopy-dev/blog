@@ -45,6 +45,11 @@ export const Block = styled.div`
     ${headingStyle}
   }
 
+  h4 {
+    font-size: 1.15em;
+    ${headingStyle}
+  }
+
   ul {
     list-style-type: disc;
     ${listStyle}
