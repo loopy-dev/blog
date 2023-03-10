@@ -54,7 +54,7 @@ export const chulcheck: Project = {
     django,
   ],
   startDate: '2022-10',
-  endDate: '2022-02',
+  endDate: '2022-12',
   links: {
     github: { name: 'Github', url: 'https://github.com/mrbartrns/chulcheck' },
     portfolio: {
