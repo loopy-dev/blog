@@ -1,9 +1,10 @@
+import ContentLayout from '~/components/layouts/ContentLayout';
 import LinkButton from '../../Main/LinkButton';
 import Icon from '../../icons';
 
 const Introduction = () => {
   return (
-    <article className="mx-auto max-w-4xl p-8">
+    <ContentLayout>
       {/** Header */}
       <div
         className="mt-24 mb-12 font-bold sm:text-4xl text-2xl sm:leading-normal md:leading-normal leading-normal text-gray-800"
@@ -48,7 +49,7 @@ const Introduction = () => {
           </span>
         </LinkButton>
       </div>
-    </article>
+    </ContentLayout>
   );
 };
 
