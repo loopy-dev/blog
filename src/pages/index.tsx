@@ -9,7 +9,13 @@ const Page = () => {
     <>
       <Head>
         <title>About Me - Portfolio</title>
-        <meta key="title" content="About Me - Portfolio" property="og:title" />
+        <meta key="title" content="About Me - Benlog" property="og:title" />
+        <meta
+          key="description"
+          content="프론트엔드 개발자 벤을 소개합니다."
+          name="description"
+          property="og:description"
+        />
       </Head>
       <GlobalLayout>
         {/** first part of main page, introduction */}
