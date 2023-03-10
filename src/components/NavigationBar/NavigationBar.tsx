@@ -47,7 +47,7 @@ const ContentContainer = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  max-width: 56rem;
+  max-width: 48rem;
   padding: 8px 24px;
   margin: 0 auto;
 
