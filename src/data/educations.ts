@@ -22,7 +22,7 @@ export const soonsilUniversity: Education = {
   title: '숭실대학교',
   startDate: '2013-03',
   endDate: '2020-02',
-  introduction: '유기신소재 파이버공학과',
+  introduction: '유기신소재 파이버공학과(신소재공학과)',
 };
 
 export const educations = [feDevCourse, soonsilUniversity];
