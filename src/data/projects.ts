@@ -16,32 +16,49 @@ import {
 import type { Project } from '../models/Resume';
 
 export const portfolio: Project = {
-  title: '포트폴리오(Blog)',
+  title: '블로그(Blog)',
   introduction:
-    '진행한 프로젝트를 모아두고 자체적인 블로그를 만들기 위해 진행 중인 프로젝트입니다.',
+    '기존에 사용하던 블로그 서비스를 대체하고, 개발했던 프로덕트를 한 곳에 모아보기 위해 개발한 사이트입니다.',
   startDate: '2023-01',
-  skills: [typescript, react, next, tailwind],
+  skills: [typescript, react, next, tailwind, styledComponents],
   description: [
-    '기존에 사용하던 블로그 플랫폼을 대체하기 위한 목적 및 공개 포트폴리오를 보여주기 위한 프로젝트',
+    '마크 다운 파일 기반 serverless 정적 블로그 서비스 개발, utterances api를 연결하여 issue 기반 댓글 시스템 구현',
+    'firebase를 이용한 피드백 페이지 구현',
+    '느린 초기 로딩속도 개선을 위한 페이지 분석 및 개선 작업',
+    '번들 파일 분석 및 코드 스플리팅으로 번들 크기 축소',
+    '리소스 분석을 통해 요청 리소스 파일 크기 최적화',
+    '폰트 관련 리소스를 최적화 하기 위하여 1/3 용량을 갖는 subset font로 대체, 필수 스타일 프리로드, 스타일 리소스 기존 대비 1/9로 축소',
+    'web vital 성능 점수를 60 → 90점으로 50% 개선',
+    'vercel analytics를 통한 유입 관리 및 web vital 체킹',
+    '사용성을 개선하기 위한 작업 진행 중',
   ],
   links: {
     github: { name: 'Github', url: 'https://github.com/mrbartrns/portfolio' },
+    website: { name: 'Website', url: 'https://portfolio-mrbartrns.vercel.app' },
   },
+  otherLinks: [
+    {
+      name: '블로그 이주하기 - 자체 서비스를 만들기 위한 첫 걸음',
+      url: 'https://portfolio-mrbartrns.vercel.app/posts/%EB%B8%94%EB%A1%9C%EA%B7%B8%20%EC%9D%B4%EC%A3%BC%ED%95%98%EA%B8%B0%20-%20%EC%9E%90%EC%B2%B4%20%EC%84%9C%EB%B9%84%EC%8A%A4%EB%A5%BC%20%EB%A7%8C%EB%93%A4%EA%B8%B0%20%EC%9C%84%ED%95%9C%20%EC%B2%AB%20%EA%B1%B8%EC%9D%8C',
+    },
+    {
+      name: '블로그를 만들면서 마주쳤던 어려움들',
+      url: 'https://portfolio-mrbartrns.vercel.app/posts/%EB%B8%94%EB%A1%9C%EA%B7%B8%EB%A5%BC%20%EB%A7%8C%EB%93%A4%EB%A9%B4%EC%84%9C%20%EB%A7%88%EC%A3%BC%EC%B9%9C%20%EC%96%B4%EB%A0%A4%EC%9B%80%EB%93%A4',
+    },
+  ],
 };
 
 export const chulcheck: Project = {
   title: '출첵(chulcheck)',
   introduction: '스터디를 할 때 팀원의 출석 관리를 도와줄 수 있는 웹 앱입니다.',
   description: [
-    '달력의 핵심 로직과 컴포넌트를 구현하였고, 달력 구성에 필요한 로직을 재사용할 수 있도록 custom hook으로 분리',
+    '달력의 핵심 로직 및 컴포넌트 구현',
     '달력에서 사용되는 데이터의 접근 시 시간복잡도를 기존 O(N)에서 O(1)으로 개선',
-    '재사용성을 고려한 컴포넌트 구현',
-    'Dropdown 컴포넌트의 경우 응집도를 높이기 위해 열림, 닫힘 상태를 내부적으로 관리하고, cloneElement를 이용하여 상태가 prop에 전달하도록 구현',
-    '실제 사용시 상태 변경을 일으킬 trigger와 배열 형태의 데이터를 삽입하면 사용할 수 있도록 사용성을 개선',
-    '라이트하우스 성능 측정을 통해 총 성능 점수를 약 20% 향상',
-    '지속적 통합을 위한 흐름을 구축하고, 반복적으로 진행되는 작업을 자동화',
-    'storybook을 통한 작은 컴포넌트 관리',
-    'Jest를 이용하여 유틸리티 함수들에 대해 엣지 케이스 구성하고 테스트를 진행',
+    'React 최상위 api를 이용한 유연한 컴포넌트 구축',
+    'createElement를 이용하여 이벤트 프록시 구축, 하위 컴포넌트와의 결합도 축소',
+    'storybook 기반 시각화로 컴포넌트를 관리',
+    '지속적 통합을 위한 흐름을 구축 및 반복 작업 자동화',
+    'Jest를 이용하여 utility functions에 대해 엣지 케이스 구성 및 테스트',
     'github actions을 통한 빌드 - 테스트과정 자동화',
   ],
   skills: [
@@ -75,13 +92,16 @@ export const chequiz: Project = {
   introduction:
     '개발자를 위한 간단한 지식 체크 서비스를 제공합니다. RPG적 요소와 퀴즈를 합쳐서 보다 재미있게 풀 수 있도록 시도해 보았습니다.',
   description: [
-    '면담을 통해 팀원의 관심사와 성향을 파악, 본 프로젝트 이전에 친밀감을 형성',
-    '노션 팀 페이지 내 화이트보드 도입으로 보다 자유로운 의견 제안 환경을 구성하고, 데일리 스크럼때 이를 공유하여 스크럼 시간을 단축',
-    'TypeScript 사용시 장점에 대해 팀원에게 설명하고 도입을 제안',
-    'Webpack과 Babel을 이용하여 React 초기 구동 환경을 구성하였고, 팀 컨벤션을 바탕으로 eslint, prettier를 설정',
-    '사용자가 임의의 퀴즈 풀을 요청할 때, 셔플 알고리즘을 이용하여 퀴즈가 보다 골고루 출제될 수 있도록 개선',
-    '기존에 작성했던 코드에 대해 가독성이 많이 떨어짐을 인식하고, 이에 대하여 담당 부분을 리팩토링',
-    '서비스에 필요한 유스케이스를 산출하고, 우선순위를 부여하여 주어진 시간 내에 핵심 기능들을 먼저 구현',
+    '면담을 통해 팀원의 관심사와 성향을 파악, 친밀감 형성',
+    '자유로운 의견 제안 환경을 위해, 팀 페이지 내 화이트보드 도입, 데일리 스크럼 시 이를 공유하여 스크럼 시간 단축',
+    '서비스에 필요한 유스케이스를 산출 및 우선순위를 부여하여 주어진 시간 내에 핵심 기능들을 먼저 구현',
+    'TypeScript 장점을 팀원들과 공유 및 도입 제안',
+    'Webpack과 Babel 기반 React 스캐폴딩 구축',
+    '팀 컨벤션 기반 eslint 및 prettier 구축 및 husky, lint-staged를 통한 개발 프로세스 개선',
+    'React 스캐폴딩 템플릿 구성 및 유지 보수',
+    'REST API 기반 퀴즈 풀기 및 해결 페이지 구현',
+    '사용자가 다양한 문제를 경험할 수 있도록 셔플 알고리즘 도입, 편향되지 않도록 퀴즈 풀 생성',
+    '가독성 개선을 위해 담당 부분 리팩토링 진행',
   ],
   skills: [typescript, react, emotion, webpack, babel],
   startDate: '2022-06',
@@ -99,7 +119,7 @@ export const chequiz: Project = {
   },
   otherLinks: [
     {
-      name: '추후 리액트 환경 구성시 빠르게 세팅이 가능하도록 만든 react typescript boilerplate',
+      name: '추후 리액트 환경 구성시 빠르게 세팅이 가능하도록 만든 react 스캐폴딩 템플릿',
       url: 'https://github.com/mrbartrns/react-typescript-boilerplate',
     },
     {
@@ -114,11 +134,12 @@ const vanillaEditor: Project = {
   introduction:
     '오직 Vanilla JS만을 사용하여 노션의 사이드바와 에디터를 구현하는 프로젝트입니다. 개발 후 TypeScript로 재작성 하였습니다.',
   description: [
-    '기존 App 컴포넌트가 너무 비대해지는 문제점을 해결하기 위해, 전역적으로 사용되는 상태를 Observer Pattern을 이용하여 컴포넌트 외부로 분리',
-    'App 컴포넌트 코드 약 60% 단축',
-    '실시간 자동 저장 기능을 구현하였으며, 500ms의 debounce를 적용하여 불필요한 api 요청 횟수 개선',
-    'Webpack과 Babel을 이용하여 React 초기 구동 환경을 구성하였고, 팀 컨벤션을 바탕으로 eslint, prettier를 설정',
-    'TypeScript를 배우면서, 기존에 작성했던 JavaScript 코드를 리라이팅하며 학습',
+    '순수 JavaScript 기반 상태 기반 렌더링 구현, 상태 기반 렌더링 컴포넌트, 라우팅 및 API요청 처리',
+    '컴포넌트 복잡도를 해결하기 위해 상태 코드를 컴포넌트 외부로 분리',
+    'Observer pattern 기반 전역 상태 관리 구현, 상태 변경 시 렌더링 처리',
+    'App 컴포넌트 300라인의 코드를 약 66% 간소화',
+    '실시간 자동 저장 기능 구현을 위한 debounce 도입, 500ms의 debounce를 적용하여 불필요한 api 요청 횟수 개선',
+    'TypeScript를 학습하며 기존에 작성했던 JavaScript 코드 리라이팅 진행',
   ],
   skills: [vanillaJS, typescript],
   startDate: '2022-04',
