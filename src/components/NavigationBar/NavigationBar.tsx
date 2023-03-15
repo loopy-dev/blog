@@ -1,10 +1,13 @@
 import Link from 'next/link';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
+import useTheme from '~/styles/theme/useTheme';
 
 // TODO - show floating menu button when display size is under sm
 const NavigationBar = () => {
+  const [isDarkMode] = useTheme();
+
   return (
-    <Container>
+    <Container isDarkMode={isDarkMode}>
       <ContentContainer>
         <ItemWrapper className="left">
           <Link href="/">
@@ -30,11 +33,23 @@ const NavigationBar = () => {
 
 export default NavigationBar;
 
-const Container = styled.nav`
+interface ContainerProps {
+  isDarkMode?: boolean;
+}
+
+const Container = styled.nav<ContainerProps>`
   box-shadow: inset 0 -1px 0 0 rgba(0, 0, 0, 0.1);
-  background-color: hsla(0, 0%, 100%, 0.8);
   z-index: 99;
   transition: all 0.1s;
+
+  ${({ isDarkMode }) =>
+    isDarkMode
+      ? css`
+          background-color: hsla(0, 0%, 15%, 0.8);
+        `
+      : css`
+          background-color: hsla(0, 0%, 100%, 0.8);
+        `}
 
   @media (min-width: 768px) {
     position: sticky;
