@@ -10,7 +10,7 @@ interface Props extends HTMLAttributes<HTMLSpanElement> {
   type: TypeofIcon;
   children?: React.ReactNode;
   isHover?: boolean;
-  'data-ishover'?: boolean;
+  noHoverEffect?: boolean;
 }
 
 type TypeofIcon =
@@ -21,10 +21,12 @@ type TypeofIcon =
   | 'blog'
   | 'project';
 
-const Icon = ({ type, color, isHover, ...props }: Props) => {
+const Icon = ({ type, color, isHover, noHoverEffect, ...props }: Props) => {
   return (
     <span
-      className={`transition-all fill-zinc-300 hover:fill-gray-900`}
+      className={`transition-all fill-zinc-300${
+        noHoverEffect ? '' : ` hover:fill-gray-900`
+      }`}
       {...props}
     >
       {getChild(type)}

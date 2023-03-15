@@ -34,7 +34,7 @@ const Introduction = () => {
         >
           <span className="inline-flex gap-2 justify-center items-center">
             <span className="hidden sm:block">
-              <Icon type="github" />
+              <Icon noHoverEffect type="github" />
             </span>
             Github 가기
           </span>
