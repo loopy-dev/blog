@@ -1,7 +1,10 @@
 import { configureStore } from '@reduxjs/toolkit';
+import themeReducer from '~components/common/ThemeController/themeSlice';
 
 const store = configureStore({
-  reducer: {},
+  reducer: {
+    isDarkMode: themeReducer,
+  },
 });
 
 export type RootState = ReturnType<typeof store.getState>;

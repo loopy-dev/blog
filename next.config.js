@@ -40,6 +40,7 @@ const nextConfig = {
         '~hooks': path.resolve(__dirname, 'src/hooks'),
         '~models': path.resolve(__dirname, 'src/models'),
         '~store': path.resolve(__dirname, 'src/store'),
+        '~styles': path.resolve(__dirname, 'src/styles'),
       },
       ...config.resolve,
     };

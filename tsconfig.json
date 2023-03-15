@@ -21,7 +21,8 @@
       "~services/*": ["src/services/*"],
       "~hooks/*": ["src/hooks/*"],
       "~models/*": ["src/models/*"],
-      "~store/*": ["src/store/*"]
+      "~store/*": ["src/store/*"],
+      "~styles/*": ["src/styles/*"]
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "**/*.config.*"],
