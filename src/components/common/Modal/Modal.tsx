@@ -1,6 +1,6 @@
 import Portal from '../Portal';
 import className from './Modal.module.scss';
-import { useModalContext } from './ModalContext';
+import useModal from './useModal';
 
 interface Props {
   children?: React.ReactNode;
@@ -8,7 +8,7 @@ interface Props {
 
 // if Modal state is open, then render. no control with css display property.
 const ModalBackground = ({ children }: Props) => {
-  const { modalState, close } = useModalContext();
+  const { modalState, close } = useModal();
 
   return (
     <Portal>

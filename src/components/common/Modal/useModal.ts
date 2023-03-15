@@ -1,14 +1,17 @@
-import { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { open as modalOpen, close as modalClose } from './modalSlice';
+import type { RootState } from '~/store';
 
 const useModal = () => {
-  const [modalState, setModalState] = useState(false);
+  const modalState = useSelector((state: RootState) => state.isModalOpen);
+  const dispatch = useDispatch();
 
   const open = () => {
-    setModalState(true);
+    dispatch(modalOpen());
   };
 
   const close = () => {
-    setModalState(false);
+    dispatch(modalClose());
   };
 
   return {
