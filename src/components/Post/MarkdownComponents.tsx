@@ -127,4 +127,9 @@ export const Block = styled.div`
   img {
     margin: 1em auto;
   }
+
+  figcaption {
+    font-size: 90%;
+    font-style: italic;
+  }
 `;

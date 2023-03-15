@@ -7,7 +7,7 @@ const Introduction = () => {
     <ContentLayout>
       {/** Header */}
       <div
-        className="mt-24 mb-12 font-bold sm:text-4xl text-2xl sm:leading-normal md:leading-normal leading-normal text-gray-800"
+        className="mt-24 mb-12 font-bold sm:text-4xl text-2xl sm:leading-normal md:leading-normal leading-normal"
         style={{ letterSpacing: '-1px' }}
       >
         <h1>환영합니다!</h1>
