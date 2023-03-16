@@ -9,53 +9,31 @@ const NavigationBar = () => {
   const [isDarkMode, toggle] = useTheme();
   const [isOpen, setIsOpen] = useState(false);
 
-  // NOTE - refactoring is needed!!!
+  const toggleHamburgerIcon = () => {
+    setIsOpen((prev) => !prev);
+  };
+
   return (
     // TODO - add color pallete on themes
     <Container isDarkMode={isDarkMode}>
-      <ContentContainer>
+      {/** upper part of NavigationBar */}
+      <PrimaryContainer>
         <ItemWrapper className="left">
-          <Link href="/">
-            <Item noHoverEffect>Benlog</Item>
-          </Link>
+          <Link href="/">BenLog</Link>
         </ItemWrapper>
         <ItemWrapper className="right">
           <Item onClick={toggle}>{isDarkMode ? 'light' : 'dark'}</Item>
-          <Link href="/posts">
-            <Item>Blog</Item>
-          </Link>
-          <Link href="/feedback">
-            <Item>Feedback</Item>
-          </Link>
-          <Link
-            href="https://github.com/mrbartrns"
-            rel="noopener noreferrer"
-            target="_blank"
-          >
-            <Item>Github</Item>
-          </Link>
+          <NavigationLinks />
         </ItemWrapper>
         <ItemWrapper className="right-hidden">
           <Item onClick={toggle}>{isDarkMode ? 'light' : 'dark'}</Item>
-          <Icon type="hamburger" onClick={() => setIsOpen((prev) => !prev)} />
+          <Icon type="hamburger" onClick={toggleHamburgerIcon} />
         </ItemWrapper>
-      </ContentContainer>
+      </PrimaryContainer>
+      {/** hidden part of NavigationBar */}
       {isOpen ? (
         <HiddenItemWrapper>
-          <Link href="/posts" style={{ width: '100%', textAlign: 'center' }}>
-            <Item>Blog</Item>
-          </Link>
-          <Link href="/feedback" style={{ width: '100%', textAlign: 'center' }}>
-            <Item>Feedback</Item>
-          </Link>
-          <Link
-            href="https://github.com/mrbartrns"
-            rel="noopener noreferrer"
-            style={{ width: '100%', textAlign: 'center' }}
-            target="_blank"
-          >
-            <Item>Github</Item>
-          </Link>
+          <NavigationLinks />
         </HiddenItemWrapper>
       ) : null}
     </Container>
@@ -63,6 +41,27 @@ const NavigationBar = () => {
 };
 
 export default NavigationBar;
+
+const NavigationLinks = () => {
+  return (
+    <>
+      <Link href="/posts" style={{ width: '100%', textAlign: 'center' }}>
+        <Item>Blog</Item>
+      </Link>
+      <Link href="/feedback" style={{ width: '100%', textAlign: 'center' }}>
+        <Item>Feedback</Item>
+      </Link>
+      <Link
+        href="https://github.com/mrbartrns"
+        rel="noopener noreferrer"
+        style={{ width: '100%', textAlign: 'center' }}
+        target="_blank"
+      >
+        <Item>Github</Item>
+      </Link>
+    </>
+  );
+};
 
 interface ContainerProps {
   isDarkMode?: boolean;
@@ -92,7 +91,7 @@ const Container = styled.nav<ContainerProps>`
   }
 `;
 
-const ContentContainer = styled.div`
+const PrimaryContainer = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -143,12 +142,7 @@ const Item = styled.div<ItemProps>`
     `}
 `;
 
-const HiddenItemWrapper = styled.ul`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-
+const HiddenItemWrapper = styled.div`
   @media (min-width: 640px) {
     display: none;
   }

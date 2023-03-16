@@ -26,7 +26,7 @@ interface Props {
 const Container = styled.span<Props>`
   display: inline-block;
   position: relative;
-  width: 24px;
+  width: 20px;
   height: 16px;
   cursor: pointer;
 
@@ -35,9 +35,9 @@ const Container = styled.span<Props>`
     position: absolute;
     right: 0;
     width: 100%;
-    height: 2px;
+    height: 2.2px;
     border-radius: 4px;
-    transition: all 0.4s;
+    transition: all 0.2s;
 
     &:nth-of-type(1) {
       top: 0;
