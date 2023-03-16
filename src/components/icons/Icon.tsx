@@ -1,6 +1,7 @@
 import type { HTMLAttributes } from 'react';
 import BlogIcon from './BlogIcon';
 import GithubIcon from './GithubIcon';
+import Hamburger from './Hamburger';
 import MailIcon from './MailIcon';
 import PortfolioIcon from './PortfolioIcon';
 import ProjectIcon from './ProjectIcon';
@@ -19,7 +20,8 @@ type TypeofIcon =
   | 'website'
   | 'mail'
   | 'blog'
-  | 'project';
+  | 'project'
+  | 'hamburger';
 
 const Icon = ({ type, color, isHover, noHoverEffect, ...props }: Props) => {
   return (
@@ -48,6 +50,8 @@ const getChild = (type: TypeofIcon) => {
       return <BlogIcon />;
     case 'project':
       return <ProjectIcon />;
+    case 'hamburger':
+      return <Hamburger />;
     default:
       throw new Error('type is required.');
   }
