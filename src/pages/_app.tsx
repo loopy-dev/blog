@@ -2,8 +2,8 @@ import { Analytics } from '@vercel/analytics/react';
 import Head from 'next/head';
 import { Provider } from 'react-redux';
 import store from '~/store';
-import { Pretendard } from '~/styles/fonts/Pretendard';
-import ThemeProvider from '~/styles/theme/ThemeProvider';
+import { Pretendard } from '~styles/fonts/Pretendard';
+import ThemeProvider from '~styles/theme/ThemeProvider';
 import '../styles/globals.css';
 import type { AppProps } from 'next/app';
 

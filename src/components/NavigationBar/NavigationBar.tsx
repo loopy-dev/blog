@@ -4,7 +4,7 @@ import useTheme from '~/styles/theme/useTheme';
 
 // TODO - show floating menu button when display size is under sm
 const NavigationBar = () => {
-  const [isDarkMode] = useTheme();
+  const [isDarkMode, toggle] = useTheme();
 
   return (
     <Container isDarkMode={isDarkMode}>
@@ -15,8 +15,12 @@ const NavigationBar = () => {
           </Link>
         </ItemWrapper>
         <ItemWrapper className="right">
+          <Item onClick={toggle}>darkmode {isDarkMode ? 'off' : 'on'}</Item>
           <Link href="/posts">
             <Item>Blog</Item>
+          </Link>
+          <Link href="/feedback">
+            <Item>Feedback</Item>
           </Link>
           <Link
             href="https://github.com/mrbartrns"
@@ -62,7 +66,6 @@ const ContentContainer = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  max-width: 48rem;
   padding: 8px 24px;
   margin: 0 auto;
 
@@ -83,6 +86,7 @@ const Item = styled.div`
   border-radius: 4px;
   user-select: none;
   transition: all 100ms cubic-bezier(0.31, 0.27, 0.15, 0.99) 0s;
+  cursor: pointer;
 
   &:hover {
     box-shadow: rgba(0, 0, 0, 0.06) 0px 0px 0px 10000px inset;
