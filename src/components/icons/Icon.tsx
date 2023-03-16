@@ -1,6 +1,8 @@
 import type { HTMLAttributes } from 'react';
+import styled, { css } from 'styled-components';
 import BlogIcon from './BlogIcon';
 import GithubIcon from './GithubIcon';
+import Hamburger from './Hamburger';
 import MailIcon from './MailIcon';
 import PortfolioIcon from './PortfolioIcon';
 import ProjectIcon from './ProjectIcon';
@@ -9,7 +11,6 @@ import WebIcon from './WebIcon';
 interface Props extends HTMLAttributes<HTMLSpanElement> {
   type: TypeofIcon;
   children?: React.ReactNode;
-  isHover?: boolean;
   noHoverEffect?: boolean;
 }
 
@@ -19,18 +20,14 @@ type TypeofIcon =
   | 'website'
   | 'mail'
   | 'blog'
-  | 'project';
+  | 'project'
+  | 'hamburger';
 
-const Icon = ({ type, color, isHover, noHoverEffect, ...props }: Props) => {
+const Icon = ({ type, noHoverEffect, ...props }: Props) => {
   return (
-    <span
-      className={`transition-all fill-zinc-300${
-        noHoverEffect ? '' : ` hover:fill-gray-900`
-      }`}
-      {...props}
-    >
+    <Wrapper noHoverEffect={noHoverEffect} {...props}>
       {getChild(type)}
-    </span>
+    </Wrapper>
   );
 };
 
@@ -48,9 +45,29 @@ const getChild = (type: TypeofIcon) => {
       return <BlogIcon />;
     case 'project':
       return <ProjectIcon />;
+    case 'hamburger':
+      return <Hamburger />;
     default:
       throw new Error('type is required.');
   }
 };
 
 export default Icon;
+
+type WrapperProps = Omit<Props, 'type'>;
+
+const Wrapper = styled.span<WrapperProps>`
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  fill: #d4d4d8;
+  transition: all 150ms cubic-bezier(0.4, 0, 0.2, 1);
+
+  ${({ noHoverEffect }) =>
+    !noHoverEffect &&
+    css`
+      &:hover {
+        fill: #111827;
+      }
+    `}
+`;
