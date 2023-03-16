@@ -35,7 +35,7 @@ const Container = styled.span<Props>`
     position: absolute;
     right: 0;
     width: 100%;
-    height: 2.5px;
+    height: 2px;
     border-radius: 4px;
     transition: all 0.4s;
 
@@ -59,13 +59,13 @@ const Container = styled.span<Props>`
       isActive &&
       css`
         &:nth-of-type(1) {
-          transform: translateY(6.5px) rotate(-45deg);
+          transform: translateY(6.55px) rotate(-45deg);
         }
         &:nth-of-type(2) {
           opacity: 0;
         }
         &:nth-of-type(3) {
-          transform: translateY(-6.5px) rotate(45deg);
+          transform: translateY(-6.55px) rotate(45deg);
         }
       `}
   }
