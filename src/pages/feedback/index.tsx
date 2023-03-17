@@ -10,10 +10,17 @@ import type { FeebackForm } from '../../models/Feeback';
 import type { SubmitHandler } from 'react-hook-form/dist/types';
 
 const Page = () => {
+  const defaultValues = {
+    email: '',
+    description: '',
+  };
+
   const handleSubmit: SubmitHandler<FeebackForm> = async (data) => {
     try {
       await postFeedback(data);
       // alert user
+      window.alert('성공적으로 제출되었습니다!');
+      reset(defaultValues);
     } catch (error) {
       console.error(error);
     }
@@ -22,12 +29,10 @@ const Page = () => {
   const {
     register,
     handleSubmit: onSubmit,
+    reset,
     formState,
   } = useForm<FeebackForm>({
-    defaultValues: {
-      email: '',
-      description: '',
-    },
+    defaultValues,
   });
 
   return (
