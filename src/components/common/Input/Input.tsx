@@ -1,9 +1,10 @@
 import type { InputHTMLAttributes } from 'react';
 import React from 'react';
+import Label from './Label';
 
 type Color = 'default' | 'error';
 
-interface Props extends InputHTMLAttributes<HTMLInputElement> {
+export interface Props extends InputHTMLAttributes<HTMLInputElement> {
   label?: string;
   variant?: Color;
 }
@@ -23,17 +24,12 @@ const Input = (
 ) => {
   return (
     <div>
-      <label
-        className="block text-sm font-medium text-gray-700"
-        htmlFor={props.id}
-      >
-        {label}
-      </label>
+      {label && <Label htmlFor={props.id}>{label}</Label>}
       <div className="relative mt-1 rounded-md shadow-sm">
         <input
           ref={ref}
           {...props}
-          className={`block w-full rounded-md border min-w-0 outline-none pl-3 py-2 sm:text-sm ${SETTINGS[variant]}`}
+          className={`block w-full rounded-md border min-w-0 outline-none pl-3 py-2 sm:text-sm ${SETTINGS[variant]} bg-transparent`}
         />
       </div>
     </div>
