@@ -7,7 +7,10 @@ const feedbackCol = collection(database, 'feedback');
 
 const postFeedback = async (feedback: FeedbackForm) => {
   try {
-    const response = await addDoc(feedbackCol, feedback);
+    const response = await addDoc(feedbackCol, {
+      ...feedback,
+      timestamp: new Date().toUTCString(),
+    });
 
     return response;
   } catch {

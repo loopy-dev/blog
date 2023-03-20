@@ -9,6 +9,7 @@ import Input from '~components/common/Input';
 import TextArea from '~components/common/Input/TextArea';
 import ContentLayout from '~components/layouts/ContentLayout';
 import GlobalLayout from '~components/layouts/GlobalLayout';
+import useLoading from '~hooks/common/useLoading';
 import type { SubmitHandler } from 'react-hook-form/dist/types';
 import type { FeedbackForm } from '~/models/Feedback';
 import type { Props as InputProps } from '~components/common/Input/Input';
@@ -23,6 +24,8 @@ const defaultValues = {
 
 const Page = () => {
   const recaptchaRef = React.createRef<Recaptcha>();
+  const [loading, startTransition] = useLoading();
+
   const handleSubmit: SubmitHandler<FeedbackForm> = async (data) => {
     try {
       const token = await recaptchaRef.current?.executeAsync();
@@ -65,7 +68,7 @@ const Page = () => {
           />
           <Form
             onSubmit={onSubmit(async (data) => {
-              await handleSubmit(data);
+              startTransition(await handleSubmit(data));
             })}
           >
             <FormField
@@ -77,6 +80,7 @@ const Page = () => {
                 required: true,
                 pattern: /^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/,
               })}
+              disabled={loading}
               error={formState.errors.email ? '이메일 형식을 맞춰주세요.' : ''}
             />
             <TextField
@@ -88,6 +92,7 @@ const Page = () => {
                 required: true,
                 minLength: 3,
               })}
+              disabled={loading}
               error={
                 formState.errors.description
                   ? '최소 세 글자 이상 입력해야 합니다.'
@@ -120,18 +125,6 @@ const Header = ({ title, description }: HeaderProps) => {
     </header>
   );
 };
-
-// const FormSection = styled.div`
-//   padding: 32px;
-//   border-radius: 4px;
-//   border: 1px solid;
-//   transition: all 150ms cubic-bezier(0.4, 0, 0.2, 1);
-
-//   @media (max-width: 640px) {
-//     padding: 0;
-//     border: none;
-//   }
-// `;
 
 const Form = styled.form`
   display: flex;
