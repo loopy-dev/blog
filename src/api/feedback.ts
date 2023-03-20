@@ -1,32 +1,23 @@
-import { addDoc, collection } from 'firebase/firestore';
-import { database } from '../services/firebase';
 import instance from './instance';
-import type { FeedbackForm } from '../models/Feedback';
+import type { FeedbackForm, CaptchaResponse } from '~models/Feedback';
 
-const feedbackCol = collection(database, 'feedback');
-
-export async function postFeedback(feeback: FeedbackForm) {
+export const postFeedback = async (feedback: FeedbackForm) => {
   try {
-    const response = await addDoc(feedbackCol, feeback);
+    const response = await instance.post('/api/feedback', { feedback });
 
-    return response;
+    return response.data;
   } catch {
-    throw new Error('error occurred at addFeedback.');
+    throw new Error('error occurred at postFeedback.');
   }
-}
+};
 
-export const postFeedbackWithCaptcha = async (
-  feedback: FeedbackForm,
-  captcha: string
-) => {
+export const verifyRecaptcha = async (token: string) => {
   try {
-    const response = await instance.post('/api/feedback', {
-      feedback,
-      captcha,
+    const { data } = await instance.post<CaptchaResponse>('/api/verify', {
+      captcha: token,
     });
-    return response;
-  } catch (error) {
-    console.error(error);
-    throw new Error('error occurred at postFeedbackWithCaptcha');
+    return data;
+  } catch {
+    throw new Error('error occurred at verifyRecaptcha.');
   }
 };

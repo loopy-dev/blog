@@ -3,7 +3,7 @@ import Head from 'next/head';
 import Recaptcha from 'react-google-recaptcha';
 import { useForm } from 'react-hook-form';
 import styled from 'styled-components';
-import { postFeedbackWithCaptcha } from '~/api/feedback';
+import { postFeedback, verifyRecaptcha } from '~/api/feedback';
 import Button from '~components/common/Button';
 import Input from '~components/common/Input';
 import TextArea from '~components/common/Input/TextArea';
@@ -27,21 +27,26 @@ const Page = () => {
   const [loading, startTransition] = useLoading();
 
   const handleSubmit: SubmitHandler<FeedbackForm> = async (data) => {
-    try {
-      const token = await recaptchaRef.current?.executeAsync();
+    const captchaToken = recaptchaRef.current?.getValue();
+    if (!captchaToken) {
+      window.alert('Recaptcha를 먼저 클릭해주세요.');
+      return;
+    }
 
-      if (!token) {
-        window.alert('Recaptcha 코드를 확인하세요.');
+    try {
+      const captchaResponse = await verifyRecaptcha(captchaToken);
+
+      if (captchaResponse.success) {
+        await postFeedback(data);
+        // alert user
+        window.alert('성공적으로 제출되었습니다!');
+        reset(defaultValues);
         return;
       }
 
-      await postFeedbackWithCaptcha(data, token);
-
-      // alert user
-      window.alert('성공적으로 제출되었습니다!');
-      reset(defaultValues);
+      window.alert('유효하지 않은 Recaptcha token입니다.');
     } catch (error) {
-      console.error(error);
+      window.alert('유효하지 않은 요청입니다.');
     }
   };
 
@@ -99,10 +104,15 @@ const Page = () => {
                   : ''
               }
             />
-            <div className="flex justify-end gap-4">
+            <div className="flex justify-end gap-4 items-center">
+              <Recaptcha
+                ref={recaptchaRef}
+                hl="ko"
+                sitekey={SITE_KEY}
+                size="normal"
+              />
               <Button>제출하기</Button>
             </div>
-            <Recaptcha ref={recaptchaRef} sitekey={SITE_KEY} size="invisible" />
           </Form>
         </ContentLayout>
       </GlobalLayout>
