@@ -1,39 +1,65 @@
 import type { TextareaHTMLAttributes } from 'react';
 import React from 'react';
+import styled from 'styled-components';
 import Label from './Label';
-
-type Color = 'default' | 'error';
+import { borderStyle } from './styles';
+import type { Color } from './styles';
 
 export interface Props extends TextareaHTMLAttributes<HTMLTextAreaElement> {
   label?: string;
   variant?: Color;
 }
 
-type Settings = {
-  [key in Color]: string;
-};
-
-const SETTINGS: Settings = {
-  default: 'focus:border-indigo-500 focus:ring-indigo-500 border-gray-300',
-  error: 'focus:border-red-500 focus:ring-red-500 border-red-500',
-};
-
 const TextArea = (
   { label, variant = 'default', ...props }: Props,
   ref: React.ForwardedRef<HTMLTextAreaElement>
 ) => {
   return (
-    <div>
+    <Container>
       {label && <Label htmlFor={props.id}>{label}</Label>}
-      <div className="relative mt-1 rounded-md shadow-sm">
-        <textarea
-          ref={ref}
-          {...props}
-          className={`block w-full rounded-md border min-w-0 outline-none pl-3 py-2 sm:text-sm ${SETTINGS[variant]} bg-transparent`}
-        />
-      </div>
-    </div>
+      <TextAreaFrame disabled={props.disabled} variant={variant}>
+        <TextAreaBase ref={ref} {...props} variant={variant} />
+      </TextAreaFrame>
+    </Container>
   );
 };
 
 export default React.forwardRef(TextArea);
+
+const Container = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  width: 100%;
+`;
+
+const TextAreaFrame = styled.div<Props>`
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+  align-items: center;
+  min-width: 0px;
+  width: 100%;
+  background-color: ${({ disabled }) =>
+    disabled ? 'rgba(0, 0, 0, 0.1)' : 'rgb(255, 255, 255)'};
+  border-radius: 6px;
+  cursor: text;
+  transition: all 100ms cubic-bezier(0.31, 0.27, 0.15, 0.99) 0s;
+
+  ${borderStyle}
+`;
+
+const TextAreaBase = styled.textarea<Props>`
+  outline: none;
+  border: none;
+  width: 100%;
+  height: 100%;
+  padding: 8px 16px;
+  background-color: transparent;
+  font-size: 14px;
+  line-height: 1.5;
+
+  &::placeholder {
+    color: rgba(200, 200, 200, 1);
+  }
+`;

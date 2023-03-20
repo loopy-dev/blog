@@ -1,27 +1,42 @@
 import React from 'react';
 import Head from 'next/head';
+import Recaptcha from 'react-google-recaptcha';
 import { useForm } from 'react-hook-form';
 import styled from 'styled-components';
-import { postFeedback } from '~/api/feeback';
+import { postFeedbackWithCaptcha } from '~/api/feedback';
 import Button from '~components/common/Button';
 import Input from '~components/common/Input';
 import TextArea from '~components/common/Input/TextArea';
 import ContentLayout from '~components/layouts/ContentLayout';
 import GlobalLayout from '~components/layouts/GlobalLayout';
+import useLoading from '~hooks/common/useLoading';
 import type { SubmitHandler } from 'react-hook-form/dist/types';
+import type { FeedbackForm } from '~/models/Feedback';
 import type { Props as InputProps } from '~components/common/Input/Input';
 import type { Props as TextAreaProps } from '~components/common/Input/TextArea';
-import type { FeebackForm } from '~models/Feeback';
+
+const SITE_KEY = process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY || '';
+
+const defaultValues = {
+  email: '',
+  description: '',
+};
 
 const Page = () => {
-  const defaultValues = {
-    email: '',
-    description: '',
-  };
+  const recaptchaRef = React.createRef<Recaptcha>();
+  const [loading, startTransition] = useLoading();
 
-  const handleSubmit: SubmitHandler<FeebackForm> = async (data) => {
+  const handleSubmit: SubmitHandler<FeedbackForm> = async (data) => {
     try {
-      await postFeedback(data);
+      const token = await recaptchaRef.current?.executeAsync();
+
+      if (!token) {
+        window.alert('Recaptcha 코드를 확인하세요.');
+        return;
+      }
+
+      await postFeedbackWithCaptcha(data, token);
+
       // alert user
       window.alert('성공적으로 제출되었습니다!');
       reset(defaultValues);
@@ -35,7 +50,7 @@ const Page = () => {
     handleSubmit: onSubmit,
     reset,
     formState,
-  } = useForm<FeebackForm>({
+  } = useForm<FeedbackForm>({
     defaultValues,
   });
 
@@ -53,7 +68,7 @@ const Page = () => {
           />
           <Form
             onSubmit={onSubmit(async (data) => {
-              await handleSubmit(data);
+              startTransition(await handleSubmit(data));
             })}
           >
             <FormField
@@ -65,6 +80,7 @@ const Page = () => {
                 required: true,
                 pattern: /^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/,
               })}
+              disabled={loading}
               error={formState.errors.email ? '이메일 형식을 맞춰주세요.' : ''}
             />
             <TextField
@@ -76,6 +92,7 @@ const Page = () => {
                 required: true,
                 minLength: 3,
               })}
+              disabled={loading}
               error={
                 formState.errors.description
                   ? '최소 세 글자 이상 입력해야 합니다.'
@@ -85,6 +102,7 @@ const Page = () => {
             <div className="flex justify-end gap-4">
               <Button>제출하기</Button>
             </div>
+            <Recaptcha ref={recaptchaRef} sitekey={SITE_KEY} size="invisible" />
           </Form>
         </ContentLayout>
       </GlobalLayout>
@@ -107,18 +125,6 @@ const Header = ({ title, description }: HeaderProps) => {
     </header>
   );
 };
-
-// const FormSection = styled.div`
-//   padding: 32px;
-//   border-radius: 4px;
-//   border: 1px solid;
-//   transition: all 150ms cubic-bezier(0.4, 0, 0.2, 1);
-
-//   @media (max-width: 640px) {
-//     padding: 0;
-//     border: none;
-//   }
-// `;
 
 const Form = styled.form`
   display: flex;
