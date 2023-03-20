@@ -1,27 +1,39 @@
 import React from 'react';
 import Head from 'next/head';
+import Recaptcha from 'react-google-recaptcha';
 import { useForm } from 'react-hook-form';
 import styled from 'styled-components';
-import { postFeedback } from '~/api/feeback';
+import { postFeedbackWithCaptcha } from '~/api/feedback';
 import Button from '~components/common/Button';
 import Input from '~components/common/Input';
 import TextArea from '~components/common/Input/TextArea';
 import ContentLayout from '~components/layouts/ContentLayout';
 import GlobalLayout from '~components/layouts/GlobalLayout';
 import type { SubmitHandler } from 'react-hook-form/dist/types';
+import type { FeedbackForm } from '~/models/Feedback';
 import type { Props as InputProps } from '~components/common/Input/Input';
 import type { Props as TextAreaProps } from '~components/common/Input/TextArea';
-import type { FeebackForm } from '~models/Feeback';
+
+const SITE_KEY = process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY || '';
+
+const defaultValues = {
+  email: '',
+  description: '',
+};
 
 const Page = () => {
-  const defaultValues = {
-    email: '',
-    description: '',
-  };
-
-  const handleSubmit: SubmitHandler<FeebackForm> = async (data) => {
+  const recaptchaRef = React.createRef<Recaptcha>();
+  const handleSubmit: SubmitHandler<FeedbackForm> = async (data) => {
     try {
-      await postFeedback(data);
+      const token = await recaptchaRef.current?.executeAsync();
+
+      if (!token) {
+        window.alert('Recaptcha 코드를 확인하세요.');
+        return;
+      }
+
+      await postFeedbackWithCaptcha(data, token);
+
       // alert user
       window.alert('성공적으로 제출되었습니다!');
       reset(defaultValues);
@@ -35,7 +47,7 @@ const Page = () => {
     handleSubmit: onSubmit,
     reset,
     formState,
-  } = useForm<FeebackForm>({
+  } = useForm<FeedbackForm>({
     defaultValues,
   });
 
@@ -85,6 +97,7 @@ const Page = () => {
             <div className="flex justify-end gap-4">
               <Button>제출하기</Button>
             </div>
+            <Recaptcha ref={recaptchaRef} sitekey={SITE_KEY} size="invisible" />
           </Form>
         </ContentLayout>
       </GlobalLayout>
