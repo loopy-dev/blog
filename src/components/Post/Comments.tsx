@@ -13,7 +13,7 @@ const Comments = () => {
     $script.setAttribute('issue-term', 'title');
     $script.setAttribute('label', 'Comment');
     $script.setAttribute('theme', 'github-light');
-    $script.setAttribute('repo', 'mrbartrns/portfolio');
+    $script.setAttribute('repo', 'mrbartrns/blog');
 
     commentRef.current?.appendChild($script);
   }, []);
