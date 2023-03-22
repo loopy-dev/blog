@@ -6,6 +6,7 @@ const Projects = dynamic(() => import('./Projects'));
 const Educations = dynamic(() => import('./Educations'));
 const Activities = dynamic(() => import('./Activities'));
 const Hobbies = dynamic(() => import('./Hobbies'));
+const Prize = dynamic(() => import('./Prize'));
 
 const Resume = () => {
   return (
@@ -16,6 +17,7 @@ const Resume = () => {
       <Projects />
       <Educations />
       <Activities />
+      <Prize />
       <Hobbies />
     </>
   );
