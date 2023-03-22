@@ -1,12 +1,13 @@
+import type { HTMLAttributes } from 'react';
 import styled from 'styled-components';
 
-interface Props {
+interface Props extends HTMLAttributes<HTMLElement> {
   label?: string | number;
 }
 
-const Tag = ({ label }: Props) => {
+const Tag = ({ label, ...props }: Props) => {
   return (
-    <Container>
+    <Container {...props}>
       <Icon />
       {label}
     </Container>
@@ -23,8 +24,8 @@ const Container = styled.button`
   background-color: #fff;
   border: 1px solid rgb(229 231 235);
   color: rgb(17 24 39);
-  word-break: break-all;
   line-height: 1;
+  word-break: keep-all;
 
   &:hover {
     background-color: rgb(241 245 249);
