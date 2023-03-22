@@ -41,7 +41,7 @@ const TextAreaFrame = styled.div<Props>`
   min-width: 0px;
   width: 100%;
   background-color: ${({ disabled }) =>
-    disabled ? 'rgba(0, 0, 0, 0.1)' : 'rgb(255, 255, 255)'};
+    disabled ? 'rgba(0, 0, 0, 0.06)' : 'rgb(255, 255, 255)'};
   border-radius: 6px;
   cursor: text;
   transition: all 100ms cubic-bezier(0.31, 0.27, 0.15, 0.99) 0s;

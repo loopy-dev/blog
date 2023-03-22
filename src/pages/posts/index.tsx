@@ -35,11 +35,13 @@ const Page = ({ posts }: Props) => {
       </Head>
       <GlobalLayout>
         <ContentLayout>
-          <div>
-            {posts.map((post) => (
-              <ListItem key={post.title} post={post} />
-            ))}
-          </div>
+          <Header
+            description="쓴 글들을 모아볼 수 있는 포스트 페이지입니다."
+            title="블로그"
+          />
+          {posts.map((post) => (
+            <ListItem key={post.title} post={post} />
+          ))}
         </ContentLayout>
       </GlobalLayout>
     </>
@@ -47,3 +49,17 @@ const Page = ({ posts }: Props) => {
 };
 
 export default Page;
+
+interface HeaderProps {
+  title: string;
+  description?: string;
+}
+
+const Header = ({ title, description }: HeaderProps) => {
+  return (
+    <header className="my-8">
+      <h1 className="font-bold text-3xl my-4 break-all">{title}</h1>
+      {description && <h2 className="text-gray-500">{description}</h2>}
+    </header>
+  );
+};
