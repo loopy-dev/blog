@@ -4,12 +4,11 @@ import Recaptcha from 'react-google-recaptcha';
 import { useForm } from 'react-hook-form';
 import styled from 'styled-components';
 import { postFeedback, verifyRecaptcha } from '~/api/feedback';
-import Button from '~components/common/Button';
+import ButtonBase from '~components/common/Button';
 import Input from '~components/common/Input';
 import TextArea from '~components/common/Input/TextArea';
 import ContentLayout from '~components/layouts/ContentLayout';
 import GlobalLayout from '~components/layouts/GlobalLayout';
-import useLoading from '~hooks/common/useLoading';
 import type { SubmitHandler } from 'react-hook-form/dist/types';
 import type { FeedbackForm } from '~/models/Feedback';
 import type { Props as InputProps } from '~components/common/Input/Input';
@@ -24,7 +23,7 @@ const defaultValues = {
 
 const Page = () => {
   const recaptchaRef = React.createRef<Recaptcha>();
-  const [loading, startTransition] = useLoading();
+  const [loading, setLoading] = React.useState(false);
 
   const handleSubmit: SubmitHandler<FeedbackForm> = async (data) => {
     const captchaToken = recaptchaRef.current?.getValue();
@@ -73,7 +72,9 @@ const Page = () => {
           />
           <Form
             onSubmit={onSubmit(async (data) => {
-              startTransition(await handleSubmit(data));
+              setLoading(true);
+              await handleSubmit(data);
+              setLoading(false);
             })}
           >
             <FormField
@@ -104,15 +105,17 @@ const Page = () => {
                   : ''
               }
             />
-            <div className="flex justify-end gap-4 items-center">
+            <FormFooter>
               <Recaptcha
                 ref={recaptchaRef}
                 hl="ko"
                 sitekey={SITE_KEY}
                 size="normal"
               />
-              <Button>제출하기</Button>
-            </div>
+              <Button disabled={loading} variant="primary">
+                제출하기
+              </Button>
+            </FormFooter>
           </Form>
         </ContentLayout>
       </GlobalLayout>
@@ -179,3 +182,20 @@ const TextField = React.forwardRef(
     );
   }
 );
+
+const FormFooter = styled.div`
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 16px;
+
+  @media (max-width: 640px) {
+    flex-direction: column;
+  }
+`;
+
+const Button = styled(ButtonBase)`
+  @media (max-width: 640px) {
+    width: 100%;
+  }
+`;

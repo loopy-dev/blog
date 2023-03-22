@@ -1,5 +1,6 @@
-import { useState } from 'react';
+import React from 'react';
 import Link from 'next/link';
+import { useRouter } from 'next/router';
 import styled, { css } from 'styled-components';
 import useTheme from '~/styles/theme/useTheme';
 import Icon from '../icons';
@@ -7,7 +8,7 @@ import Icon from '../icons';
 // TODO - show floating menu button when display size is under sm
 const NavigationBar = () => {
   const [isDarkMode, toggle] = useTheme();
-  const [isOpen, setIsOpen] = useState(false);
+  const [isOpen, setIsOpen] = React.useState(false);
 
   const toggleHamburgerIcon = () => {
     setIsOpen((prev) => !prev);
@@ -19,7 +20,7 @@ const NavigationBar = () => {
       {/** upper part of NavigationBar */}
       <PrimaryContainer>
         <ItemWrapper className="left">
-          <Link href="/">BenLog</Link>
+          <Title href="/">BenLog</Title>
         </ItemWrapper>
         <ItemWrapper className="right">
           <Item onClick={toggle}>{isDarkMode ? 'light' : 'dark'}</Item>
@@ -43,13 +44,16 @@ const NavigationBar = () => {
 export default NavigationBar;
 
 const NavigationLinks = () => {
+  const router = useRouter();
   return (
     <>
       <Link href="/posts" style={{ width: '100%', textAlign: 'center' }}>
-        <Item>Blog</Item>
+        <Item current={getSubDomain(router.pathname) === 'posts'}>Blog</Item>
       </Link>
       <Link href="/feedback" style={{ width: '100%', textAlign: 'center' }}>
-        <Item>Feedback</Item>
+        <Item current={getSubDomain(router.pathname) === 'feedback'}>
+          Feedback
+        </Item>
       </Link>
       <Link
         href="https://github.com/mrbartrns"
@@ -62,6 +66,17 @@ const NavigationLinks = () => {
     </>
   );
 };
+
+const getSubDomain = (pathname: string) => {
+  const pathArr = pathname.split('/');
+
+  return pathArr.length > 1 ? pathArr[1] : null;
+};
+
+const Title = styled(Link)`
+  font-weight: 500;
+  font-size: 18px;
+`;
 
 interface ContainerProps {
   isDarkMode?: boolean;
@@ -97,6 +112,7 @@ const PrimaryContainer = styled.div`
   align-items: center;
   padding: 8px 24px;
   width: 100%;
+  max-width: 900px;
   margin: 0 auto;
 `;
 
@@ -123,21 +139,31 @@ const ItemWrapper = styled.div`
 
 interface ItemProps {
   noHoverEffect?: boolean;
+  current?: boolean;
 }
 
 const Item = styled.div<ItemProps>`
-  padding: 8px 16px;
-  border-radius: 4px;
   user-select: none;
   transition: all 100ms cubic-bezier(0.31, 0.27, 0.15, 0.99) 0s;
   cursor: pointer;
   width: 100%;
+  padding: 4px 8px;
+  font-size: 14px;
 
-  ${({ noHoverEffect }) =>
+  ${({ current, theme }) =>
+    current
+      ? css`
+          color: ${theme.text};
+        `
+      : css`
+          color: rgb(161, 161, 170);
+        `}
+
+  ${({ noHoverEffect, theme }) =>
     !noHoverEffect &&
     css`
       &:hover {
-        box-shadow: rgba(0, 0, 0, 0.06) 0px 0px 0px 10000px inset;
+        color: ${theme.text};
       }
     `}
 `;

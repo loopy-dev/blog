@@ -93,8 +93,8 @@ export const chequiz: Project = {
     '개발자를 위한 간단한 지식 체크 서비스를 제공합니다. RPG적 요소와 퀴즈를 합쳐서 보다 재미있게 풀 수 있도록 시도해 보았습니다.',
   description: [
     '면담을 통해 팀원의 관심사와 성향을 파악, 친밀감 형성',
-    '자유로운 의견 제안 환경을 위해, 팀 페이지 내 화이트보드 도입, 데일리 스크럼 시 이를 공유하여 스크럼 시간 단축',
-    '서비스에 필요한 유스케이스를 산출 및 우선순위를 부여하여 주어진 시간 내에 핵심 기능들을 먼저 구현',
+    '자유로운 의견 제안 환경을 위해 팀 페이지 내 화이트보드 도입, 데일리 스크럼 시간 단축',
+    '서비스에 필요한 유스케이스를 산출 및 우선순위 부여, 주어진 시간 내에 핵심 기능들 우선 구현',
     'TypeScript 장점을 팀원들과 공유 및 도입 제안',
     'Webpack과 Babel 기반 React 스캐폴딩 구축',
     '팀 컨벤션 기반 eslint 및 prettier 구축 및 husky, lint-staged를 통한 개발 프로세스 개선',
@@ -105,7 +105,7 @@ export const chequiz: Project = {
   ],
   skills: [typescript, react, emotion, webpack, babel],
   startDate: '2022-06',
-  endDate: '리팩토링 중',
+  endDate: '리팩토링 중(백엔드 서비스 중지)',
   links: {
     github: { name: 'Github', url: 'https://github.com/mrbartrns/chequiz' },
     portfolio: {

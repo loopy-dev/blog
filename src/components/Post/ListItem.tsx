@@ -42,7 +42,7 @@ const Container = styled(Link)`
   border-bottom: 1px solid rgba(0, 0, 0, 0.1);
 
   &:hover {
-    background-color: rgb(243, 244, 246);
+    background-color: rgb(249 250 251);
   }
 
   &:last-of-type {
