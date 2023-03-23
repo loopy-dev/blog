@@ -37,13 +37,14 @@ const Container = styled(Link)`
   flex-direction: column;
   gap: 8px;
   width: 100%;
-  padding: 4px 16px 12px;
+  padding: 4px 0 12px;
   min-height: 150px;
   border-bottom: 1px solid rgba(0, 0, 0, 0.1);
 
-  &:hover {
+  // TODO - need color change in dark mode
+  /* &:hover {
     background-color: rgb(249 250 251);
-  }
+  } */
 
   &:last-of-type {
     border-bottom: none;
