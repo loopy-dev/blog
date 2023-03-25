@@ -153,7 +153,7 @@ export default PostDetailPage
 
 반면에 Next.js에서는 단순히 `pages` 폴더에 일정 규칙으로 파일명을 명명하기만 한다면, url에 따라 자동으로 라우팅을 처리해준다.
 
-```
+```text
 // pages 폴더 내부의 파일들은 일정 규칙에 맞게끔 파일명을 작성해야 한다.
 pages
 ┣ api
