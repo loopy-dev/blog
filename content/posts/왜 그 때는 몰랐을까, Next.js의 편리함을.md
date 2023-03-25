@@ -235,60 +235,6 @@ export default handler;
 
 클라이언트에서는 간단하게 `api/verify` 경로를 요청하여 원하는 동작을 수행할 수 있다.
 
-## 미들웨어
-
-아직 사용해 본 적은 없으나, 옛날에 Next.js 프로젝트를 하면서 잘 모를 때 [우리맵 프로젝트](https://github.com/mrbartrns/woorimap)나 React에서 사용자 authorization을 위해 Next.js 는 고차함수를 , React는 `react-router-dom`의 `Route` 를 바탕으로 `PrivateRotue` 컴포넌트를 만들어서 처리했다. (클라이언트 사이드에서 요청 시 처리)
-
-```tsx
-// in next.js
-function withAuth<P>(Component: FunctionComponent<P>) {
-  return function WithAuthComponent(props: P) {
-    const mounted = useComponentDidMount();
-    const user = useUser();
-    const router = useRouter();
-
-    useEffect(() => {
-      if (!mounted) return;
-      if (!user) {
-        router.push('/auth/signin');
-      }
-    }, [mounted, router, user]);
-
-    if (user) {
-      return (
-        <Component {...props} />
-      );
-    }
-    return null;
-  };
-}
-
-export default withAuth;
-```
-
-```tsx
-// in Pure React
-import { useLayoutEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
-
-const Protected = ({ children }) => {
-  const navigate = useNavigate();
-  
-  // useLayoutEffect은 render 후 layout, paint 과정 전에 동기적으로 실행되므로 깜빡임 방지가 가능하다.
-  useLayoutEffect(() => {
-    const value = window.localstorage.getItem<string>('token', '');
-
-    if (!value) {
-      navigate('/signin');
-    }
-  }, [navigate]);
-
-  return children;
-};
-
-export default Protected;
-```
-
 ## 그 외 다양한 최적화 기술들(폰트 최적화)
 
 Next.js는 폰트, css 프리로드 등 다양한 기능들을 Next.js의 api를 이용하여 간단하게 구현할 수 있다.

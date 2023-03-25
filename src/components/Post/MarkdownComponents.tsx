@@ -132,4 +132,14 @@ export const Block = styled.div`
     font-size: 90%;
     font-style: italic;
   }
+
+  aside {
+    margin: 16px 0;
+    width: 100%;
+    border-radius: 3px;
+    border: 1px solid rgba(55, 53, 47, 0.16);
+    padding: 16px 16px 16px 12px;
+    color: rgb(120, 119, 116);
+    fill: rgb(120, 119, 116);
+  }
 `;
