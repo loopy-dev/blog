@@ -293,10 +293,17 @@ export default MyApp;
 # 출처
 
 [어서 와, SSR은 처음이지? - 도입 편](https://d2.naver.com/helloworld/7804182)
+
 [[Next.js] SSG, SSR 개념 정리](https://narup.tistory.com/235)
+
 [Next.js의 렌더링 과정(Hydrate) 알아보기](https://www.howdy-mj.me/next/hydrate)
+
 [API Routes: Introduction | Next.js](https://nextjs.org/docs/api-routes/introduction)
+
 [CORS는 왜 이렇게 우리를 힘들게 하는걸까?](https://evan-moon.github.io/2020/05/21/about-cors/#cors%EB%8A%94-%EC%96%B4%EB%96%BB%EA%B2%8C-%EB%8F%99%EC%9E%91%ED%95%98%EB%82%98%EC%9A%94)
+
 [Advanced Features: Middleware | Next.js](https://nextjs.org/docs/advanced-features/middleware)
+
 [Next.js - middleware 사용하기 (로그인 연동하기)](https://junheedot.tistory.com/entry/Nextjs-middleware-%EC%82%AC%EC%9A%A9%ED%95%98%EA%B8%B0-%EB%A1%9C%EA%B7%B8%EC%9D%B8-%EC%97%B0%EB%8F%99%ED%95%98%EA%B8%B0)
+
 [Preload의 개념, 그리고 올바른 사용법](https://helloinyong.tistory.com/319)
