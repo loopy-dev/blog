@@ -1,10 +1,10 @@
 import { Analytics } from '@vercel/analytics/react';
 import Head from 'next/head';
 import { Provider } from 'react-redux';
+import { Pretendard } from '~/lib/fonts/Pretendard';
+import GlobalStyle from '~/lib/styles/GlobalStyle';
 import store from '~/store';
-import { Pretendard } from '~styles/fonts/Pretendard';
-import GlobalStyle from '~styles/theme/GlobalStyle';
-import '../styles/globals.css';
+import '../lib/styles/globals.css';
 import type { AppProps } from 'next/app';
 
 const MyApp = ({ Component, pageProps }: AppProps) => {

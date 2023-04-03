@@ -1,4 +1,4 @@
-import useTheme from '~/styles/theme/useTheme';
+import useTheme from '~/lib/styles/useTheme';
 import { Item } from './Item';
 
 const ThemeToggleButton = () => {

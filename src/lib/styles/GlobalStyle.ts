@@ -1,5 +1,5 @@
 import { createGlobalStyle } from 'styled-components';
-import cssVar from '~/utils/cssVar';
+import cssVar from '~/lib/styles/cssVar';
 
 const lightStyle = `
   --background: #f8f9fa;
