@@ -1,5 +1,6 @@
-import Document from 'next/document';
+import Document, { Html, Head, Main, NextScript } from 'next/document';
 import { ServerStyleSheet } from 'styled-components';
+import ThemeScript from '~styles/theme/ThemeScript';
 import type { DocumentContext } from 'next/document';
 
 export default class MyDocument extends Document {
@@ -22,5 +23,18 @@ export default class MyDocument extends Document {
     } finally {
       sheet.seal();
     }
+  }
+
+  render() {
+    return (
+      <Html lang="ko">
+        <Head />
+        <body>
+          <ThemeScript />
+          <Main />
+          <NextScript />
+        </body>
+      </Html>
+    );
   }
 }
