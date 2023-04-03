@@ -1,3 +1,5 @@
+import styled from 'styled-components';
+import cssVar from '~/lib/styles/cssVar';
 import ExperienceLayout from '../../layouts/ExperienceLayout';
 import OtherLinks from './OtherLinks';
 import PersonalInfo from './PersonalInfo';
@@ -15,14 +17,12 @@ const ContentTemplate = ({ content, sticky }: Props) => {
       sticky={sticky}
       left={
         <>
-          {content.title && (
-            <h2 className="font-bold text-xl py-1">{content.title}</h2>
-          )}
+          {content.title && <ContentTitle>{content.title}</ContentTitle>}
           {/** TODO - Date format 후 사용하기 */}
           {content.startDate && (
-            <p className="pt-4 text-zinc-400">
+            <ContentDate>
               {content.startDate} ~ {content.endDate || '진행 중'}
-            </p>
+            </ContentDate>
           )}
           {content.links && <PersonalInfo links={content.links} />}
         </>
@@ -30,22 +30,18 @@ const ContentTemplate = ({ content, sticky }: Props) => {
       right={
         <>
           {content.introduction && (
-            <h3 className="font-bold mb-4 text-xl">{content.introduction}</h3>
+            <ContentIntroduction>{content.introduction}</ContentIntroduction>
           )}
           {content.description && (
-            <ul className="my-4 list-disc pl-4">
+            <ContentDescription>
               {content.description.map((description) =>
                 typeof description === 'string' ? (
-                  <li key={description} className="py-1">
-                    {description}
-                  </li>
+                  <li key={description}>{description}</li>
                 ) : (
-                  <li key={description.name} className="py-1">
-                    {description.name}
-                  </li>
+                  <li key={description.name}>{description.name}</li>
                 )
               )}
-            </ul>
+            </ContentDescription>
           )}
           {/** 기술 스택 */}
           {content.skills && <Skills skills={content.skills} />}
@@ -57,3 +53,30 @@ const ContentTemplate = ({ content, sticky }: Props) => {
 };
 
 export default ContentTemplate;
+
+const ContentTitle = styled.h2`
+  font-weight: 700;
+  font-size: 1.25rem /* 20px */;
+  line-height: 1.75rem /* 28px */;
+  padding: 4px 0;
+`;
+
+const ContentIntroduction = styled.h3`
+  font-weight: 700;
+  font-size: 1.15rem;
+`;
+
+const ContentDate = styled.p`
+  margin-top: 16px;
+  color: ${cssVar('text3')};
+`;
+
+const ContentDescription = styled.ul`
+  margin: 1rem 0;
+  list-style-type: disc;
+  padding-left: 1rem;
+
+  & li {
+    padding: 4px 0;
+  }
+`;

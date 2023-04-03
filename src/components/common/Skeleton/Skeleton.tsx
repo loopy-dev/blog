@@ -1,4 +1,5 @@
 import styled, { css } from 'styled-components';
+import cssVar from '~/lib/styles/cssVar';
 
 interface Props {
   // color?: 'default'
@@ -37,7 +38,7 @@ const Block = styled.span<Props>`
   display: inline-block;
   height: 1em;
   border-radius: 4px;
-  background-color: rgba(226, 232, 240, 1);
+  background-color: ${cssVar('bg_skeleton')};
 
   ${({ circle }) =>
     circle &&

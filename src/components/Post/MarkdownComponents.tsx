@@ -1,4 +1,5 @@
 import styled, { css } from 'styled-components';
+import cssVar from '~/lib/styles/cssVar';
 
 const headingStyle = css`
   margin-top: 1em;
@@ -90,9 +91,8 @@ export const Block = styled.div`
     padding: 8px 16px;
     width: 100%;
     border-left: 2px solid rgb(139, 108, 239);
-    color: rgb(120, 119, 116);
+    color: ${cssVar('text3')};
     background-color: transparent;
-    fill: rgb(120, 119, 116);
     font-size: 1em;
   }
 
@@ -121,7 +121,7 @@ export const Block = styled.div`
   }
 
   a {
-    color: rgb(59, 130, 246);
+    color: ${cssVar('text_anchor')};
   }
 
   img {
@@ -139,7 +139,6 @@ export const Block = styled.div`
     border-radius: 3px;
     border: 1px solid rgba(55, 53, 47, 0.16);
     padding: 16px 16px 16px 12px;
-    color: rgb(120, 119, 116);
-    fill: rgb(120, 119, 116);
+    color: ${cssVar('text3')};
   }
 `;

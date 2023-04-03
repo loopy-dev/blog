@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import styled from 'styled-components';
+import cssVar from '~/lib/styles/cssVar';
 import Tag from '../common/Tag';
 import type { FrontMatter } from '~models/Post';
 
@@ -76,14 +77,14 @@ const PostTags = styled.div`
 
 const Description = styled.p`
   margin-bottom: 0.8125rem;
-  color: rgb(161, 161, 170);
+  color: ${cssVar('text3')};
   font-size: 90%;
   line-height: 1.3;
 `;
 
 const TimeStamp = styled.p`
   text-align: right;
-  color: rgb(161, 161, 170);
+  color: ${cssVar('text3')};
   font-size: 12px;
   line-height: 1.3;
 `;

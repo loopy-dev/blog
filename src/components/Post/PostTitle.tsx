@@ -1,3 +1,5 @@
+import styled from 'styled-components';
+import cssVar from '~/lib/styles/cssVar';
 import type { FrontMatter } from '~/models/Post';
 
 interface Props {
@@ -13,24 +15,7 @@ const ContentTitle = ({ postMetaData }: Props) => {
         className="title"
         style={{ marginTop: '2rem', marginBottom: '1.21875em' }}
       >
-        <h1
-          className="font-bold"
-          style={{
-            maxWidth: '100%',
-            width: '100%',
-            letterSpacing: '-1px',
-            whiteSpace: 'pre-wrap',
-            wordBreak: 'break-word',
-            caretColor: 'rgb(55, 53, 47)',
-            padding: '3px 2px',
-            fontWeight: 600,
-            fontSize: '3em',
-            lineHeight: '1.3',
-            marginTop: '1em',
-          }}
-        >
-          {postMetaData.title}
-        </h1>
+        <Title>{postMetaData.title}</Title>
       </div>
       <div
         className="meta flex flex-row"
@@ -39,14 +24,35 @@ const ContentTitle = ({ postMetaData }: Props) => {
         <p>
           by <span className="font-bold">mrbartrns</span>
         </p>
-        <p className="italic text-slate-400">{`${date.getFullYear()}-${
+        <PostDate>{`${date.getFullYear()}-${
           date.getMonth() + 1 < 10
             ? `0${date.getMonth() + 1}`
             : date.getMonth() + 1
-        }-${date.getDate() < 10 ? `0${date.getDate()}` : date.getDate()}`}</p>
+        }-${
+          date.getDate() < 10 ? `0${date.getDate()}` : date.getDate()
+        }`}</PostDate>
       </div>
     </div>
   );
 };
 
 export default ContentTitle;
+
+const Title = styled.h1`
+  max-2idth: 100%;
+  width: 100%;
+  letter-spacing: -1px;
+  white-space: pre-wrap;
+  word-break: break-word;
+  caret-color: 'rgb(55, 53, 47)';
+  padding: 3px 2px;
+  font-weight: 700;
+  font-size: 3em;
+  line-height: 1.3;
+  margin-top: 1em;
+`;
+
+const PostDate = styled.p`
+  color: ${cssVar('text2')};
+  font-style: italic;
+`;

@@ -1,6 +1,6 @@
 import Document, { Html, Head, Main, NextScript } from 'next/document';
 import { ServerStyleSheet } from 'styled-components';
-import ThemeScript from '~styles/theme/ThemeScript';
+import ThemeScript from '~/lib/styles/ThemeScript';
 import type { DocumentContext } from 'next/document';
 
 export default class MyDocument extends Document {

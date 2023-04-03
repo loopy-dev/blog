@@ -3,7 +3,7 @@ import dynamic from 'next/dynamic';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import styled from 'styled-components';
-import cssVar from '~/utils/cssVar';
+import cssVar from '~/lib/styles/cssVar';
 import Icon from '../icons';
 import { Item } from './Item';
 
@@ -90,7 +90,7 @@ const Container = styled.nav`
   box-shadow: inset 0 -1px 0 0 rgba(0, 0, 0, 0.1);
   z-index: 99;
   transition: all 0.1s;
-  background-color: ${cssVar('navBackground')};
+  background-color: ${cssVar('bg_nav')};
 
   @media (min-width: 768px) {
     position: sticky;

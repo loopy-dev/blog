@@ -1,5 +1,6 @@
 import type { HTMLAttributes } from 'react';
 import styled, { css } from 'styled-components';
+import cssVar from '~/lib/styles/cssVar';
 import BlogIcon from './BlogIcon';
 import GithubIcon from './GithubIcon';
 import Hamburger from './Hamburger';
@@ -60,14 +61,14 @@ const Wrapper = styled.span<WrapperProps>`
   display: inline-flex;
   justify-content: center;
   align-items: center;
-  fill: #d4d4d8;
+  fill: ${cssVar('text4')};
   transition: all 150ms cubic-bezier(0.4, 0, 0.2, 1);
 
   ${({ noHoverEffect }) =>
     !noHoverEffect &&
     css`
       &:hover {
-        fill: #111827;
+        fill: ${cssVar('text3')};
       }
     `}
 `;
