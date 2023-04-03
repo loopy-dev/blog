@@ -5,8 +5,6 @@ interface Props {
   children: React.ReactNode;
 }
 
-// const Footer = dynamic(() => import('../common/Footer'));
-
 const GlobalLayout = ({ children }: Props) => {
   return (
     <Container>

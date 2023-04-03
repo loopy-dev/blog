@@ -1,13 +1,18 @@
 import React from 'react';
+import dynamic from 'next/dynamic';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import styled, { css } from 'styled-components';
-import useTheme from '~/styles/theme/useTheme';
+import styled from 'styled-components';
+import cssVar from '~/utils/cssVar';
 import Icon from '../icons';
+import { Item } from './Item';
+
+const ThemeToggleButton = dynamic(() => import('./ThemeToggleButton'), {
+  ssr: false,
+});
 
 // TODO - show floating menu button when display size is under sm
 const NavigationBar = () => {
-  const [isDarkMode, toggle] = useTheme();
   const [isOpen, setIsOpen] = React.useState(false);
 
   const toggleHamburgerIcon = () => {
@@ -16,18 +21,18 @@ const NavigationBar = () => {
 
   return (
     // TODO - add color pallete on themes
-    <Container isDarkMode={isDarkMode}>
+    <Container>
       {/** upper part of NavigationBar */}
       <PrimaryContainer>
         <ItemWrapper className="left">
           <Title href="/">BenLog</Title>
         </ItemWrapper>
         <ItemWrapper className="right">
-          <Item onClick={toggle}>{isDarkMode ? 'light' : 'dark'}</Item>
+          <ThemeToggleButton />
           <NavigationLinks />
         </ItemWrapper>
         <ItemWrapper className="right-hidden">
-          <Item onClick={toggle}>{isDarkMode ? 'light' : 'dark'}</Item>
+          <ThemeToggleButton />
           <Icon type="hamburger" onClick={toggleHamburgerIcon} />
         </ItemWrapper>
       </PrimaryContainer>
@@ -78,26 +83,14 @@ const Title = styled(Link)`
   font-size: 18px;
 `;
 
-interface ContainerProps {
-  isDarkMode?: boolean;
-}
-
-const Container = styled.nav<ContainerProps>`
+const Container = styled.nav`
   display: flex;
   flex-direction: column;
   gap: 8px;
   box-shadow: inset 0 -1px 0 0 rgba(0, 0, 0, 0.1);
   z-index: 99;
   transition: all 0.1s;
-
-  ${({ isDarkMode }) =>
-    isDarkMode
-      ? css`
-          background-color: hsla(0, 0%, 15%, 0.8);
-        `
-      : css`
-          background-color: hsla(0, 0%, 100%, 0.8);
-        `}
+  background-color: ${cssVar('navBackground')};
 
   @media (min-width: 768px) {
     position: sticky;
@@ -135,37 +128,6 @@ const ItemWrapper = styled.div`
       display: flex;
     }
   }
-`;
-
-interface ItemProps {
-  noHoverEffect?: boolean;
-  current?: boolean;
-}
-
-const Item = styled.div<ItemProps>`
-  user-select: none;
-  transition: all 100ms cubic-bezier(0.31, 0.27, 0.15, 0.99) 0s;
-  cursor: pointer;
-  width: 100%;
-  padding: 4px 8px;
-  font-size: 14px;
-
-  ${({ current, theme }) =>
-    current
-      ? css`
-          color: ${theme.text};
-        `
-      : css`
-          color: rgb(161, 161, 170);
-        `}
-
-  ${({ noHoverEffect, theme }) =>
-    !noHoverEffect &&
-    css`
-      &:hover {
-        color: ${theme.text};
-      }
-    `}
 `;
 
 const HiddenItemWrapper = styled.div`
