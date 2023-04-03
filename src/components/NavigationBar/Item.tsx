@@ -1,4 +1,5 @@
 import styled, { css } from 'styled-components';
+import cssVar from '~/lib/styles/cssVar';
 
 interface ItemProps {
   noHoverEffect?: boolean;
@@ -12,21 +13,22 @@ export const Item = styled.div<ItemProps>`
   width: 100%;
   padding: 4px 8px;
   font-size: 14px;
+  font-weight: 500;
 
-  ${({ current, theme }) =>
+  ${({ current }) =>
     current
       ? css`
-          color: ${theme.text};
+          color: ${cssVar('text1')};
         `
       : css`
-          color: rgb(161, 161, 170);
+          color: ${cssVar('text2')};
         `}
 
-  ${({ noHoverEffect, theme }) =>
+  ${({ noHoverEffect }) =>
     !noHoverEffect &&
     css`
       &:hover {
-        color: ${theme.text};
+        color: ${cssVar('text1')};
       }
     `}
 `;

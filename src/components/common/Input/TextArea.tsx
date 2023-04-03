@@ -1,6 +1,7 @@
 import type { TextareaHTMLAttributes } from 'react';
 import React from 'react';
 import styled from 'styled-components';
+import cssVar from '~/lib/styles/cssVar';
 import Label from './Label';
 import { borderStyle } from './styles';
 import type { Color } from './styles';
@@ -41,7 +42,7 @@ const TextAreaFrame = styled.div<Props>`
   min-width: 0px;
   width: 100%;
   background-color: ${({ disabled }) =>
-    disabled ? 'rgba(0, 0, 0, 0.06)' : 'rgb(255, 255, 255)'};
+    disabled ? cssVar('bg_disabled') : cssVar('bg_element1')};
   border-radius: 6px;
   cursor: text;
   transition: all 100ms cubic-bezier(0.31, 0.27, 0.15, 0.99) 0s;

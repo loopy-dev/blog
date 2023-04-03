@@ -4,6 +4,7 @@ import Recaptcha from 'react-google-recaptcha';
 import { useForm } from 'react-hook-form';
 import styled from 'styled-components';
 import { postFeedback, verifyRecaptcha } from '~/api/feedback';
+import Header from '~components/Header';
 import ButtonBase from '~components/common/Button';
 import Input from '~components/common/Input';
 import TextArea from '~components/common/Input/TextArea';
@@ -124,20 +125,6 @@ const Page = () => {
 };
 
 export default Page;
-
-interface HeaderProps {
-  title: string;
-  description?: string;
-}
-
-const Header = ({ title, description }: HeaderProps) => {
-  return (
-    <header className="my-8">
-      <h1 className="font-bold text-3xl my-4 break-all">{title}</h1>
-      {description && <h2 className="text-gray-500">{description}</h2>}
-    </header>
-  );
-};
 
 const Form = styled.form`
   display: flex;

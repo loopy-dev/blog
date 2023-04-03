@@ -1,7 +1,13 @@
+import type { HTMLAttributes } from 'react';
 import { useState } from 'react';
 import styled, { css } from 'styled-components';
+import cssVar from '~/lib/styles/cssVar';
 
-const Hamburger = () => {
+interface Props extends HTMLAttributes<HTMLElement> {
+  onClick?: React.MouseEventHandler<HTMLElement>;
+}
+
+const Hamburger = ({ onClick, ...props }: Props) => {
   const [isActive, setActive] = useState(false);
 
   const toggle = () => {
@@ -9,7 +15,14 @@ const Hamburger = () => {
   };
 
   return (
-    <Container isActive={isActive} onClick={toggle}>
+    <Container
+      isActive={isActive}
+      onClick={(e) => {
+        toggle();
+        onClick?.(e);
+      }}
+      {...props}
+    >
       <span />
       <span />
       <span />
@@ -38,6 +51,11 @@ const Container = styled.span<Props>`
     height: 2.2px;
     border-radius: 4px;
     transition: all 0.2s;
+    background-color: ${cssVar('text4')};
+
+    &:hover {
+      background-color: ${cssVar('text3')};
+    }
 
     &:nth-of-type(1) {
       top: 0;

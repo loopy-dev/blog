@@ -90,7 +90,7 @@ const Container = styled.nav`
   box-shadow: inset 0 -1px 0 0 rgba(0, 0, 0, 0.1);
   z-index: 99;
   transition: all 0.1s;
-  background-color: ${cssVar('navBackground')};
+  background-color: ${cssVar('bg_nav')};
 
   @media (min-width: 768px) {
     position: sticky;

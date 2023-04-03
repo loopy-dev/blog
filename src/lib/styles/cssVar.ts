@@ -1,5 +1,7 @@
-const cssVar = (variables: string) => {
-  return `var(--${variables.replace(/-/g, '_')})`;
+import type { PaletteKeys } from './types';
+
+const cssVar = (variables: PaletteKeys) => {
+  return `var(--${variables.replace(/_/g, '-')})`;
 };
 
 export default cssVar;

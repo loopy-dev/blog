@@ -1,13 +1,14 @@
+import styled from 'styled-components';
 import Icon from '../../icons/Icon';
 import type { PersonalLink } from '../../../models/Resume';
 
 interface Props {
-  links?: Partial<PersonalLink>;
+  links: Partial<PersonalLink>;
 }
 
 const PersonalInfo = ({ links }: Props) => {
-  return links ? (
-    <div className="flex flex-wrap gap-3 my-4">
+  return (
+    <Container>
       {links.github && (
         <a href={links.github.url} rel="noopener noreferrer" target="_blank">
           <Icon type="github" />
@@ -23,8 +24,15 @@ const PersonalInfo = ({ links }: Props) => {
           <Icon type="portfolio" />
         </a>
       )}
-    </div>
-  ) : null;
+    </Container>
+  );
 };
 
 export default PersonalInfo;
+
+const Container = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin: 1rem 0;
+`;
