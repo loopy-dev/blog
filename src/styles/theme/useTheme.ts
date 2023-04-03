@@ -1,27 +1,14 @@
-import { useEffect, useState } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import { setLight, setDark } from './themeSlice';
-import type { RootState } from '~/store';
+import { useState } from 'react';
 
 type ReturnTypes = [string, () => void];
 
-// const useTheme = (): ReturnTypes => {
-//   const isDarkMode = useSelector((state: RootState) => state.isDarkMode);
-//   const dispatch = useDispatch();
-
-//   const toggle = () => {
-//     if (isDarkMode) {
-//       dispatch(setLight());
-//     } else {
-//       dispatch(setDark());
-//     }
-//   };
-
-//   return [isDarkMode, toggle];
-// };
-
 const useTheme = (): ReturnTypes => {
-  const [theme, setTheme] = useState('light');
+  if (typeof window === 'undefined')
+    throw new Error('useTheme hooks only can use on csr.');
+
+  const [theme, setTheme] = useState(
+    () => window.localStorage.getItem('theme') || 'light'
+  );
 
   const toggle = () => {
     setTheme((prev) => (prev === 'light' ? 'dark' : 'light'));
@@ -30,11 +17,8 @@ const useTheme = (): ReturnTypes => {
     if (!$body) return;
 
     $body.dataset.theme = theme === 'light' ? 'dark' : 'light';
+    window.localStorage.setItem('theme', theme === 'light' ? 'dark' : 'light');
   };
-
-  useEffect(() => {
-    setTheme(window.localStorage.getItem('theme') || 'light');
-  }, []);
 
   return [theme, toggle];
 };

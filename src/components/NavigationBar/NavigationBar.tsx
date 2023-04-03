@@ -1,14 +1,18 @@
 import React from 'react';
+import dynamic from 'next/dynamic';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import styled, { css } from 'styled-components';
-import useTheme from '~/styles/theme/useTheme';
+import styled from 'styled-components';
 import cssVar from '~/utils/cssVar';
 import Icon from '../icons';
+import { Item } from './Item';
+
+const ThemeToggleButton = dynamic(() => import('./ThemeToggleButton'), {
+  ssr: false,
+});
 
 // TODO - show floating menu button when display size is under sm
 const NavigationBar = () => {
-  const [theme, toggle] = useTheme();
   const [isOpen, setIsOpen] = React.useState(false);
 
   const toggleHamburgerIcon = () => {
@@ -24,11 +28,11 @@ const NavigationBar = () => {
           <Title href="/">BenLog</Title>
         </ItemWrapper>
         <ItemWrapper className="right">
-          <Item onClick={toggle}>{theme === 'dark' ? 'light' : 'dark'}</Item>
+          <ThemeToggleButton />
           <NavigationLinks />
         </ItemWrapper>
         <ItemWrapper className="right-hidden">
-          <Item onClick={toggle}>{theme === 'dark' ? 'light' : 'dark'}</Item>
+          <ThemeToggleButton />
           <Icon type="hamburger" onClick={toggleHamburgerIcon} />
         </ItemWrapper>
       </PrimaryContainer>
@@ -124,37 +128,6 @@ const ItemWrapper = styled.div`
       display: flex;
     }
   }
-`;
-
-interface ItemProps {
-  noHoverEffect?: boolean;
-  current?: boolean;
-}
-
-const Item = styled.div<ItemProps>`
-  user-select: none;
-  transition: all 100ms cubic-bezier(0.31, 0.27, 0.15, 0.99) 0s;
-  cursor: pointer;
-  width: 100%;
-  padding: 4px 8px;
-  font-size: 14px;
-
-  ${({ current, theme }) =>
-    current
-      ? css`
-          color: ${theme.text};
-        `
-      : css`
-          color: rgb(161, 161, 170);
-        `}
-
-  ${({ noHoverEffect, theme }) =>
-    !noHoverEffect &&
-    css`
-      &:hover {
-        color: ${theme.text};
-      }
-    `}
 `;
 
 const HiddenItemWrapper = styled.div`
