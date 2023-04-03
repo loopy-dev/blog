@@ -3,11 +3,12 @@ import Link from 'next/link';
 import { useRouter } from 'next/router';
 import styled, { css } from 'styled-components';
 import useTheme from '~/styles/theme/useTheme';
+import cssVar from '~/utils/cssVar';
 import Icon from '../icons';
 
 // TODO - show floating menu button when display size is under sm
 const NavigationBar = () => {
-  const [isDarkMode, toggle] = useTheme();
+  const [theme, toggle] = useTheme();
   const [isOpen, setIsOpen] = React.useState(false);
 
   const toggleHamburgerIcon = () => {
@@ -16,18 +17,18 @@ const NavigationBar = () => {
 
   return (
     // TODO - add color pallete on themes
-    <Container isDarkMode={isDarkMode}>
+    <Container>
       {/** upper part of NavigationBar */}
       <PrimaryContainer>
         <ItemWrapper className="left">
           <Title href="/">BenLog</Title>
         </ItemWrapper>
         <ItemWrapper className="right">
-          <Item onClick={toggle}>{isDarkMode ? 'light' : 'dark'}</Item>
+          <Item onClick={toggle}>{theme === 'dark' ? 'light' : 'dark'}</Item>
           <NavigationLinks />
         </ItemWrapper>
         <ItemWrapper className="right-hidden">
-          <Item onClick={toggle}>{isDarkMode ? 'light' : 'dark'}</Item>
+          <Item onClick={toggle}>{theme === 'dark' ? 'light' : 'dark'}</Item>
           <Icon type="hamburger" onClick={toggleHamburgerIcon} />
         </ItemWrapper>
       </PrimaryContainer>
@@ -78,26 +79,14 @@ const Title = styled(Link)`
   font-size: 18px;
 `;
 
-interface ContainerProps {
-  isDarkMode?: boolean;
-}
-
-const Container = styled.nav<ContainerProps>`
+const Container = styled.nav`
   display: flex;
   flex-direction: column;
   gap: 8px;
   box-shadow: inset 0 -1px 0 0 rgba(0, 0, 0, 0.1);
   z-index: 99;
   transition: all 0.1s;
-
-  ${({ isDarkMode }) =>
-    isDarkMode
-      ? css`
-          background-color: hsla(0, 0%, 15%, 0.8);
-        `
-      : css`
-          background-color: hsla(0, 0%, 100%, 0.8);
-        `}
+  background-color: ${cssVar('navBackground')};
 
   @media (min-width: 768px) {
     position: sticky;
