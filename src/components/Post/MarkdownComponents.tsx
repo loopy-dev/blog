@@ -6,7 +6,6 @@ const headingStyle = css`
   padding: 3px 2px;
   max-width: 100%;
   width: 100%;
-  line-height: 1.3;
   font-weight: 600;
   caret-color: rgb(55, 53, 47);
   white-space: pre-wrap;
@@ -92,7 +91,7 @@ export const Block = styled.div`
     width: 100%;
     border-left: 2px solid rgb(139, 108, 239);
     color: ${cssVar('text3')};
-    background-color: transparent;
+    background-color: ${cssVar('bg_page1')};
     font-size: 1em;
   }
 
