@@ -75,7 +75,6 @@ const ContentDescription = styled.ul`
   margin: 1rem 0;
   list-style-type: disc;
   padding-left: 1rem;
-  /* letter-spacing: -0.5px; */
 
   & li {
     padding: 3px 2px;

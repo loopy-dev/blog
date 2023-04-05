@@ -28,7 +28,14 @@ export default class MyDocument extends Document {
   render() {
     return (
       <Html lang="ko">
-        <Head />
+        <Head>
+          <link
+            as="style"
+            crossOrigin=""
+            href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.6/dist/web/variable/pretendardvariable-dynamic-subset.css"
+            rel="preload stylesheet"
+          />
+        </Head>
         <body>
           <ThemeScript />
           <Main />

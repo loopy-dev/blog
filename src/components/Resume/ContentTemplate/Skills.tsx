@@ -1,7 +1,7 @@
 import { useState } from 'react';
-import SkillButton from '../ContentTemplate/SkillButton';
-import classes from './Skills.module.scss';
-import type { Skill } from '../../../models/Resume';
+import styled from 'styled-components';
+import Tag from '~/components/common/Tag';
+import type { Skill } from '~models/Resume';
 
 interface Props {
   skills: Skill[];
@@ -15,19 +15,15 @@ const Skills = ({ skills }: Props) => {
       <div className="flex items-baseline gap-8">
         <h3 className="font-bold text-xl my-4">사용 기술</h3>
       </div>
-      <div
-        className={`flex flex-wrap gap-2 mb-4 overflow-x-auto ${classes['scroll-hide']}`}
-      >
+      <SkillWrapper>
         {skills.map((skill, index) => (
-          <SkillButton
+          <Tag
             key={skill.name}
-            selected={index === selectedIndex}
+            label={skill.name}
             onClick={() => setSelectedIndex(index)}
-          >
-            {skill.name}
-          </SkillButton>
+          />
         ))}
-      </div>
+      </SkillWrapper>
       <div>
         <h4 className="font-bold text-lg mt-2 mb-4">
           {skills[selectedIndex].name}
@@ -41,3 +37,15 @@ const Skills = ({ skills }: Props) => {
 };
 
 export default Skills;
+
+const SkillWrapper = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 16px;
+  overflow-x: auto;
+
+  &::webkit-scrollbar {
+    display: none;
+  }
+`;

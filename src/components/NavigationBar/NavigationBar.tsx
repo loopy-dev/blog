@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { Noto_Sans_KR } from '@next/font/google';
 import dynamic from 'next/dynamic';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
@@ -9,6 +10,12 @@ import { Item } from './Item';
 
 const ThemeToggleButton = dynamic(() => import('./ThemeToggleButton'), {
   ssr: false,
+});
+
+const notoSans = Noto_Sans_KR({
+  weight: '500',
+  style: ['normal'],
+  subsets: ['latin'],
 });
 
 // TODO - show floating menu button when display size is under sm
@@ -25,7 +32,9 @@ const NavigationBar = () => {
       {/** upper part of NavigationBar */}
       <PrimaryContainer>
         <ItemWrapper className="left">
-          <Title href="/">BenLog</Title>
+          <Title className={notoSans.className} href="/">
+            BenLog
+          </Title>
         </ItemWrapper>
         <ItemWrapper className="right">
           <ThemeToggleButton />

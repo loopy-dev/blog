@@ -10,12 +10,16 @@ const headingStyle = css`
   caret-color: rgb(55, 53, 47);
   white-space: pre-wrap;
   word-break: break-word;
+  letter-spacing: -0.01rem;
 `;
 
 const listStyle = css`
-  margin-top: 1px;
-  padding: 3px 0 3px 32px;
+  margin-top: 29px;
   caret-color: rgb(55, 53, 47);
+
+  @media (max-width: 768px) {
+    matgin-top: 21px;
+  }
 `;
 
 const tableCellStyle = css`
@@ -61,17 +65,25 @@ export const Block = styled.div`
   }
 
   li {
-    padding: 3px 2px;
+    margin-left: 30px;
+    margin-bottom: 14px;
+    line-height: 1.75;
+    letter-spacing: -0.003em;
   }
 
   p {
-    margin-top: 4px;
-    padding: 3px 2px;
+    margin-top: 38px;
     width: 100%;
     max-width: 100%;
     white-space: pre-wrap;
     word-break: break-word;
     caret-color: rgb(55, 53, 47);
+    line-height: 1.75;
+    letter-spacing: -0.003em;
+
+    @media (max-width: 768px) {
+      margin-top: 10px;
+    }
   }
 
   code {
@@ -86,17 +98,33 @@ export const Block = styled.div`
 
   blockquote {
     display: flex;
-    margin: 16px 0;
+    margin-top: 38px;
     padding: 8px 16px;
     width: 100%;
     border-left: 2px solid ${cssVar('primary')};
     color: ${cssVar('text3')};
     background-color: ${cssVar('bg_page1')};
     font-size: 1em;
+    font-style: italic;
+
+    & p {
+      margin: 4px;
+    }
+
+    @media (max-width: 768px) {
+      line-height: 1.58;
+      margin-top: 30px;
+      letter-spacing: -0.004em;
+    }
   }
 
   pre {
+    margin-top: 43px;
     word-break: break-all;
+
+    @media (max-width: 768px) {
+      margin-top: 35px;
+    }
   }
 
   table {

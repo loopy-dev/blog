@@ -1,6 +1,6 @@
 import dynamic from 'next/dynamic';
 import ReactMarkdown from 'react-markdown';
-import { dracula } from 'react-syntax-highlighter/dist/cjs/styles/prism';
+import { base16AteliersulphurpoolLight } from 'react-syntax-highlighter/dist/cjs/styles/prism';
 import rehypeRaw from 'rehype-raw';
 import remarkFrontMatter from 'remark-frontmatter';
 import remarkGfm from 'remark-gfm';
@@ -34,7 +34,12 @@ const Content = ({ content }: Props) => {
               <SyntaxHighlighter
                 PreTag="div"
                 language={language}
-                style={dracula}
+                style={base16AteliersulphurpoolLight}
+                customStyle={{
+                  padding: '24px',
+                  fontSize: '14px',
+                  borderRadius: '4px',
+                }}
                 {...props}
               >
                 {String(children).replace(/\n$/, '')}

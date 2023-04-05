@@ -1,5 +1,4 @@
 import { PrismAsyncLight } from 'react-syntax-highlighter';
-import { dracula } from 'react-syntax-highlighter/dist/cjs/styles/prism';
 import type { SyntaxHighlighterProps } from 'react-syntax-highlighter';
 
 const SyntaxHighlighter = ({
@@ -8,12 +7,7 @@ const SyntaxHighlighter = ({
   ...props
 }: SyntaxHighlighterProps) => {
   return (
-    <PrismAsyncLight
-      PreTag="div"
-      language={language}
-      style={dracula}
-      {...props}
-    >
+    <PrismAsyncLight language={language} {...props}>
       {String(children).replace(/\n$/, '')}
     </PrismAsyncLight>
   );

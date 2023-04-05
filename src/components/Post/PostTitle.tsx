@@ -41,7 +41,7 @@ export default ContentTitle;
 const Title = styled.h1`
   max-width: 100%;
   width: 100%;
-  letter-spacing: -1px;
+  letter-spacing: -0.03em;
   white-space: pre-wrap;
   word-break: break-word;
   caret-color: rgb(55, 53, 47);
