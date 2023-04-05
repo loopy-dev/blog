@@ -2,7 +2,7 @@ import styled, { css } from 'styled-components';
 import cssVar from '~/lib/styles/cssVar';
 
 const headingStyle = css`
-  margin-top: 1em;
+  margin-top: 1.5em;
   padding: 3px 2px;
   max-width: 100%;
   width: 100%;
@@ -65,11 +65,11 @@ export const Block = styled.div`
   }
 
   p {
-    margin-top: 1px;
+    margin-top: 4px;
     padding: 3px 2px;
     width: 100%;
     max-width: 100%;
-    white-spce: pre-wrap;
+    white-space: pre-wrap;
     word-break: break-word;
     caret-color: rgb(55, 53, 47);
   }
@@ -89,7 +89,7 @@ export const Block = styled.div`
     margin: 16px 0;
     padding: 8px 16px;
     width: 100%;
-    border-left: 2px solid rgb(139, 108, 239);
+    border-left: 2px solid ${cssVar('primary')};
     color: ${cssVar('text3')};
     background-color: ${cssVar('bg_page1')};
     font-size: 1em;
@@ -120,7 +120,7 @@ export const Block = styled.div`
   }
 
   a {
-    color: ${cssVar('text_anchor')};
+    color: ${cssVar('primary_variant')};
   }
 
   img {

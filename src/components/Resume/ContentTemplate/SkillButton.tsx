@@ -13,7 +13,7 @@ const SkillButton = ({ selected, children, ...props }: Props) => {
       type="button"
       className={`${
         selected ? classes.selected : ''
-      } border py-1 px-4 rounded-full cursor-pointer hover:bg-rose-400 hover:text-white select-none transition-all whitespace-nowrap`}
+      } border py-1 px-4 rounded-full cursor-pointer hover:bg-green-400 hover:text-white select-none transition-all whitespace-nowrap`}
     >
       {children}
     </button>

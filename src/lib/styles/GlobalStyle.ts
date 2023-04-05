@@ -11,10 +11,12 @@ const lightStyle = `
   --text2: ${Palette.light.text2};
   --text3: ${Palette.light.text3};
   --text4: ${Palette.light.text4};
-  --text-anchor: ${Palette.light.text_anchor};
-  --text-success: ${Palette.light.text_success};
-  --text-failure: ${Palette.light.text_failure};
+  --primary-variant: ${Palette.light.primary_variant};
+  --success: ${Palette.light.success};
+  --failure: ${Palette.light.failure};
   --bg-nav: ${Palette.light.bg_nav};
+  --primary: ${Palette.light.primary};
+  --primary-light: ${Palette.light.primary_light};
 `;
 
 const darkStyle = `
@@ -26,10 +28,12 @@ const darkStyle = `
   --text2: ${Palette.dark.text2};
   --text3: ${Palette.dark.text3};
   --text4: ${Palette.dark.text4};
-  --text-anchor: ${Palette.dark.text_anchor};
-  --text-success: ${Palette.dark.text_success};
-  --text-failure: ${Palette.dark.text_failure};
+  --primary-variant: ${Palette.dark.primary_variant};
+  --success: ${Palette.dark.success};
+  --failure: ${Palette.dark.failure};
   --bg-nav: ${Palette.dark.bg_nav};
+  --primary: ${Palette.light.primary};
+  --primary-light: ${Palette.dark.primary_light};
 `;
 
 const commonStyle = `

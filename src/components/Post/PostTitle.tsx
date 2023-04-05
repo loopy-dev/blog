@@ -21,7 +21,7 @@ const ContentTitle = ({ postMetaData }: Props) => {
         className="meta flex flex-row"
         style={{ justifyContent: 'space-between' }}
       >
-        <p>
+        <p className="w-full">
           by <span className="font-bold">mrbartrns</span>
         </p>
         <PostDate>{`${date.getFullYear()}-${
@@ -39,12 +39,12 @@ const ContentTitle = ({ postMetaData }: Props) => {
 export default ContentTitle;
 
 const Title = styled.h1`
-  max-2idth: 100%;
+  max-width: 100%;
   width: 100%;
   letter-spacing: -1px;
   white-space: pre-wrap;
   word-break: break-word;
-  caret-color: 'rgb(55, 53, 47)';
+  caret-color: rgb(55, 53, 47);
   padding: 3px 2px;
   font-weight: 700;
   font-size: 3em;
@@ -53,6 +53,8 @@ const Title = styled.h1`
 `;
 
 const PostDate = styled.p`
+  width: 100%;
+  text-align: right;
   color: ${cssVar('text2')};
   font-style: italic;
 `;

@@ -1,11 +1,17 @@
+import { Noto_Sans_KR } from '@next/font/google';
 import { Analytics } from '@vercel/analytics/react';
 import Head from 'next/head';
 import { Provider } from 'react-redux';
-import { Pretendard } from '~/lib/fonts/Pretendard';
 import GlobalStyle from '~/lib/styles/GlobalStyle';
 import store from '~/store';
 import '../lib/styles/globals.css';
 import type { AppProps } from 'next/app';
+
+const notoSans = Noto_Sans_KR({
+  weight: ['400', '500', '700'],
+  style: ['normal'],
+  subsets: ['latin'],
+});
 
 const MyApp = ({ Component, pageProps }: AppProps) => {
   return (
@@ -20,7 +26,7 @@ const MyApp = ({ Component, pageProps }: AppProps) => {
           property="og:description"
         />
       </Head>
-      <div className={Pretendard.className}>
+      <div className={notoSans.className}>
         <Component {...pageProps} />
       </div>
       <Analytics />

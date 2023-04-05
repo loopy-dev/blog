@@ -12,7 +12,6 @@ export const Item = styled.div<ItemProps>`
   cursor: pointer;
   width: 100%;
   padding: 4px 8px;
-  font-size: 14px;
   font-weight: 500;
 
   ${({ current }) =>
@@ -28,7 +27,7 @@ export const Item = styled.div<ItemProps>`
     !noHoverEffect &&
     css`
       &:hover {
-        color: ${cssVar('text1')};
+        color: ${cssVar('primary_light')};
       }
     `}
 `;

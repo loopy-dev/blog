@@ -6,9 +6,19 @@ const useTheme = (): ReturnTypes => {
   if (typeof window === 'undefined')
     throw new Error('useTheme hooks only can use on csr.');
 
-  const [theme, setTheme] = useState(
-    () => window.localStorage.getItem('theme') || 'light'
-  );
+  const [theme, setTheme] = useState<'light' | 'dark'>(() => {
+    const theme = window.localStorage.getItem('theme');
+
+    if (theme === 'light' || theme === 'dark') {
+      return theme;
+    }
+
+    if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+      return 'dark';
+    }
+
+    return 'light';
+  });
 
   const toggle = () => {
     setTheme((prev) => (prev === 'light' ? 'dark' : 'light'));

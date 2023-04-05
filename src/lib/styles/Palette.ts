@@ -13,9 +13,11 @@ export const LightPalette: ColorPalette = {
   text2: '#50575e',
   text3: '#8c8f94',
   text4: '#ced4da',
-  text_anchor: 'rgb(59, 130, 246)',
-  text_success: '#55ce9b',
-  text_failure: 'rgb(239, 68, 68)',
+  primary_variant: 'rgb(24, 144, 255)',
+  primary_light: '#b2d7ef',
+  primary: '#1da1f2',
+  success: '#55ce9b',
+  failure: 'rgb(239, 68, 68)',
 };
 
 export const DarkPalette: ColorPalette = {
@@ -28,9 +30,11 @@ export const DarkPalette: ColorPalette = {
   text2: '#d1d5db',
   text3: '#bdbdbd',
   text4: '#616161',
-  text_anchor: 'rgb(59, 130, 246)',
-  text_success: '#55ce9b',
-  text_failure: 'rgb(239, 68, 68)',
+  primary_variant: 'rgb(24, 144, 255)',
+  primary: '#1da1f2',
+  primary_light: '#b2d7ef',
+  success: '#55ce9b',
+  failure: 'rgb(239, 68, 68)',
 };
 
 export const CommonPalette: CommonThemePalette = {

@@ -1,5 +1,6 @@
 import type { ButtonHTMLAttributes } from 'react';
 import styled, { css } from 'styled-components';
+import cssVar from '~/lib/styles/cssVar';
 
 interface Props extends ButtonHTMLAttributes<HTMLButtonElement> {
   variant?:
@@ -19,7 +20,7 @@ const variantStyle = css<Props>`
     switch (variant) {
       case 'primary':
         return css`
-          background-color: rgb(24, 144, 255);
+          background-color: ${cssVar('primary')};
           color: rgb(255, 255, 255);
         `;
       case 'transparent':
@@ -27,7 +28,10 @@ const variantStyle = css<Props>`
           background-color: transparent;
         `;
       default:
-        return css``;
+        return css`
+          background-color: ${cssVar('bg_page1')};
+          color: ${cssVar('text1')};
+        `;
     }
   }}
 `;

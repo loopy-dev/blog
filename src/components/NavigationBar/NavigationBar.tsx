@@ -1,4 +1,4 @@
-import React from 'react';
+import { useState } from 'react';
 import dynamic from 'next/dynamic';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
@@ -13,7 +13,7 @@ const ThemeToggleButton = dynamic(() => import('./ThemeToggleButton'), {
 
 // TODO - show floating menu button when display size is under sm
 const NavigationBar = () => {
-  const [isOpen, setIsOpen] = React.useState(false);
+  const [isOpen, setIsOpen] = useState(false);
 
   const toggleHamburgerIcon = () => {
     setIsOpen((prev) => !prev);
@@ -80,14 +80,19 @@ const getSubDomain = (pathname: string) => {
 
 const Title = styled(Link)`
   font-weight: 500;
-  font-size: 18px;
+  font-size: 24px;
+
+  &:after {
+    content: '.';
+    padding-left: 4px;
+    color: ${cssVar('primary')};
+  }
 `;
 
 const Container = styled.nav`
   display: flex;
   flex-direction: column;
   gap: 8px;
-  box-shadow: inset 0 -1px 0 0 rgba(0, 0, 0, 0.1);
   z-index: 99;
   transition: all 0.1s;
   background-color: ${cssVar('bg_nav')};
@@ -96,6 +101,7 @@ const Container = styled.nav`
     position: sticky;
     top: 0;
     backdrop-filter: saturate(180%) blur(5px);
+    box-shadow: inset 0 -1px 0 0 rgba(0, 0, 0, 0.1);
   }
 `;
 

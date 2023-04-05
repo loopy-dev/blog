@@ -26,7 +26,7 @@ const OtherLinks = ({ otherLinks }: Props) => {
 export default OtherLinks;
 
 const Anchor = styled.a`
-  color: ${cssVar('text_anchor')};
+  color: ${cssVar('primary_variant')};
   transition: all 150ms cubic-bezier(0.4, 0, 0.2, 1);
   text-decoration: underline;
 `;
