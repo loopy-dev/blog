@@ -2,8 +2,7 @@ import styled, { css } from 'styled-components';
 import cssVar from '~/lib/styles/cssVar';
 
 const headingStyle = css`
-  margin-top: 1.5em;
-  padding: 3px 2px;
+  margin-top: 30px;
   max-width: 100%;
   width: 100%;
   font-weight: 600;
@@ -11,14 +10,18 @@ const headingStyle = css`
   white-space: pre-wrap;
   word-break: break-word;
   letter-spacing: -0.01rem;
+
+  @media (max-width: 768px) {
+    margin-top: 24px;
+  }
 `;
 
 const listStyle = css`
-  margin-top: 29px;
+  margin-top: 24px;
   caret-color: rgb(55, 53, 47);
 
   @media (max-width: 768px) {
-    matgin-top: 21px;
+    margin-top: 10px;
   }
 `;
 
@@ -65,14 +68,19 @@ export const Block = styled.div`
   }
 
   li {
-    margin-left: 30px;
-    margin-bottom: 14px;
+    margin-left: 24px;
+    margin-bottom: 10px;
     line-height: 1.75;
     letter-spacing: -0.003em;
+
+    & > ul,
+    & > li {
+      margin-top: 10px;
+    }
   }
 
   p {
-    margin-top: 38px;
+    margin-top: 24px;
     width: 100%;
     max-width: 100%;
     white-space: pre-wrap;
@@ -98,7 +106,7 @@ export const Block = styled.div`
 
   blockquote {
     display: flex;
-    margin-top: 38px;
+    margin-top: 24px;
     padding: 8px 16px;
     width: 100%;
     border-left: 2px solid ${cssVar('primary')};
@@ -113,7 +121,7 @@ export const Block = styled.div`
 
     @media (max-width: 768px) {
       line-height: 1.58;
-      margin-top: 30px;
+      margin-top: 10px;
       letter-spacing: -0.004em;
     }
   }
