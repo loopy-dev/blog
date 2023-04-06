@@ -39,6 +39,7 @@ const Content = ({ content }: Props) => {
                   padding: '24px',
                   fontSize: '14px',
                   borderRadius: '4px',
+                  margin: 0,
                 }}
                 {...props}
               >
