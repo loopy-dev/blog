@@ -40,21 +40,57 @@ export const Block = styled.div`
   h1 {
     font-size: 1.875em;
     ${headingStyle}
+
+    & + p, & + ul, & + ol {
+      margin-top: 8px;
+    }
+
+    & + blockquote,
+    & + aside {
+      margin-top: 12px;
+    }
   }
 
   h2 {
     font-size: 1.5em;
     ${headingStyle}
+
+    & + p, & + ul, & + ol {
+      margin-top: 8px;
+    }
+
+    & + blockquote,
+    & + aside {
+      margin-top: 12px;
+    }
   }
 
   h3 {
     font-size: 1.25em;
     ${headingStyle}
+
+    & + p, & + ul, & + ol {
+      margin-top: 8px;
+    }
+
+    & + blockquote,
+    & + aside {
+      margin-top: 10px;
+    }
   }
 
   h4 {
     font-size: 1.15em;
     ${headingStyle}
+
+    & + p, & + ul, & + ol {
+      margin-top: 8px;
+    }
+
+    & + blockquote,
+    & + aside {
+      margin-top: 10px;
+    }
   }
 
   ul {
@@ -127,8 +163,12 @@ export const Block = styled.div`
   }
 
   pre {
-    margin-top: 43px;
+    margin-top: 30px;
     word-break: break-all;
+
+    & div code {
+      padding: 0;
+    }
 
     @media (max-width: 768px) {
       margin-top: 35px;
@@ -169,7 +209,7 @@ export const Block = styled.div`
   }
 
   aside {
-    margin: 16px 0;
+    margin-top: 24px;
     width: 100%;
     border-radius: 3px;
     border: 1px solid rgba(55, 53, 47, 0.16);
