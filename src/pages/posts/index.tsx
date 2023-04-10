@@ -1,3 +1,4 @@
+import { useDeferredValue, useState } from 'react';
 import Head from 'next/head';
 import Header from '~components/Header';
 import ListItem from '~components/Post/ListItem';
@@ -29,6 +30,23 @@ export const getStaticProps: GetStaticProps = async () => {
 };
 
 const Page = ({ posts }: Props) => {
+  const [keywords, setKeywords] = useState<string>('');
+  const filteredPosts = useDeferredValue(
+    keywords
+      ? posts.filter(
+          (post) =>
+            post.title.includes(keywords) ||
+            post.description.includes(keywords) ||
+            post.tags.some((tag) => tag.includes(keywords))
+        )
+      : posts
+  );
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { value } = e.target;
+    setKeywords(value);
+  };
+
   return (
     <>
       <Head>
@@ -43,12 +61,16 @@ const Page = ({ posts }: Props) => {
           />
         </ContentLayout>
         <ContentLayout>
-          <SearchBar />
+          <SearchBar value={keywords} onChange={handleChange} />
         </ContentLayout>
         <ContentLayout>
-          {posts.map((post) => (
-            <ListItem key={post.title} post={post} />
-          ))}
+          {filteredPosts.length > 0 ? (
+            filteredPosts.map((post) => (
+              <ListItem key={post.title} post={post} />
+            ))
+          ) : (
+            <div>현재 글이 없습니다. :(</div>
+          )}
         </ContentLayout>
       </GlobalLayout>
     </>
