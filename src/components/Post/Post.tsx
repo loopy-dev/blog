@@ -10,6 +10,7 @@ interface Props {
 const Post = ({ post }: Props) => {
   const frontMatter: FrontMatter = {
     title: post.title,
+    url: post.url,
     tags: post.tags,
     description: post.description,
     createdTime: post.createdTime,

@@ -1,13 +1,15 @@
+import type { InputHTMLAttributes } from 'react';
 import styled from 'styled-components';
 import Input from '~components/common/Input';
 
-const SearchBar = () => {
+const SearchBar = ({ ...props }: InputHTMLAttributes<HTMLInputElement>) => {
   return (
     <Input
       frameSize="lg"
       left={<SearchIcon />}
       placeholder="포스트를 검색해보세요."
       shape="rounded"
+      {...props}
     />
   );
 };

@@ -11,7 +11,7 @@ interface Props {
 // TODO - add props
 const ListItem = ({ post }: Props) => {
   return (
-    <Container href={`/posts/${post.title}`}>
+    <Container href={`/posts/${post.url}`}>
       <PostTitle>{post.title}</PostTitle>
       <PostTags>
         {post.tags.map((tag) => (
