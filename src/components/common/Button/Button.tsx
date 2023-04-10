@@ -11,9 +11,14 @@ interface Props extends ButtonHTMLAttributes<HTMLButtonElement> {
     | 'error'
     | 'transparent';
   borderStyle?: 'solid' | 'dashed' | 'dotted' | 'double' | 'none';
-  size?: 'md' | 'lg';
+  size?: 'md' | 'lg' | 'xs';
+  shape?: 'normal' | 'rounded';
   fullWidth?: boolean;
 }
+
+const shapeStyle = css<Props>`
+  border-radius: ${({ shape }) => (shape === 'rounded' ? '9999px' : '6px')};
+`;
 
 const variantStyle = css<Props>`
   ${({ variant }) => {
@@ -63,35 +68,56 @@ const borderStyle = css<Props>`
   }}
 `;
 
+const sizeStyle = css<Props>`
+  ${({ size }) => {
+    switch (size) {
+      case 'lg':
+        return css`
+          padding: 0 16px;
+          height: 56px;
+          font-size: 18px;
+          line-height: 1.5;
+        `;
+      case 'md':
+        return css`
+          padding: 0 16px;
+          height: 44px;
+          font-size: 16px;
+          line-height: 1.5;
+        `;
+      case 'xs':
+        return css`
+          padding: 6px 10px;
+          font-size: 12px;
+          line-height: 1;
+        `;
+      default:
+        return css`
+          padding: 0 16px;
+          height: 44px;
+          font-size: 16px;
+          line-height: 1.5;
+        `;
+    }
+  }}
+`;
+
 const Button = styled.button<Props>`
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  gap: 6px;
   font-weight: 500;
-  line-height: 1.5;
   user-select: none;
   white-space: nowrap;
   text-overflow: ellipsis;
-  padding: 0 16px;
-  height: ${({ size }) => {
-    switch (size) {
-      case 'lg':
-        return '56px';
-      default:
-        return '44px';
-    }
-  }};
-  font-size: ${({ size }) => {
-    switch (size) {
-      case 'lg':
-        return '18px';
-      default:
-        return '16px';
-    }
-  }};
   width: ${({ fullWidth }) => (fullWidth ? '100%' : 'fit-content')};
-  border-radius: 6px;
   cursor: pointer;
 
+  ${sizeStyle}
   ${variantStyle}
   ${borderStyle}
+  ${shapeStyle}
 
   &:hover {
     box-shadow: rgba(0, 0, 0, 0.06) 0px 0px 0px 10000px inset;

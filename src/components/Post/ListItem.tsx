@@ -58,7 +58,6 @@ const PostTitle = styled.h3`
   margin-top: 1.5rem;
   margin-bottom: 0.3rem;
   letter-spacing: -1px;
-  line-height: 1.3;
 `;
 
 const PostTags = styled.div`
@@ -76,15 +75,16 @@ const PostTags = styled.div`
 `;
 
 const Description = styled.p`
-  margin-bottom: 0.8125rem;
+  margin-top: 8px;
   color: ${cssVar('text3')};
   font-size: 90%;
-  line-height: 1.3;
+  letter-spacing: 0.003em;
 `;
 
 const TimeStamp = styled.p`
   text-align: right;
   color: ${cssVar('text3')};
-  font-size: 12px;
+  font-size: 80%;
   line-height: 1.3;
+  letter-spacing: 0.003em;
 `;

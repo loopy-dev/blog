@@ -1,6 +1,7 @@
 import { useState } from 'react';
+import type { Theme } from './types';
 
-type ReturnTypes = [string, () => void];
+type ReturnTypes = [Theme, () => void];
 
 const useTheme = (): ReturnTypes => {
   if (typeof window === 'undefined')

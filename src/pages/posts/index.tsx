@@ -2,6 +2,7 @@ import Head from 'next/head';
 import ListItem from '~/components/Post/ListItem';
 import postService from '~/services/post';
 import Header from '~components/Header';
+import SearchBar from '~components/Post/SearchBar';
 import ContentLayout from '~components/layouts/ContentLayout';
 import GlobalLayout from '~components/layouts/GlobalLayout';
 import type { GetStaticProps } from 'next';
@@ -40,6 +41,11 @@ const Page = ({ posts }: Props) => {
             description="쓴 글들을 모아볼 수 있는 포스트 페이지입니다."
             title="블로그"
           />
+        </ContentLayout>
+        <ContentLayout>
+          <SearchBar />
+        </ContentLayout>
+        <ContentLayout>
           {posts.map((post) => (
             <ListItem key={post.title} post={post} />
           ))}
