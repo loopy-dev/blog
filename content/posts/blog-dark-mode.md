@@ -1,5 +1,5 @@
 ---
-title: blog-dark-mode
+title: 블로그 다크모드 적용기
 createdTime: 2023-04-04
 tags:
   - projects

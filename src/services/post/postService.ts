@@ -42,10 +42,22 @@ export class PostService {
       .use(remarkParseFrontMatter)
       .process(file);
 
+    const frontMatter = result.data.frontmatter as Record<
+      string,
+      string | string[]
+    >;
+
+    // NOTE
+    // fileName will be an url of the post,
+    // title of frontmatter will be a real title of the post.
+    const url = parseFileName(fileName, 'md');
+    const title = frontMatter.title ? (frontMatter.title as string) : url;
+
     return {
-      ...(result.data.frontmatter as FrontMatter),
-      title: parseFileName(fileName, 'md'),
-    };
+      ...frontMatter,
+      url,
+      title,
+    } as FrontMatter;
   }
 
   getPostList() {

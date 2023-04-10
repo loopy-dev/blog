@@ -1,5 +1,6 @@
 export interface Post {
   title: string;
+  url: string;
   createdTime: string;
   tags: string[];
   description: string;

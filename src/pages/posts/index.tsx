@@ -1,12 +1,12 @@
 import Head from 'next/head';
-import ListItem from '~/components/Post/ListItem';
-import postService from '~/services/post';
 import Header from '~components/Header';
+import ListItem from '~components/Post/ListItem';
 import SearchBar from '~components/Post/SearchBar';
 import ContentLayout from '~components/layouts/ContentLayout';
 import GlobalLayout from '~components/layouts/GlobalLayout';
+import postService from '~services/post';
 import type { GetStaticProps } from 'next';
-import type { FrontMatter } from '~/models/Post';
+import type { FrontMatter } from '~models/Post';
 
 interface Props {
   posts: FrontMatter[];
