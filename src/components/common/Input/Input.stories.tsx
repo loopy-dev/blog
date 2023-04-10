@@ -17,4 +17,7 @@ export const Default = Template.bind({});
 
 Default.args = {
   disabled: false,
+  variant: 'default',
+  shape: 'normal',
+  frameSize: 'md',
 };

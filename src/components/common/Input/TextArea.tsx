@@ -3,22 +3,23 @@ import React from 'react';
 import styled from 'styled-components';
 import cssVar from '~/lib/styles/cssVar';
 import Label from './Label';
-import { borderStyle } from './styles';
+import { borderStyle, shapeStyle } from './styles';
 import type { Color } from './styles';
 
 export interface Props extends TextareaHTMLAttributes<HTMLTextAreaElement> {
   label?: string;
   variant?: Color;
+  shape?: 'normal' | 'rounded';
 }
 
 const TextArea = (
-  { label, variant = 'default', ...props }: Props,
+  { label, variant = 'default', shape = 'normal', ...props }: Props,
   ref: React.ForwardedRef<HTMLTextAreaElement>
 ) => {
   return (
     <Container>
       {label && <Label htmlFor={props.id}>{label}</Label>}
-      <TextAreaFrame disabled={props.disabled} variant={variant}>
+      <TextAreaFrame disabled={props.disabled} shape={shape} variant={variant}>
         <TextAreaBase ref={ref} {...props} variant={variant} />
       </TextAreaFrame>
     </Container>
@@ -48,6 +49,7 @@ const TextAreaFrame = styled.div<Props>`
   transition: all 100ms cubic-bezier(0.31, 0.27, 0.15, 0.99) 0s;
 
   ${borderStyle}
+  ${shapeStyle}
 `;
 
 const TextAreaBase = styled.textarea<Props>`

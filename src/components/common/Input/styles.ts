@@ -4,6 +4,8 @@ export type Color = 'default' | 'primary' | 'error' | 'none';
 
 interface Props {
   variant?: Color;
+  shape?: 'normal' | 'rounded';
+  frameSize?: 'md' | 'lg';
 }
 
 export const borderStyle = css<Props>`
@@ -36,4 +38,29 @@ export const borderStyle = css<Props>`
     border: 1px solid rgb(24, 144, 255);
     box-shadow: rgba(24, 144, 255, 0.3) 0px 0px 0px 2px;
   }
+`;
+
+export const shapeStyle = css<Props>`
+  border-radius: ${({ shape }) => (shape === 'rounded' ? '9999px' : '6px')};
+`;
+
+export const frameSizeStyle = css<Props>`
+  ${({ frameSize }) => {
+    switch (frameSize) {
+      case 'md':
+        return css`
+          height: 32px;
+        `;
+
+      case 'lg':
+        return css`
+          height: 36px;
+        `;
+
+      default:
+        return css`
+          height: 32px;
+        `;
+    }
+  }}
 `;
