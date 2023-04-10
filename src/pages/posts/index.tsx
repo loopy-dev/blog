@@ -7,6 +7,7 @@ import ListItem from '~components/Post/ListItem';
 import SearchBar from '~components/Post/SearchBar';
 import ContentLayout from '~components/layouts/ContentLayout';
 import GlobalLayout from '~components/layouts/GlobalLayout';
+import useDebounce from '~hooks/common/useDebounce';
 import postService from '~services/post';
 import type { GetStaticProps } from 'next';
 import type { FrontMatter } from '~models/Post';
@@ -33,6 +34,9 @@ export const getStaticProps: GetStaticProps = async () => {
 
 const Page = ({ posts }: Props) => {
   const [keywords, setKeywords] = useState<string>('');
+  const debounced = useDebounce((target: string) => {
+    setKeywords(target);
+  });
   const filteredPosts = useDeferredValue(
     keywords
       ? posts.filter(
@@ -46,7 +50,7 @@ const Page = ({ posts }: Props) => {
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { value } = e.target;
-    setKeywords(value);
+    debounced(value);
   };
 
   return (
@@ -63,7 +67,7 @@ const Page = ({ posts }: Props) => {
           />
         </ContentLayout>
         <ContentLayout>
-          <SearchBar value={keywords} onChange={handleChange} />
+          <SearchBar onChange={handleChange} />
         </ContentLayout>
         <ContentLayout>
           {filteredPosts.length > 0 ? (
@@ -74,11 +78,13 @@ const Page = ({ posts }: Props) => {
             <ImageContainer>
               <Image
                 alt="loading"
-                height={180}
+                height={0}
                 src="/nyan-cat.gif"
-                width={400}
+                width={0}
                 style={{
-                  marginLeft: '3.5rem',
+                  marginLeft: '10%',
+                  width: '100%',
+                  height: 'auto',
                 }}
               />
               <p>해당 키워드에 대한 포스트가 아직 없네요. </p>
