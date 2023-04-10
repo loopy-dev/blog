@@ -1,5 +1,7 @@
 import { useDeferredValue, useState } from 'react';
 import Head from 'next/head';
+import Image from 'next/image';
+import styled from 'styled-components';
 import Header from '~components/Header';
 import ListItem from '~components/Post/ListItem';
 import SearchBar from '~components/Post/SearchBar';
@@ -69,7 +71,18 @@ const Page = ({ posts }: Props) => {
               <ListItem key={post.title} post={post} />
             ))
           ) : (
-            <div>현재 글이 없습니다. :(</div>
+            <ImageContainer>
+              <Image
+                alt="loading"
+                height={180}
+                src="/nyan-cat.gif"
+                width={400}
+                style={{
+                  marginLeft: '3.5rem',
+                }}
+              />
+              <p>해당 키워드에 대한 포스트가 아직 없네요. </p>
+            </ImageContainer>
           )}
         </ContentLayout>
       </GlobalLayout>
@@ -78,3 +91,11 @@ const Page = ({ posts }: Props) => {
 };
 
 export default Page;
+
+const ImageContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  justify-content: center;
+  align-items: center;
+`;
