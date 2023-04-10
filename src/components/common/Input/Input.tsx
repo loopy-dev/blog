@@ -11,6 +11,7 @@ export interface Props extends InputHTMLAttributes<HTMLInputElement> {
   variant?: Color;
   shape?: 'normal' | 'rounded';
   frameSize?: 'md' | 'lg';
+  left?: React.ReactNode;
 }
 
 const Input = (
@@ -19,6 +20,7 @@ const Input = (
     variant = 'default',
     shape = 'normal',
     frameSize = 'md',
+    left,
     ...props
   }: Props,
   ref: React.ForwardedRef<HTMLInputElement>
@@ -32,6 +34,7 @@ const Input = (
         shape={shape}
         variant={variant}
       >
+        {left && <Left>{left}</Left>}
         <InputBase
           ref={ref}
           frameSize={frameSize}
@@ -78,8 +81,13 @@ const InputBase = styled.input<Props>`
   background-color: transparent;
   font-size: ${({ frameSize }) => (frameSize === 'lg' ? '16px' : '14px')};
   line-height: 1.5;
+  text-overflow: ellipsis;
 
   &::placeholder {
     color: rgba(200, 200, 200, 1);
   }
+`;
+
+const Left = styled.span`
+  flex-shrink: 0;
 `;

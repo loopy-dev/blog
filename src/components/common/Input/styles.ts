@@ -54,7 +54,7 @@ export const frameSizeStyle = css<Props>`
 
       case 'lg':
         return css`
-          height: 36px;
+          height: 40px;
         `;
 
       default:
