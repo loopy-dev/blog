@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import Footer from '~components/common/Footer';
 import NavigationBar from '../NavigationBar';
 
 interface Props {
@@ -10,6 +11,7 @@ const GlobalLayout = ({ children }: Props) => {
     <Container>
       <NavigationBar />
       <Main>{children}</Main>
+      <Footer />
     </Container>
   );
 };
@@ -24,4 +26,5 @@ const Container = styled.div`
 
 const Main = styled.main`
   flex: 1;
+  min-height: 800px;
 `;
