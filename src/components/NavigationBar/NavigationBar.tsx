@@ -62,12 +62,10 @@ const NavigationLinks = () => {
   return (
     <>
       <Link href="/posts" style={{ width: '100%', textAlign: 'center' }}>
-        <Item current={getSubDomain(router.pathname) === 'posts'}>Blog</Item>
+        <Item current={getSubDomain(router.pathname) === 'posts'}>Posts</Item>
       </Link>
-      <Link href="/feedback" style={{ width: '100%', textAlign: 'center' }}>
-        <Item current={getSubDomain(router.pathname) === 'feedback'}>
-          Feedback
-        </Item>
+      <Link href="/about" style={{ width: '100%', textAlign: 'center' }}>
+        <Item current={getSubDomain(router.pathname) === 'posts'}>About</Item>
       </Link>
       <Link
         href="https://github.com/mrbartrns"
