@@ -1,4 +1,5 @@
 import dynamic from 'next/dynamic';
+import Image from 'next/image';
 import ReactMarkdown from 'react-markdown';
 import { base16AteliersulphurpoolLight } from 'react-syntax-highlighter/dist/cjs/styles/prism';
 import rehypeRaw from 'rehype-raw';
@@ -50,6 +51,10 @@ const Content = ({ content }: Props) => {
                 {children}
               </code>
             );
+          },
+          img({ node, ...props }) {
+            // eslint-disable-next-line @next/next/no-img-element, jsx-a11y/alt-text
+            return <img {...props} loading="lazy" />;
           },
         }}
       >
