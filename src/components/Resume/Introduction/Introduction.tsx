@@ -11,7 +11,7 @@ const Introduction = () => {
         style={{ letterSpacing: '-1px' }}
       >
         <h1>환영합니다!</h1>
-        <h1>프론트엔드 개발자 고준혁입니다.</h1>
+        <h1>프론트엔드 개발자 벤입니다.</h1>
       </div>
       {/** introduction */}
       <ul className="md:text-xl my-12">

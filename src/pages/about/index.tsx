@@ -1,9 +1,14 @@
 import React from 'react';
 import dynamic from 'next/dynamic';
 import Head from 'next/head';
+import Link from 'next/link';
 import GlobalLayout from '~components/layouts/GlobalLayout';
 
 const Resume = dynamic(() => import('../../components/Resume'));
+const NotificationBar = dynamic(
+  () => import('../../components/NotificationBar'),
+  { ssr: false }
+);
 
 const Page = () => {
   return (
@@ -19,6 +24,18 @@ const Page = () => {
         />
       </Head>
       <GlobalLayout>
+        <NotificationBar>
+          <p>
+            Currently looking for a job.{' '}
+            <Link
+              href="mailto:mrbartrns@gmail.com"
+              style={{ fontWeight: 'bold', textDecoration: 'underline' }}
+            >
+              Email
+            </Link>{' '}
+            me if you want to know more about me.
+          </p>
+        </NotificationBar>
         {/** first part of main page, introduction */}
         <Resume />
         {/** Projects - temporary projects(same with projects page) */}

@@ -20,7 +20,7 @@
       "~services/*": ["src/services/*"],
       "~hooks/*": ["src/hooks/*"],
       "~models/*": ["src/models/*"],
-      "~store/*": ["src/store/*"],
+      "~store/*": ["src/lib/store/*"],
       "~styles/*": ["src/styles/*"],
       "~/*": ["src/*"]
     }
