@@ -19,12 +19,10 @@ const GlobalLayout = ({ children }: Props) => {
 export default GlobalLayout;
 
 const Container = styled.div`
-  display: flex;
-  flex-direction: column;
   position: relative;
 `;
 
 const Main = styled.main`
-  flex: 1;
+  position: relative;
   min-height: 800px;
 `;

@@ -1,8 +1,8 @@
 import { Analytics } from '@vercel/analytics/react';
 import Head from 'next/head';
 import { Provider } from 'react-redux';
+import store from '~/lib/store';
 import GlobalStyle from '~/lib/styles/GlobalStyle';
-import store from '~/store';
 import '../lib/styles/globals.css';
 import type { AppProps } from 'next/app';
 
