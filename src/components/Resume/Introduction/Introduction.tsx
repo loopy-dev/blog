@@ -1,6 +1,6 @@
 import ContentLayout from '~/components/layouts/ContentLayout';
-import LinkButton from '../../Main/LinkButton';
 import Icon from '../../icons';
+import LinkButton from './LinkButton';
 
 const Introduction = () => {
   return (
