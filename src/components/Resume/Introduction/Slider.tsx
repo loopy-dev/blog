@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import useInterval from '../../hooks/common/useInterval/useInterval';
+import useInterval from '../../../hooks/common/useInterval/useInterval';
 import classNames from './Slider.module.css';
 
 interface Props {

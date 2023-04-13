@@ -6,7 +6,7 @@ const ContentLayout = styled.div`
   padding: 24px;
 
   & + & {
-    padding-top: 8px;
+    padding-top: 0;
   }
 `;
 
