@@ -38,6 +38,7 @@ const darkStyle = `
 
 const commonStyle = `
   --bg-skeleton: ${CommonPalette.bg_skeleton};
+  --bg-selection: ${CommonPalette.bg_selection};
 `;
 
 const GlobalStyle = createGlobalStyle`
@@ -67,5 +68,8 @@ const GlobalStyle = createGlobalStyle`
     }
   }
 
+  &::selection {
+    background-color: ${cssVar('bg_selection')};
+  }
 `;
 export default GlobalStyle;

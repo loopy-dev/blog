@@ -37,7 +37,7 @@ const Content = ({ content }: Props) => {
                 language={language}
                 style={base16AteliersulphurpoolLight}
                 customStyle={{
-                  padding: '24px',
+                  padding: '34px 16px 32px 32px',
                   fontSize: '14px',
                   borderRadius: '4px',
                   margin: 0,

@@ -2,6 +2,7 @@ export type Theme = 'dark' | 'light';
 
 export interface CommonPalette {
   bg_skeleton: string;
+  bg_selection: string;
 }
 
 export interface ColorPalette {
