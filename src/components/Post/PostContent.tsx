@@ -53,9 +53,13 @@ const Content = ({ content }: Props) => {
               </code>
             );
           },
-          img({ src = '', alt = 'image' }) {
-            // eslint-disable-next-line @next/next/no-img-element, jsx-a11y/alt-text
-            return <Image alt={alt} height={450} src={src} width={800} />;
+          img({ node, src = '', alt = 'image', ...props }) {
+            return src.startsWith('user-images.githubusercontent.com') ? (
+              <Image alt={alt} height={450} src={src} width={800} />
+            ) : (
+              // eslint-disable-next-line @next/next/no-img-element
+              <img alt={alt} loading="lazy" src={src} {...props} />
+            );
           },
         }}
       >

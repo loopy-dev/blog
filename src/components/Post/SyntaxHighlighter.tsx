@@ -7,6 +7,7 @@ const filterMap: Record<string, string> = {
   tsx: 'TypeScript JSX',
   bash: 'Bash',
   json: 'JSON',
+  text: 'Plain Text',
 };
 
 const transformLanguage = (language: string | undefined) => {
