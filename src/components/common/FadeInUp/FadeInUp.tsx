@@ -1,6 +1,6 @@
 import type { HTMLAttributes } from 'react';
 import { useState } from 'react';
-import useIntersection from '../../../hooks/common/useIntersection';
+import useIntersection from '../../../hooks/useIntersection';
 import classNames from './FadeInUp.module.css';
 
 /**

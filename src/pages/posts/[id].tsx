@@ -3,8 +3,8 @@ import Head from 'next/head';
 import PostSkeleton from '~/components/Post/PostSkeleton';
 import ContentLayout from '~/components/layouts/ContentLayout';
 import GlobalLayout from '~/components/layouts/GlobalLayout';
-import postService from '~/services/post';
-import { parseFileName } from '~/services/post/postService';
+import postService from '~/lib/post';
+import { parseFileName } from '~/lib/post/postService';
 import type { GetStaticPaths, GetStaticProps } from 'next';
 import type { Post as PostModel } from '~/models/Post';
 

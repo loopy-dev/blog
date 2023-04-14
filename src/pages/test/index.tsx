@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import Input from '~components/common/Input';
 import ContentLayout from '~components/layouts/ContentLayout';
-import useDebounce from '~hooks/common/useDebounce';
+import useDebounce from '~hooks/useDebounce';
 
 const Page = () => {
   const [value, setValue] = useState<string>('');

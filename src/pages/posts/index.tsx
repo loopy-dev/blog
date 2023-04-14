@@ -7,8 +7,8 @@ import ListItem from '~components/Post/ListItem';
 import SearchBar from '~components/Post/SearchBar';
 import ContentLayout from '~components/layouts/ContentLayout';
 import GlobalLayout from '~components/layouts/GlobalLayout';
-import useDebounce from '~hooks/common/useDebounce';
-import postService from '~services/post';
+import useDebounce from '~hooks/useDebounce';
+import postService from '~/lib/post';
 import type { GetStaticProps } from 'next';
 import type { FrontMatter } from '~models/Post';
 

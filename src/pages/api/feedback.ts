@@ -1,5 +1,5 @@
 import { addDoc, collection } from '@firebase/firestore';
-import { database } from '~services/firebase';
+import { database } from '~/lib/firebase';
 import type { NextApiRequest, NextApiResponse } from 'next';
 
 const feedbackCol = collection(database, 'feedback');
