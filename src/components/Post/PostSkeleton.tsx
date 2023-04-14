@@ -34,13 +34,13 @@ const PostSkeleton = () => {
     <Block>
       {/** post title */}
       <div className="my-16">
-        <div className="title">
+        <div className="header">
           <h1>
-            <Skeleton flex={6} />
-            <Skeleton flex={5} />
-            <Skeleton flex={2} />
-            <Skeleton flex={2} />
-            <Skeleton flex={3} />
+            <Skeleton flex={6} height="3em" />
+            <Skeleton flex={5} height="3em" />
+            <Skeleton flex={2} height="3em" />
+            <Skeleton flex={2} height="3em" />
+            <Skeleton flex={3} height="3em" />
           </h1>
         </div>
         <div className="subinfo">
@@ -49,17 +49,17 @@ const PostSkeleton = () => {
         </div>
       </div>
       {/** post content */}
-      <div className="contents">
+      <div className="content">
+        <h1>
+          <Skeleton noSpacing height="1.5em" width="15%" />
+        </h1>
+        {SkeletonParagraph}
         <h2>
-          <Skeleton noSpacing height="1.5em" width="5rem" />
+          <Skeleton noSpacing height="1.5em" width="20%" />
         </h2>
         {SkeletonParagraph}
         <h2>
-          <Skeleton noSpacing height="1.5em" width="7rem" />
-        </h2>
-        {SkeletonParagraph}
-        <h2>
-          <Skeleton noSpacing height="1.5em" width="7rem" />
+          <Skeleton noSpacing height="1.5em" width="30%" />
         </h2>
         {SkeletonParagraph}
       </div>
@@ -75,7 +75,6 @@ const Block = styled.div`
     white-space: pre-wrap;
     word-break: break-word;
     caret-color: rgb(55, 53, 47);
-    padding: 3px 2px;
     line-height: 1.3;
     margin-top: 1rem;
 
@@ -84,14 +83,15 @@ const Block = styled.div`
     }
   }
 
-  .title {
+  .header {
     margin-top: 2rem;
-    margin-bottom: 1.21875em;
+    margin-bottom: 1.5rem;
   }
 
   .subinfo {
     display: flex;
     justify-content: space-between;
+    margin-top: 2.2rem;
 
     & > * {
       width: 100px;
@@ -99,27 +99,36 @@ const Block = styled.div`
     }
   }
 
-  h2 {
-    white-space: pre-wrap;
-    word-break: break-word;
-    caret-color: rgb(55, 53, 47);
-    padding: 3px 2px;
-    font-weight: 600;
-    font-size: 1.5em;
-    line-height: 1.3;
-    margin-top: 1em;
-  }
-
-  .contents {
+  .content {
     margin-top: 4rem;
+
     .lines {
       margin-top: 0.75em;
     }
 
+    h1 {
+      font-size: 1.5em;
+      margin-top: 30px;
+      width: 100%;
+
+      @media (max-width: 768px) {
+        margin-top: 24px;
+      }
+    }
+
+    h2 {
+      font-size: 1.35em;
+      margin-top: 30px;
+      width: 100%;
+
+      @media (max-width: 768px) {
+        margin-top: 24px;
+      }
+    }
+
     .line {
-      margin-bottom: 0.5rem;
+      margin-top: 14px;
       display: flex;
-      font-size: 1em;
     }
   }
 `;

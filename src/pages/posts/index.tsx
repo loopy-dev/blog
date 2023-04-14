@@ -1,20 +1,17 @@
 import { useDeferredValue, useState } from 'react';
+import dynamic from 'next/dynamic';
 import Head from 'next/head';
 import Image from 'next/image';
 import styled from 'styled-components';
 import postService from '~/lib/post';
 import Header from '~components/Header';
-import ListItem from '~components/Post/ListItem';
+import ListSkeleton from '~components/Post/ListSkeleton';
 import SearchBar from '~components/Post/SearchBar';
 import ContentLayout from '~components/layouts/ContentLayout';
 import GlobalLayout from '~components/layouts/GlobalLayout';
 import useDebounce from '~hooks/useDebounce';
 import type { GetStaticProps } from 'next';
 import type { FrontMatter } from '~/models/Post';
-
-interface Props {
-  posts: FrontMatter[];
-}
 
 export const getStaticProps: GetStaticProps = async () => {
   try {
@@ -31,6 +28,14 @@ export const getStaticProps: GetStaticProps = async () => {
     };
   }
 };
+
+const PostList = dynamic(() => import('../../components/Post/PostList'), {
+  loading: () => <ListSkeleton />,
+});
+
+interface Props {
+  posts: FrontMatter[];
+}
 
 const Page = ({ posts }: Props) => {
   const [keywords, setKeywords] = useState<string>('');
@@ -56,24 +61,24 @@ const Page = ({ posts }: Props) => {
   return (
     <>
       <Head>
-        <title>Blog - Portfolio</title>
-        <meta key="title" content="Blog - Portfolio" property="og:title" />
+        <title>Posts - Benlog</title>
+        <meta key="title" content="Posts - Benlog" property="og:title" />
+        <meta
+          key="description"
+          content="작성한 글들을 모아볼 수 있어요."
+          property="og:description"
+        />
       </Head>
       <GlobalLayout>
         <ContentLayout>
-          <Header
-            description="쓴 글들을 모아볼 수 있는 포스트 페이지입니다."
-            title="블로그"
-          />
+          <Header description="작성한 글들을 모아볼 수 있어요." title="Posts" />
         </ContentLayout>
         <ContentLayout>
           <SearchBar onChange={handleChange} />
         </ContentLayout>
         <ContentLayout>
           {filteredPosts.length > 0 ? (
-            filteredPosts.map((post) => (
-              <ListItem key={post.title} post={post} />
-            ))
+            <PostList posts={filteredPosts} />
           ) : (
             <ImageContainer>
               <Image

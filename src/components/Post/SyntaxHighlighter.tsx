@@ -7,6 +7,7 @@ const filterMap: Record<string, string> = {
   tsx: 'TypeScript JSX',
   bash: 'Bash',
   json: 'JSON',
+  text: 'Plain Text',
 };
 
 const transformLanguage = (language: string | undefined) => {
@@ -46,6 +47,10 @@ const Container = styled.div`
     color: rgb(0, 0, 0, 0.5);
     opacity: 0;
     transition: all 100ms cubic-bezier(0.31, 0.27, 0.15, 0.99) 0s;
+
+    @media (max-width: 768px) {
+      opacity: 1;
+    }
   }
 
   &:hover {

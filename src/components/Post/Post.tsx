@@ -1,6 +1,6 @@
 import Comments from './Comments';
-import Content from './PostContent';
-import ContentTitle from './PostTitle';
+import PostContent from './PostContent';
+import PostHeader from './PostHeader';
 import type { FrontMatter, Post as PostModel } from '~/models/Post';
 
 interface Props {
@@ -17,8 +17,8 @@ const Post = ({ post }: Props) => {
   };
   return (
     <>
-      <ContentTitle postMetaData={{ ...frontMatter }} />
-      <Content content={post.content} />
+      <PostHeader postMetaData={{ ...frontMatter }} />
+      <PostContent content={post.content} />
       <Comments />
     </>
   );

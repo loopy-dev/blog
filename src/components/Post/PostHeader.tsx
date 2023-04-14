@@ -6,7 +6,7 @@ interface Props {
   postMetaData: FrontMatter;
 }
 
-const ContentTitle = ({ postMetaData }: Props) => {
+const PostHeader = ({ postMetaData }: Props) => {
   const date = new Date(postMetaData.createdTime);
 
   return (
@@ -36,7 +36,7 @@ const ContentTitle = ({ postMetaData }: Props) => {
   );
 };
 
-export default ContentTitle;
+export default PostHeader;
 
 const Title = styled.h1`
   max-width: 100%;
@@ -45,7 +45,6 @@ const Title = styled.h1`
   white-space: pre-wrap;
   word-break: break-word;
   caret-color: rgb(55, 53, 47);
-  padding: 3px 2px;
   font-weight: 700;
   font-size: 3em;
   line-height: 1.3;
