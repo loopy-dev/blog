@@ -16,7 +16,17 @@ const Page = ({ post }: Props) => {
   return (
     <>
       <Head>
-        <title>{`${post.title} - Blog`}</title>
+        <title>{`${post.title} - Benlog`}</title>
+        <meta
+          key="title"
+          content={`${post.title} - Benlog`}
+          property="og:title"
+        />
+        <meta
+          key="description"
+          content={post.description}
+          property="og:description"
+        />
       </Head>
       <GlobalLayout>
         <ContentLayout>
