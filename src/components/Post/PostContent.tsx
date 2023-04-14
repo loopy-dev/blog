@@ -1,7 +1,9 @@
 import dynamic from 'next/dynamic';
+import Image from 'next/image';
 import ReactMarkdown from 'react-markdown';
 import { base16AteliersulphurpoolLight } from 'react-syntax-highlighter/dist/cjs/styles/prism';
 import rehypeRaw from 'rehype-raw';
+import remarkBreaks from 'remark-breaks';
 import remarkFrontMatter from 'remark-frontmatter';
 import remarkGfm from 'remark-gfm';
 import Skeleton from '../common/Skeleton';
@@ -19,7 +21,7 @@ const Content = ({ content }: Props) => {
     <Block>
       <ReactMarkdown
         rehypePlugins={[rehypeRaw]}
-        remarkPlugins={[remarkGfm, remarkFrontMatter]}
+        remarkPlugins={[remarkGfm, remarkFrontMatter, remarkBreaks]}
         components={{
           code({ node, inline, className, children, style, ...props }) {
             const match = /language-(\w+)/.exec(className || '');
@@ -36,7 +38,7 @@ const Content = ({ content }: Props) => {
                 language={language}
                 style={base16AteliersulphurpoolLight}
                 customStyle={{
-                  padding: '24px',
+                  padding: '34px 16px 32px 32px',
                   fontSize: '14px',
                   borderRadius: '4px',
                   margin: 0,
@@ -51,9 +53,9 @@ const Content = ({ content }: Props) => {
               </code>
             );
           },
-          img({ node, ...props }) {
+          img({ src = '', alt = 'image' }) {
             // eslint-disable-next-line @next/next/no-img-element, jsx-a11y/alt-text
-            return <img {...props} loading="lazy" />;
+            return <Image alt={alt} height={450} src={src} width={800} />;
           },
         }}
       >

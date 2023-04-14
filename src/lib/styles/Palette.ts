@@ -39,6 +39,7 @@ export const DarkPalette: ColorPalette = {
 
 export const CommonPalette: CommonThemePalette = {
   bg_skeleton: 'rgba(226, 232, 240, 1)',
+  bg_selection: 'rgba(35, 131, 226, 0.28)',
 };
 
 export const Palette = {

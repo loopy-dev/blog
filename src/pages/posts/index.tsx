@@ -2,15 +2,15 @@ import { useDeferredValue, useState } from 'react';
 import Head from 'next/head';
 import Image from 'next/image';
 import styled from 'styled-components';
+import postService from '~/lib/post';
 import Header from '~components/Header';
 import ListItem from '~components/Post/ListItem';
 import SearchBar from '~components/Post/SearchBar';
 import ContentLayout from '~components/layouts/ContentLayout';
 import GlobalLayout from '~components/layouts/GlobalLayout';
-import useDebounce from '~hooks/common/useDebounce';
-import postService from '~services/post';
+import useDebounce from '~hooks/useDebounce';
 import type { GetStaticProps } from 'next';
-import type { FrontMatter } from '~models/Post';
+import type { FrontMatter } from '~/models/Post';
 
 interface Props {
   posts: FrontMatter[];
