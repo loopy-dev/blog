@@ -5,6 +5,8 @@ import type { SyntaxHighlighterProps } from 'react-syntax-highlighter';
 const filterMap: Record<string, string> = {
   jsx: 'JavaScript JSX',
   tsx: 'TypeScript JSX',
+  bash: 'Bash',
+  json: 'JSON',
 };
 
 const transformLanguage = (language: string | undefined) => {
