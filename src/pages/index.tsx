@@ -1,9 +1,9 @@
 import Head from 'next/head';
+import postService from '~/lib/post';
 import Header from '~components/Header';
 import Banner from '~components/Main';
 import ListItem from '~components/Post/ListItem';
 import ContentLayout from '~components/layouts/ContentLayout';
-import postService from '~/lib/post';
 import GlobalLayout from '../components/layouts/GlobalLayout';
 import type { GetStaticProps } from 'next';
 import type { FrontMatter } from '~models/Post';

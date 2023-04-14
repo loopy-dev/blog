@@ -3,7 +3,7 @@ import Head from 'next/head';
 import Recaptcha from 'react-google-recaptcha';
 import { useForm } from 'react-hook-form';
 import styled from 'styled-components';
-import { postFeedback, verifyRecaptcha } from '~/api/feedback';
+import { postFeedback, verifyRecaptcha } from '~/lib/api/feedback';
 import Header from '~components/Header';
 import ButtonBase from '~components/common/Button';
 import Input from '~components/common/Input';

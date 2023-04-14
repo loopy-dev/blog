@@ -17,7 +17,6 @@
     "baseUrl": "./",
     "paths": {
       "~components/*": ["src/components/*"],
-      "~services/*": ["src/services/*"],
       "~hooks/*": ["src/hooks/*"],
       "~models/*": ["src/models/*"],
       "~store/*": ["src/lib/store/*"],
