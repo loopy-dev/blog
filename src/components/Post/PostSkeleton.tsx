@@ -44,14 +44,14 @@ const PostSkeleton = () => {
           </h1>
         </div>
         <div className="subinfo">
-          <Skeleton noSpacing />
-          <Skeleton noSpacing />
+          <Skeleton noSpacing width="30%" />
+          <Skeleton noSpacing width="30%" />
         </div>
       </div>
       {/** post content */}
       <div className="content">
         <h1>
-          <Skeleton noSpacing height="1.5em" width="15%" />
+          <Skeleton noSpacing height="1.5em" width="25%" />
         </h1>
         {SkeletonParagraph}
         <h2>
@@ -92,11 +92,6 @@ const Block = styled.div`
     display: flex;
     justify-content: space-between;
     margin-top: 2.2rem;
-
-    & > * {
-      width: 100px;
-      height: 20px;
-    }
   }
 
   .content {
@@ -127,7 +122,7 @@ const Block = styled.div`
     }
 
     .line {
-      margin-top: 14px;
+      margin-top: 8px;
       display: flex;
     }
   }

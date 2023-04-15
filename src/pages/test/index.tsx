@@ -1,12 +1,10 @@
-import ItemSkeleton from '~components/Post/ItemSkeleton';
+import PostSkeleton from '~components/Post/PostSkeleton';
 import ContentLayout from '~components/layouts/ContentLayout';
 
 const Page = () => {
   return (
     <ContentLayout>
-      <div style={{ marginTop: '5rem' }}>
-        <ItemSkeleton />
-      </div>
+      <PostSkeleton />
     </ContentLayout>
   );
 };
