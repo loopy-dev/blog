@@ -14,6 +14,10 @@ const headingStyle = css`
   @media (max-width: 768px) {
     margin-top: 24px;
   }
+
+  &:target {
+    scroll-margin-top: 80px;
+  }
 `;
 
 const listStyle = css`

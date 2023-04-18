@@ -1,11 +1,9 @@
 import PostSkeleton from '~components/Post/PostSkeleton';
-import ContentLayout from '~components/layouts/ContentLayout';
+import PostLayout from '~components/layouts/PostLayout';
 
 const Page = () => {
   return (
-    <ContentLayout>
-      <PostSkeleton />
-    </ContentLayout>
+    <PostLayout aside={<div>Hello, World!</div>} content={<PostSkeleton />} />
   );
 };
 
