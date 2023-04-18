@@ -119,7 +119,7 @@ const PrimaryContainer = styled.div`
   align-items: center;
   padding: 8px 24px;
   width: 100%;
-  max-width: 900px;
+  max-width: 1024px;
   margin: 0 auto;
 `;
 

@@ -8,6 +8,7 @@ import remarkFrontMatter from 'remark-frontmatter';
 import remarkGfm from 'remark-gfm';
 import Skeleton from '../common/Skeleton';
 import { Block } from './MarkdownComponents';
+import { setElementId } from './utils';
 
 const SyntaxHighlighter = dynamic(() => import('./SyntaxHighlighter'), {
   loading: () => <Skeleton noSpacing height="220px" width="100%" />,
@@ -18,12 +19,42 @@ interface Props {
 
 const Content = ({ content }: Props) => {
   return (
-    <Block>
+    <Block className="post-content">
       <ReactMarkdown
+        includeElementIndex
         rehypePlugins={[rehypeRaw]}
         remarkPlugins={[remarkGfm, remarkFrontMatter, remarkBreaks]}
         components={{
-          code({ node, inline, className, children, style, ...props }) {
+          h1({ index, children }) {
+            return (
+              <h1 data-index={index} id={setElementId(children)}>
+                {children}
+              </h1>
+            );
+          },
+          h2({ index, children }) {
+            return (
+              <h2 data-index={index} id={setElementId(children)}>
+                {children}
+              </h2>
+            );
+          },
+          h3({ index, children }) {
+            return (
+              <h3 data-index={index} id={setElementId(children)}>
+                {children}
+              </h3>
+            );
+          },
+          code({
+            node,
+            inline,
+            className,
+            children,
+            style,
+            siblingCount,
+            ...props
+          }) {
             const match = /language-(\w+)/.exec(className || '');
             const language = match
               ? match[1] === 'typescript'
@@ -53,7 +84,7 @@ const Content = ({ content }: Props) => {
               </code>
             );
           },
-          img({ node, src = '', alt = 'image', ...props }) {
+          img({ node, src = '', alt = 'image', siblingCount, ...props }) {
             return src.startsWith('user-images.githubusercontent.com') ? (
               <Image alt={alt} height={450} src={src} width={800} />
             ) : (
