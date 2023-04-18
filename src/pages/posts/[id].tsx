@@ -62,11 +62,13 @@ const Page = ({ post }: Props) => {
         <meta
           key="title"
           content={`${post.title} - Benlog`}
+          name="title"
           property="og:title"
         />
         <meta
           key="description"
           content={post.description}
+          name="description"
           property="og:description"
         />
       </Head>
