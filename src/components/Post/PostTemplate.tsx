@@ -5,31 +5,32 @@ interface Props {
   aside?: React.ReactNode;
 }
 
-const PostLayout = ({ content, aside }: Props) => {
+const PostTemplate = ({ content, aside }: Props) => {
   return (
     <Container>
-      <Content>{content}</Content>
+      <Article>{content}</Article>
       {aside ? <Aside>{aside}</Aside> : null}
     </Container>
   );
 };
 
-export default PostLayout;
+export default PostTemplate;
 
 const Container = styled.div`
   display: flex;
   justify-content: space-between;
   position: relative;
+  width: 100%;
   max-width: 1024px;
-  align-items: start;
   margin: 0 auto;
+  align-items: start;
 
   @media (max-width: 1023px) {
     display: block;
   }
 `;
 
-const Content = styled.article`
+const Article = styled.article`
   padding: 24px;
   width: 100%;
   max-width: 44rem;

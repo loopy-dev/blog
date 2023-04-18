@@ -4,7 +4,7 @@ import PostSkeleton from '~/components/Post/PostSkeleton';
 import GlobalLayout from '~/components/layouts/GlobalLayout';
 import postService from '~/lib/post';
 import { parseFileName } from '~/lib/post/postService';
-import PostLayout from '~components/layouts/PostLayout';
+import PostTemplate from '~components/Post/PostTemplate';
 import type { GetStaticPaths, GetStaticProps } from 'next';
 import type { Post as PostModel } from '~/models/Post';
 
@@ -12,12 +12,8 @@ interface Props {
   post: PostModel;
 }
 
-const PostContent = dynamic(() => import('../../components/Post'), {
-  loading: () => <PostSkeleton />,
-});
-
-const PostAside = dynamic(() => import('../../components/Post/PostAside'), {
-  ssr: false,
+const Post = dynamic(() => import('../../components/Post'), {
+  loading: () => <PostTemplate aside={<div />} content={<PostSkeleton />} />,
 });
 
 export const getStaticPaths: GetStaticPaths = async () => {
@@ -75,13 +71,7 @@ const Page = ({ post }: Props) => {
         />
       </Head>
       <GlobalLayout>
-        {/* <ContentLayout>
-          <LazyLoadedPost post={post} />
-        </ContentLayout> */}
-        <PostLayout
-          aside={<PostAside />}
-          content={<PostContent post={post} />}
-        />
+        <Post post={post} />
       </GlobalLayout>
     </>
   );
