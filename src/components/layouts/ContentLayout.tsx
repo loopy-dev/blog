@@ -1,14 +1,18 @@
-import styled from 'styled-components';
+import type { HTMLAttributes } from 'react';
+import classnames from 'classnames/bind';
+import css from './ContentLayout.module.css';
 
-const ContentLayout = styled.div`
-  margin: 0 auto;
-  max-width: 44rem;
-  width: 100%;
-  padding: 24px;
+const cx = classnames.bind(css);
 
-  & + & {
-    padding-top: 0;
-  }
-`;
+const ContentLayout = ({
+  children,
+  ...props
+}: HTMLAttributes<HTMLDivElement>) => {
+  return (
+    <div {...props} className={cx('content-layout')}>
+      {children}
+    </div>
+  );
+};
 
 export default ContentLayout;
