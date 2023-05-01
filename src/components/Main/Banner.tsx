@@ -1,13 +1,20 @@
+import classNames from 'classnames';
 import Image from 'next/image';
 import Link from 'next/link';
-import styled from 'styled-components';
-import cssVar from '~/lib/styles/cssVar';
 import ContentLayout from '~components/layouts/ContentLayout';
 
 const Banner = () => {
   return (
     <ContentLayout>
-      <Container>
+      <div
+        className={classNames(
+          'flex',
+          'flex-col',
+          'gap-4',
+          'justify-center',
+          'items-center'
+        )}
+      >
         <Image
           priority
           alt="ben"
@@ -17,36 +24,23 @@ const Banner = () => {
           width={0}
         />
         <div>
-          <p>
+          <p className={classNames('leading-[1.75]', 'mt-6')}>
             Benlog는 현재 공사중이에요.{' '}
             <Link
               href="/posts"
-              style={{
-                color: `${cssVar('primary_variant')}`,
-                textDecoration: 'underline',
-              }}
+              className={classNames(
+                'text-[color:var(--primary-variant)]',
+                'hover:underline'
+              )}
             >
               Posts
             </Link>
             를 눌러 글을 볼 수 있어요.
           </p>
         </div>
-      </Container>
+      </div>
     </ContentLayout>
   );
 };
 
 export default Banner;
-
-const Container = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-  justify-content: center;
-  align-items: center;
-
-  p {
-    line-height: 1.75;
-    margin-top: 24px;
-  }
-`;
