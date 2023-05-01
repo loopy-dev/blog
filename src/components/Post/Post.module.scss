@@ -8,3 +8,24 @@
     display: none;
   }
 }
+
+.syntax-highlighter-container {
+  @apply relative;
+
+  & .language-indicator {
+    @apply absolute top-2 left-2 z-[1] text-xs font-sans md:opacity-0 opacity-100 transition duration-100;
+    color: rgba(0, 0, 0, 0.5);
+  }
+
+  @media (max-width: 767px) {
+    & .language-indicator {
+      @apply opacity-100;
+    }
+  }
+
+  &:hover {
+    & .language-indicator {
+      @apply opacity-100;
+    }
+  }
+}
