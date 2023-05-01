@@ -1,12 +1,12 @@
 import { useState } from 'react';
 import { Noto_Sans_KR } from '@next/font/google';
+import classNames from 'classnames';
 import dynamic from 'next/dynamic';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import styled from 'styled-components';
-import cssVar from '~/lib/styles/cssVar';
 import Icon from '../icons';
 import { Item } from './Item';
+import styles from './NavigationBar.module.scss';
 
 const ThemeToggleButton = dynamic(() => import('./ThemeToggleButton'), {
   ssr: false,
@@ -28,30 +28,53 @@ const NavigationBar = () => {
 
   return (
     // TODO - add color pallete on themes
-    <Container>
+    <nav className={classNames(styles['navigation-bar-container'])}>
       {/** upper part of NavigationBar */}
-      <PrimaryContainer>
-        <ItemWrapper className="left">
-          <Title className={notoSans.className} href="/">
+      <div
+        className={classNames(
+          'flex',
+          'justify-between',
+          'items-center',
+          'py-2',
+          'px-6',
+          'w-full',
+          'max-w-5xl',
+          'my-0',
+          'mx-auto'
+        )}
+      >
+        <div
+          className={classNames(
+            'left',
+            'flex',
+            'items-center',
+            'gap-2',
+            'sm:gap-0'
+          )}
+        >
+          <Link
+            className={classNames(notoSans.className, styles.title)}
+            href="/"
+          >
             BenLog
-          </Title>
-        </ItemWrapper>
-        <ItemWrapper className="right">
+          </Link>
+        </div>
+        <div className={classNames('hidden', 'sm:flex')}>
           <ThemeToggleButton />
           <NavigationLinks />
-        </ItemWrapper>
-        <ItemWrapper className="right-hidden">
+        </div>
+        <div className={classNames('flex', 'sm:hidden')}>
           <ThemeToggleButton />
           <Icon type="hamburger" onClick={toggleHamburgerIcon} />
-        </ItemWrapper>
-      </PrimaryContainer>
+        </div>
+      </div>
       {/** hidden part of NavigationBar */}
       {isOpen ? (
-        <HiddenItemWrapper>
+        <div className={classNames('block', 'sm:hidden')}>
           <NavigationLinks />
-        </HiddenItemWrapper>
+        </div>
       ) : null}
-    </Container>
+    </nav>
   );
 };
 
@@ -61,16 +84,16 @@ const NavigationLinks = () => {
   const router = useRouter();
   return (
     <>
-      <Link href="/posts" style={{ width: '100%', textAlign: 'center' }}>
+      <Link className={classNames('w-full', 'text-center')} href="/posts">
         <Item current={getSubDomain(router.pathname) === 'posts'}>Posts</Item>
       </Link>
-      <Link href="/about" style={{ width: '100%', textAlign: 'center' }}>
+      <Link className={classNames('w-full', 'text-center')} href="/about">
         <Item current={getSubDomain(router.pathname) === 'posts'}>About</Item>
       </Link>
       <Link
+        className={classNames('w-full', 'text-center')}
         href="https://github.com/mrbartrns"
         rel="noopener noreferrer"
-        style={{ width: '100%', textAlign: 'center' }}
         target="_blank"
       >
         <Item>Github</Item>
@@ -84,68 +107,3 @@ const getSubDomain = (pathname: string) => {
 
   return pathArr.length > 1 ? pathArr[1] : null;
 };
-
-const Title = styled(Link)`
-  font-weight: 500;
-  font-size: 24px;
-  user-select: none;
-
-  &:after {
-    content: '.';
-    padding-left: 4px;
-    color: ${cssVar('primary')};
-  }
-`;
-
-const Container = styled.nav`
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-  z-index: 99;
-  transition: all 0.1s;
-  background-color: ${cssVar('bg_nav')};
-
-  @media (min-width: 768px) {
-    position: sticky;
-    top: 0;
-    backdrop-filter: saturate(180%) blur(5px);
-    box-shadow: inset 0 -1px 0 0 rgba(0, 0, 0, 0.1);
-  }
-`;
-
-const PrimaryContainer = styled.div`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 8px 24px;
-  width: 100%;
-  max-width: 1024px;
-  margin: 0 auto;
-`;
-
-const ItemWrapper = styled.div`
-  display: flex;
-  align-items: center;
-
-  &.right-hidden {
-    display: none;
-  }
-
-  @media (max-width: 640px) {
-    gap: 8px;
-
-    &.right {
-      display: none;
-    }
-
-    &.right-hidden {
-      display: flex;
-    }
-  }
-`;
-
-const HiddenItemWrapper = styled.div`
-  @media (min-width: 640px) {
-    display: none;
-  }
-`;
