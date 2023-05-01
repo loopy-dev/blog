@@ -1,7 +1,7 @@
+import classNames from 'classnames';
 import Link from 'next/link';
-import styled from 'styled-components';
-import cssVar from '~/lib/styles/cssVar';
 import Tag from '../common/Tag';
+import styles from './Post.module.scss';
 import type { FrontMatter } from '~models/Post';
 
 interface Props {
@@ -11,9 +11,33 @@ interface Props {
 // TODO - add props
 const ListItem = ({ post }: Props) => {
   return (
-    <Container href={`/posts/${post.url}`}>
-      <PostTitle>{post.title}</PostTitle>
-      <PostTags>
+    <Link
+      href={`/posts/${post.url}`}
+      className={classNames(
+        'flex',
+        'flex-col',
+        'gap-2',
+        'w-full',
+        'pt-1',
+        'pb-3',
+        'min-h-[150px]',
+        'border-b',
+        'border-[rbga(0, 0, 0, 0.1)]',
+        'last-of-type:border-none'
+      )}
+    >
+      <h3
+        className={classNames(
+          'font-bold',
+          'text-[1.5em]',
+          'mt-6',
+          'mb-[0.3rem]',
+          'tracking-[-1px]'
+        )}
+      >
+        {post.title}
+      </h3>
+      <div className={classNames(styles['post-tags-container'])}>
         {post.tags.map((tag) => (
           <Tag
             key={tag}
@@ -24,67 +48,30 @@ const ListItem = ({ post }: Props) => {
             }}
           />
         ))}
-      </PostTags>
-      <Description>{post.description}</Description>
-      <TimeStamp>{post.createdTime}</TimeStamp>
-    </Container>
+      </div>
+      <p
+        className={classNames(
+          'mt-2',
+          'text-[color:var(--text3)]',
+          'text-[90%]',
+          'tracking-[0.003em]'
+        )}
+      >
+        {post.description}
+      </p>
+      <p
+        className={classNames(
+          'text-right',
+          'text-[color:var(--text3)]',
+          'text-[80%]',
+          'leading-[1.3]',
+          'tracking-[0.003em]'
+        )}
+      >
+        {post.createdTime}
+      </p>
+    </Link>
   );
 };
 
 export default ListItem;
-
-const Container = styled(Link)`
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-  width: 100%;
-  padding: 4px 0 12px;
-  min-height: 150px;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
-
-  // TODO - need color change in dark mode
-  /* &:hover {
-    background-color: rgb(249 250 251);
-  } */
-
-  &:last-of-type {
-    border-bottom: none;
-  }
-`;
-
-const PostTitle = styled.h3`
-  font-weight: 700;
-  font-size: 1.5em;
-  margin-top: 1.5rem;
-  margin-bottom: 0.3rem;
-  letter-spacing: -1px;
-`;
-
-const PostTags = styled.div`
-  display: flex;
-  gap: 6px;
-  flex-wrap: nowrap;
-  overflow-x: scroll;
-
-  -ms-overflow-style: none; /* IE and Edge */
-  scrollbar-width: none; /* Firefox */
-
-  &::-webkit-scrollbar {
-    display: none;
-  }
-`;
-
-const Description = styled.p`
-  margin-top: 8px;
-  color: ${cssVar('text3')};
-  font-size: 90%;
-  letter-spacing: 0.003em;
-`;
-
-const TimeStamp = styled.p`
-  text-align: right;
-  color: ${cssVar('text3')};
-  font-size: 80%;
-  line-height: 1.3;
-  letter-spacing: 0.003em;
-`;
