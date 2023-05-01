@@ -1,0 +1,89 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@mixin light_variables {
+  --bg-page1: #f6f7f7;
+  --bg-page2: #ffffff;
+  --bg-element1: #ffffff;
+  --bg-disabled: rgba(0, 0, 0, 0.12);
+  --bg-nav: rgba(255, 255, 255, 0.8);
+  --bg-skeleton: rgba(226, 232, 240, 1);
+  --text1: #202124;
+  --text2: #50575e;
+  --text3: #8c8f94;
+  --text4: #ced4da;
+}
+
+@mixin dark_variables {
+  --bg-page1: #121212;
+  --bg-page2: #121212;
+  --bg-element1: #1e1e1e;
+  --bg-disabled: rgba(255, 255, 255, 0.12);
+  --bg-nav: rgba(18, 18, 18, 0.8);
+  --text1: #eeeeee;
+  --text2: #d1d5db;
+  --text3: #bdbdbd;
+  --text4: #616161;
+}
+
+@mixin default_variables {
+  --primary: #1da1f2;
+  --primary-light: #b2d7ef;
+  --primary-variant: rgb(24, 144, 255);
+  --bg-selection: rgba(35, 131, 226, 0.28);
+  --success: #55ce9b;
+  --error: rgb(239, 68, 68);
+}
+
+:root {
+  @include light_variables();
+  @include default_variables();
+}
+
+html,
+body {
+  padding: 0;
+  margin: 0;
+  font-family: 'Pretendard Variable', -apple-system, BlinkMacSystemFont,
+    Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans,
+    Helvetica Neue, sans-serif;
+}
+
+html {
+  &.dark {
+    @include dark_variables();
+  }
+}
+
+body {
+  color: var(--text1);
+  background-color: var(--bg-page2);
+
+  &[data-theme='light'] {
+    @include light_variables();
+  }
+
+  &[data-theme='dark'] {
+    @include dark_variables();
+  }
+}
+
+::selection {
+  background-color: var(--bg-selection);
+}
+
+@media (prefers-color-scheme: dark) {
+  body {
+    @include dark_variables();
+  }
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+* {
+  box-sizing: border-box;
+}
