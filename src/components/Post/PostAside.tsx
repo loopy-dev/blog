@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react';
-import styled from 'styled-components';
-import cssVar from '~/lib/styles/cssVar';
+import classNames from 'classnames';
 import { setElementId } from './utils';
 
 const PostAside = () => {
@@ -23,10 +22,11 @@ const PostAside = () => {
   }, []);
 
   return (
-    <Container>
+    <ul className={classNames('w-full', 'text-[color:var(--primary-variant)]')}>
       {heads.map((head) => (
         <li
           key={head.textContent}
+          className={classNames('text-[90%]', 'leading-[1.7]')}
           style={{
             paddingLeft:
               head.tagName === 'H2'
@@ -36,26 +36,16 @@ const PostAside = () => {
                 : 0,
           }}
         >
-          <a href={`#${setElementId(head.textContent)}`}>{head.textContent}</a>
+          <a
+            className={classNames('hover:underline')}
+            href={`#${setElementId(head.textContent)}`}
+          >
+            {head.textContent}
+          </a>
         </li>
       ))}
-    </Container>
+    </ul>
   );
 };
 
 export default PostAside;
-
-const Container = styled.ul`
-  width: 100%;
-
-  color: ${cssVar('primary_variant')};
-
-  & li {
-    font-size: 90%;
-    line-height: 1.7;
-  }
-
-  & a:hover {
-    text-decoration: underline;
-  }
-`;

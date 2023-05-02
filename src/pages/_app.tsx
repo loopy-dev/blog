@@ -2,14 +2,12 @@ import { Analytics } from '@vercel/analytics/react';
 import Head from 'next/head';
 import { Provider } from 'react-redux';
 import store from '~/lib/store';
-import GlobalStyle from '~/lib/styles/GlobalStyle';
-import '../lib/styles/globals.css';
+import '../lib/styles/globals.scss';
 import type { AppProps } from 'next/app';
 
 const MyApp = ({ Component, pageProps }: AppProps) => {
   return (
     <Provider store={store}>
-      <GlobalStyle />
       <Head>
         <title>Benlog</title>
         <meta key="title" content="Benlog" property="og:title" />

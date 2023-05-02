@@ -1,6 +1,5 @@
+import classNames from 'classnames';
 import { useDispatch, useSelector } from 'react-redux';
-import styled from 'styled-components';
-import cssVar from '~/lib/styles/cssVar';
 import Button from '~components/common/Button';
 import { close } from './notificationSlice';
 import type { RootState } from '~store/.';
@@ -19,45 +18,39 @@ const NotificationBar = ({ children, background = 'primary' }: Props) => {
   };
 
   return children && notificationState ? (
-    <Container background={background}>
-      <div>
+    <div
+      className={classNames(
+        'absolute',
+        'z-[1]',
+        'w-full',
+        'text-white',
+        'shadow-[inset_0_-1px_0_0_rgba(0, 0, 0, 0.1)]',
+        {
+          'bg-[color:var(--success)]': background === 'success',
+          'bg-[color:var(--primary)]': background === 'primary',
+          'bg-[color:var(--error)]': background === 'error',
+        }
+      )}
+    >
+      <div
+        className={classNames(
+          'flex',
+          'justify-center',
+          'items-center',
+          'gap-4',
+          'mx-auto',
+          'py-2',
+          'px-6',
+          'w-full'
+        )}
+      >
         <p>{children}</p>
         <Button size="xs" variant="transparent" onClick={closeNotificationBar}>
           Close
         </Button>
       </div>
-    </Container>
+    </div>
   ) : null;
 };
 
 export default NotificationBar;
-
-const Container = styled.div<Props>`
-  z-index: 1;
-  position: absolute;
-  width: 100%;
-  background-color: ${({ background }) => {
-    switch (background) {
-      case 'primary':
-        return cssVar('primary');
-      case 'success':
-        return cssVar('success');
-      case 'error':
-        return cssVar('failure');
-      default:
-        return cssVar('primary');
-    }
-  }};
-  color: #fff;
-  box-shadow: inset 0 -1px 0 0 rgba(0, 0, 0, 0.1);
-
-  div {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 16px;
-    margin: 0 auto;
-    padding: 8px 24px;
-    width: 100%;
-  }
-`;

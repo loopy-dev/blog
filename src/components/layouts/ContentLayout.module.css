@@ -1,0 +1,7 @@
+.content-layout {
+  @apply w-full mx-auto max-w-[44rem] p-6;
+}
+
+.content-layout + .content-layout {
+  @apply pt-0;
+}

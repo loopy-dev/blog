@@ -1,5 +1,5 @@
 import type { HTMLAttributes } from 'react';
-import styled from 'styled-components';
+import classNames from 'classnames';
 
 interface Props extends HTMLAttributes<HTMLElement> {
   label?: string | number;
@@ -7,30 +7,29 @@ interface Props extends HTMLAttributes<HTMLElement> {
 
 const Tag = ({ label, ...props }: Props) => {
   return (
-    <Container {...props}>
+    <button
+      className={classNames(
+        'flex',
+        'items-center',
+        'gap-1.5',
+        'rounded-full',
+        'py-1.5',
+        'px-2.5',
+        'bg-white',
+        'border',
+        'text-gray-900',
+        'leading-none',
+        'break-keep',
+        'text-xs',
+        'hover:bg-slate-100'
+      )}
+      {...props}
+    >
       <Icon />
       {label}
-    </Container>
+    </button>
   );
 };
-
-const Container = styled.button`
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  border-radius: 9999px;
-  font-size: 12px;
-  padding: 6px 10px;
-  background-color: #fff;
-  border: 1px solid rgb(229 231 235);
-  color: rgb(17 24 39);
-  line-height: 1;
-  word-break: keep-all;
-
-  &:hover {
-    background-color: rgb(241 245 249);
-  }
-`;
 
 const Icon = () => (
   <svg

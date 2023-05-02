@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import classNames from 'classnames';
 import Footer from '~components/common/Footer';
 import NavigationBar from '../NavigationBar';
 
@@ -8,21 +8,14 @@ interface Props {
 
 const GlobalLayout = ({ children }: Props) => {
   return (
-    <Container>
+    <div className={classNames('relative')}>
       <NavigationBar />
-      <Main>{children}</Main>
+      <main className={classNames('relative', 'min-h-[800px]')}>
+        {children}
+      </main>
       <Footer />
-    </Container>
+    </div>
   );
 };
 
 export default GlobalLayout;
-
-const Container = styled.div`
-  position: relative;
-`;
-
-const Main = styled.main`
-  position: relative;
-  min-height: 800px;
-`;

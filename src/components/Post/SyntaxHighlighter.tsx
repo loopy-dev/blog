@@ -1,5 +1,6 @@
+import classNames from 'classnames';
 import { PrismAsyncLight } from 'react-syntax-highlighter';
-import styled from 'styled-components';
+import styles from './Post.module.scss';
 import type { SyntaxHighlighterProps } from 'react-syntax-highlighter';
 
 const filterMap: Record<string, string> = {
@@ -22,40 +23,15 @@ const SyntaxHighlighter = ({
   ...props
 }: SyntaxHighlighterProps) => {
   return (
-    <Container>
-      <div className="language-indicator">{transformLanguage(language)}</div>
+    <div className={classNames(styles['syntax-highlighter-container'])}>
+      <div className={classNames(styles['language-indicator'])}>
+        {transformLanguage(language)}
+      </div>
       <PrismAsyncLight language={language} {...props}>
         {String(children).replace(/\n$/, '')}
       </PrismAsyncLight>
-    </Container>
+    </div>
   );
 };
 
 export default SyntaxHighlighter;
-
-const Container = styled.div`
-  position: relative;
-
-  & .language-indicator {
-    position: absolute;
-    top: 8px;
-    left: 8px;
-    z-index: 1;
-    font-size: 12px;
-    font-family: sans-serif;
-    line-height: 1;
-    color: rgb(0, 0, 0, 0.5);
-    opacity: 0;
-    transition: all 100ms cubic-bezier(0.31, 0.27, 0.15, 0.99) 0s;
-
-    @media (max-width: 768px) {
-      opacity: 1;
-    }
-  }
-
-  &:hover {
-    & .language-indicator {
-      opacity: 1;
-    }
-  }
-`;

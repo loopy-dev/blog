@@ -1,4 +1,5 @@
-import classes from './ExperienceLayout.module.css';
+import classNames from 'classnames';
+import css from './ExperienceLayout.module.css';
 
 interface Props {
   left: React.ReactNode;
@@ -13,15 +14,27 @@ interface Props {
  */
 const ExperienceLayout = ({ left, right, sticky }: Props) => {
   return (
-    <div className="flex relative md:flex-row flex-col gap-4 w-full">
+    <div
+      className={classNames(
+        'flex',
+        'relative',
+        'md:flex-row',
+        'flex-col',
+        'gap-4',
+        'w-full'
+      )}
+    >
       <aside
-        className={`${classes.left} ${
-          sticky ? 'md:sticky' : ''
-        } self-start top-16`}
+        className={classNames(
+          css.left,
+          { 'md:sticky': sticky },
+          'self-start',
+          'top-16'
+        )}
       >
         {left}
       </aside>
-      <article className={`${classes.right}`}>{right}</article>
+      <article className={classNames(css.right)}>{right}</article>
     </div>
   );
 };

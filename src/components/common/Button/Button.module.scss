@@ -1,0 +1,79 @@
+.button {
+  @apply inline-flex justify-center items-center gap-1.5 font-medium select-none whitespace-nowrap text-ellipsis cursor-pointer leading-normal border rounded-md;
+
+  &__fit {
+    @apply w-fit;
+  }
+
+  &__full {
+    @apply w-full;
+  }
+
+  &__bg-primary {
+    @apply bg-[color:var(--primary)] text-white;
+  }
+
+  &__bg-success {
+    @apply bg-[color:var(--success)] text-white;
+  }
+
+  &__bg-error {
+    @apply bg-[color:var(--error)] text-white;
+  }
+
+  &__bg-transparent {
+    @apply bg-transparent text-inherit;
+  }
+
+  &__border-solid,
+  &__border-default {
+    @apply border-solid;
+  }
+
+  &__border-dashed {
+    @apply border-dashed;
+  }
+
+  &__border-double {
+    @apply border-double;
+  }
+
+  &__border-none {
+    @apply border-none;
+  }
+
+  &__border-dotted {
+    @apply border-dotted;
+  }
+
+  &__shape-normal {
+    @apply rounded-md;
+  }
+
+  &__shape-rounded {
+    @apply rounded-full;
+  }
+
+  &__size-xs {
+    @apply py-1.5 px-2.5 text-xs leading-none;
+  }
+
+  &__size-md,
+  &__size-default {
+    @apply px-4 h-11;
+  }
+
+  &__size-lg {
+    @apply px-4 h-14 text-lg leading-normal;
+  }
+
+  &:hover {
+    box-shadow: rgba(0, 0, 0, 0.06) 0px 0px 0px 10000px inset;
+  }
+
+  &:disabled {
+    @apply shadow-none cursor-default;
+    background-color: rgba(0, 0, 0, 0.06);
+    color: rgba(0, 0, 0, 0.25);
+  }
+}

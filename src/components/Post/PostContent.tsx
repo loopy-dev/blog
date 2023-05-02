@@ -1,3 +1,4 @@
+import classNames from 'classnames';
 import dynamic from 'next/dynamic';
 import Image from 'next/image';
 import ReactMarkdown from 'react-markdown';
@@ -7,7 +8,7 @@ import remarkBreaks from 'remark-breaks';
 import remarkFrontMatter from 'remark-frontmatter';
 import remarkGfm from 'remark-gfm';
 import Skeleton from '../common/Skeleton';
-import { Block } from './MarkdownComponents';
+import styles from './Markdown.module.scss';
 import { setElementId } from './utils';
 
 const SyntaxHighlighter = dynamic(() => import('./SyntaxHighlighter'), {
@@ -19,7 +20,7 @@ interface Props {
 
 const Content = ({ content }: Props) => {
   return (
-    <Block className="post-content">
+    <div className={classNames('post-content', styles.block)}>
       <ReactMarkdown
         includeElementIndex
         rehypePlugins={[rehypeRaw]}
@@ -96,7 +97,7 @@ const Content = ({ content }: Props) => {
       >
         {content}
       </ReactMarkdown>
-    </Block>
+    </div>
   );
 };
 

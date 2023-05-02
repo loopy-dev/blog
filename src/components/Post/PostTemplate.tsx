@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import classNames from 'classnames';
 
 interface Props {
   content: React.ReactNode;
@@ -7,44 +7,40 @@ interface Props {
 
 const PostTemplate = ({ content, aside }: Props) => {
   return (
-    <Container>
-      <Article>{content}</Article>
-      {aside ? <Aside>{aside}</Aside> : null}
-    </Container>
+    <div
+      className={classNames(
+        'lg:flex',
+        'w-full',
+        'justify-between',
+        'relative',
+        'max-w-screen-lg',
+        'mx-auto',
+        'items-start',
+        'block'
+      )}
+    >
+      <article
+        className={classNames('p-6', 'w-full', 'max-w-[44rem]', 'mx-auto')}
+      >
+        {content}
+      </article>
+      {aside ? (
+        <aside
+          className={classNames(
+            'sticky',
+            'mt-[20%]',
+            'p-6',
+            'w-[300px]',
+            'hidden',
+            'lg:block',
+            'top-[20%]'
+          )}
+        >
+          {aside}
+        </aside>
+      ) : null}
+    </div>
   );
 };
 
 export default PostTemplate;
-
-const Container = styled.div`
-  display: flex;
-  justify-content: space-between;
-  position: relative;
-  width: 100%;
-  max-width: 1024px;
-  margin: 0 auto;
-  align-items: start;
-
-  @media (max-width: 1023px) {
-    display: block;
-  }
-`;
-
-const Article = styled.article`
-  padding: 24px;
-  width: 100%;
-  max-width: 44rem;
-  margin: 0 auto;
-`;
-
-const Aside = styled.aside`
-  top: 20%;
-  position: sticky;
-  margin-top: 20%;
-  padding: 24px;
-  width: 300px;
-
-  @media (max-width: 1023px) {
-    display: none;
-  }
-`;
