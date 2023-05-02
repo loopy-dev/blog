@@ -1,5 +1,4 @@
-import styled from 'styled-components';
-import cssVar from '~/lib/styles/cssVar';
+import classNames from 'classnames';
 
 interface HeaderProps {
   title: string;
@@ -8,26 +7,15 @@ interface HeaderProps {
 
 const Header = ({ title, description }: HeaderProps) => {
   return (
-    <Container>
-      <h1>{title}</h1>
-      {description && <h2>{description}</h2>}
-    </Container>
+    <header className={classNames('my-8')}>
+      <h1 className={classNames('my-4', 'font-bold', 'text-3xl')}>{title}</h1>
+      {description && (
+        <h2 className={classNames('text-[color:var(--text3)]')}>
+          {description}
+        </h2>
+      )}
+    </header>
   );
 };
 
 export default Header;
-
-const Container = styled.header`
-  margin: 32px 0;
-
-  & h1 {
-    margin: 1rem 0;
-    font-weight: 700;
-    font-size: 1.875rem /* 30px */;
-    line-height: 2.25rem /* 36px */;
-  }
-
-  & h2 {
-    color: ${cssVar('text3')};
-  }
-`;
