@@ -5,7 +5,7 @@ import { useForm } from 'react-hook-form';
 import styled from 'styled-components';
 import { postFeedback, verifyRecaptcha } from '~/lib/api/feedback';
 import Header from '~components/Header';
-import ButtonBase from '~components/common/Button';
+import Button from '~components/common/Button';
 import Input from '~components/common/Input';
 import TextArea from '~components/common/Input/TextArea';
 import ContentLayout from '~components/layouts/ContentLayout';
@@ -113,7 +113,11 @@ const Page = () => {
                 sitekey={SITE_KEY}
                 size="normal"
               />
-              <Button disabled={loading} variant="primary">
+              <Button
+                className="sm:w-fit w-full"
+                disabled={loading}
+                variant="primary"
+              >
                 제출하기
               </Button>
             </FormFooter>
@@ -178,11 +182,5 @@ const FormFooter = styled.div`
 
   @media (max-width: 640px) {
     flex-direction: column;
-  }
-`;
-
-const Button = styled(ButtonBase)`
-  @media (max-width: 640px) {
-    width: 100%;
   }
 `;
