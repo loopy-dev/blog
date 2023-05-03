@@ -10,7 +10,7 @@ const Comments = () => {
     $script.async = true;
     $script.crossOrigin = 'anonymous';
     $script.setAttribute('src', 'https://utteranc.es/client.js');
-    $script.setAttribute('issue-term', 'title');
+    $script.setAttribute('issue-term', 'pathname');
     $script.setAttribute('label', 'Comment');
     $script.setAttribute('theme', 'github-light');
     $script.setAttribute('repo', 'mrbartrns/blog');
