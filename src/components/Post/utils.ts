@@ -8,3 +8,7 @@ export const setElementId = (children: React.ReactNode | React.ReactNode[]) => {
     ? replaceId(children)
     : undefined;
 };
+
+export const capitalize = (word: string) => {
+  return word.charAt(0).toUpperCase() + word.slice(1);
+};

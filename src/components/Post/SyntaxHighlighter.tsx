@@ -1,6 +1,7 @@
 import classNames from 'classnames';
 import { PrismAsyncLight } from 'react-syntax-highlighter';
 import styles from './Post.module.scss';
+import { capitalize } from './utils';
 import type { SyntaxHighlighterProps } from 'react-syntax-highlighter';
 
 const filterMap: Record<string, string> = {
@@ -9,12 +10,13 @@ const filterMap: Record<string, string> = {
   bash: 'Bash',
   json: 'JSON',
   text: 'Plain Text',
+  scss: 'Scss(Sass)',
 };
 
 const transformLanguage = (language: string | undefined) => {
   if (!language) return '';
 
-  return filterMap[language] ? filterMap[language] : language;
+  return filterMap[language] ? filterMap[language] : capitalize(language);
 };
 
 const SyntaxHighlighter = ({

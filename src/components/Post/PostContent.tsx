@@ -18,6 +18,19 @@ interface Props {
   content: string;
 }
 
+const transformLanguage = (language: string) => {
+  switch (language) {
+    case 'typescript':
+      return 'tsx';
+    case 'javascript':
+      return 'jsx';
+    case 'sass':
+      return 'scss';
+    default:
+      return language;
+  }
+};
+
 const Content = ({ content }: Props) => {
   return (
     <div className={classNames('post-content', styles.block)}>
@@ -57,13 +70,7 @@ const Content = ({ content }: Props) => {
             ...props
           }) {
             const match = /language-(\w+)/.exec(className || '');
-            const language = match
-              ? match[1] === 'typescript'
-                ? 'tsx'
-                : match[1] === 'javascript'
-                ? 'jsx'
-                : match[1]
-              : 'text';
+            const language = match ? transformLanguage(match[1]) : 'text';
             return !inline && match ? (
               <SyntaxHighlighter
                 PreTag="div"
