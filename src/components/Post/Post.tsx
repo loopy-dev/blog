@@ -2,9 +2,9 @@ import { useEffect, useRef, useState } from 'react';
 import classNames from 'classnames';
 import dynamic from 'next/dynamic';
 import { getPostComments } from '~/lib/api/post';
-import SideBar from '~components/common/SideBar/SideBar';
+import SideBar from '~components/common/SideBar';
 import Icon from '~components/icons';
-import useLoading from '~hooks/useLoading';
+import CommentIcon from '~components/icons/CommentIcon';
 import Comments from './Comments';
 import PostContent from './PostContent';
 import PostHeader from './PostHeader';
@@ -27,8 +27,7 @@ const Post = ({ post }: Props) => {
   };
 
   const [open, setOpen] = useState(false);
-  const [loading, startTransition] = useLoading();
-  const [commentCounts, setCommentCounts] = useState(0);
+  const [commentCounts, setCommentCounts] = useState<string | number>('...');
   const ref = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
@@ -48,13 +47,11 @@ const Post = ({ post }: Props) => {
   }, []);
 
   useEffect(() => {
-    startTransition(
-      (async () => {
-        const comments = await getPostComments(post.url);
-        setCommentCounts(comments.comments);
-      })()
-    );
-  }, [post.url, startTransition]);
+    (async () => {
+      const comments = await getPostComments(post.url);
+      setCommentCounts(comments.comments);
+    })();
+  }, [post.url]);
 
   return (
     <PostTemplate
@@ -63,23 +60,32 @@ const Post = ({ post }: Props) => {
         <>
           <PostHeader postMetaData={{ ...frontMatter }} />
           <PostContent content={post.content} />
+          {/** comments */}
           <div className={classNames('mt-8')}>
             <Comments className="block md:hidden" />
-            <button
-              type="button"
+            <div
               className={classNames(
-                'md:block',
-                'hidden',
-                'pointer-events-none',
-                'md:pointer-events-auto'
+                'inline-flex',
+                'gap-0.5',
+                'justify-between',
+                'items-center',
+                'text-[color:var(--text4)]',
+                'fill-[color:var(--text4)]',
+                'hover:text-[color:var(--text3)]',
+                'hover:fill-[color:var(--text3)]',
+                'cursor-pointer'
               )}
               onClick={() => {
-                setOpen((prev) => !prev);
+                setOpen(true);
               }}
             >
-              {!loading && commentCounts > 0 && `${commentCounts}개의 `}댓글
-              펼치기
-            </button>
+              {/** TODO - refactor Icon */}
+              <span>
+                <CommentIcon />
+              </span>
+              <span>{commentCounts}</span>
+            </div>
+            {/** sidebar */}
             <SideBar ref={ref} className="hidden md:block" isOpen={open}>
               <div className="mt-20 p-4">
                 <div
@@ -108,7 +114,6 @@ const Post = ({ post }: Props) => {
                     창 닫기
                   </Icon>
                 </div>
-
                 <Comments />
               </div>
             </SideBar>

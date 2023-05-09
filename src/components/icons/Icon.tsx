@@ -1,8 +1,8 @@
 import type { HTMLAttributes } from 'react';
-import styled, { css } from 'styled-components';
-import cssVar from '~/lib/styles/cssVar';
+import classNames from 'classnames';
 import BlogIcon from './BlogIcon';
 import CloseIcon from './CloseIcon';
+import CommentIcon from './CommentIcon';
 import GithubIcon from './GithubIcon';
 import Hamburger from './Hamburger';
 import MailIcon from './MailIcon';
@@ -24,13 +24,26 @@ type TypeofIcon =
   | 'blog'
   | 'project'
   | 'hamburger'
-  | 'close';
+  | 'close'
+  | 'comment';
 
-const Icon = ({ type, noHoverEffect, ...props }: Props) => {
+const Icon = ({ type, noHoverEffect, className, ...props }: Props) => {
   return (
-    <Wrapper noHoverEffect={noHoverEffect} {...props}>
+    <span
+      className={classNames(
+        'inline-flex',
+        'justify-center',
+        'items-center',
+        'fill-[color:var(--text4)]',
+        {
+          'hover:fill-[color:var(--text3)]': !noHoverEffect,
+        },
+        className
+      )}
+      {...props}
+    >
       {getChild(type)}
-    </Wrapper>
+    </span>
   );
 };
 
@@ -52,27 +65,11 @@ const getChild = (type: TypeofIcon) => {
       return <Hamburger />;
     case 'close':
       return <CloseIcon />;
+    case 'comment':
+      return <CommentIcon />;
     default:
       throw new Error('type is required.');
   }
 };
 
 export default Icon;
-
-type WrapperProps = Omit<Props, 'type'>;
-
-const Wrapper = styled.span<WrapperProps>`
-  display: inline-flex;
-  justify-content: center;
-  align-items: center;
-  fill: ${cssVar('text4')};
-  transition: all 150ms cubic-bezier(0.4, 0, 0.2, 1);
-
-  ${({ noHoverEffect }) =>
-    !noHoverEffect &&
-    css`
-      &:hover {
-        fill: ${cssVar('text3')};
-      }
-    `}
-`;

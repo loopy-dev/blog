@@ -19,24 +19,23 @@ const SideBar = (
       className={classNames(
         styles['sidebar-container'],
         {
-          'pointer-events-none': !isOpen,
-          'cursor-pointer': isOpen,
-          invisible: !isOpen,
-          visible: isOpen,
-          'bg-[color:rgba(0, 0, 0, 0.08)]': isOpen,
+          [styles['sidebar-container__open']]: isOpen,
+          [styles['sidebar-container__close']]: !isOpen,
         },
         className
       )}
     >
+      {/** TODO - prop으로 받을 수 있도록 하기 */}
       <div
         className={classNames(
           styles.sidebar,
           `w-[400px]`,
-          'bg-green-400',
           {
             '-translate-x-[400px]': isOpen,
           },
-          'bg-[color:var(--bg-page2)]'
+          {
+            [styles['sidebar__open']]: isOpen,
+          }
         )}
         {...props}
       >
