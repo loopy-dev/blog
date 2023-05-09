@@ -2,6 +2,7 @@ import type { HTMLAttributes } from 'react';
 import styled, { css } from 'styled-components';
 import cssVar from '~/lib/styles/cssVar';
 import BlogIcon from './BlogIcon';
+import CloseIcon from './CloseIcon';
 import GithubIcon from './GithubIcon';
 import Hamburger from './Hamburger';
 import MailIcon from './MailIcon';
@@ -22,7 +23,8 @@ type TypeofIcon =
   | 'mail'
   | 'blog'
   | 'project'
-  | 'hamburger';
+  | 'hamburger'
+  | 'close';
 
 const Icon = ({ type, noHoverEffect, ...props }: Props) => {
   return (
@@ -48,6 +50,8 @@ const getChild = (type: TypeofIcon) => {
       return <ProjectIcon />;
     case 'hamburger':
       return <Hamburger />;
+    case 'close':
+      return <CloseIcon />;
     default:
       throw new Error('type is required.');
   }

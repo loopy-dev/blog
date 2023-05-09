@@ -1,6 +1,9 @@
 import { useEffect, useRef, useState } from 'react';
+import classNames from 'classnames';
 import dynamic from 'next/dynamic';
+import Button from '~components/common/Button';
 import SideBar from '~components/common/SideBar/SideBar';
+import Icon from '~components/icons';
 import Comments from './Comments';
 import PostContent from './PostContent';
 import PostHeader from './PostHeader';
@@ -59,15 +62,33 @@ const Post = ({ post }: Props) => {
           </button>
           <SideBar ref={ref} className="hidden md:block" isOpen={open}>
             <div className="mt-20 p-4">
-              <h3>댓글</h3>
-              <button
-                type="button"
-                onClick={() => {
-                  setOpen(false);
-                }}
+              <div
+                className={classNames(
+                  'flex',
+                  'justify-between',
+                  'items-center'
+                )}
               >
-                창 닫기
-              </button>
+                <h3
+                  className={classNames(
+                    'leading-normal',
+                    'font-medium',
+                    'text-2xl'
+                  )}
+                >
+                  댓글
+                </h3>
+                <Icon
+                  className={classNames('cursor-pointer')}
+                  type="close"
+                  onClick={() => {
+                    setOpen(false);
+                  }}
+                >
+                  창 닫기
+                </Icon>
+              </div>
+
               <Comments />
             </div>
           </SideBar>
