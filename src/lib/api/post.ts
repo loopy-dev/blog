@@ -14,3 +14,11 @@ export const getPostMarkdown = async (id: string) => {
 
   return response.data;
 };
+
+export const getPostComments = async (pathname: string) => {
+  const response = await instance.get<{ comments: number }>(
+    `/api/post/comment/${pathname}`
+  );
+
+  return response.data;
+};
