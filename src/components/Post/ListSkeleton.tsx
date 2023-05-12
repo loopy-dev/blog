@@ -1,11 +1,11 @@
 const ListSkeleton = () => {
   return (
-    <>
+    <div>
       <ItemSkeleton />
       <ItemSkeleton />
       <ItemSkeleton />
       <ItemSkeleton />
-    </>
+    </div>
   );
 };
 

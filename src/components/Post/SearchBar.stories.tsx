@@ -1,10 +1,7 @@
 import SearchBar from './SearchBar';
-import type { ComponentMeta, ComponentStory } from '@storybook/react';
+import type { Meta } from '@storybook/react';
 
 export default {
   title: 'Components/Post/SearchBar',
-} as ComponentMeta<typeof SearchBar>;
-
-const Template: ComponentStory<typeof SearchBar> = () => <SearchBar />;
-
-export const Default = Template.bind({});
+  component: SearchBar,
+} satisfies Meta<typeof SearchBar>;
