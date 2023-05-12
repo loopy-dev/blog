@@ -2,7 +2,7 @@ import Head from 'next/head';
 import postService from '~/lib/post';
 import Header from '~components/Header';
 import Banner from '~components/Main';
-import ListItem from '~components/Post/ListItem';
+import PostList from '~components/Post/PostList';
 import ContentLayout from '~components/layouts/ContentLayout';
 import GlobalLayout from '../components/layouts/GlobalLayout';
 import type { GetStaticProps } from 'next';
@@ -50,9 +50,7 @@ const Page = ({ posts }: Props) => {
             description="최근에 작성한 글을 볼 수 있어요."
             title="Recent Posts"
           />
-          {recentPosts.map((post) => (
-            <ListItem key={post.title} post={post} />
-          ))}
+          <PostList posts={recentPosts} />
         </ContentLayout>
       </GlobalLayout>
     </>
