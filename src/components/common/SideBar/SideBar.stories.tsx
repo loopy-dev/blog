@@ -1,21 +1,32 @@
-import { useState } from 'react';
 import SideBar from './SideBar';
+import SideBarProvider, { useSideBarContext } from './SideBarContext';
 import type { Meta, StoryObj } from '@storybook/react';
 
-const Template = () => {
-  const [state, setState] = useState(false);
-
+const Component = () => {
+  const { isOpen, open, close } = useSideBarContext();
   return (
-    <div className="mx-auto relative w-[700px] h-screen bg-gray-200 overflow-x-hidden">
+    <div>
       <button
         onClick={() => {
-          setState((prev) => !prev);
+          if (isOpen) {
+            close();
+          } else {
+            open();
+          }
         }}
       >
         Click
       </button>
-      <SideBar isOpen={state} />
+      <SideBar />
     </div>
+  );
+};
+
+const Template = () => {
+  return (
+    <SideBarProvider>
+      <Component />
+    </SideBarProvider>
   );
 };
 
