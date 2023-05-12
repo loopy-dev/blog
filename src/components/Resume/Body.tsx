@@ -1,16 +1,17 @@
-import Activities from './Activities';
-import Educations from './Educations';
+import { activities } from '~/data/activities';
+import { educations } from '~/data/educations';
+import { prize } from '~/data/prize';
+import projects from '~/data/projects';
+import Content from './Content';
 import Hobbies from './Hobbies';
-import Prize from './Prize';
-import Projects from './Projects';
 
 const Body = () => {
   return (
     <>
-      <Projects />
-      <Educations />
-      <Activities />
-      <Prize />
+      <Content sticky contents={projects} title="Projects" />
+      <Content contents={educations} title="Educations" />
+      <Content contents={activities} title="Activities" />
+      <Content contents={prize} title="Prize" />
       <Hobbies />
     </>
   );
