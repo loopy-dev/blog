@@ -10,11 +10,11 @@ interface Props {
 
 const PostList = ({ posts }: Props) => {
   return (
-    <>
+    <div>
       {posts.map((post) => (
         <PostItem key={post.title} post={post} />
       ))}
-    </>
+    </div>
   );
 };
 

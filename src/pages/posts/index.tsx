@@ -29,9 +29,12 @@ export const getStaticProps: GetStaticProps = async () => {
   }
 };
 
-const PostList = dynamic(() => import('../../components/Post/PostList'), {
-  loading: () => <ListSkeleton />,
-});
+const PostList = dynamic(
+  () => import('../../components/Post').then((module) => module.PostList),
+  {
+    loading: () => <ListSkeleton />,
+  }
+);
 
 interface Props {
   posts: FrontMatter[];
@@ -59,7 +62,7 @@ const Page = ({ posts }: Props) => {
   };
 
   return (
-    <>
+    <GlobalLayout>
       <Head>
         <title>Posts - Benlog</title>
         <meta key="title" content="Posts - Benlog" property="og:title" />
@@ -69,35 +72,33 @@ const Page = ({ posts }: Props) => {
           property="og:description"
         />
       </Head>
-      <GlobalLayout>
-        <ContentLayout>
-          <Header description="작성한 글들을 모아볼 수 있어요." title="Posts" />
-        </ContentLayout>
-        <ContentLayout>
-          <SearchBar onChange={handleChange} />
-        </ContentLayout>
-        <ContentLayout>
-          {filteredPosts.length > 0 ? (
-            <PostList posts={filteredPosts} />
-          ) : (
-            <ImageContainer>
-              <Image
-                alt="loading"
-                height={0}
-                src="/nyan-cat.gif"
-                width={0}
-                style={{
-                  marginLeft: '10%',
-                  width: '100%',
-                  height: 'auto',
-                }}
-              />
-              <p>해당 키워드에 대한 포스트가 아직 없네요. </p>
-            </ImageContainer>
-          )}
-        </ContentLayout>
-      </GlobalLayout>
-    </>
+      <ContentLayout>
+        <Header description="작성한 글들을 모아볼 수 있어요." title="Posts" />
+      </ContentLayout>
+      <ContentLayout>
+        <SearchBar onChange={handleChange} />
+      </ContentLayout>
+      <ContentLayout>
+        {filteredPosts.length > 0 ? (
+          <PostList posts={filteredPosts} />
+        ) : (
+          <ImageContainer>
+            <Image
+              alt="loading"
+              height={0}
+              src="/nyan-cat.gif"
+              width={0}
+              style={{
+                marginLeft: '10%',
+                width: '100%',
+                height: 'auto',
+              }}
+            />
+            <p>해당 키워드에 대한 포스트가 아직 없네요. </p>
+          </ImageContainer>
+        )}
+      </ContentLayout>
+    </GlobalLayout>
   );
 };
 
