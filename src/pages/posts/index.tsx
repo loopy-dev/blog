@@ -1,8 +1,8 @@
 import { useDeferredValue, useState } from 'react';
+import classNames from 'classnames';
 import dynamic from 'next/dynamic';
 import Head from 'next/head';
 import Image from 'next/image';
-import styled from 'styled-components';
 import postService from '~/lib/post';
 import Header from '~components/Header';
 import ListSkeleton from '~components/Post/ListSkeleton';
@@ -10,6 +10,7 @@ import SearchBar from '~components/Post/SearchBar';
 import ContentLayout from '~components/layouts/ContentLayout';
 import GlobalLayout from '~components/layouts/GlobalLayout';
 import useDebounce from '~hooks/useDebounce';
+import InfiniteScrollComponent from '~hooks/useInfiniteScroll/InfiniteScrollComponent';
 import type { GetStaticProps } from 'next';
 import type { FrontMatter } from '~/models/Post';
 
@@ -40,11 +41,18 @@ interface Props {
   posts: FrontMatter[];
 }
 
+const INITIAL_POST_COUNTS = 5;
+const NEXT_POST_COUNTS = 5;
+
 const Page = ({ posts }: Props) => {
   const [keywords, setKeywords] = useState<string>('');
   const debounced = useDebounce((target: string) => {
     setKeywords(target);
   });
+  const [counts, setCounts] = useState(
+    Math.min(INITIAL_POST_COUNTS, posts.length)
+  );
+
   const filteredPosts = useDeferredValue(
     keywords
       ? posts.filter(
@@ -53,7 +61,7 @@ const Page = ({ posts }: Props) => {
             post.description.includes(keywords) ||
             post.tags.some((tag) => tag.includes(keywords))
         )
-      : posts
+      : posts.slice(0, counts)
   );
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -80,9 +88,27 @@ const Page = ({ posts }: Props) => {
       </ContentLayout>
       <ContentLayout>
         {filteredPosts.length > 0 ? (
-          <PostList posts={filteredPosts} />
+          <>
+            <PostList posts={filteredPosts} />
+            <InfiniteScrollComponent
+              threshold={0.7}
+              onIntersect={() => {
+                setCounts((prev) =>
+                  Math.min(prev + NEXT_POST_COUNTS, posts.length)
+                );
+              }}
+            />
+          </>
         ) : (
-          <ImageContainer>
+          <div
+            className={classNames(
+              'flex',
+              'flex-col',
+              'gap-4',
+              'justify-center',
+              'items-center'
+            )}
+          >
             <Image
               alt="loading"
               height={0}
@@ -95,7 +121,7 @@ const Page = ({ posts }: Props) => {
               }}
             />
             <p>해당 키워드에 대한 포스트가 아직 없네요. </p>
-          </ImageContainer>
+          </div>
         )}
       </ContentLayout>
     </GlobalLayout>
@@ -103,11 +129,3 @@ const Page = ({ posts }: Props) => {
 };
 
 export default Page;
-
-const ImageContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-  justify-content: center;
-  align-items: center;
-`;

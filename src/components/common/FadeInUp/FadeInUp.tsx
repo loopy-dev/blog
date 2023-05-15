@@ -1,14 +1,19 @@
 import type { HTMLAttributes } from 'react';
 import { useState } from 'react';
+import classNames from 'classnames';
 import useIntersection from '../../../hooks/useIntersection';
-import classNames from './FadeInUp.module.css';
+import styles from './FadeInUp.module.css';
 
 /**
  * @description
  * This is a component to apply FadeInUp animation to child component.
  * TODO - add more options
  */
-const FadeInUp = ({ children, ...props }: HTMLAttributes<HTMLDivElement>) => {
+const FadeInUp = ({
+  children,
+  className,
+  ...props
+}: HTMLAttributes<HTMLDivElement>) => {
   const [isIntersecting, setIsIntersecting] = useState(false);
 
   const ref = useIntersection<HTMLDivElement>(
@@ -26,9 +31,10 @@ const FadeInUp = ({ children, ...props }: HTMLAttributes<HTMLDivElement>) => {
   return (
     <div
       ref={ref}
-      className={`${props.className || ''} ${
-        isIntersecting ? classNames.active : classNames.inactive
-      }`}
+      className={classNames(
+        { [styles.active]: isIntersecting, [styles.inactive]: !isIntersecting },
+        className
+      )}
       {...props}
     >
       {children}
