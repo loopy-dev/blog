@@ -30,8 +30,13 @@ const PostFooter = ({ url }: Props) => {
 
   useEffect(() => {
     (async () => {
-      const hitsData = await getPostHits(url);
-      setHits(hitsData.message);
+      try {
+        const hitsData = await getPostHits(url);
+        setHits(hitsData.message);
+      } catch {
+        // eslint-disable-next-line no-console
+        console.log('hit is not available on development mode.');
+      }
     })();
   }, [url]);
 
