@@ -1,10 +1,25 @@
+import ArticleLayout from '~/components/layouts/ArticleLayout';
+import hobbies from '~/data/hobbies';
+
+const Hobbies = () => {
+  return (
+    <ArticleLayout title="취미">
+      {hobbies.map((hobby) => (
+        <Hobby key={hobby.title} content={hobby} />
+      ))}
+    </ArticleLayout>
+  );
+};
+
+export default Hobbies;
+
 import type { Resume } from '~/models/Resume';
 
-interface Props {
+interface HobbyProps {
   content: Resume;
 }
 
-const Hobby = ({ content }: Props) => {
+const Hobby = ({ content }: HobbyProps) => {
   return (
     <div>
       <h2 className="font-bold text-xl">{content.title}</h2>
@@ -29,5 +44,3 @@ const Hobby = ({ content }: Props) => {
     </div>
   );
 };
-
-export default Hobby;

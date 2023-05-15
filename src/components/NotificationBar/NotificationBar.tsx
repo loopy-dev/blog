@@ -44,7 +44,7 @@ const NotificationBar = ({ children, background = 'primary' }: Props) => {
           'w-full'
         )}
       >
-        <p>{children}</p>
+        <div>{children}</div>
         <Button size="xs" variant="transparent" onClick={closeNotificationBar}>
           Close
         </Button>
