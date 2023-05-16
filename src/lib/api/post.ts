@@ -1,5 +1,5 @@
 import instance from './instance';
-import type { FrontMatter } from '~/models/Post';
+import type { FrontMatter, PostHits } from '~/models/Post';
 
 export const getPostMetaData = async (id: string) => {
   const uri = encodeURI(id);
@@ -19,6 +19,12 @@ export const getPostComments = async (pathname: string) => {
   const response = await instance.get<{ comments: number }>(
     `/api/post/comment/${pathname}`
   );
+
+  return response.data;
+};
+
+export const getPostHits = async (pathname: string) => {
+  const response = await instance.get<PostHits>(`/api/post/hits/${pathname}`);
 
   return response.data;
 };
