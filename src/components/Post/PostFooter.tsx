@@ -7,6 +7,7 @@ import Icon from '~components/icons';
 import CommentIcon from '~components/icons/CommentIcon';
 import ViewIcon from '~components/icons/ViewIcon';
 import Comments from './Comments';
+import { formatNumber } from './utils';
 
 interface Props {
   url: string;
@@ -32,7 +33,7 @@ const PostFooter = ({ url }: Props) => {
     (async () => {
       try {
         const hitsData = await getPostHits(url);
-        setHits(hitsData.message);
+        setHits(formatNumber(Number(hitsData.message)));
       } catch {
         // eslint-disable-next-line no-console
         console.log('hit is not available on development mode.');
