@@ -1,26 +1,32 @@
 import { useEffect, useState } from 'react';
 import classNames from 'classnames';
 import { getPostComments, getPostHits } from '~/lib/api/post';
+import Card from '~components/common/Card';
+import { CardContent } from '~components/common/Card/Card';
 import { SideBarProvider, useSideBarContext } from '~components/common/SideBar';
 import SideBar from '~components/common/SideBar';
 import Icon from '~components/icons';
 import CommentIcon from '~components/icons/CommentIcon';
 import ViewIcon from '~components/icons/ViewIcon';
 import Comments from './Comments';
+import styles from './Post.module.scss';
 import { formatNumber } from './utils';
+import type { FrontMatter } from '~models/Post';
 
 interface Props {
   url: string;
+  recommendedPosts: FrontMatter[];
 }
 
 /** comments
  * NOTE - Suspense(dynamic) block이 내부에 존재한다면 hydration error가 발생
  * TODO - hits 추가
  */
-const PostFooter = ({ url }: Props) => {
+const PostFooter = ({ url, recommendedPosts }: Props) => {
   const { open, close } = useSideBarContext();
   const [commentCounts, setCommentCounts] = useState<string | number>('...');
   const [hits, setHits] = useState('...');
+  const [recommended, setRecommended] = useState(recommendedPosts.slice(0, 4));
 
   useEffect(() => {
     (async () => {
@@ -43,6 +49,41 @@ const PostFooter = ({ url }: Props) => {
 
   return (
     <div className={classNames('mt-8')}>
+      {/** Recommended Posts section */}
+      <section>
+        <h2>추천 포스트</h2>
+        <div
+          className={classNames(
+            'flex',
+            'overflow-x-auto',
+            'gap-4',
+            styles['recommended-posts-section']
+          )}
+        >
+          {recommendedPosts.map((post) => (
+            <Card
+              key={post.url}
+              className={classNames(styles.card, 'flex-shrink-0')}
+            >
+              <CardContent>
+                <h3 className={classNames('font-medium', 'tracking-tight')}>
+                  {post.title}
+                </h3>
+                <p
+                  className={classNames(
+                    'mt-2',
+                    'leading',
+                    'text-slate-400',
+                    'text-sm'
+                  )}
+                >
+                  {post.description}
+                </p>
+              </CardContent>
+            </Card>
+          ))}
+        </div>
+      </section>
       <Comments className="block md:hidden" />
       {/** meta */}
       <div
@@ -128,10 +169,10 @@ const PostFooter = ({ url }: Props) => {
   );
 };
 
-const PostFooterWithProvider = ({ url }: Props) => {
+const PostFooterWithProvider = ({ url, recommendedPosts }: Props) => {
   return (
     <SideBarProvider>
-      <PostFooter url={url} />
+      <PostFooter recommendedPosts={recommendedPosts} url={url} />
     </SideBarProvider>
   );
 };
