@@ -7,11 +7,12 @@ import type { FrontMatter, Post as PostModel } from '~/models/Post';
 
 interface Props {
   post: PostModel;
+  recommendedPosts: FrontMatter[];
 }
 
 const PostAside = dynamic(() => import('./PostAside'), { ssr: false });
 
-const Post = ({ post }: Props) => {
+const Post = ({ post, recommendedPosts }: Props) => {
   const frontMatter: FrontMatter = {
     title: post.title,
     url: post.url,
@@ -27,7 +28,10 @@ const Post = ({ post }: Props) => {
         <>
           <PostHeader postMetaData={{ ...frontMatter }} />
           <PostContent content={post.content} />
-          <PostFooter url={frontMatter.url} />
+          <PostFooter
+            recommendedPosts={recommendedPosts}
+            url={frontMatter.url}
+          />
         </>
       }
     />

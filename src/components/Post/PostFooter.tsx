@@ -1,24 +1,52 @@
 import { useEffect, useState } from 'react';
 import classNames from 'classnames';
 import { getPostComments, getPostHits } from '~/lib/api/post';
+import Card from '~components/common/Card';
+import { CardContent } from '~components/common/Card/Card';
 import { SideBarProvider, useSideBarContext } from '~components/common/SideBar';
 import SideBar from '~components/common/SideBar';
 import Icon from '~components/icons';
 import CommentIcon from '~components/icons/CommentIcon';
 import ViewIcon from '~components/icons/ViewIcon';
 import Comments from './Comments';
-import { formatNumber } from './utils';
+import styles from './Post.module.scss';
+import { formatNumber, shuffle } from './utils';
+import type { FrontMatter } from '~models/Post';
 
 interface Props {
   url: string;
+  recommendedPosts: FrontMatter[];
 }
 
-/** comments
+/**
  * NOTE - Suspense(dynamic) block이 내부에 존재한다면 hydration error가 발생
- * TODO - hits 추가
  */
-const PostFooter = ({ url }: Props) => {
-  const { open, close } = useSideBarContext();
+const PostFooter = ({ url, recommendedPosts }: Props) => {
+  return (
+    <div className={classNames('mt-12')}>
+      {/** Recommended Posts section */}
+      <RecommendedPostsContainer recommendedPosts={recommendedPosts} />
+      {/** meta */}
+      <MetaContainer url={url} />
+      <CommentsContainer />
+    </div>
+  );
+};
+
+const PostFooterWithProvider = ({ url, recommendedPosts }: Props) => {
+  return (
+    <SideBarProvider>
+      <PostFooter recommendedPosts={recommendedPosts} url={url} />
+    </SideBarProvider>
+  );
+};
+
+export default PostFooterWithProvider;
+
+type MetaContainerProps = Pick<Props, 'url'>;
+
+const MetaContainer = ({ url }: MetaContainerProps) => {
+  const { open } = useSideBarContext();
   const [commentCounts, setCommentCounts] = useState<string | number>('...');
   const [hits, setHits] = useState('...');
 
@@ -42,62 +70,59 @@ const PostFooter = ({ url }: Props) => {
   }, [url]);
 
   return (
-    <div className={classNames('mt-8')}>
-      <Comments className="block md:hidden" />
-      {/** meta */}
+    <div className={classNames('hidden', 'md:flex', 'gap-4', 'w-full', 'mt-6')}>
       <div
         className={classNames(
-          'hidden',
-          'md:flex',
-          'gap-4',
-          'w-full',
-          'justify-end'
+          'inline-flex',
+          'gap-0.5',
+          'justify-between',
+          'items-center',
+          'text-[color:var(--text4)]',
+          'fill-[color:var(--text4)]',
+          'hover:text-[color:var(--text3)]',
+          'hover:fill-[color:var(--text3)]',
+          'cursor-pointer'
+        )}
+        onClick={() => {
+          open();
+        }}
+      >
+        {/** TODO - refactor Icon */}
+        <span>
+          <CommentIcon />
+        </span>
+        <span>{commentCounts}</span>
+      </div>
+      <div
+        className={classNames(
+          'inline-flex',
+          'gap-0.5',
+          'justify-between',
+          'items-center',
+          'text-[color:var(--text4)]',
+          'stroke-[color:var(--text4)]',
+          'stroke-[1.5]',
+          'hover:text-[color:var(--text3)]',
+          'hover:stroke-[color:var(--text3)]',
+          'hover:fill-[color:var(--text3)]',
+          'cursor-pointer'
         )}
       >
-        <div
-          className={classNames(
-            'inline-flex',
-            'gap-0.5',
-            'justify-between',
-            'items-center',
-            'text-[color:var(--text4)]',
-            'fill-[color:var(--text4)]',
-            'hover:text-[color:var(--text3)]',
-            'hover:fill-[color:var(--text3)]',
-            'cursor-pointer'
-          )}
-          onClick={() => {
-            open();
-          }}
-        >
-          {/** TODO - refactor Icon */}
-          <span>
-            <CommentIcon />
-          </span>
-          <span>{commentCounts}</span>
-        </div>
-        <div
-          className={classNames(
-            'inline-flex',
-            'gap-0.5',
-            'justify-between',
-            'items-center',
-            'text-[color:var(--text4)]',
-            'stroke-[color:var(--text4)]',
-            'stroke-[1.5]',
-            'hover:text-[color:var(--text3)]',
-            'hover:stroke-[color:var(--text3)]',
-            'hover:fill-[color:var(--text3)]',
-            'cursor-pointer'
-          )}
-        >
-          <span>
-            <ViewIcon />
-          </span>
-          <span>{hits}</span>
-        </div>
+        <span>
+          <ViewIcon />
+        </span>
+        <span>{hits}</span>
       </div>
+    </div>
+  );
+};
 
+const CommentsContainer = () => {
+  const { close } = useSideBarContext();
+  return (
+    <>
+      {/** comments on mobile layout */}
+      <Comments className="block md:hidden" />
       {/** sidebar */}
       <SideBar className="hidden md:block">
         <div className="mt-20 p-4">
@@ -124,16 +149,57 @@ const PostFooter = ({ url }: Props) => {
           <Comments />
         </div>
       </SideBar>
-    </div>
+    </>
   );
 };
 
-const PostFooterWithProvider = ({ url }: Props) => {
+type RecommendedPostsContainerProps = Pick<Props, 'recommendedPosts'>;
+
+const RecommendedPostsContainer = ({
+  recommendedPosts,
+}: RecommendedPostsContainerProps) => {
+  const [recommended, setRecommended] = useState<FrontMatter[]>([]);
+
+  useEffect(() => {
+    const shuffled = shuffle(recommendedPosts).slice(0, 4);
+    setRecommended(shuffled);
+  }, [recommendedPosts]);
+
   return (
-    <SideBarProvider>
-      <PostFooter url={url} />
-    </SideBarProvider>
+    <section>
+      <h2 className={classNames('text-2xl', 'font-semibold')}>추천 포스트</h2>
+      <div
+        className={classNames(
+          'flex',
+          'overflow-x-auto',
+          'gap-4',
+          'mt-4',
+          styles['recommended-posts-section']
+        )}
+      >
+        {recommended.map((post) => (
+          <Card
+            key={post.url}
+            className={classNames(styles.card, 'flex-shrink-0')}
+          >
+            <CardContent>
+              <h3 className={classNames('font-medium', 'tracking-tight')}>
+                {post.title}
+              </h3>
+              <p
+                className={classNames(
+                  'mt-2',
+                  'leading',
+                  'text-slate-400',
+                  'text-sm'
+                )}
+              >
+                {post.description}
+              </p>
+            </CardContent>
+          </Card>
+        ))}
+      </div>
+    </section>
   );
 };
-
-export default PostFooterWithProvider;
