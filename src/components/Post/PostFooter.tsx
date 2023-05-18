@@ -10,7 +10,7 @@ import CommentIcon from '~components/icons/CommentIcon';
 import ViewIcon from '~components/icons/ViewIcon';
 import Comments from './Comments';
 import styles from './Post.module.scss';
-import { formatNumber } from './utils';
+import { formatNumber, shuffle } from './utils';
 import type { FrontMatter } from '~models/Post';
 
 interface Props {
@@ -26,7 +26,7 @@ const PostFooter = ({ url, recommendedPosts }: Props) => {
   const { open, close } = useSideBarContext();
   const [commentCounts, setCommentCounts] = useState<string | number>('...');
   const [hits, setHits] = useState('...');
-  const [recommended, setRecommended] = useState(recommendedPosts.slice(0, 4));
+  const [recommended, setRecommended] = useState<FrontMatter[]>([]);
 
   useEffect(() => {
     (async () => {
@@ -47,6 +47,11 @@ const PostFooter = ({ url, recommendedPosts }: Props) => {
     })();
   }, [url]);
 
+  useEffect(() => {
+    const shuffled = shuffle(recommendedPosts).slice(0, 4);
+    setRecommended(shuffled);
+  }, [recommendedPosts]);
+
   return (
     <div className={classNames('mt-8')}>
       {/** Recommended Posts section */}
@@ -60,7 +65,7 @@ const PostFooter = ({ url, recommendedPosts }: Props) => {
             styles['recommended-posts-section']
           )}
         >
-          {recommendedPosts.map((post) => (
+          {recommended.map((post) => (
             <Card
               key={post.url}
               className={classNames(styles.card, 'flex-shrink-0')}

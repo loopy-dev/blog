@@ -44,3 +44,14 @@ export const formatNumber = (count: number) => {
     postFix[exp / 3 - 1]
   }`;
 };
+
+export const shuffle = <T>(arr: T[]) => {
+  const ret = [...arr];
+  for (let i = 0; i < arr.length - 1; i++) {
+    const j = Math.floor(Math.random() * (i + 1));
+
+    [ret[i], ret[j]] = [ret[j], ret[i]];
+  }
+
+  return ret;
+};
