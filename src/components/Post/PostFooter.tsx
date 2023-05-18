@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import classNames from 'classnames';
+import Link from 'next/link';
 import { getPostComments, getPostHits } from '~/lib/api/post';
 import Card from '~components/common/Card';
 import { CardContent } from '~components/common/Card/Card';
@@ -182,21 +183,26 @@ const RecommendedPostsContainer = ({
             key={post.url}
             className={classNames(styles.card, 'flex-shrink-0')}
           >
-            <CardContent>
-              <h3 className={classNames('font-medium', 'tracking-tight')}>
-                {post.title}
-              </h3>
-              <p
-                className={classNames(
-                  'mt-2',
-                  'leading',
-                  'text-slate-400',
-                  'text-sm'
-                )}
-              >
-                {post.description}
-              </p>
-            </CardContent>
+            <Link
+              className={classNames('block', 'h-full', 'hover:bg-slate-50')}
+              href={`/posts/${post.url}`}
+            >
+              <CardContent>
+                <h3 className={classNames('font-medium', 'tracking-tight')}>
+                  {post.title}
+                </h3>
+                <p
+                  className={classNames(
+                    'mt-2',
+                    'leading',
+                    'text-slate-400',
+                    'text-sm'
+                  )}
+                >
+                  {post.description}
+                </p>
+              </CardContent>
+            </Link>
           </Card>
         ))}
       </div>
