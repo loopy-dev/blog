@@ -9,7 +9,13 @@ const ThemeScript = () => {
         return theme ? theme : systemPrefersDark ? 'dark' : 'light';
       }
 
-      document.body.dataset.theme = getInitTheme();
+      const theme = getInitTheme();
+      document.body.dataset.theme = theme;
+      if (theme === 'dark') {
+        document.documentElement.classList.add('dark');
+      } else {
+        document.documentElement.classList.remove('dark');
+      }
     })();
   `;
   return <script dangerouslySetInnerHTML={{ __html: setTheme }} />;

@@ -5,7 +5,7 @@ type ReturnTypes = [Theme, () => void];
 
 const useTheme = (): ReturnTypes => {
   if (typeof window === 'undefined')
-    throw new Error('useTheme hooks only can use on csr.');
+    throw new Error('useTheme hooks only can use on client side.');
 
   const [theme, setTheme] = useState<'light' | 'dark'>(() => {
     const theme = window.localStorage.getItem('theme');
@@ -27,7 +27,16 @@ const useTheme = (): ReturnTypes => {
     const $body = document.querySelector('body');
     if (!$body) return;
 
-    $body.dataset.theme = theme === 'light' ? 'dark' : 'light';
+    if (theme === 'light') {
+      document.documentElement.classList.add('dark');
+      $body.dataset.theme = 'dark';
+    } else {
+      document.documentElement.classList.remove('dark');
+      $body.dataset.theme = 'light';
+    }
+
+    // $body.dataset.theme = theme === 'light' ? 'dark' : 'light';
+
     window.localStorage.setItem('theme', theme === 'light' ? 'dark' : 'light');
   };
 
