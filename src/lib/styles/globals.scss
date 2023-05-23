@@ -51,32 +51,38 @@ body {
 }
 
 html {
+  @apply text-zinc-800 bg-white;
+  @include light_variables();
   &.dark {
     @include dark_variables();
+    @apply text-zinc-100 bg-zinc-800;
   }
 }
 
-body {
-  color: var(--text1);
-  background-color: var(--bg-page2);
+// body {
+//   color: var(--text1);
+//   background-color: var(--bg-page2);
 
-  &[data-theme='light'] {
-    @include light_variables();
-  }
+//   &[data-theme='light'] {
+//     @include light_variables();
+//   }
 
-  &[data-theme='dark'] {
-    @include dark_variables();
-  }
-}
+//   &[data-theme='dark'] {
+//     @include dark_variables();
+//   }
+// }
 
 ::selection {
   background-color: var(--bg-selection);
 }
 
 @media (prefers-color-scheme: dark) {
-  body {
+  html {
     @include dark_variables();
   }
+  // body {
+  //   @include dark_variables();
+  // }
 }
 
 a {

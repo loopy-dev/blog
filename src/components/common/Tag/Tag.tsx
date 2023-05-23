@@ -16,12 +16,14 @@ const Tag = ({ label, ...props }: Props) => {
         'py-1.5',
         'px-2.5',
         'bg-white',
+        'dark:bg-zinc-600',
         'border',
-        'text-gray-900',
         'leading-none',
         'break-keep',
         'text-xs',
-        'hover:bg-slate-100'
+        'hover:bg-zinc-100',
+        'dark:hover:bg-zinc-500',
+        'dark:border-transparent'
       )}
       {...props}
     >
@@ -33,7 +35,7 @@ const Tag = ({ label, ...props }: Props) => {
 
 const Icon = () => (
   <svg
-    className="fill-gray-600 shrink-0"
+    className="fill-zinc-600 shrink-0 dark:fill-zinc-400"
     fill="current"
     height="12"
     strokeWidth="0"

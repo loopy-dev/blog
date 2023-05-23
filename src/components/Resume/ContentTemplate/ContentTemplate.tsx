@@ -1,5 +1,5 @@
+import classNames from 'classnames';
 import styled from 'styled-components';
-import cssVar from '~/lib/styles/cssVar';
 import ExperienceLayout from '../../layouts/ExperienceLayout';
 import OtherLinks from './OtherLinks';
 import PersonalInfo from './PersonalInfo';
@@ -20,9 +20,15 @@ const ContentTemplate = ({ content, sticky }: Props) => {
           {content.title && <ContentTitle>{content.title}</ContentTitle>}
           {/** TODO - Date format 후 사용하기 */}
           {content.startDate && (
-            <ContentDate>
+            <p
+              className={classNames(
+                'mt-4',
+                'text-zinc-500',
+                'dark:text-zinc-300'
+              )}
+            >
               {content.startDate} ~ {content.endDate || '진행 중'}
-            </ContentDate>
+            </p>
           )}
           {content.links && <PersonalInfo links={content.links} />}
         </>
@@ -64,11 +70,6 @@ const ContentTitle = styled.h2`
 const ContentIntroduction = styled.h3`
   font-weight: 700;
   font-size: 1.15rem;
-`;
-
-const ContentDate = styled.p`
-  margin-top: 16px;
-  color: ${cssVar('text3')};
 `;
 
 const ContentDescription = styled.ul`

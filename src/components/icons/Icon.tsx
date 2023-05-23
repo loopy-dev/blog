@@ -34,9 +34,11 @@ const Icon = ({ type, noHoverEffect, className, ...props }: Props) => {
         'inline-flex',
         'justify-center',
         'items-center',
-        'fill-[color:var(--text4)]',
+        'fill-zinc-300',
+        'dark:fill-zinc-500',
         {
-          'hover:fill-[color:var(--text3)]': !noHoverEffect,
+          'hover:fill-zinc-400': !noHoverEffect,
+          'hover:dark:fill-zinc-400': !noHoverEffect,
         },
         className
       )}
