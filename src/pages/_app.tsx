@@ -6,6 +6,7 @@ import Script from 'next/script';
 import { Provider } from 'react-redux';
 import { pageview, GA_TRACKING_ID } from '~/lib/ga/gtag';
 import store from '~/lib/store';
+import RouteProgressBar from '~components/Main/RouteProgressBar';
 import '../lib/styles/globals.scss';
 import type { AppProps } from 'next/app';
 
@@ -52,6 +53,7 @@ const MyApp = ({ Component, pageProps }: AppProps) => {
         src={`https://www.googletagmanager.com/gtag/js?id=${GA_TRACKING_ID}`}
         strategy="afterInteractive"
       />
+      <RouteProgressBar />
       <Component {...pageProps} />
       <Analytics />
     </Provider>

@@ -1,0 +1,9 @@
+.progress-bar {
+  &__phase-1 {
+    transition: width linear 1000ms;
+  }
+
+  &__phase-2 {
+    transition: width linear 50ms;
+  }
+}
