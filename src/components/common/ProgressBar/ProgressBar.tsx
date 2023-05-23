@@ -1,5 +1,6 @@
 import classNames from 'classnames';
 
+// TODO - color 추가
 interface Props {
   width?: number;
   className?: string;
@@ -18,6 +19,7 @@ const ProgressBar = ({ width = 0, className }: Props) => {
         'left-0',
         'bg-[color:var(--primary)]',
         'z-[100]',
+        'shadow-sm',
         className
       )}
     />
