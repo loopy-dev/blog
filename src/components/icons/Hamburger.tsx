@@ -52,6 +52,7 @@ const Container = styled.span<Props>`
     border-radius: 4px;
     transition: all 0.2s;
     background-color: ${cssVar('text4')};
+    user-select: none;
 
     &:hover {
       background-color: ${cssVar('text3')};
