@@ -55,7 +55,7 @@ html {
   @include light_variables();
   &.dark {
     @include dark_variables();
-    @apply text-zinc-100 bg-zinc-800;
+    @apply text-white bg-zinc-800;
   }
 }
 
