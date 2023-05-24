@@ -24,7 +24,15 @@ interface Props {
  */
 const PostFooter = ({ url, recommendedPosts }: Props) => {
   return (
-    <div className={classNames('mt-12')}>
+    <div
+      className={classNames(
+        'mt-16',
+        'border-t',
+        'pt-8',
+        'border-zinc-500',
+        'border-dashed'
+      )}
+    >
       {/** Recommended Posts section */}
       <RecommendedPostsContainer recommendedPosts={recommendedPosts} />
       {/** meta */}
@@ -78,10 +86,14 @@ const MetaContainer = ({ url }: MetaContainerProps) => {
           'gap-0.5',
           'justify-between',
           'items-center',
-          'text-[color:var(--text4)]',
-          'fill-[color:var(--text4)]',
-          'hover:text-[color:var(--text3)]',
-          'hover:fill-[color:var(--text3)]',
+          'text-zinc-500',
+          'dark:text-zinc-400',
+          'fill-zinc-500',
+          'dark:fill-zinc-400',
+          'hover:text-zinc-600',
+          'hover:fill-zinc-600',
+          'hover:dark:fill-zinc-300',
+          'hover:dark:text-zinc-300',
           'cursor-pointer'
         )}
         onClick={() => {
@@ -100,12 +112,15 @@ const MetaContainer = ({ url }: MetaContainerProps) => {
           'gap-0.5',
           'justify-between',
           'items-center',
-          'text-[color:var(--text4)]',
-          'stroke-[color:var(--text4)]',
-          'stroke-[1.5]',
-          'hover:text-[color:var(--text3)]',
-          'hover:stroke-[color:var(--text3)]',
-          'hover:fill-[color:var(--text3)]',
+          'text-zinc-500',
+          'dark:text-zinc-400',
+          'stroke-zinc-500',
+          'dark:stroke-zinc-400',
+          'hover:text-zinc-600',
+          'hover:stroke-zinc-600',
+          'hover:dark:stroke-zinc-300',
+          'hover:dark:text-zinc-300',
+          'fill-zinc-400',
           'cursor-pointer'
         )}
       >
@@ -168,7 +183,7 @@ const RecommendedPostsContainer = ({
 
   return (
     <section>
-      <h2 className={classNames('text-2xl', 'font-semibold')}>추천 포스트</h2>
+      <h2 className={classNames('text-3xl', 'font-semibold')}>추천 포스트</h2>
       <div
         className={classNames(
           'flex',
@@ -184,8 +199,16 @@ const RecommendedPostsContainer = ({
             className={classNames(styles.card, 'flex-shrink-0')}
           >
             <Link
-              className={classNames('block', 'h-full', 'hover:bg-slate-50')}
               href={`/posts/${post.url}`}
+              className={classNames(
+                'block',
+                'h-full',
+                'hover:bg-zinc-50',
+                'bg-white',
+                'dark:bg-zinc-700',
+                'hover:dark:bg-zinc-600',
+                'rounded'
+              )}
             >
               <CardContent>
                 <h3 className={classNames('font-medium', 'tracking-tight')}>
@@ -195,7 +218,8 @@ const RecommendedPostsContainer = ({
                   className={classNames(
                     'mt-2',
                     'leading',
-                    'text-slate-400',
+                    'text-zinc-500',
+                    'dark:text-zinc-300',
                     'text-sm'
                   )}
                 >

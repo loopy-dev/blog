@@ -51,6 +51,8 @@ const SideBar = ({ width = 320, children, className, ...props }: Props) => {
         className={classNames(
           styles.sidebar,
           `w-[400px]`,
+          'bg-white',
+          'dark:bg-zinc-800',
           {
             '-translate-x-[400px]': isSideBarOpen,
           },

@@ -28,7 +28,18 @@ const NavigationBar = () => {
 
   return (
     // TODO - add color pallete on themes
-    <nav className={classNames(styles['navigation-bar-container'])}>
+    <nav
+      className={classNames(
+        styles['navigation-bar-container'],
+        'flex',
+        'flex-col',
+        'gap-2',
+        'z-30',
+        'transition',
+        'bg-white/80',
+        'dark:bg-zinc-800/80'
+      )}
+    >
       {/** upper part of NavigationBar */}
       <div
         className={classNames(

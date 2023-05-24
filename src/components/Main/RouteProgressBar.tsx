@@ -24,12 +24,12 @@ const RouteProgressBar = () => {
       window.setTimeout(() => {
         setClassName('progress-bar__phase-2');
         setProgress(100);
-      }, 750);
+      }, 250);
 
       window.setTimeout(() => {
         setClassName('');
         setProgress(0);
-      }, 1000);
+      }, 500);
     };
 
     router.events.on('routeChangeStart', handleStart);

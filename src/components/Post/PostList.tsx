@@ -67,7 +67,8 @@ const PostItem = ({ post }: PostItemProps) => {
       <p
         className={classNames(
           'mt-2',
-          'text-[color:var(--text3)]',
+          'text-zinc-600',
+          'dark:text-zinc-300',
           'text-[90%]',
           'tracking-[0.003em]'
         )}
@@ -77,7 +78,8 @@ const PostItem = ({ post }: PostItemProps) => {
       <p
         className={classNames(
           'text-right',
-          'text-[color:var(--text3)]',
+          'text-zinc-600',
+          'dark:text-zinc-300',
           'text-[80%]',
           'leading-[1.3]',
           'tracking-[0.003em]'

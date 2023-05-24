@@ -8,8 +8,14 @@ interface Props extends HTMLAttributes<HTMLDivElement> {
 const Card = ({ maxWidth, children, className, ...props }: Props) => {
   return (
     <div
-      className={classNames('border', 'rounded', 'w-full', className)}
       style={{ maxWidth }}
+      className={classNames(
+        'border',
+        'rounded',
+        'w-full',
+        'dark:border-transparent',
+        className
+      )}
       {...props}
     >
       {children}

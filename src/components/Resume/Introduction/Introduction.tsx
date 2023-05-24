@@ -1,7 +1,7 @@
 import classNames from 'classnames';
 import ContentLayout from '~/components/layouts/ContentLayout';
 import Icon from '../../icons';
-import LinkButton from './LinkButton';
+import styles from './Introduction.module.scss';
 
 const Introduction = () => {
   return (
@@ -42,10 +42,15 @@ const Introduction = () => {
           'sm:justify-start'
         )}
       >
-        <LinkButton
-          color="black"
+        <a
           href="https://github.com/mrbartrns"
+          rel="noreferrer"
           target="_blank"
+          className={classNames(
+            styles['link-button'],
+            'bg-zinc-900',
+            'text-white'
+          )}
         >
           <span
             className={classNames(
@@ -60,11 +65,16 @@ const Introduction = () => {
             </span>
             Github 가기
           </span>
-        </LinkButton>
-        <LinkButton
-          color="turquoise"
+        </a>
+        <a
           href="https://velog.io/@mrbartrns"
+          rel="noreferrer"
           target="_blank"
+          className={classNames(
+            styles['link-button'],
+            'text-white',
+            'bg-[color:#20c997]'
+          )}
         >
           <span
             className={classNames(
@@ -76,7 +86,7 @@ const Introduction = () => {
           >
             이전 블로그
           </span>
-        </LinkButton>
+        </a>
       </div>
     </ContentLayout>
   );
