@@ -17,8 +17,6 @@ import styles from './Post.module.scss';
 import { formatNumber, shuffle } from './utils';
 import type { FrontMatter } from '~models/Post';
 
-const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
-
 interface Props {
   url: string;
   recommendedPosts: FrontMatter[];
@@ -166,8 +164,7 @@ const MetaContainer = ({ url }: MetaContainerProps) => {
             'cursor-pointer'
           )}
           onClick={() => {
-            console.log(BASE_URL);
-            if (!BASE_URL) return;
+            const BASE_URL = window.location.origin;
             const url = BASE_URL.concat(router.asPath);
             writeText(url)?.then(
               () => {
