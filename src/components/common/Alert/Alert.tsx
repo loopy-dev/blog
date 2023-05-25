@@ -1,8 +1,15 @@
 import { useCallback, useEffect, useState } from 'react';
+import classNames from 'classnames';
 import { v4 } from 'uuid';
 import AlertItem from './AlertItem';
 
-type CreateAlertFn = (text?: string, duration?: number) => void;
+type BgColor = 'success' | 'error' | 'primary';
+
+type CreateAlertFn = (
+  text?: string,
+  duration?: number,
+  bgColor?: BgColor
+) => void;
 
 const initialize = () => {
   let createAlertFn: CreateAlertFn | null = null;
@@ -11,10 +18,10 @@ const initialize = () => {
     createAlertFn = fn;
   };
 
-  const notificate = (text?: string, duration?: number) => {
+  const notificate = (text?: string, duration?: number, bgColor?: BgColor) => {
     if (!createAlertFn) return;
 
-    createAlertFn(text, duration);
+    createAlertFn(text, duration, bgColor);
   };
 
   return { bind, notificate };
@@ -28,16 +35,24 @@ type AlertState = {
   id: string;
   message?: string;
   duration?: number;
+  bgColor?: BgColor;
 };
 
+interface Props {
+  width?: string;
+}
+
 // NOTE - 일단 하나의 Alert만 출력되는 것으로 구성해보자
-const AlertManager = () => {
+const AlertManager = ({ width = '320px' }: Props) => {
   const [alerts, setAlerts] = useState<AlertState[]>([]);
 
-  const createAlert = useCallback((message?: string, duration?: number) => {
-    const newAlert: AlertState = { id: v4(), message, duration };
-    setAlerts((prev) => [...prev, newAlert]);
-  }, []);
+  const createAlert = useCallback(
+    (message?: string, duration?: number, bgColor?: BgColor) => {
+      const newAlert: AlertState = { id: v4(), message, duration, bgColor };
+      setAlerts((prev) => [...prev, newAlert]);
+    },
+    []
+  );
 
   const removeAlert = useCallback((id: string) => {
     setAlerts((prev) => prev.filter((alertState) => alertState.id !== id));
@@ -48,10 +63,22 @@ const AlertManager = () => {
   }, [createAlert]);
 
   return (
-    <div>
+    <div
+      style={{ width }}
+      className={classNames(
+        'fixed',
+        'left-1/2',
+        'top-0',
+        '-translate-x-1/2',
+        'max-w-full',
+        'z-20',
+        'pointer-events-none'
+      )}
+    >
       {alerts.map((alertState) => (
         <AlertItem
           key={alertState.id}
+          bgColor={alertState.bgColor}
           duration={alertState.duration}
           id={alertState.id}
           message={alertState.message}
