@@ -7,6 +7,7 @@ import { Provider } from 'react-redux';
 import { pageview, GA_TRACKING_ID } from '~/lib/ga/gtag';
 import store from '~/lib/store';
 import RouteProgressBar from '~components/Main/RouteProgressBar';
+import AlertManager from '~components/common/Alert';
 import '../lib/styles/globals.scss';
 import type { AppProps } from 'next/app';
 
@@ -55,6 +56,7 @@ const MyApp = ({ Component, pageProps }: AppProps) => {
       />
       <RouteProgressBar />
       <Component {...pageProps} />
+      <AlertManager width="640px" />
       <Analytics />
     </Provider>
   );

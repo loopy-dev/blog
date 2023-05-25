@@ -64,15 +64,16 @@ const AlertManager = ({ width = '320px' }: Props) => {
 
   return (
     <div
-      style={{ width }}
+      style={{ maxWidth: width }}
       className={classNames(
         'fixed',
         'left-1/2',
         'top-0',
         '-translate-x-1/2',
-        'max-w-full',
-        'z-20',
-        'pointer-events-none'
+        'z-40',
+        'pointer-events-none',
+        'w-full',
+        'px-2'
       )}
     >
       {alerts.map((alertState) => (

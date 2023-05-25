@@ -49,10 +49,12 @@ const AlertItem = ({
         'w-full',
         'text-white',
         'leading-normal',
-        'first-of-type:mt-8',
+        'first-of-type:mt-14',
+        'mt-1',
         'p-2',
         'rounded',
         'shadow-md',
+        'text-sm',
         {
           'bg-green-400': bgColor === 'success',
           'bg-[color:var(--primary)]': bgColor === 'primary',
