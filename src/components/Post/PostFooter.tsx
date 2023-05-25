@@ -169,11 +169,7 @@ const MetaContainer = ({ url }: MetaContainerProps) => {
             const url = BASE_URL.concat(router.asPath);
             writeText(url)?.then(
               () => {
-                notificate(
-                  `url이 클립보드에 복사되었습니다. 복사된 url은 ${url}입니다.`,
-                  1500,
-                  'success'
-                );
+                notificate(`링크가 복사되었습니다.`, 1500, 'success');
               },
               () => {
                 notificate(
