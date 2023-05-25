@@ -3,6 +3,7 @@ import classNames from 'classnames';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { getPostComments, getPostHits } from '~/lib/api/post';
+import { notificate } from '~components/common/Alert';
 import Card from '~components/common/Card';
 import { CardContent } from '~components/common/Card/Card';
 import { SideBarProvider, useSideBarContext } from '~components/common/SideBar';
@@ -168,13 +169,17 @@ const MetaContainer = ({ url }: MetaContainerProps) => {
             const url = BASE_URL.concat(router.asPath);
             writeText(url)?.then(
               () => {
-                window.alert(
-                  `url이 클립보드에 복사되었습니다. 복사된 url은 ${url}입니다.`
+                notificate(
+                  `url이 클립보드에 복사되었습니다. 복사된 url은 ${url}입니다.`,
+                  1500,
+                  'success'
                 );
               },
               () => {
-                window.alert(
-                  '알 수 없는 이유로 클립보드에 복사되지 않았습니다.'
+                notificate(
+                  '알 수 없는 이유로 클립보드에 복사되지 않았습니다.',
+                  1500,
+                  'error'
                 );
               }
             );

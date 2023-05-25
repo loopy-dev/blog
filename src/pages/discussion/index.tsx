@@ -5,6 +5,7 @@ import { useForm } from 'react-hook-form';
 import styled from 'styled-components';
 import { postFeedback, verifyRecaptcha } from '~/lib/api/feedback';
 import Header from '~components/Header';
+import { notificate } from '~components/common/Alert';
 import Button from '~components/common/Button';
 import Input from '~components/common/Input';
 import TextArea from '~components/common/Input/TextArea';
@@ -29,7 +30,7 @@ const Page = () => {
   const handleSubmit: SubmitHandler<FeedbackForm> = async (data) => {
     const captchaToken = recaptchaRef.current?.getValue();
     if (!captchaToken) {
-      window.alert('Recaptcha를 먼저 클릭해주세요.');
+      notificate('Recaptcha를 먼저 클릭해주세요.', 1500, 'error');
       return;
     }
 
@@ -39,14 +40,14 @@ const Page = () => {
       if (captchaResponse.success) {
         await postFeedback(data);
         // alert user
-        window.alert('성공적으로 제출되었습니다!');
+        notificate('성공적으로 제출되었습니다!', 1500, 'success');
         reset(defaultValues);
         return;
       }
 
-      window.alert('유효하지 않은 Recaptcha token입니다.');
+      notificate('유효하지 않은 Recaptcha token입니다.', 1500, 'error');
     } catch (error) {
-      window.alert('유효하지 않은 요청입니다.');
+      notificate('유효하지 않은 요청입니다.', 1500, 'error');
     }
   };
 
@@ -72,11 +73,16 @@ const Page = () => {
             title="피드백"
           />
           <Form
-            onSubmit={onSubmit(async (data) => {
-              setLoading(true);
-              await handleSubmit(data);
-              setLoading(false);
-            })}
+            onSubmit={onSubmit(
+              async (data) => {
+                setLoading(true);
+                await handleSubmit(data);
+                setLoading(false);
+              },
+              () => {
+                notificate('주어진 폼을 채워주세요.', 1500, 'error');
+              }
+            )}
           >
             <FormField
               id="email"
