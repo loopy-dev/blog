@@ -6,8 +6,9 @@ import Image from 'next/image';
 import postService from '~/lib/post';
 import Header from '~components/Header';
 import ListSkeleton from '~components/Post/ListSkeleton';
+import PostTemplate from '~components/Post/PostTemplate';
 import SearchBar from '~components/Post/SearchBar';
-import ContentLayout from '~components/layouts/ContentLayout';
+import TagList from '~components/Post/TagList';
 import GlobalLayout from '~components/layouts/GlobalLayout';
 import useDebounce from '~hooks/useDebounce';
 import InfiniteScrollComponent from '~hooks/useInfiniteScroll/InfiniteScrollComponent';
@@ -37,12 +38,12 @@ const PostList = dynamic(
   }
 );
 
+const INITIAL_POST_COUNTS = 5;
+const NEXT_POST_COUNTS = 5;
+
 interface Props {
   posts: FrontMatter[];
 }
-
-const INITIAL_POST_COUNTS = 5;
-const NEXT_POST_COUNTS = 5;
 
 const Page = ({ posts }: Props) => {
   const [keywords, setKeywords] = useState<string>('');
@@ -80,50 +81,56 @@ const Page = ({ posts }: Props) => {
           property="og:description"
         />
       </Head>
-      <ContentLayout>
-        <Header description="작성한 글들을 모아볼 수 있어요." title="Posts" />
-      </ContentLayout>
-      <ContentLayout>
-        <SearchBar onChange={handleChange} />
-      </ContentLayout>
-      <ContentLayout>
-        {filteredPosts.length > 0 ? (
+      <PostTemplate
+        aside={<TagList posts={posts} />}
+        content={
           <>
-            <PostList posts={filteredPosts} />
-            <InfiniteScrollComponent
-              threshold={0.7}
-              onIntersect={() => {
-                setCounts((prev) =>
-                  Math.min(prev + NEXT_POST_COUNTS, posts.length)
-                );
-              }}
+            <Header
+              description="작성한 글들을 모아볼 수 있어요."
+              title="Posts"
             />
+            <SearchBar onChange={handleChange} />
+            <div>
+              {filteredPosts.length > 0 ? (
+                <>
+                  <PostList posts={filteredPosts} />
+                  <InfiniteScrollComponent
+                    threshold={0.7}
+                    onIntersect={() => {
+                      setCounts((prev) =>
+                        Math.min(prev + NEXT_POST_COUNTS, posts.length)
+                      );
+                    }}
+                  />
+                </>
+              ) : (
+                <div
+                  className={classNames(
+                    'flex',
+                    'flex-col',
+                    'gap-4',
+                    'justify-center',
+                    'items-center'
+                  )}
+                >
+                  <Image
+                    alt="loading"
+                    height={0}
+                    src="/nyan-cat.gif"
+                    width={0}
+                    style={{
+                      marginLeft: '10%',
+                      width: '100%',
+                      height: 'auto',
+                    }}
+                  />
+                  <p>해당 키워드에 대한 포스트가 아직 없네요. </p>
+                </div>
+              )}
+            </div>
           </>
-        ) : (
-          <div
-            className={classNames(
-              'flex',
-              'flex-col',
-              'gap-4',
-              'justify-center',
-              'items-center'
-            )}
-          >
-            <Image
-              alt="loading"
-              height={0}
-              src="/nyan-cat.gif"
-              width={0}
-              style={{
-                marginLeft: '10%',
-                width: '100%',
-                height: 'auto',
-              }}
-            />
-            <p>해당 키워드에 대한 포스트가 아직 없네요. </p>
-          </div>
-        )}
-      </ContentLayout>
+        }
+      />
     </GlobalLayout>
   );
 };
