@@ -8,12 +8,10 @@ interface Props {
   duration?: number;
   message?: string;
   onDone?: OnDoneCallBackFn;
-  id: string;
   bgColor?: BgColor;
 }
 
 const AlertItem = ({
-  id,
   duration = 2000,
   message,
   onDone,
@@ -39,7 +37,7 @@ const AlertItem = ({
     return () => {
       if (timeoutRef.current) clearTimeout(timeoutRef.current);
     };
-  }, [disappear, duration, id]);
+  }, [disappear, duration]);
 
   return (
     <div
