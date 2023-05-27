@@ -81,7 +81,6 @@ const AlertManager = ({ width = '320px' }: Props) => {
           key={alertState.id}
           bgColor={alertState.bgColor}
           duration={alertState.duration}
-          id={alertState.id}
           message={alertState.message}
           onDone={() => {
             removeAlert(alertState.id);

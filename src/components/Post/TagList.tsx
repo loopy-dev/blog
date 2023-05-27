@@ -29,7 +29,7 @@ const TagList = ({ posts }: Props) => {
   return (
     <div className={classNames('flex', 'w-full', 'flex-wrap', 'gap-2')}>
       {Object.entries(tags).map(([key, value]) => (
-        <Tag key={value} label={`${key}: ${value}`} />
+        <Tag key={key} label={`${key}: ${value}`} />
       ))}
     </div>
   );
