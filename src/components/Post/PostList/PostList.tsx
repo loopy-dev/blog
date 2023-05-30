@@ -1,7 +1,7 @@
 import classNames from 'classnames';
 import Link from 'next/link';
 import Tag from '~components/common/Tag';
-import styles from './Post.module.scss';
+import styles from '../Post.module.scss';
 import type { FrontMatter } from '~models/Post';
 
 interface Props {

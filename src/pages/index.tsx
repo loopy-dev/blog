@@ -2,7 +2,7 @@ import Head from 'next/head';
 import postService from '~/lib/post';
 import Header from '~components/Header';
 import Banner from '~components/Main';
-import PostList from '~components/Post/PostList';
+import PostList from '~components/Post/PostList/PostList';
 import ContentLayout from '~components/layouts/ContentLayout';
 import GlobalLayout from '../components/layouts/GlobalLayout';
 import type { GetStaticProps } from 'next';

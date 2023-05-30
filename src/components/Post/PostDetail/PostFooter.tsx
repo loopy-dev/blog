@@ -13,9 +13,9 @@ import CommentIcon from '~components/icons/CommentIcon';
 import ShareIcon from '~components/icons/ShareIcon';
 import ViewIcon from '~components/icons/ViewIcon';
 import useClipboard from '~hooks/useClipboard';
+import styles from '../Post.module.scss';
+import { formatNumber, shuffle } from '../utils';
 import Comments from './Comments';
-import styles from './Post.module.scss';
-import { formatNumber, shuffle } from './utils';
 import type { FrontMatter } from '~models/Post';
 
 interface Props {

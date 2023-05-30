@@ -5,10 +5,12 @@ import Head from 'next/head';
 import Image from 'next/image';
 import postService from '~/lib/post';
 import Header from '~components/Header';
-import ListSkeleton from '~components/Post/ListSkeleton';
-import PostTemplate from '~components/Post/PostTemplate';
-import SearchBar from '~components/Post/SearchBar';
-import TagList from '~components/Post/TagList';
+import {
+  PostListSkeleton,
+  PostTemplate,
+  SearchBar,
+  TagList,
+} from '~components/Post';
 import GlobalLayout from '~components/layouts/GlobalLayout';
 import useDebounce from '~hooks/useDebounce';
 import InfiniteScrollComponent from '~hooks/useInfiniteScroll/InfiniteScrollComponent';
@@ -34,7 +36,7 @@ export const getStaticProps: GetStaticProps = async () => {
 const PostList = dynamic(
   () => import('../../components/Post').then((module) => module.PostList),
   {
-    loading: () => <ListSkeleton />,
+    loading: () => <PostListSkeleton />,
   }
 );
 

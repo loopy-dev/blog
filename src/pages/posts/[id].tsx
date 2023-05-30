@@ -1,10 +1,9 @@
 import dynamic from 'next/dynamic';
 import Head from 'next/head';
-import PostSkeleton from '~/components/Post/PostSkeleton';
 import GlobalLayout from '~/components/layouts/GlobalLayout';
 import postService from '~/lib/post';
 import { parseFileName } from '~/lib/post/postService';
-import PostTemplate from '~components/Post/PostTemplate';
+import { PostSkeleton, PostTemplate } from '~components/Post';
 import type { GetStaticPaths, GetStaticProps } from 'next';
 import type { FrontMatter, Post as PostModel } from '~/models/Post';
 
@@ -14,9 +13,12 @@ interface Props {
 }
 
 // TODO - Post는 dynamic import 하지 말고, 내부 Content만 dynamic update 진행 테스트
-const Post = dynamic(() => import('../../components/Post'), {
-  loading: () => <PostTemplate aside={<div />} content={<PostSkeleton />} />,
-});
+const Post = dynamic(
+  () => import('../../components/Post').then((module) => module.Post),
+  {
+    loading: () => <PostTemplate aside={<div />} content={<PostSkeleton />} />,
+  }
+);
 
 export const getStaticPaths: GetStaticPaths = async () => {
   const posts = postService.getPostList();
