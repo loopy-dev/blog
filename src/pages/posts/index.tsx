@@ -97,13 +97,37 @@ const Page = ({ posts }: Props) => {
             <Header
               title="Posts"
               description={
-                keywords.length > 0
-                  ? `제목, 태그에 ${keywords} 키워드가 포함된 포스트를 검색해요.`
-                  : selectedTags.length > 0
-                  ? `${selectedTags.join(
-                      ', '
-                    )} 태그가 포함된 포스트를 검색해요.`
-                  : '작성한 글들을 모아볼 수 있어요.'
+                keywords.length > 0 ? (
+                  <p>
+                    제목, 태그에{' '}
+                    <span
+                      className={classNames(
+                        'text-[color:var(--primary-variant)]'
+                      )}
+                    >
+                      {keywords}
+                    </span>{' '}
+                    키워드가 포함된 포스트를 검색해요.
+                  </p>
+                ) : selectedTags.length > 0 ? (
+                  <p>
+                    {selectedTags.map((tag, index) => (
+                      <span
+                        key={tag}
+                        className={classNames(
+                          'text-[color:var(--primary-variant)]'
+                        )}
+                      >
+                        {index < selectedTags.length - 1
+                          ? tag.concat(', ')
+                          : tag}
+                      </span>
+                    ))}{' '}
+                    태그가 포함된 포스트를 검색해요.
+                  </p>
+                ) : (
+                  '작성한 글들을 모아볼 수 있어요.'
+                )
               }
             />
             <SearchBar onChange={handleChange} />
