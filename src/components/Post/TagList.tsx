@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import classNames from 'classnames';
 import Button from '~components/common/Button';
 import Tag from '~components/common/Tag';
@@ -15,53 +16,78 @@ interface Props {
  *
  */
 const TagList = ({ posts, onClick, onReset }: Props) => {
-  const tags = posts.reduce((acc, cur) => {
-    const tags = cur.tags;
+  /**
+   * ```tsx
+   * const tags = { tagName: [1, false] }
+   * ```
+   */
+  const [tags, setTags] = useState(
+    posts.reduce((acc, cur) => {
+      const tags = cur.tags;
 
-    tags.forEach((tag) => {
-      if (Object.hasOwn(acc, tag)) {
-        acc[tag] += 1;
-      } else {
-        acc[tag] = 1;
-      }
+      tags.forEach((tag) => {
+        if (Object.hasOwn(acc, tag)) {
+          acc[tag][0] += 1;
+        } else {
+          acc[tag] = [1, false];
+        }
+      });
+
+      return acc;
+    }, {} as Record<string, [number, boolean]>)
+  );
+
+  const toggleSelected = (tagName: string) => {
+    setTags((prev) => {
+      if (!Object.hasOwn(prev, tagName)) return prev;
+
+      const ret = { ...prev };
+      ret[tagName][1] = !ret[tagName][1];
+      return ret;
     });
+  };
 
-    return acc;
-  }, {} as Record<string, number>);
+  const clearSelected = () => {
+    setTags((prev) => {
+      const ret = { ...prev };
+      Object.keys(ret).forEach((key) => {
+        ret[key][1] = false;
+      });
+      return ret;
+    });
+  };
 
   return (
-    <div>
-      <h4 className={classNames('font-medium')}>태그별로 모아보기</h4>
-      <p
-        className={classNames(
-          'text-sm',
-          'text-[color:var(--primary-variant)]',
-          'mt-2'
-        )}
-      >
-        태그를 클릭하면 해당 태그가 포함된 글들만 모아볼 수 있어요.
-      </p>
-      <div>
+    <div className={classNames('border', 'rounded-lg', 'p-4')}>
+      <div className={classNames('flex', 'justify-between', 'items-center')}>
+        <h4 className={classNames('font-medium')}>태그별로 모아보기</h4>
         <Button
           borderStyle="none"
           shape="rounded"
           size="xs"
           variant="transparent"
           onClick={() => {
+            clearSelected();
             onReset?.();
           }}
         >
-          초기화
+          <span className={classNames('text-[color:var(--primary-variant)]')}>
+            초기화
+          </span>
         </Button>
       </div>
       <div
         className={classNames('flex', 'w-full', 'flex-wrap', 'gap-2', 'mt-4')}
       >
-        {Object.entries(tags).map(([key, value]) => (
+        {Object.entries(tags).map(([key, [count, selected]]) => (
           <Tag
             key={key}
-            label={`${key}: ${value}`}
+            label={`${key}: ${count}`}
+            selected={selected}
             onClick={() => {
+              // toggle tag
+              toggleSelected(key);
+              // callback function
               onClick?.(key);
             }}
           />
