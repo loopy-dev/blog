@@ -2,7 +2,7 @@ import classNames from 'classnames';
 
 interface HeaderProps {
   title: string;
-  description?: string;
+  description?: React.ReactNode;
 }
 
 const Header = ({ title, description }: HeaderProps) => {

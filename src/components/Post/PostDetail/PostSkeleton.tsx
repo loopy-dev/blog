@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import Skeleton from '../common/Skeleton';
+import Skeleton from '../../common/Skeleton';
 
 /**
  * https://github.com/velopert/velog-client/blob/master/src/components/post/PostSkeleton.tsx

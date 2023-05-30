@@ -1,7 +1,7 @@
 import classNames from 'classnames';
 import { PrismAsyncLight } from 'react-syntax-highlighter';
-import styles from './Post.module.scss';
-import { capitalize } from './utils';
+import styles from '../Post.module.scss';
+import { capitalize } from '../utils';
 import type { SyntaxHighlighterProps } from 'react-syntax-highlighter';
 
 const filterMap: Record<string, string> = {

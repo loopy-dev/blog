@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
 import classNames from 'classnames';
-import { setElementId } from './utils';
+import { setElementId } from '../utils';
 
 const PostAside = () => {
   const [heads, setHeads] = useState<HTMLHeadingElement[]>([]);

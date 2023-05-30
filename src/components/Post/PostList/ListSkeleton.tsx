@@ -12,7 +12,7 @@ const ListSkeleton = () => {
 export default ListSkeleton;
 
 import styled from 'styled-components';
-import Skeleton from '../common/Skeleton';
+import Skeleton from '../../common/Skeleton';
 
 const SkeletonParagraph = (
   <div className="lines">

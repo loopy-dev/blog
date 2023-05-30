@@ -7,9 +7,9 @@ import rehypeRaw from 'rehype-raw';
 import remarkBreaks from 'remark-breaks';
 import remarkFrontMatter from 'remark-frontmatter';
 import remarkGfm from 'remark-gfm';
-import Skeleton from '../common/Skeleton';
+import Skeleton from '~components/common/Skeleton';
+import { setElementId } from '../utils';
 import styles from './Markdown.module.scss';
-import { setElementId } from './utils';
 
 const SyntaxHighlighter = dynamic(() => import('./SyntaxHighlighter'), {
   loading: () => <Skeleton noSpacing height="220px" width="100%" />,

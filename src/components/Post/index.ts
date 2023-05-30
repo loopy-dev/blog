@@ -1,5 +1,8 @@
-import Post from './Post';
-import PostList from './PostList';
-
-export default Post;
-export { PostList };
+export { default as Post, PostSkeleton, PostTemplate } from './PostDetail';
+export {
+  default as PostList,
+  PostListSkeleton,
+  TagList,
+  SearchBar,
+  useTag,
+} from './PostList';

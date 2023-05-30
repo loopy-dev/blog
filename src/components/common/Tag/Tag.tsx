@@ -3,9 +3,10 @@ import classNames from 'classnames';
 
 interface Props extends HTMLAttributes<HTMLElement> {
   label?: string | number;
+  selected?: boolean;
 }
 
-const Tag = ({ label, ...props }: Props) => {
+const Tag = ({ label, selected, ...props }: Props) => {
   return (
     <button
       className={classNames(
@@ -15,8 +16,12 @@ const Tag = ({ label, ...props }: Props) => {
         'rounded-full',
         'py-1.5',
         'px-2.5',
-        'bg-white',
-        'dark:bg-zinc-600',
+        {
+          'bg-white': !selected,
+          'dark:bg-zinc-600': !selected,
+          'bg-zinc-100': selected,
+          'dark:bg-zinc-500': selected,
+        },
         'border',
         'leading-none',
         'break-keep',
