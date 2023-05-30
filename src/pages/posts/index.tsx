@@ -66,6 +66,11 @@ const Page = ({ posts }: Props) => {
             post.description.includes(keywords) ||
             post.tags.some((tag) => tag.includes(keywords))
         )
+      : selectedTags.length > 0
+      ? posts.filter((post) => {
+          const postTags = new Set(post.tags);
+          return selectedTags.every((tag) => postTags.has(tag));
+        })
       : posts.slice(0, counts)
   );
 
@@ -90,8 +95,16 @@ const Page = ({ posts }: Props) => {
         content={
           <>
             <Header
-              description="작성한 글들을 모아볼 수 있어요."
               title="Posts"
+              description={
+                keywords.length > 0
+                  ? `제목, 태그에 ${keywords} 키워드가 포함된 포스트를 검색해요.`
+                  : selectedTags.length > 0
+                  ? `${selectedTags.join(
+                      ', '
+                    )} 태그가 포함된 포스트를 검색해요.`
+                  : '작성한 글들을 모아볼 수 있어요.'
+              }
             />
             <SearchBar onChange={handleChange} />
             <div>
