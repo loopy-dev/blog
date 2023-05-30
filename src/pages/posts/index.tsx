@@ -1,8 +1,8 @@
 import { useDeferredValue, useState } from 'react';
 import classNames from 'classnames';
+import Lottie from 'lottie-react';
 import dynamic from 'next/dynamic';
 import Head from 'next/head';
-import Image from 'next/image';
 import postService from '~/lib/post';
 import Header from '~components/Header';
 import {
@@ -15,6 +15,7 @@ import {
 import GlobalLayout from '~components/layouts/GlobalLayout';
 import useDebounce from '~hooks/useDebounce';
 import InfiniteScrollComponent from '~hooks/useInfiniteScroll/InfiniteScrollComponent';
+import itemNotFound from '../../../public/item-not-found.json';
 import type { GetStaticProps } from 'next';
 import type { FrontMatter } from '~/models/Post';
 
@@ -210,17 +211,9 @@ const NoResult = ({ message }: NoResultProps) => {
         'items-center'
       )}
     >
-      <Image
-        alt="loading"
-        height={0}
-        src="/nyan-cat.gif"
-        width={0}
-        style={{
-          marginLeft: '10%',
-          width: '100%',
-          height: 'auto',
-        }}
-      />
+      <div className={classNames('mx-auto', 'w-full', 'max-w-[400px]')}>
+        <Lottie loop animationData={itemNotFound} />
+      </div>
       <p>{message}</p>
     </div>
   );
