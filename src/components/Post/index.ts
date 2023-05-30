@@ -4,4 +4,5 @@ export {
   PostListSkeleton,
   TagList,
   SearchBar,
+  useTag,
 } from './PostList';

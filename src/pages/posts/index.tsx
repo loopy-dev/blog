@@ -10,6 +10,7 @@ import {
   PostTemplate,
   SearchBar,
   TagList,
+  useTag,
 } from '~components/Post';
 import GlobalLayout from '~components/layouts/GlobalLayout';
 import useDebounce from '~hooks/useDebounce';
@@ -48,38 +49,28 @@ interface Props {
 }
 
 const Page = ({ posts }: Props) => {
+  // input values
   const [keywords, setKeywords] = useState<string>('');
   const debounced = useDebounce((target: string) => {
     setKeywords(target);
   });
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { value } = e.target;
+    debounced(value);
+  };
 
   // used in infinite scroll
   const [counts, setCounts] = useState(
     Math.min(INITIAL_POST_COUNTS, posts.length)
   );
 
+  // tags
   const { selectedTags, toggleTag, clear } = useTag();
 
+  // posts
   const filteredPosts = useDeferredValue(
-    keywords
-      ? posts.filter(
-          (post) =>
-            post.title.includes(keywords) ||
-            post.description.includes(keywords) ||
-            post.tags.some((tag) => tag.includes(keywords))
-        )
-      : selectedTags.length > 0
-      ? posts.filter((post) => {
-          const postTags = new Set(post.tags);
-          return selectedTags.every((tag) => postTags.has(tag));
-        })
-      : posts.slice(0, counts)
+    getFilteredPosts({ posts, keywords, selectedTags, counts })
   );
-
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { value } = e.target;
-    debounced(value);
-  };
 
   return (
     <GlobalLayout>
@@ -100,33 +91,9 @@ const Page = ({ posts }: Props) => {
               title="Posts"
               description={
                 keywords.length > 0 ? (
-                  <p>
-                    제목, 태그에{' '}
-                    <span
-                      className={classNames(
-                        'text-[color:var(--primary-variant)]'
-                      )}
-                    >
-                      {keywords}
-                    </span>{' '}
-                    키워드가 포함된 포스트를 검색해요.
-                  </p>
+                  <InputKeywordsMessage keywords={keywords} />
                 ) : selectedTags.length > 0 ? (
-                  <p>
-                    {selectedTags.map((tag, index) => (
-                      <span
-                        key={tag}
-                        className={classNames(
-                          'text-[color:var(--primary-variant)]'
-                        )}
-                      >
-                        {index < selectedTags.length - 1
-                          ? tag.concat(', ')
-                          : tag}
-                      </span>
-                    ))}{' '}
-                    태그가 포함된 포스트를 검색해요.
-                  </p>
+                  <TagSelectedMessage selectedTags={selectedTags} />
                 ) : (
                   '작성한 글들을 모아볼 수 있어요.'
                 )
@@ -147,28 +114,7 @@ const Page = ({ posts }: Props) => {
                   />
                 </>
               ) : (
-                <div
-                  className={classNames(
-                    'flex',
-                    'flex-col',
-                    'gap-4',
-                    'justify-center',
-                    'items-center'
-                  )}
-                >
-                  <Image
-                    alt="loading"
-                    height={0}
-                    src="/nyan-cat.gif"
-                    width={0}
-                    style={{
-                      marginLeft: '10%',
-                      width: '100%',
-                      height: 'auto',
-                    }}
-                  />
-                  <p>해당 키워드에 대한 포스트가 아직 없네요. </p>
-                </div>
+                <NoResult message="해당 키워드에 대한 포스트가 아직 없네요." />
               )}
             </div>
           </>
@@ -180,47 +126,102 @@ const Page = ({ posts }: Props) => {
 
 export default Page;
 
-const useTag = () => {
-  const [selectedTags, setSelectedTags] = useState<Set<string>>(new Set());
+interface GetFilteredPostsProps {
+  posts: FrontMatter[];
+  keywords?: string;
+  selectedTags?: string[];
+  counts: number;
+}
 
-  const addTag = (tagName: string) => {
-    setSelectedTags((prev) => {
-      const ret = new Set(Array.from(prev));
-      ret.add(tagName);
-      return ret;
-    });
-  };
+/**
+ * @description
+ * keywords, selectedTags, counts를 바탕으로 검색 결과를 반환합니다.
+ *
+ */
+const getFilteredPosts = ({
+  posts,
+  keywords,
+  selectedTags,
+  counts,
+}: GetFilteredPostsProps) => {
+  return keywords
+    ? posts.filter(
+        (post) =>
+          post.title.includes(keywords) ||
+          post.description.includes(keywords) ||
+          post.tags.some((tag) => tag.includes(keywords))
+      )
+    : selectedTags && selectedTags.length > 0
+    ? posts.filter((post) => {
+        const postTags = new Set(post.tags);
+        return selectedTags.every((tag) => postTags.has(tag));
+      })
+    : posts.slice(0, counts);
+};
 
-  const removeTag = (tagName: string) => {
-    setSelectedTags((prev) => {
-      const ret = new Set(Array.from(prev));
-      ret.delete(tagName);
-      return ret;
-    });
-  };
+interface InputMessageProps {
+  keywords: string;
+}
 
-  const toggleTag = (tagName: string) => {
-    setSelectedTags((prev) => {
-      if (prev.has(tagName)) {
-        const ret = new Set(Array.from(prev));
-        ret.delete(tagName);
-        return ret;
-      }
-      const ret = new Set(Array.from(prev));
-      ret.add(tagName);
-      return ret;
-    });
-  };
+const InputKeywordsMessage = ({ keywords }: InputMessageProps) => {
+  return (
+    <p>
+      제목, 태그에{' '}
+      <span className={classNames('text-[color:var(--primary-variant)]')}>
+        {keywords}
+      </span>{' '}
+      키워드가 포함된 포스트를 검색해요.
+    </p>
+  );
+};
 
-  const clear = () => {
-    setSelectedTags(() => new Set());
-  };
+interface TagMessageProps {
+  selectedTags: string[];
+}
 
-  return {
-    selectedTags: Array.from(selectedTags),
-    addTag,
-    removeTag,
-    toggleTag,
-    clear,
-  };
+const TagSelectedMessage = ({ selectedTags }: TagMessageProps) => {
+  return (
+    <p>
+      {selectedTags.map((tag, index) => (
+        <span
+          key={tag}
+          className={classNames('text-[color:var(--primary-variant)]')}
+        >
+          {index < selectedTags.length - 1 ? tag.concat(', ') : tag}
+        </span>
+      ))}{' '}
+      태그가 포함된 포스트를 검색해요.
+    </p>
+  );
+};
+
+interface NoResultProps {
+  message?: string;
+}
+
+const NoResult = ({ message }: NoResultProps) => {
+  return (
+    <div
+      className={classNames(
+        'flex',
+        'flex-col',
+        'gap-4',
+        'justify-center',
+        'items-center'
+      )}
+    >
+      <Image
+        alt="loading"
+        height={0}
+        src="/nyan-cat.gif"
+        width={0}
+        style={{
+          marginLeft: '10%',
+          width: '100%',
+          height: 'auto',
+        }}
+      />
+      <p>{message}</p>
+    </div>
+  );
 };
