@@ -41,6 +41,51 @@ const PostList = dynamic(
 const INITIAL_POST_COUNTS = 5;
 const NEXT_POST_COUNTS = 5;
 
+const useTag = () => {
+  const [selectedTags, setSelectedTags] = useState<Set<string>>(new Set());
+
+  const addTag = (tagName: string) => {
+    setSelectedTags((prev) => {
+      const ret = new Set(Array.from(prev));
+      ret.add(tagName);
+      return ret;
+    });
+  };
+
+  const removeTag = (tagName: string) => {
+    setSelectedTags((prev) => {
+      const ret = new Set(Array.from(prev));
+      ret.delete(tagName);
+      return ret;
+    });
+  };
+
+  const toggleTag = (tagName: string) => {
+    setSelectedTags((prev) => {
+      if (prev.has(tagName)) {
+        const ret = new Set(Array.from(prev));
+        ret.delete(tagName);
+        return ret;
+      }
+      const ret = new Set(Array.from(prev));
+      ret.add(tagName);
+      return ret;
+    });
+  };
+
+  const clear = () => {
+    setSelectedTags(() => new Set());
+  };
+
+  return {
+    selectedTags: Array.from(selectedTags),
+    addTag,
+    removeTag,
+    toggleTag,
+    clear,
+  };
+};
+
 interface Props {
   posts: FrontMatter[];
 }
@@ -50,9 +95,13 @@ const Page = ({ posts }: Props) => {
   const debounced = useDebounce((target: string) => {
     setKeywords(target);
   });
+
+  // used in infinite scroll
   const [counts, setCounts] = useState(
     Math.min(INITIAL_POST_COUNTS, posts.length)
   );
+
+  const { selectedTags, toggleTag, clear } = useTag();
 
   const filteredPosts = useDeferredValue(
     keywords
@@ -82,7 +131,7 @@ const Page = ({ posts }: Props) => {
         />
       </Head>
       <PostTemplate
-        aside={<TagList posts={posts} />}
+        aside={<TagList posts={posts} onClick={toggleTag} onReset={clear} />}
         content={
           <>
             <Header
