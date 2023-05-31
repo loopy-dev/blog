@@ -108,7 +108,6 @@ const Page = ({ posts }: Props) => {
       </div>
       <PostTemplate
         orderAsideFirst
-        showAsideOnMobile
         aside={
           <TagList
             className={classNames({ hidden: keywords.length > 0 }, 'lg:block')}
