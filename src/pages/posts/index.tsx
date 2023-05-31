@@ -4,6 +4,7 @@ import Lottie from 'lottie-react';
 import dynamic from 'next/dynamic';
 import Head from 'next/head';
 import postService from '~/lib/post';
+import { filterPostsByKeywordsAndTags } from '~/lib/post/postQuery-client';
 import Header from '~components/Header';
 import {
   PostListSkeleton,
@@ -70,7 +71,10 @@ const Page = ({ posts }: Props) => {
 
   // posts
   const filteredPosts = useDeferredValue(
-    getFilteredPosts({ posts, keywords, selectedTags, counts })
+    filterPostsByKeywordsAndTags(posts, { keywords, selectedTags }).slice(
+      0,
+      counts
+    )
   );
 
   return (
@@ -141,39 +145,6 @@ const Page = ({ posts }: Props) => {
 };
 
 export default Page;
-
-interface GetFilteredPostsProps {
-  posts: FrontMatter[];
-  keywords?: string;
-  selectedTags?: string[];
-  counts: number;
-}
-
-/**
- * @description
- * keywords, selectedTags, counts를 바탕으로 검색 결과를 반환합니다.
- *
- */
-const getFilteredPosts = ({
-  posts,
-  keywords,
-  selectedTags,
-  counts,
-}: GetFilteredPostsProps) => {
-  return keywords
-    ? posts.filter(
-        (post) =>
-          post.title.includes(keywords) ||
-          post.description.includes(keywords) ||
-          post.tags.some((tag) => tag.includes(keywords))
-      )
-    : selectedTags && selectedTags.length > 0
-    ? posts.filter((post) => {
-        const postTags = new Set(post.tags);
-        return selectedTags.every((tag) => postTags.has(tag));
-      })
-    : posts.slice(0, counts);
-};
 
 interface InputMessageProps {
   keywords: string;
