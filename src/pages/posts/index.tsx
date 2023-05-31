@@ -85,6 +85,8 @@ const Page = ({ posts }: Props) => {
         />
       </Head>
       <PostTemplate
+        orderAsideFirst
+        showAsideOnMobile
         aside={<TagList posts={posts} onClick={toggleTag} onReset={clear} />}
         content={
           <>
