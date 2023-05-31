@@ -15,11 +15,12 @@ export const filterPostsByKeywords = (
   posts: FrontMatter[],
   keywords: string
 ) => {
+  const lowered = keywords.toLocaleLowerCase();
   return posts.filter(
     (post) =>
-      post.title.includes(keywords) ||
-      post.description.includes(keywords) ||
-      post.tags.some((tag) => tag.includes(keywords))
+      post.title.toLocaleLowerCase().includes(lowered) ||
+      post.description.toLocaleLowerCase().includes(lowered) ||
+      post.tags.some((tag) => tag.toLocaleLowerCase().includes(lowered))
   );
 };
 
