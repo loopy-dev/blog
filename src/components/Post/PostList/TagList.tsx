@@ -8,6 +8,7 @@ interface Props {
   posts: FrontMatter[];
   onClick?: (tagName: string) => void;
   onReset?: () => void;
+  className?: string;
 }
 
 /**
@@ -15,7 +16,7 @@ interface Props {
  * FrontMatter Props을 받아 Tag list를 보여준다.
  *
  */
-const TagList = ({ posts, onClick, onReset }: Props) => {
+const TagList = ({ posts, onClick, onReset, className }: Props) => {
   /**
    * ```tsx
    * const tags = { tagName: [1, false] }
@@ -58,7 +59,7 @@ const TagList = ({ posts, onClick, onReset }: Props) => {
   };
 
   return (
-    <div className={classNames('border', 'rounded-lg', 'p-4')}>
+    <div className={classNames('border', 'rounded-lg', 'p-4', className)}>
       <div className={classNames('flex', 'justify-between', 'items-center')}>
         <h4 className={classNames('font-medium')}>태그별로 모아보기</h4>
         <Button

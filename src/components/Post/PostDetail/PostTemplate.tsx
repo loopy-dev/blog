@@ -3,13 +3,22 @@ import classNames from 'classnames';
 interface Props {
   content: React.ReactNode;
   aside?: React.ReactNode;
+  showAsideOnMobile?: boolean;
+  orderAsideFirst?: boolean;
 }
 
-const PostTemplate = ({ content, aside }: Props) => {
+const PostTemplate = ({
+  content,
+  aside,
+  showAsideOnMobile,
+  orderAsideFirst,
+}: Props) => {
   return (
     <div
       className={classNames(
-        'lg:flex',
+        'flex',
+        'flex-col',
+        'lg:flex-row',
         'w-full',
         'justify-between',
         'relative',
@@ -27,13 +36,21 @@ const PostTemplate = ({ content, aside }: Props) => {
       {aside ? (
         <aside
           className={classNames(
-            'sticky',
-            'mt-[20%]',
-            'p-6',
-            'w-[300px]',
-            'hidden',
+            'lg:sticky',
+            'lg:mt-[10%]',
             'lg:block',
-            'top-[20%]'
+            'lg:w-[300px]',
+            'max-w-[44rem]',
+            'mx-auto',
+            'p-6',
+            'top-[20%]',
+            'lg:order-none',
+            {
+              'order-first': orderAsideFirst,
+            },
+            {
+              hidden: !showAsideOnMobile,
+            }
           )}
         >
           {aside}
