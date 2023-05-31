@@ -37,7 +37,7 @@ const PostTemplate = ({
         <aside
           className={classNames(
             'lg:sticky',
-            'lg:mt-[20%]',
+            'lg:mt-[10%]',
             'lg:block',
             'lg:w-[300px]',
             'max-w-[44rem]',

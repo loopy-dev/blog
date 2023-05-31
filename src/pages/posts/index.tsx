@@ -111,11 +111,8 @@ const Page = ({ posts }: Props) => {
         showAsideOnMobile
         aside={
           <TagList
+            className={classNames({ hidden: keywords.length > 0 }, 'lg:block')}
             posts={posts}
-            className={classNames(
-              { hidden: keywords.length > 0 },
-              'lg:setblock'
-            )}
             onClick={toggleTag}
             onReset={clear}
           />

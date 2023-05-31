@@ -10,7 +10,7 @@ interface Props {
 
 const PostList = ({ posts }: Props) => {
   return (
-    <div className={classNames('mt-4')}>
+    <div className={classNames('lg:mt-4')}>
       {posts.map((post) => (
         <PostItem key={post.title} post={post} />
       ))}
