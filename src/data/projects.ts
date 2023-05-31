@@ -22,15 +22,12 @@ export const portfolio: Project = {
   startDate: '2023-01',
   skills: [typescript, react, next, tailwind, styledComponents],
   description: [
-    '마크 다운 파일 기반 serverless 정적 블로그 서비스 개발, utterances api를 연결하여 issue 기반 댓글 시스템 구현',
-    'firebase를 이용한 피드백 페이지 구현',
-    '느린 초기 로딩속도 개선을 위한 페이지 분석 및 개선 작업',
-    '번들 파일 분석 및 코드 스플리팅으로 번들 크기 축소',
-    '리소스 분석을 통해 요청 리소스 파일 크기 최적화',
-    '폰트 관련 리소스를 최적화 하기 위하여 1/3 용량을 갖는 subset font로 대체, 필수 스타일 프리로드, 스타일 리소스 기존 대비 1/9로 축소',
+    '마크 다운 파일 기반 정적 블로그 서비스',
+    '백엔드로부터 자유롭게 개발 진행(firbase store를 이용한 피드백 페이지, utterances api issue 기반 댓글 시스템, 외부 api를 활용한 조회수 기능 등)',
+    '느린 초기 로딩속도 개선을 위한 페이지 분석 및 개선 작업 진행 (번들 파일 분석 및 코드 스플리팅으로 번들 크기 축소, 리소스 분석을 통한 요청 리소스 파일 크기 최적화)',
     'web vital 성능 점수를 60 → 90점으로 50% 개선',
-    'vercel analytics를 통한 유입 관리 및 web vital 체킹',
-    '사용성을 개선하기 위한 작업 진행 중',
+    'vercel analytics, ga를 통한 유입 관리 및 web vital 체킹',
+    '사용성 경험을 개선하기 위한 작업 및 리팩토링 진행 중(블로그에 진행 사항을 기록 중에 있습니다.)',
   ],
   links: {
     github: { name: 'Github', url: 'https://github.com/mrbartrns/portfolio' },
@@ -44,6 +41,22 @@ export const portfolio: Project = {
     {
       name: '블로그를 만들면서 마주쳤던 어려움들',
       url: 'https://portfolio-mrbartrns.vercel.app/posts/%EB%B8%94%EB%A1%9C%EA%B7%B8%EB%A5%BC%20%EB%A7%8C%EB%93%A4%EB%A9%B4%EC%84%9C%20%EB%A7%88%EC%A3%BC%EC%B9%9C%20%EC%96%B4%EB%A0%A4%EC%9B%80%EB%93%A4',
+    },
+    {
+      name: '블로그 가독성 개선하기',
+      url: 'https://portfolio-mrbartrns.vercel.app/posts/improve-post-readability',
+    },
+    {
+      name: '블로그 다크모드 적용기',
+      url: 'https://portfolio-mrbartrns.vercel.app/posts/blog-dark-mode',
+    },
+    {
+      name: '백엔드 없이 블로그 추가 기능 구현하기(feat. 댓글과 조회수기능, 추천 포스트)',
+      url: 'https://portfolio-mrbartrns.vercel.app/posts/new-blog-features',
+    },
+    {
+      name: '클로저를 활용하여 커스텀 알림창 구현하기',
+      url: 'https://portfolio-mrbartrns.vercel.app/posts/create-custom-alert-component',
     },
   ],
 };
