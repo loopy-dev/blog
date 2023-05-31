@@ -84,43 +84,60 @@ const Page = ({ posts }: Props) => {
           property="og:description"
         />
       </Head>
+      <div
+        className={classNames(
+          'max-w-[44rem]',
+          'lg:max-w-screen-lg',
+          'p-6',
+          'mx-auto'
+        )}
+      >
+        <Header
+          title="Posts"
+          description={
+            keywords.length > 0 ? (
+              <InputKeywordsMessage keywords={keywords} />
+            ) : selectedTags.length > 0 ? (
+              <TagSelectedMessage selectedTags={selectedTags} />
+            ) : (
+              '작성한 글들을 모아볼 수 있어요.'
+            )
+          }
+        />
+        <SearchBar onChange={handleChange} />
+      </div>
       <PostTemplate
         orderAsideFirst
         showAsideOnMobile
-        aside={<TagList posts={posts} onClick={toggleTag} onReset={clear} />}
+        aside={
+          <TagList
+            posts={posts}
+            className={classNames(
+              { hidden: keywords.length > 0 },
+              'lg:setblock'
+            )}
+            onClick={toggleTag}
+            onReset={clear}
+          />
+        }
         content={
-          <>
-            <Header
-              title="Posts"
-              description={
-                keywords.length > 0 ? (
-                  <InputKeywordsMessage keywords={keywords} />
-                ) : selectedTags.length > 0 ? (
-                  <TagSelectedMessage selectedTags={selectedTags} />
-                ) : (
-                  '작성한 글들을 모아볼 수 있어요.'
-                )
-              }
-            />
-            <SearchBar onChange={handleChange} />
-            <div>
-              {filteredPosts.length > 0 ? (
-                <>
-                  <PostList posts={filteredPosts} />
-                  <InfiniteScrollComponent
-                    threshold={0.7}
-                    onIntersect={() => {
-                      setCounts((prev) =>
-                        Math.min(prev + NEXT_POST_COUNTS, posts.length)
-                      );
-                    }}
-                  />
-                </>
-              ) : (
-                <NoResult message="해당 키워드에 대한 포스트가 아직 없네요." />
-              )}
-            </div>
-          </>
+          <div>
+            {filteredPosts.length > 0 ? (
+              <>
+                <PostList posts={filteredPosts} />
+                <InfiniteScrollComponent
+                  threshold={0.7}
+                  onIntersect={() => {
+                    setCounts((prev) =>
+                      Math.min(prev + NEXT_POST_COUNTS, posts.length)
+                    );
+                  }}
+                />
+              </>
+            ) : (
+              <NoResult message="해당 키워드에 대한 포스트가 아직 없네요." />
+            )}
+          </div>
         }
       />
     </GlobalLayout>
