@@ -1,7 +1,7 @@
 import { useState } from 'react';
-import { Noto_Sans_KR } from '@next/font/google';
 import classNames from 'classnames';
 import dynamic from 'next/dynamic';
+import { Noto_Sans_KR } from 'next/font/google';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import Icon from '../icons';
