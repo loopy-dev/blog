@@ -7,6 +7,7 @@ tags:
   - Next.js
   - frontend
 description: 커스텀 알림 컴포넌트를 구현해보자
+series: b67c675a-e8fc-47d7-8b3a-44ed363d8956
 ---
 
 # 개요
@@ -21,16 +22,16 @@ window.alert가 사용자 경험에 부정적인 영향을 미치는 이유는, 
 
 알림 컴포넌트를 만들기에 앞서서, 어떤 모습으로 보여지면 좋을 지 구상을 해 보았다.
 
--   **알림이 사용자의 행동을 방해하지 않아야 함**
--   화면의 가장 상단, 그리고 가운데 노출되어야 하며, 스크롤과 관계 없이 같은 위치에서 보여줘야 함
--   알림이 나왔다가 들어가는 효과가 있어야 하며, 알림이 들어간 뒤 렌더 트리에서 완전히 사라져야 함
+- **알림이 사용자의 행동을 방해하지 않아야 함**
+- 화면의 가장 상단, 그리고 가운데 노출되어야 하며, 스크롤과 관계 없이 같은 위치에서 보여줘야 함
+- 알림이 나왔다가 들어가는 효과가 있어야 하며, 알림이 들어간 뒤 렌더 트리에서 완전히 사라져야 함
 
 그림으로 나타내면 다음과 같다.
 
 그리고 개발자의 입장에서 사용했을 때 어떻게 하면 편하게 사용할 수 있을지 역시 생각해 보았다.
 
--   알림을 보여주는 함수 `notificate`를 호출하면, 언제 어디서나 화면에서 노출이 되어야 함(이 부분은 `react-toast`라는 패키지에서 영감을 받았다.)
--   또한, notificate 함수를 호출할 때 노출 시간과 배경 색을 정할 수 있어야 함
+- 알림을 보여주는 함수 `notificate`를 호출하면, 언제 어디서나 화면에서 노출이 되어야 함(이 부분은 `react-toast`라는 패키지에서 영감을 받았다.)
+- 또한, notificate 함수를 호출할 때 노출 시간과 배경 색을 정할 수 있어야 함
 
 이를 위하여 `AlertManager`라는 컴포넌트를 최상단에 두고 해당 컴포넌트에서 AlertQueue를 관리하는 방식을 사용하고자 했다. 전역적으로 상태를 관리할 수 있는 방법들 중에서 보편적인 방법들은, `React Context api` 사용하기, `Redux` 등 여러 방법이 있으나, 이러한 방법을 최종적으로 채택하지 않았다.
 
@@ -60,18 +61,18 @@ Context api는 React 내장 api로서 굉장히 편리하지만, Next.js 환경�
 
 ```tsx
 const outer = () => {
-	let counter = 0
-	return () => {
-  	counter++
-    return counter
-  }
-}
+  let counter = 0;
+  return () => {
+    counter++;
+    return counter;
+  };
+};
 
-const inner = outer()
-console.log(inner())  // 1
-console.log(inner())  // 2
-console.log(inner())  // 3
-console.log(inner())  // 4
+const inner = outer();
+console.log(inner()); // 1
+console.log(inner()); // 2
+console.log(inner()); // 3
+console.log(inner()); // 4
 ```
 
 1.  전역 스코프에서 `outer`라는 함수를 선언한다.
@@ -87,22 +88,22 @@ console.log(inner())  // 4
 ```tsx
 // AlertManager.tsx
 const AlertManager = () => {
-  const [queue, setQueue] = useState([])
-  
+  const [queue, setQueue] = useState([]);
+
   const createAlert = useCallback((text, duration, bgColor) => {
     const newAlert = {
-      id: v4(),  // uuid pkg
+      id: v4(), // uuid pkg
       text,
       duration,
-      bgColor
-    }
-    
-    setQueue((prev) => [...prev, newAlert])
-  }, [])
+      bgColor,
+    };
+
+    setQueue((prev) => [...prev, newAlert]);
+  }, []);
 
   const removeAlert = useCallback((id) => {
-    setQueue((prev) => prev.filter((alertState) => alertState.id !== id))
-  }, [])
+    setQueue((prev) => prev.filter((alertState) => alertState.id !== id));
+  }, []);
 
   return (
     <div>
@@ -120,7 +121,7 @@ const AlertManager = () => {
       ))}
     </div>
   );
-}
+};
 
 // _app.tsx
 const App = ({ Component, pageProps }) => {
@@ -130,7 +131,7 @@ const App = ({ Component, pageProps }) => {
       <AlertManager width="640px" />
     </Provider>
   );
-}
+};
 ```
 
 그리고 어디서나 `notificate` 라는 함수를 호출하여, 언제 어디서나 `createAlert` 를 호출한 효과를 내기 위하여 다음과 같이 상위 스코프에서 참조하도록 만들었다.
@@ -154,7 +155,7 @@ const initialize = () => {
 
 const { bind, notificate } = initialize();
 
-export { bind, notificate }
+export { bind, notificate };
 ```
 
 1.  상위 스코프인 `initialize` 내부에서 `createAlertFn`이라는 식별자가 선언되었고, `bind`라는 함수를 통해 createAlertFn의 값을 변경할 수 있으며 `notificate`를 통해 식별자를 참조할 수 있다.
@@ -164,23 +165,21 @@ export { bind, notificate }
 따라서 bind를 통해 해당 함수를 식별자가 참조할 수 있게 만들어주면, 언제 어디서든 간에 notificate 함수를 통해 호출할 수 있게 된다. 따라서 기존 AlertManger에서, bind를 통해 createAlert 함수를 바인딩 시켜주는 작업이 필요하다.
 
 ```tsx
-
 const AlertManger = () => {
-
   const createAlert = useCallback((text, duration, bgColor) => {
     const newAlert = {
-      id: v4(),  // uuid pkg
+      id: v4(), // uuid pkg
       text,
       duration,
-      bgColor
-    }
-    
-    setQueue((prev) => [...prev, newAlert])
-  }, [])
+      bgColor,
+    };
+
+    setQueue((prev) => [...prev, newAlert]);
+  }, []);
 
   useEffect(() => {
-    bind(createAlert)  // 이제 notificate 함수를 호출하여 알림을 보여줄 수 있다.
-  }, [createAlert])
+    bind(createAlert); // 이제 notificate 함수를 호출하여 알림을 보여줄 수 있다.
+  }, [createAlert]);
 
   return (
     <div>
@@ -197,7 +196,7 @@ const AlertManger = () => {
       ))}
     </div>
   );
-}
+};
 ```
 
 마지막으로 AlertManger에 알림이 쌓이면 보여줄 `AlertItem`이라는 컴포넌트를 구현한다. AlertItem은 내려오는 효과와 끝나면 올라가는 효과가 필요하며, 컴포넌트가 올라가는 효과가 끝난 다음 사라져야 하므로, 이 부분은 `setTimeout`을 이용하여 구현했다. `disappear`이라는 함수에서 이 부분을 담당하므로, 해당 부분을 확인하면 된다.
@@ -220,7 +219,7 @@ const AlertItem = ({
   const onDoneRef = useRef(onDone);
 
   const disappear = useCallback(() => {
-    setIsShowing(false);  // false시 transition
+    setIsShowing(false); // false시 transition
 
     setTimeout(() => {
       onDoneRef.current?.();
@@ -237,11 +236,7 @@ const AlertItem = ({
     };
   }, [disappear, duration]);
 
-  return (
-    <div>
-      {message}
-    </div>
-  );
+  return <div>{message}</div>;
 };
 
 export default AlertItem;

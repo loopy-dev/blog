@@ -1,15 +1,17 @@
 import dynamic from 'next/dynamic';
 import Head from 'next/head';
+import json from 'content/series.json';
 import GlobalLayout from '~/components/layouts/GlobalLayout';
 import postService from '~/lib/post';
 import { parseFileName } from '~/lib/post/postService';
 import { PostSkeleton, PostTemplate } from '~components/Post';
 import type { GetStaticPaths, GetStaticProps } from 'next';
-import type { FrontMatter, Post as PostModel } from '~/models/Post';
+import type { FrontMatter, Post as PostModel, Series } from '~/models/Post';
 
 interface Props {
   post: PostModel;
   recommendedPosts: FrontMatter[];
+  series: Series | null;
 }
 
 // TODO - Post는 dynamic import 하지 말고, 내부 Content만 dynamic update 진행 테스트
@@ -43,12 +45,31 @@ export const getStaticProps: GetStaticProps = async (context) => {
     const postMetaData = await postService.decodeMetaData(`${id}.md`);
     const post = postService.decode(`${id}.md`);
 
+    const postListMetaData = await postService.getPostListMetaData();
+
     // NOTE - 본인 것을 제외하고 반환
-    const recommendedPosts = await postService
-      .getPostListMetaData()
-      .then((frontmatters) =>
-        frontmatters.filter((frontMatter) => frontMatter.url !== id)
+    const recommendedPosts = postListMetaData.filter(
+      (frontMatter) => frontMatter.url !== id
+    );
+
+    let series: Series | null = null;
+    const seriesId = postMetaData.series;
+
+    if (seriesId) {
+      const seriesItems = postListMetaData.filter(
+        (frontMatter) => frontMatter.series === seriesId
       );
+
+      series = {
+        id: seriesId,
+        title: (json as Record<string, string>)[seriesId] || seriesId,
+        items: seriesItems.sort(
+          (a, b) =>
+            new Date(a.createdTime).getTime() -
+            new Date(b.createdTime).getTime()
+        ),
+      };
+    }
 
     return {
       props: {
@@ -57,6 +78,7 @@ export const getStaticProps: GetStaticProps = async (context) => {
           ...postMetaData,
         },
         recommendedPosts,
+        series,
       },
     };
   } catch {
@@ -66,7 +88,7 @@ export const getStaticProps: GetStaticProps = async (context) => {
   }
 };
 
-const Page = ({ post, recommendedPosts }: Props) => {
+const Page = ({ post, recommendedPosts, series }: Props) => {
   return (
     <GlobalLayout>
       <Head>
@@ -84,7 +106,7 @@ const Page = ({ post, recommendedPosts }: Props) => {
           property="og:description"
         />
       </Head>
-      <Post post={post} recommendedPosts={recommendedPosts} />
+      <Post post={post} recommendedPosts={recommendedPosts} series={series} />
     </GlobalLayout>
   );
 };

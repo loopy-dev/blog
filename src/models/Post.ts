@@ -5,6 +5,7 @@ export interface Post {
   tags: string[];
   description: string;
   content: string;
+  series?: string;
 }
 
 export interface PostHits {
@@ -16,3 +17,9 @@ export interface PostHits {
 }
 
 export type FrontMatter = Omit<Post, 'content'>;
+
+export interface Series {
+  id: string;
+  title: string;
+  items: FrontMatter[];
+}
