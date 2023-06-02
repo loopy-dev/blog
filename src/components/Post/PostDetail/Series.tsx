@@ -89,11 +89,9 @@ const Series = ({ series }: Props) => {
             className={classNames(
               'flex',
               'gap-4',
-              'py-0.5',
+              'py-1',
               'px-4',
-              'leading-normal',
-              'text-sm',
-              'sm:text-base'
+              'leading-normal'
             )}
           >
             <span
