@@ -1,4 +1,6 @@
 import type { HTMLAttributes } from 'react';
+import { useMemo } from 'react';
+import { useCallback } from 'react';
 import { createContext, useContext, useState } from 'react';
 
 interface Props extends HTMLAttributes<HTMLDivElement> {
@@ -20,7 +22,8 @@ interface DropdownProps {
 
 const DropdownContext = createContext({});
 
-const useDropdownContext = () => useContext(DropdownContext) as DropdownProps;
+export const useDropdownContext = () =>
+  useContext(DropdownContext) as DropdownProps;
 
 // NOTE - dropdownTrigger prop 내에 trigger 삽입 시
 // 항상 DropdownTrigger Component로 감싸게 하는 방법이 이상적인가?
@@ -34,21 +37,24 @@ export const Dropdown = ({
   // isOpen이 true라면 dropdown이 열리고, 아니면 닫힘
   const [isOpen, setIsOpen] = useState(isOpenBeginning);
 
-  const open = () => {
+  const open = useCallback(() => {
     setIsOpen(true);
-  };
+  }, []);
 
-  const close = () => {
+  const close = useCallback(() => {
     setIsOpen(false);
-  };
+  }, []);
 
-  const toggle = () => {
+  const toggle = useCallback(() => {
     setIsOpen((prev) => !prev);
-  };
+  }, []);
 
   return (
     <DropdownContext.Provider
-      value={{ isOpen, open, close, toggle, autoClose }}
+      value={useMemo(
+        () => ({ isOpen, open, close, toggle, autoClose }),
+        [autoClose, close, isOpen, open, toggle]
+      )}
     >
       {/** frame of dropdown */}
       <div {...props}>

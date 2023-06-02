@@ -3,12 +3,17 @@ import PostContent from './PostContent';
 import PostFooter from './PostFooter';
 import PostHeader from './PostHeader';
 import PostTemplate from './PostTemplate';
-import type { FrontMatter, Post as PostModel, Series } from '~/models/Post';
+import Series from './Series';
+import type {
+  FrontMatter,
+  Post as PostModel,
+  Series as SeriesType,
+} from '~/models/Post';
 
 interface Props {
   post: PostModel;
   recommendedPosts: FrontMatter[];
-  series: Series | null;
+  series: SeriesType | null;
 }
 
 const PostAside = dynamic(() => import('./PostAside'), { ssr: false });
@@ -29,7 +34,7 @@ const Post = ({ post, recommendedPosts, series }: Props) => {
         <>
           <PostHeader postMetaData={{ ...frontMatter }} />
           {/** here goes series if exist */}
-          {series && JSON.stringify(series)}
+          {series && <Series series={series} />}
           <PostContent content={post.content} />
           <PostFooter
             recommendedPosts={recommendedPosts}
