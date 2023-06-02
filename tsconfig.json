@@ -19,8 +19,6 @@
       "~components/*": ["src/components/*"],
       "~hooks/*": ["src/hooks/*"],
       "~models/*": ["src/models/*"],
-      "~store/*": ["src/lib/store/*"],
-      "~styles/*": ["src/styles/*"],
       "~/*": ["src/*"]
     }
   },

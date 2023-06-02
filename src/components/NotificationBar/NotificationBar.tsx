@@ -2,7 +2,7 @@ import classNames from 'classnames';
 import { useDispatch, useSelector } from 'react-redux';
 import Button from '~components/common/Button';
 import { close } from './notificationSlice';
-import type { RootState } from '~store/.';
+import type { RootState } from '~/lib/store';
 
 interface Props {
   background?: 'primary' | 'success' | 'error';

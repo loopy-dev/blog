@@ -8,6 +8,7 @@ tags:
   - frontend
   - darkmode
 description: 좌충우돌 다크모드 적용기 in next.js
+series: b67c675a-e8fc-47d7-8b3a-44ed363d8956
 ---
 
 # 요약

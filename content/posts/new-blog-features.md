@@ -2,11 +2,12 @@
 title: 백엔드 없이 블로그 추가 기능 구현하기(feat. 댓글과 조회수기능, 추천 포스트)
 createdTime: 2023-05-19
 tags:
-    - projects
-    - React
-    - Next.js
-    - frontend
+  - projects
+  - React
+  - Next.js
+  - frontend
 description: 블로그 추가 기능들을 구현해보자. 백엔드 없이!
+series: b67c675a-e8fc-47d7-8b3a-44ed363d8956
 ---
 
 # 개요
@@ -54,11 +55,7 @@ const Comments = () => {
 
     commentRef.current?.appendChild($script);
   }, []);
-  return (
-    <section
-      ref={commentRef}
-    />
-  );
+  return <section ref={commentRef} />;
 };
 
 export default Comments;
@@ -186,7 +183,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
       message: 'hit is not available on development mode.',
     });
   }
-  
+
   // custom한 주소
   const url = `https://hits.dwyl.com/${process.env.GITHUB_ID}/${process.env.POST_PREFIX}-${pathname}.json`;
 
@@ -196,7 +193,6 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
 };
 
 export default handler;
-
 ```
 
 ```tsx
@@ -214,8 +210,8 @@ const Meta = () => {
     })();
   }, [url]);
 
-return <div />
-}
+  return <div />;
+};
 ```
 
 `formatNumber`라는 함수는 조회수가 1천회가 넘어갈 때 1k, 1백만회가 넘어갈 때 1M 등 간단하게 표현할 수 있도록 구현한 함수이다. 110만회일 때 1.1M 형식으로 나타내야 하며, 해당 함수는 테스트하기가 용이하기 때문에 해당 함수에 대한 테스트 코드를 작성했다.
