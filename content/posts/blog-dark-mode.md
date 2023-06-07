@@ -83,7 +83,7 @@ useEffect hook은 마운트가 되고 페인트가 된 뒤 실행되는 hook이�
 
 ## CSS 변수
 
-<aside> 📌 해당 방법론은 velopert님의 블로그를 참고하였습니다.
+<aside> 해당 방법론은 velopert님의 블로그를 참고하였습니다.
 
 </aside>
 

@@ -2,10 +2,10 @@
 title: 왜 그 때는 몰랐을까, Next.js의 편리함을
 createdTime: 2023-03-25
 tags:
-    - projects
-    - React
-    - Next.js
-    - frontend
+  - projects
+  - React
+  - Next.js
+  - frontend
 description: Next.js를 이번 프로젝트에 본격적으로 사용하면서 여러 편리한 기능들을 사용하면서 느낀점과 기존 React에서는 어떻게 같은 기능을 구현했었는지 비교하는 시간을 가졌다.
 ---
 
@@ -20,13 +20,11 @@ description: Next.js를 이번 프로젝트에 본격적으로 사용하면서 �
 ```tsx
 const ReactComponent = () => {
   const [value, setValue] = useState(() => {
-    return window.localStorage.getItem('key') || ''
-  }) // 가능
+    return window.localStorage.getItem('key') || '';
+  }); // 가능
 
-  return (
-    <h1>{value}</h1>
-  )
-}
+  return <h1>{value}</h1>;
+};
 ```
 
 그러나 Nextjs의 경우 서버 사이드 렌더링이기 때문에, 렌더 단계에서 스토리지에 접근하여 처리하는 것이 불가능하며, 오직 `useEffect` hook을 통해 localStorage 값에 접근할 수 있다.
@@ -34,13 +32,13 @@ const ReactComponent = () => {
 ```tsx
 const NextComponent = () => {
   const [value, setValue] = useState('');
-  
+
   // 컴포넌트가 서버사이드에서 렌더링된 뒤, 클라이언트에서 동작하는 useEffect에서 localStorage 접근 가능
   // 서버사이드에서 window 객체는 undefined이다.
   useEffect(() => {
     setValue(() => window.localStorage.getItem('key') || '')
   }, [])
-  
+
   // mount 후 useEffect hook 실행으로 인해 찰나의 시간에 데이터가 변하는 현상 발생
   return (
     {value && <h1>{value}</h1>}
@@ -58,7 +56,7 @@ Nextjs는 React 기반이지만, 일반 React가 클라이언트 사이드에서
 
 ## 클라이언트 사이드 렌더링(CSR)
 
-<aside> 📌 클라이언트 사이드 렌더링은, 브라우저가 렌더링의 주체로서 렌더링 과정을 실행하는 것을 뜻한다.
+<aside> 클라이언트 사이드 렌더링은, 브라우저가 렌더링의 주체로서 렌더링 과정을 실행하는 것을 뜻한다.
 
 </aside>
 
@@ -75,7 +73,7 @@ Nextjs는 React 기반이지만, 일반 React가 클라이언트 사이드에서
 
 ## 서버 사이드 렌더링
 
-<aside> 📌 서버 사이드 렌더링은 렌더링 주체가 서버가 되어, 서버에서 템플릿을 렌더링한 뒤 클라이언트에 전달하는 방식이다.
+<aside> 서버 사이드 렌더링은 렌더링 주체가 서버가 되어, 서버에서 템플릿을 렌더링한 뒤 클라이언트에 전달하는 방식이다.
 
 </aside>
 
@@ -127,14 +125,11 @@ const Router = () => {
   return (
     <Routes>
       <Route element={<NotFoundPage />} path="/404" />
-      <Route
-        path="/"
-        element={<MainPage />}
-      />
+      <Route path="/" element={<MainPage />} />
       <Route element={<PostDetailPage />} path="/posts/:id" />
-  </Routes>
-  )
-}
+    </Routes>
+  );
+};
 ```
 
 그리고 동적 라우팅을 위해 `PostDetailPage`에서는 `useParams`를 통해 `id`에 접근할 수 있다.
@@ -146,9 +141,9 @@ const PostDetailPage = () => {
   const { id } = useParams();
 
   // ...
-}
+};
 
-export default PostDetailPage
+export default PostDetailPage;
 ```
 
 반면에 Next.js에서는 단순히 `pages` 폴더에 일정 규칙으로 파일명을 명명하기만 한다면, url에 따라 자동으로 라우팅을 처리해준다.
@@ -168,22 +163,22 @@ pages
 ┗ _document.tsx
 ```
 
--   `pages` 폴더의 `index.tsx`는, 사용자가 `/` 경로를 요청했을 때 보여줄 컴포넌트가 된다. 마찬가지로 `/posts` 를 사용자가 요청하면, `posts/index.tsx` 내용이 사용자에게 보여지게 된다.
--   `[id].tsx`규칙을 통해 dynamic routing이 가능하다. dynamic routing은, `/posts/abc` 등 동적으로 하위 데이터를 불러와야 하는 경우에 유용하다.
--   다음과 같이 컴포넌트 내에서 `useRouter`를 통해 접근이 가능하다.
+- `pages` 폴더의 `index.tsx`는, 사용자가 `/` 경로를 요청했을 때 보여줄 컴포넌트가 된다. 마찬가지로 `/posts` 를 사용자가 요청하면, `posts/index.tsx` 내용이 사용자에게 보여지게 된다.
+- `[id].tsx`규칙을 통해 dynamic routing이 가능하다. dynamic routing은, `/posts/abc` 등 동적으로 하위 데이터를 불러와야 하는 경우에 유용하다.
+- 다음과 같이 컴포넌트 내에서 `useRouter`를 통해 접근이 가능하다.
 
 ```tsx
 // 파일 이름이 [pid].tsx 라면 router.query.pid 값에 접근할 수 있다.
-import { useRouter } from 'next/router'
+import { useRouter } from 'next/router';
 
 const Post = () => {
-  const router = useRouter()
-  const { pid } = router.query
+  const router = useRouter();
+  const { pid } = router.query;
 
-  return <p>Post: {pid}</p>
-}
+  return <p>Post: {pid}</p>;
+};
 
-export default Post
+export default Post;
 ```
 
 ```tsx
