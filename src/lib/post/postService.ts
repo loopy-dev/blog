@@ -12,6 +12,7 @@ import type { FrontMatter } from '~models/Post';
  * @example
  * fullFileName: `example.md`
  * @returns fileName without extension `example.md` -> `example`
+ * this class only can be used on server side.
  */
 export const parseFileName = (fullFileName: string, extension: string) => {
   return fullFileName.slice(0, -(extension.length + 1));
