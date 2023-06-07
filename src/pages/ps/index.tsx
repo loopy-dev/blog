@@ -90,7 +90,7 @@ const Page = ({ posts }: Props) => {
         )}
       >
         <Header
-          title="Posts"
+          title="Problem Solvings"
           description={
             keywords.length > 0 ? (
               <InputKeywordsMessage keywords={keywords} />
