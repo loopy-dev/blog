@@ -14,6 +14,8 @@ import styles from './Markdown.module.scss';
 const SyntaxHighlighter = dynamic(() => import('./SyntaxHighlighter'), {
   loading: () => <Skeleton noSpacing height="220px" width="100%" />,
 });
+
+const Gist = dynamic(() => import('react-gist'), { ssr: false });
 interface Props {
   content: string;
 }
@@ -99,6 +101,14 @@ const Content = ({ content }: Props) => {
               // eslint-disable-next-line @next/next/no-img-element
               <img alt={alt} loading="lazy" src={src} {...props} />
             );
+          },
+          // checking github gist
+          div({ node, children }) {
+            const gistId = node.properties?.dataGist;
+            if (gistId && typeof gistId === 'string') {
+              return <Gist id={gistId} />;
+            }
+            return <div>{children}</div>;
           },
         }}
       >
