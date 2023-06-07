@@ -110,6 +110,41 @@ const Content = ({ content }: Props) => {
             }
             return <div>{children}</div>;
           },
+          blockquote({ node, children, ...props }) {
+            return (
+              <blockquote
+                className={classNames(
+                  'bg-zinc-100',
+                  'dark:bg-zinc-700',
+                  'text-zinc-500',
+                  'dark:text-zinc-300',
+                  'italic'
+                )}
+                {...props}
+              >
+                {children}
+              </blockquote>
+            );
+          },
+          aside({ node, children, ...props }) {
+            return (
+              <aside
+                {...props}
+                className={classNames(
+                  'flex',
+                  'border',
+                  'dark:border-none',
+                  'gap-2',
+                  'dark:bg-zinc-700',
+                  'text-zinc-500',
+                  'dark:text-zinc-300',
+                  'before:content-["📌"]'
+                )}
+              >
+                {children}
+              </aside>
+            );
+          },
         }}
       >
         {content}
