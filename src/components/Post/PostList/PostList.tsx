@@ -6,13 +6,14 @@ import type { FrontMatter } from '~models/Post';
 
 interface Props {
   posts: FrontMatter[];
+  category?: string;
 }
 
-const PostList = ({ posts }: Props) => {
+const PostList = ({ category, posts }: Props) => {
   return (
     <div className={classNames('lg:mt-4')}>
       {posts.map((post) => (
-        <PostItem key={post.title} post={post} />
+        <PostItem key={post.title} category={category} post={post} />
       ))}
     </div>
   );
@@ -22,12 +23,13 @@ export default PostList;
 
 interface PostItemProps {
   post: FrontMatter;
+  category?: string;
 }
 
-const PostItem = ({ post }: PostItemProps) => {
+const PostItem = ({ post, category = 'posts' }: PostItemProps) => {
   return (
     <Link
-      href={`/posts/${post.url}`}
+      href={`/${category}/${post.url}`}
       className={classNames(
         'flex',
         'flex-col',

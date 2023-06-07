@@ -14,6 +14,8 @@ import styles from './Markdown.module.scss';
 const SyntaxHighlighter = dynamic(() => import('./SyntaxHighlighter'), {
   loading: () => <Skeleton noSpacing height="220px" width="100%" />,
 });
+
+const Gist = dynamic(() => import('react-gist'), { ssr: false });
 interface Props {
   content: string;
 }
@@ -98,6 +100,49 @@ const Content = ({ content }: Props) => {
             ) : (
               // eslint-disable-next-line @next/next/no-img-element
               <img alt={alt} loading="lazy" src={src} {...props} />
+            );
+          },
+          // checking github gist
+          div({ node, children }) {
+            const gistId = node.properties?.dataGist;
+            if (gistId && typeof gistId === 'string') {
+              return <Gist id={gistId} />;
+            }
+            return <div>{children}</div>;
+          },
+          blockquote({ node, children, ...props }) {
+            return (
+              <blockquote
+                className={classNames(
+                  'bg-zinc-100',
+                  'dark:bg-zinc-700',
+                  'text-zinc-500',
+                  'dark:text-zinc-300',
+                  'italic'
+                )}
+                {...props}
+              >
+                {children}
+              </blockquote>
+            );
+          },
+          aside({ node, children, ...props }) {
+            return (
+              <aside
+                {...props}
+                className={classNames(
+                  'flex',
+                  'border',
+                  'dark:border-none',
+                  'gap-2',
+                  'dark:bg-zinc-700',
+                  'text-zinc-500',
+                  'dark:text-zinc-300',
+                  'before:content-["📌"]'
+                )}
+              >
+                {children}
+              </aside>
             );
           },
         }}

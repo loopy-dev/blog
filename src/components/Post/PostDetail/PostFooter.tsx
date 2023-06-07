@@ -21,12 +21,13 @@ import type { FrontMatter } from '~models/Post';
 interface Props {
   url: string;
   recommendedPosts: FrontMatter[];
+  category?: string;
 }
 
 /**
  * NOTE - Suspense(dynamic) block이 내부에 존재한다면 hydration error가 발생
  */
-const PostFooter = ({ url, recommendedPosts }: Props) => {
+const PostFooter = ({ url, recommendedPosts, category = 'posts' }: Props) => {
   return (
     <div
       className={classNames(
@@ -38,7 +39,10 @@ const PostFooter = ({ url, recommendedPosts }: Props) => {
       )}
     >
       {/** Recommended Posts section */}
-      <RecommendedPostsContainer recommendedPosts={recommendedPosts} />
+      <RecommendedPostsContainer
+        category={category}
+        recommendedPosts={recommendedPosts}
+      />
       {/** meta */}
       <MetaContainer url={url} />
       <CommentsContainer />
@@ -46,10 +50,18 @@ const PostFooter = ({ url, recommendedPosts }: Props) => {
   );
 };
 
-const PostFooterWithProvider = ({ url, recommendedPosts }: Props) => {
+const PostFooterWithProvider = ({
+  url,
+  recommendedPosts,
+  category = 'posts',
+}: Props) => {
   return (
     <SideBarProvider>
-      <PostFooter recommendedPosts={recommendedPosts} url={url} />
+      <PostFooter
+        category={category}
+        recommendedPosts={recommendedPosts}
+        url={url}
+      />
     </SideBarProvider>
   );
 };
@@ -226,10 +238,14 @@ const CommentsContainer = () => {
   );
 };
 
-type RecommendedPostsContainerProps = Pick<Props, 'recommendedPosts'>;
+type RecommendedPostsContainerProps = Pick<
+  Props,
+  'recommendedPosts' | 'category'
+>;
 
 const RecommendedPostsContainer = ({
   recommendedPosts,
+  category = 'posts',
 }: RecommendedPostsContainerProps) => {
   const [recommended, setRecommended] = useState<FrontMatter[]>([]);
 
@@ -256,7 +272,7 @@ const RecommendedPostsContainer = ({
             className={classNames(styles.card, 'flex-shrink-0')}
           >
             <Link
-              href={`/posts/${post.url}`}
+              href={`/${category}/${post.url}`}
               className={classNames(
                 'block',
                 'h-full',

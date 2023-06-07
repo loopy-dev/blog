@@ -43,7 +43,8 @@
     }
 
     & + blockquote,
-    & + aside {
+    & + aside,
+    & + iframe {
       margin-top: 12px;
     }
   }
@@ -59,7 +60,8 @@
     }
 
     & + blockquote,
-    & + aside {
+    & + aside,
+    & + iframe {
       margin-top: 12px;
     }
   }
@@ -75,7 +77,8 @@
     }
 
     & + blockquote,
-    & + aside {
+    & + aside,
+    & + iframe {
       margin-top: 10px;
     }
   }
@@ -91,7 +94,8 @@
     }
 
     & + blockquote,
-    & + aside {
+    & + aside,
+    & + iframe {
       margin-top: 10px;
     }
   }
@@ -149,10 +153,7 @@
     padding: 8px 16px;
     width: 100%;
     border-left: 2px solid var(--primary);
-    color: var(--text3);
-    background-color: var(--bg-page1);
     font-size: 1em;
-    font-style: italic;
 
     & p {
       margin: 4px;
@@ -220,8 +221,6 @@
     margin-top: 24px;
     width: 100%;
     border-radius: 3px;
-    border: 1px solid rgba(55, 53, 47, 0.16);
     padding: 16px 16px 16px 12px;
-    color: var(--text3);
   }
 }

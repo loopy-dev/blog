@@ -14,11 +14,17 @@ interface Props {
   post: PostModel;
   recommendedPosts: FrontMatter[];
   series: SeriesType | null;
+  category?: string;
 }
 
 const PostAside = dynamic(() => import('./PostAside'), { ssr: false });
 
-const Post = ({ post, recommendedPosts, series }: Props) => {
+const Post = ({
+  post,
+  recommendedPosts,
+  series,
+  category = 'posts',
+}: Props) => {
   const frontMatter: FrontMatter = {
     title: post.title,
     url: post.url,
@@ -37,6 +43,7 @@ const Post = ({ post, recommendedPosts, series }: Props) => {
           {series && <Series series={series} />}
           <PostContent content={post.content} />
           <PostFooter
+            category={category}
             recommendedPosts={recommendedPosts}
             url={frontMatter.url}
           />
