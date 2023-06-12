@@ -30,7 +30,7 @@ jobs:
             ${{ runner.os }}-
 
       - name: Install Dependencies
-        run: npm install --force
+        run: npm install
 
       - name: Test
         run: npm run test
