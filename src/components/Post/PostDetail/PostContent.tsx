@@ -15,7 +15,9 @@ const SyntaxHighlighter = dynamic(() => import('./SyntaxHighlighter'), {
   loading: () => <Skeleton noSpacing height="220px" width="100%" />,
 });
 
-const Gist = dynamic(() => import('react-gist'), { ssr: false });
+const Gist = dynamic(() => import('gist-react').then((module) => module.Gist), {
+  ssr: false,
+});
 interface Props {
   content: string;
 }
@@ -106,11 +108,11 @@ const Content = ({ content }: Props) => {
           div({ node, children }) {
             const gistId = node.properties?.dataGist;
             if (gistId && typeof gistId === 'string') {
-              return <Gist id={gistId} />;
+              return <Gist gistId={gistId} />;
             }
             return <div>{children}</div>;
           },
-          blockquote({ node, children, ...props }) {
+          blockquote({ node, children, siblingCount, ...props }) {
             return (
               <blockquote
                 className={classNames(
@@ -126,7 +128,7 @@ const Content = ({ content }: Props) => {
               </blockquote>
             );
           },
-          aside({ node, children, ...props }) {
+          aside({ node, children, siblingCount, ...props }) {
             return (
               <aside
                 {...props}
