@@ -11442,11 +11442,6 @@ react-element-to-jsx-string@^15.0.0:
     is-plain-object "5.0.0"
     react-is "18.1.0"
 
-react-gist@^1.2.4:
-  version "1.2.4"
-  resolved "https://registry.yarnpkg.com/react-gist/-/react-gist-1.2.4.tgz#4ee71f24cc6f60836354e2ad6e30f6d24e06e0f7"
-  integrity sha512-uDgPJ08IJsl/7auK3CS53JKGC1P/X7tNCzo9k0r6D/5l+ilsxE1+SAaylJCh0aeyZoJOoxQikKU+MHsAvA9iFw==
-
 react-google-recaptcha@^2.1.0:
   version "2.1.0"
   resolved "https://registry.yarnpkg.com/react-google-recaptcha/-/react-google-recaptcha-2.1.0.tgz#9f6f4954ce49c1dedabc2c532347321d892d0a16"
