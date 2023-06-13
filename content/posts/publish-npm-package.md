@@ -70,7 +70,7 @@ const App = () => {
 
 이 스크립트를 작성하면 다음과 같은 결과를 얻을 수 있다.
 
-https://github.com/mrbartrns/blog/assets/56826914/bb6a1439-27c2-4c58-9c02-a5d2206ba402
+![image](https://github.com/mrbartrns/blog/assets/56826914/bb6a1439-27c2-4c58-9c02-a5d2206ba402)
 
 ### srcdoc에 스크립트를 작성하여 렌더링하기
 
