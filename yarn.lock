@@ -7915,10 +7915,10 @@ giget@^1.0.0:
     pathe "^1.1.0"
     tar "^6.1.13"
 
-gist-react@^0.0.11:
-  version "0.0.11"
-  resolved "https://registry.yarnpkg.com/gist-react/-/gist-react-0.0.11.tgz#edc7e4925fe78be82e6cae4b55f3c81405173e45"
-  integrity sha512-3xe968upUbwJ0P0jB3ot5DZeIVBHy53lXxPfSMMD/vmtA8egT1IKCfVmOeP9kK/I0x7J+GVAXuNCeAJh1wToFA==
+gist-react@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/gist-react/-/gist-react-1.0.0.tgz#ef78e4880d537d62848fcdf05bc922304b6535b1"
+  integrity sha512-1x/q4rGDhub3NbLh/rlNhj15EdgsAYO13dqZyUyBfBkBdo9K30JASAeFXe9z0b4QyWXFKZLuuqUyNUp3cdo57A==
   dependencies:
     react "^18.2.0"
     react-dom "^18.2.0"
