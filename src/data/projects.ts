@@ -12,10 +12,36 @@ import {
   vanillaJS,
   tailwind,
   next,
+  rollUp,
 } from './skills';
 import type { Project } from '../models/Resume';
 
-export const portfolio: Project = {
+export const gistReact: Project = {
+  title: 'gist-react',
+  introduction:
+    'gist를 embed 할 때 사용했던 패키지가 최신 버전을 지원하지 않아, 직접 만들고 배포했습니다.',
+  startDate: '2023-06',
+  skills: [typescript, react, rollUp],
+  description: [
+    'github gist를 보다 쉽게 embed 할 수 있도록 개발 및 npm 배포',
+    '최신 문법으로 작성되어 React의 최신 버전을 지원하며, Rollup 번들러로 패키지를 관리',
+    '주간 다운로드 수 800 달성',
+    '현재 블로그에서 직접 만든 패키지로 대체하였음',
+    {
+      name: '다사다난했던 npm 패키지 배포(iframe, embed등)',
+      url: '/posts/publish-npm-package',
+    },
+  ],
+  links: {
+    github: { name: 'Github', url: 'https://github.com/mrbartrns/gist-react' },
+    website: {
+      name: 'Website',
+      url: 'https://www.npmjs.com/package/gist-react',
+    },
+  },
+};
+
+export const blog: Project = {
   title: '블로그(Blog)',
   introduction:
     '기존에 사용하던 블로그 서비스를 대체하고, 개발했던 프로덕트를 한 곳에 모아보기 위해 개발한 사이트입니다.',
@@ -179,6 +205,6 @@ const vanillaEditor: Project = {
   ],
 };
 
-const projects: Project[] = [portfolio, chulcheck, chequiz, vanillaEditor];
+const projects: Project[] = [gistReact, blog, chequiz, vanillaEditor];
 
 export default projects;

@@ -1,4 +1,5 @@
 import classNames from 'classnames';
+import Link from 'next/link';
 import styled from 'styled-components';
 import ExperienceLayout from '../../layouts/ExperienceLayout';
 import OtherLinks from './OtherLinks';
@@ -44,7 +45,17 @@ const ContentTemplate = ({ content, sticky }: Props) => {
                 typeof description === 'string' ? (
                   <li key={description}>{description}</li>
                 ) : (
-                  <li key={description.name}>{description.name}</li>
+                  <li key={description.name}>
+                    <Link
+                      href={description.url}
+                      className={classNames(
+                        'text-[color:var(--primary-variant)]',
+                        'hover:underline'
+                      )}
+                    >
+                      {description.name}
+                    </Link>
+                  </li>
                 )
               )}
             </ContentDescription>

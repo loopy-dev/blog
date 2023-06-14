@@ -1,5 +1,10 @@
 import type { Skill } from '../models/Resume';
 
+export const rollUp: Skill = {
+  name: 'Rollup',
+  description: `번들 포맷 커스터마이징이 가능하고 트리 셰이킹에 용이하여 번들 크기 최적화가 용이한 Rollup을 이용하여 패키지를 관리하였습니다.`,
+};
+
 export const react: Skill = {
   name: 'React',
   description: `다른 프론트엔드 라이브러리(또는 프레임워크)보다 사용자 수가 많아 커뮤니티의 도움을 쉽게 받을 수 있을 것이라 생각하고 사용하였습니다.\n또한 JSX 문법을 이용하여 html과 동일한 문법으로 컴포넌트를 작성할 수 있습니다.
