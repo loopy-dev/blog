@@ -7,6 +7,9 @@ interface ItemProps {
 }
 
 export const Item = styled.div<ItemProps>`
+  display: flex;
+  justify-content: center;
+  align-items: center;
   user-select: none;
   transition: all 100ms cubic-bezier(0.31, 0.27, 0.15, 0.99) 0s;
   cursor: pointer;

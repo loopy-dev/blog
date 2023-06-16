@@ -1,6 +1,7 @@
-import styled from 'styled-components';
-import Icon from '../../icons/Icon';
-import type { PersonalLink } from '../../../models/Resume';
+import classNames from 'classnames';
+import { FaGithub, FaBook } from 'react-icons/fa';
+import { TfiWorld } from 'react-icons/tfi';
+import type { PersonalLink } from '~/models/Resume';
 
 interface Props {
   links: Partial<PersonalLink>;
@@ -8,31 +9,60 @@ interface Props {
 
 const PersonalInfo = ({ links }: Props) => {
   return (
-    <Container>
+    <div className={classNames('flex', 'gap-2', 'my-4')}>
       {links.github && (
-        <a href={links.github.url} rel="noopener noreferrer" target="_blank">
-          <Icon type="github" />
+        <a
+          href={links.github.url}
+          rel="noopener noreferrer"
+          target="_blank"
+          className={classNames(
+            'inline-flex',
+            'justify-center',
+            'items-center'
+          )}
+        >
+          <FaGithub
+            className={classNames(
+              'text-3xl',
+              'text-zinc-300',
+              'hover:text-zinc-400'
+            )}
+          />
         </a>
       )}
       {links.website && (
-        <a href={links.website.url} rel="noopener noreferrer" target="_blank">
-          <Icon type="website" />
+        <a
+          href={links.website.url}
+          rel="noopener noreferrer"
+          target="_blank"
+          className={classNames(
+            'inline-flex',
+            'justify-center',
+            'items-center'
+          )}
+        >
+          <TfiWorld
+            className={classNames(
+              'text-3xl',
+              'text-zinc-300',
+              'hover:text-zinc-400'
+            )}
+          />
         </a>
       )}
       {links.portfolio && (
         <a href={links.portfolio.url} rel="noopener noreferrer" target="_blank">
-          <Icon type="portfolio" />
+          <FaBook
+            className={classNames(
+              'text-3xl',
+              'text-zinc-300',
+              'hover:text-zinc-400'
+            )}
+          />
         </a>
       )}
-    </Container>
+    </div>
   );
 };
 
 export default PersonalInfo;
-
-const Container = styled.div`
-  display: flex;
-  flex-wrap: wrap;
-  gap: 12px;
-  margin: 1rem 0;
-`;
