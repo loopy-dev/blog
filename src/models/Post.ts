@@ -6,6 +6,7 @@ export interface Post {
   description: string;
   content: string;
   series?: string;
+  coverImage?: string;
 }
 
 export interface PostHits {

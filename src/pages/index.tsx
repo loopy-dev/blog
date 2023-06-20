@@ -1,7 +1,6 @@
 import Head from 'next/head';
 import postService from '~/lib/post';
 import Header from '~components/Header';
-import Banner from '~components/Main';
 import PostList from '~components/Post/PostList/PostList';
 import ContentLayout from '~components/layouts/ContentLayout';
 import GlobalLayout from '../components/layouts/GlobalLayout';
@@ -29,7 +28,7 @@ interface Props {
 }
 
 const Page = ({ posts }: Props) => {
-  const recentPosts = posts.slice(0, 3);
+  const recentPosts = posts.slice(0, 5);
 
   return (
     <>
@@ -44,7 +43,7 @@ const Page = ({ posts }: Props) => {
         />
       </Head>
       <GlobalLayout>
-        <Banner />
+        {/* <Banner /> */}
         <ContentLayout>
           <Header
             description="최근에 작성한 글을 볼 수 있어요."

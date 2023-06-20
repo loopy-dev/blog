@@ -38,12 +38,13 @@ const ImageItem = ({ imageUrl, blockHeight, altImage, children }: Props) => {
       ref={ref}
       style={style}
       className={classNames(
-        'border',
         'rounded-2xl',
         'p-4',
         'transition-all',
         'bg-center',
-        'bg-no-repeat'
+        'bg-no-repeat',
+        // NOTE - 임시 스타일
+        'hover:shadow-lg'
       )}
     >
       {children}
