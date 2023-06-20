@@ -1,4 +1,7 @@
+import classNames from 'classnames';
 import Head from 'next/head';
+import Link from 'next/link';
+import { FaArrowRight } from 'react-icons/fa';
 import postService from '~/lib/post';
 import Header from '~components/Header';
 import PostList from '~components/Post/PostList/PostList';
@@ -48,6 +51,21 @@ const Page = ({ posts }: Props) => {
           <Header
             description="최근에 작성한 글을 볼 수 있어요."
             title="Recent Posts"
+            right={
+              <Link
+                href="/posts"
+                className={classNames(
+                  'inline-flex',
+                  'items-center',
+                  'gap-2',
+                  'text-[color:var(--primary-variant)]',
+                  'hover:underline'
+                )}
+              >
+                이동하기{' '}
+                <FaArrowRight className={classNames('hidden', 'sm:block')} />
+              </Link>
+            }
           />
           <PostList posts={recentPosts} />
         </ContentLayout>

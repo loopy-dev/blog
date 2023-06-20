@@ -1,7 +1,7 @@
 import classNames from 'classnames';
 import Link from 'next/link';
 import Card from '~components/common/Card';
-import { CardContent, CardMedia } from '~components/common/Card/Card';
+import { CardContent } from '~components/common/Card/Card';
 import Tag from '~components/common/Tag';
 import styles from '../Post.module.scss';
 import ImageItem from './ImageItem';
