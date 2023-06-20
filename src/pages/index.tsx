@@ -4,7 +4,7 @@ import Link from 'next/link';
 import { FaArrowRight } from 'react-icons/fa';
 import postService from '~/lib/post';
 import Header from '~components/Header';
-import PostList from '~components/Post/PostList/PostList';
+import MainList from '~components/Main/MainList';
 import ContentLayout from '~components/layouts/ContentLayout';
 import GlobalLayout from '../components/layouts/GlobalLayout';
 import type { GetStaticProps } from 'next';
@@ -67,7 +67,7 @@ const Page = ({ posts }: Props) => {
               </Link>
             }
           />
-          <PostList posts={recentPosts} />
+          <MainList posts={recentPosts} />
         </ContentLayout>
       </GlobalLayout>
     </>
