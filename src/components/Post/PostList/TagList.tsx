@@ -59,7 +59,16 @@ const TagList = ({ posts, onClick, onReset, className }: Props) => {
   };
 
   return (
-    <div className={classNames('border', 'rounded-lg', 'p-4', className)}>
+    <div
+      className={classNames(
+        'border',
+        'dark:border-none',
+        'rounded-lg',
+        'p-4',
+        'dark:bg-zinc-800',
+        className
+      )}
+    >
       <div className={classNames('flex', 'justify-between', 'items-center')}>
         <h4 className={classNames('font-medium')}>태그별로 모아보기</h4>
         <Button

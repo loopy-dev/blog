@@ -38,7 +38,7 @@ const NavigationBar = () => {
         'z-30',
         'transition',
         'bg-white/80',
-        'dark:bg-zinc-800/80'
+        'dark:bg-zinc-900/80'
       )}
     >
       {/** upper part of NavigationBar */}
