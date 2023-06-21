@@ -11,7 +11,7 @@ interface Props {
   category?: string;
 }
 
-const PostList = ({ category = 'posts', posts }: Props) => {
+const MainList = ({ category = 'posts', posts }: Props) => {
   return (
     <div className={classNames('lg:mt-4')}>
       {
@@ -110,4 +110,4 @@ const PostList = ({ category = 'posts', posts }: Props) => {
   );
 };
 
-export default PostList;
+export default MainList;
