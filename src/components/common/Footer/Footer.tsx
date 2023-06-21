@@ -1,63 +1,77 @@
+import classNames from 'classnames';
 import Link from 'next/link';
+import { FaCommentDots, FaGithubSquare, FaUserCircle } from 'react-icons/fa';
+import { ImBlog } from 'react-icons/im';
 import styled from 'styled-components';
 import cssVar from '~/lib/styles/cssVar';
 
 const Footer = () => {
   return (
-    <Block>
-      <Title href="/">{"© Ben's Devlog"}</Title>
-      <SubBlock>
-        <Link
-          href="https://github.com/mrbartrns"
-          rel="noopener noreferrer"
-          target="_blank"
+    <footer className={classNames('min-h-[150px]', 'shadow-inner', 'text-xl')}>
+      <div
+        className={classNames(
+          'max-w-[44rem]',
+          'h-full',
+          'mx-auto',
+          'flex',
+          'justify-around',
+          'items-center',
+          'py-8'
+        )}
+      >
+        <Link className={classNames('font-medium')} href="/">
+          <p>{"© Ben's"}</p>
+          <p>Devlog</p>
+        </Link>
+        <ul
+          className={classNames(
+            'flex',
+            'justify-center',
+            'items-center',
+            'gap-6',
+            'text-2xl',
+            'text-zinc-300'
+          )}
         >
-          <Item>Github</Item>
-        </Link>
-        <Link
-          href="https://velog.io/@mrbartrns"
-          rel="noopener noreferrer"
-          target="_blank"
-        >
-          <Item>이전 블로그(velog)</Item>
-        </Link>
-        <Link href="/discussion">
-          <Item>의견 제출하기</Item>
-        </Link>
-      </SubBlock>
-    </Block>
+          <li className={classNames('hover:text-zinc-900')}>
+            <Link
+              href="https://github.com/mrbartrns"
+              rel="noopener noreferrer"
+              target="_blank"
+            >
+              <FaGithubSquare />
+            </Link>
+          </li>
+          <li className={classNames('hover:text-zinc-900')}>
+            <Link
+              href="https://velog.io/@mrbartrns"
+              rel="noopener noreferrer"
+              target="_blank"
+            >
+              <ImBlog />
+            </Link>
+          </li>
+          <li className={classNames('hover:text-zinc-900')}>
+            <Link href="/discussion" rel="noopener noreferrer" target="_blank">
+              <FaCommentDots />
+            </Link>
+          </li>
+          <li className={classNames('hover:text-zinc-900')}>
+            <Link
+              href="https://noble-fisherman-5cc.notion.site/00ca620933e94941900f26f317786c43"
+              rel="noopener noreferrer"
+              target="_blank"
+            >
+              <FaUserCircle />
+            </Link>
+          </li>
+        </ul>
+      </div>
+    </footer>
   );
 };
 
 export default Footer;
-
-const Block = styled.footer`
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-  justify-content: center;
-  align-items: center;
-  min-height: 150px;
-  box-shadow: inset 0 1px 0 0 rgba(0, 0, 0, 0.1);
-  font-size: 14px;
-`;
-
-const Title = styled(Link)`
-  padding: 8px;
-  text-align: center;
-`;
-
-const SubBlock = styled.ul`
-  display: flex;
-  justify-content: center;
-  gap: 16px;
-  width: 100%;
-
-  @media (max-width: 640px) {
-    flex-direction: column;
-    gap: 0;
-  }
-`;
 
 export const Item = styled.div`
   user-select: none;
