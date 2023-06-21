@@ -14,7 +14,7 @@ interface Props {
 }
 
 // TODO - onRouteChange -> close
-const Series = ({ series }: Props) => {
+const PostSeries = ({ series }: Props) => {
   return (
     <div className={styles.series}>
       <Dropdown
@@ -120,7 +120,7 @@ const Series = ({ series }: Props) => {
   );
 };
 
-export default Series;
+export default PostSeries;
 
 const DropdownMenu = ({
   children,
