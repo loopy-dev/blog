@@ -17,9 +17,10 @@ const Footer = () => {
           'flex-col',
           'sm:flex-row',
           'gap-6',
-          'justify-around',
+          'justify-between',
           'items-center',
-          'py-8'
+          'py-8',
+          'px-6'
         )}
       >
         <Link
