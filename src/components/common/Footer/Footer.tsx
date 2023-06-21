@@ -14,12 +14,24 @@ const Footer = () => {
           'h-full',
           'mx-auto',
           'flex',
+          'flex-col',
+          'sm:flex-row',
+          'gap-6',
           'justify-around',
           'items-center',
           'py-8'
         )}
       >
-        <Link className={classNames('font-medium')} href="/">
+        <Link
+          href="/"
+          className={classNames(
+            'font-medium',
+            'flex',
+            'flex-row',
+            'sm:flex-col',
+            'gap-1'
+          )}
+        >
           <p>{"© Ben's"}</p>
           <p>Devlog</p>
         </Link>
@@ -28,6 +40,7 @@ const Footer = () => {
             'flex',
             'justify-center',
             'items-center',
+            'flex-wrap',
             'gap-6',
             'text-2xl',
             'text-zinc-300'
