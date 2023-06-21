@@ -9,7 +9,8 @@ interface Props {
   category?: string;
   posts: FrontMatter[];
 }
-const MainPsList = ({ category = 'posts', posts }: Props) => {
+
+const MainCardList = ({ posts, category = 'posts' }: Props) => {
   return (
     <div
       className={classNames('flex', 'flex-wrap', 'gap-4', 'justify-between')}
@@ -93,4 +94,4 @@ const MainPsList = ({ category = 'posts', posts }: Props) => {
   );
 };
 
-export default MainPsList;
+export default MainCardList;
