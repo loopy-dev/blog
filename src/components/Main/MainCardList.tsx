@@ -22,8 +22,10 @@ const MainCardList = ({ posts, category = 'posts' }: Props) => {
             'w-full',
             'sm:w-[48%]',
             'h-[250px]',
+            'bg-white',
+            'dark:bg-zinc-800',
             'hover:bg-zinc-100',
-            'dark:hover:bg-zinc-500'
+            'dark:hover:bg-zinc-700'
           )}
         >
           <CardContent>
