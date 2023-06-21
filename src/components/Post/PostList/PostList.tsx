@@ -9,7 +9,7 @@ interface Props {
   category?: string;
 }
 
-const PostList = ({ category, posts }: Props) => {
+const PostList = ({ category = 'posts', posts }: Props) => {
   return (
     <div className={classNames('lg:mt-4')}>
       {posts.map((post) => (

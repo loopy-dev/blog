@@ -28,7 +28,9 @@ const Tag = ({ label, selected, ...props }: Props) => {
         'text-xs',
         'hover:bg-zinc-100',
         'dark:hover:bg-zinc-500',
-        'dark:border-transparent'
+        'dark:border-transparent',
+        'whitespace-nowrap',
+        'text-ellipsis'
       )}
       {...props}
     >

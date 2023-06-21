@@ -2,7 +2,7 @@ import type { HTMLAttributes } from 'react';
 import classNames from 'classnames';
 
 interface Props extends HTMLAttributes<HTMLDivElement> {
-  maxWidth?: number;
+  maxWidth?: number | string;
 }
 
 const Card = ({ maxWidth, children, className, ...props }: Props) => {
@@ -58,5 +58,5 @@ interface CardContentProps {
 }
 
 export const CardContent = ({ children }: CardContentProps) => {
-  return <div className={classNames('p-4')}>{children}</div>;
+  return <div className={classNames('p-4', 'h-full')}>{children}</div>;
 };

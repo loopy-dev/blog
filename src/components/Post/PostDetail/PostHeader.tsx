@@ -1,6 +1,6 @@
 import classNames from 'classnames';
+import styles from '../Post.module.scss';
 import type { FrontMatter } from '~/models/Post';
-
 interface Props {
   postMetaData: FrontMatter;
 }
@@ -12,7 +12,7 @@ const PostHeader = ({ postMetaData }: Props) => {
   }-${date.getDate() < 10 ? `0${date.getDate()}` : date.getDate()}`;
 
   return (
-    <div className="my-16">
+    <div className={classNames('my-16', styles.header)}>
       <div className={classNames('title', 'mt-8', 'mb-[1.21875em]')}>
         <h1
           className={classNames(

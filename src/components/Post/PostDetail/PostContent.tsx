@@ -8,6 +8,7 @@ import remarkBreaks from 'remark-breaks';
 import remarkFrontMatter from 'remark-frontmatter';
 import remarkGfm from 'remark-gfm';
 import Skeleton from '~components/common/Skeleton';
+import postStyles from '../Post.module.scss';
 import { setElementId } from '../utils';
 import styles from './Markdown.module.scss';
 
@@ -37,7 +38,9 @@ const transformLanguage = (language: string) => {
 
 const Content = ({ content }: Props) => {
   return (
-    <div className={classNames('post-content', styles.block)}>
+    <div
+      className={classNames('post-content', styles.block, postStyles.content)}
+    >
       <ReactMarkdown
         includeElementIndex
         rehypePlugins={[rehypeRaw]}

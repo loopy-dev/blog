@@ -4,7 +4,7 @@ const useIntersection = <T extends HTMLElement>(
   cb: IntersectionObserverCallback,
   options?: IntersectionObserverInit
 ) => {
-  const ref = useRef<T | null>(null);
+  const ref = useRef<T>(null);
   const optionsRef = useRef(options);
 
   useEffect(() => {
