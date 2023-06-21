@@ -43,3 +43,21 @@
     display: none;
   }
 }
+
+.article {
+  & .header {
+    @apply px-6 pt-6;
+  }
+
+  & .series {
+    @apply px-6;
+  }
+
+  & .content {
+    @apply px-6;
+  }
+
+  & .footer {
+    @apply px-6 pb-6;
+  }
+}

@@ -1,4 +1,5 @@
 import classNames from 'classnames';
+import styles from '../Post.module.scss';
 
 interface Props {
   content: React.ReactNode;
@@ -29,7 +30,12 @@ const PostTemplate = ({
       )}
     >
       <article
-        className={classNames('p-6', 'w-full', 'max-w-[44rem]', 'mx-auto')}
+        className={classNames(
+          'w-full',
+          'max-w-[44rem]',
+          'mx-auto',
+          styles.article
+        )}
       >
         {content}
       </article>

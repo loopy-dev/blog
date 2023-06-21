@@ -4,6 +4,7 @@ import PostFooter from './PostFooter';
 import PostHeader from './PostHeader';
 import PostTemplate from './PostTemplate';
 import Series from './Series';
+import PostThumnail from './Thumnail';
 import type {
   FrontMatter,
   Post as PostModel,
@@ -31,6 +32,7 @@ const Post = ({
     tags: post.tags,
     description: post.description,
     createdTime: post.createdTime,
+    coverImage: post.coverImage,
   };
 
   return (
@@ -39,7 +41,9 @@ const Post = ({
       content={
         <>
           <PostHeader postMetaData={{ ...frontMatter }} />
-          {/** here goes series if exist */}
+          {post.coverImage && (
+            <PostThumnail maxHeight="1024px" src={post.coverImage} />
+          )}
           {series && <Series series={series} />}
           <PostContent content={post.content} />
           <PostFooter

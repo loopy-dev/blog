@@ -35,7 +35,8 @@ const PostFooter = ({ url, recommendedPosts, category = 'posts' }: Props) => {
         'border-t',
         'pt-8',
         'border-zinc-500',
-        'border-dashed'
+        'border-dashed',
+        styles.footer
       )}
     >
       {/** Recommended Posts section */}
