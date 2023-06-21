@@ -13,6 +13,7 @@ const nextConfig = {
     domains: [
       'user-images.githubusercontent.com',
       'avatars.githubusercontent.com',
+      'github.com',
     ],
   },
   compiler: {

@@ -2,8 +2,8 @@ import dynamic from 'next/dynamic';
 import PostContent from './PostContent';
 import PostFooter from './PostFooter';
 import PostHeader from './PostHeader';
+import PostSeries from './PostSeries';
 import PostTemplate from './PostTemplate';
-import Series from './Series';
 import PostThumnail from './Thumnail';
 import type {
   FrontMatter,
@@ -44,7 +44,7 @@ const Post = ({
           {post.coverImage && (
             <PostThumnail maxHeight="1024px" src={post.coverImage} />
           )}
-          {series && <Series series={series} />}
+          {series && <PostSeries series={series} />}
           <PostContent content={post.content} />
           <PostFooter
             category={category}

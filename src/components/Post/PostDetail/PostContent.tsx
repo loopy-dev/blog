@@ -36,6 +36,16 @@ const transformLanguage = (language: string) => {
   }
 };
 
+const isInImageDomainList = (url: string) => {
+  const domainList = [
+    'user-images.githubusercontent.com',
+    'avatars.githubusercontent.com',
+    'github.com',
+  ];
+
+  return domainList.some((domain) => url.startsWith(domain));
+};
+
 const Content = ({ content }: Props) => {
   return (
     <div
@@ -100,8 +110,8 @@ const Content = ({ content }: Props) => {
             );
           },
           img({ node, src = '', alt = 'image', siblingCount, ...props }) {
-            return src.startsWith('user-images.githubusercontent.com') ? (
-              <Image alt={alt} height={450} src={src} width={800} />
+            return isInImageDomainList(src) ? (
+              <Image alt={alt} height={0} src={src} width={800} />
             ) : (
               // eslint-disable-next-line @next/next/no-img-element
               <img alt={alt} loading="lazy" src={src} {...props} />
