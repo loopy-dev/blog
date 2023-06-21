@@ -1,10 +1,21 @@
 import Tag from './Tag';
-import type { ComponentMeta, ComponentStory } from '@storybook/react';
+import type { Meta, StoryObj } from '@storybook/react';
 
 export default {
   title: 'Components/Tag',
-} as ComponentMeta<typeof Tag>;
+  component: Tag,
+} as Meta<typeof Tag>;
 
-export const Default: ComponentStory<typeof Tag> = () => (
-  <Tag label="estimation" />
-);
+export const Default: StoryObj<typeof Tag> = {
+  args: {
+    label: 'estimation',
+    selected: false,
+  },
+};
+
+export const DefaultSelected: StoryObj<typeof Tag> = {
+  args: {
+    label: 'estimation',
+    selected: true,
+  },
+};
