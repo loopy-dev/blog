@@ -2,6 +2,9 @@ import { useEffect, useState } from 'react';
 import classNames from 'classnames';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
+import { AiOutlineComment } from 'react-icons/ai';
+import { BsShareFill } from 'react-icons/bs';
+import { MdOutlineRemoveRedEye } from 'react-icons/md';
 import { getPostComments, getPostHits } from '~/lib/api/post';
 import { notificate } from '~components/common/Alert';
 import Card from '~components/common/Card';
@@ -9,9 +12,6 @@ import { CardContent } from '~components/common/Card/Card';
 import { SideBarProvider, useSideBarContext } from '~components/common/SideBar';
 import SideBar from '~components/common/SideBar';
 import Icon from '~components/icons';
-import CommentIcon from '~components/icons/CommentIcon';
-import ShareIcon from '~components/icons/ShareIcon';
-import ViewIcon from '~components/icons/ViewIcon';
 import useClipboard from '~hooks/useClipboard';
 import styles from '../Post.module.scss';
 import { formatNumber, shuffle } from '../utils';
@@ -113,16 +113,11 @@ const MetaContainer = ({ url }: MetaContainerProps) => {
         <div
           className={classNames(
             'inline-flex',
-            'gap-0.5',
-            'justify-between',
+            'justify-center',
             'items-center',
             'text-zinc-500',
             'dark:text-zinc-400',
-            'fill-zinc-500',
-            'dark:fill-zinc-400',
             'hover:text-zinc-600',
-            'hover:fill-zinc-600',
-            'hover:dark:fill-zinc-300',
             'hover:dark:text-zinc-300',
             'cursor-pointer'
           )}
@@ -131,31 +126,25 @@ const MetaContainer = ({ url }: MetaContainerProps) => {
           }}
         >
           {/** TODO - refactor Icon */}
-          <span>
-            <CommentIcon />
+          <span className={classNames('text-3xl', 'mr-1.5')}>
+            <AiOutlineComment />
           </span>
           <span>{commentCounts}</span>
         </div>
         <div
           className={classNames(
             'inline-flex',
-            'gap-0.5',
-            'justify-between',
+            'justify-center',
             'items-center',
             'text-zinc-500',
             'dark:text-zinc-400',
-            'stroke-zinc-500',
-            'dark:stroke-zinc-400',
             'hover:text-zinc-600',
-            'hover:stroke-zinc-600',
-            'hover:dark:stroke-zinc-300',
             'hover:dark:text-zinc-300',
-            'fill-zinc-400',
             'cursor-pointer'
           )}
         >
-          <span>
-            <ViewIcon />
+          <span className={classNames('text-3xl', 'mr-1.5')}>
+            <MdOutlineRemoveRedEye />
           </span>
           <span>{hits}</span>
         </div>
@@ -164,16 +153,11 @@ const MetaContainer = ({ url }: MetaContainerProps) => {
         <div
           className={classNames(
             'inline-flex',
-            'gap-0.5',
-            'justify-between',
+            'justify-center',
             'items-center',
             'text-zinc-500',
             'dark:text-zinc-400',
-            'fill-zinc-500',
-            'dark:fill-zinc-400',
             'hover:text-zinc-600',
-            'hover:fill-zinc-600',
-            'hover:dark:fill-zinc-300',
             'hover:dark:text-zinc-300',
             'cursor-pointer'
           )}
@@ -194,8 +178,8 @@ const MetaContainer = ({ url }: MetaContainerProps) => {
             );
           }}
         >
-          <span>
-            <ShareIcon />
+          <span className={classNames('text-xl')}>
+            <BsShareFill />
           </span>
         </div>
       </div>
@@ -277,10 +261,10 @@ const RecommendedPostsContainer = ({
               className={classNames(
                 'block',
                 'h-full',
-                'hover:bg-zinc-50',
+                'hover:bg-zinc-100',
                 'bg-white',
-                'dark:bg-zinc-700',
-                'hover:dark:bg-zinc-600',
+                'dark:bg-zinc-800',
+                'hover:dark:bg-zinc-700',
                 'rounded'
               )}
             >
