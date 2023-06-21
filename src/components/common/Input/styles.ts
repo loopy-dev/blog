@@ -6,6 +6,7 @@ interface Props {
   variant?: Color;
   shape?: 'normal' | 'rounded';
   frameSize?: 'md' | 'lg';
+  disabled?: boolean;
 }
 
 export const borderStyle = css<Props>`

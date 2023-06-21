@@ -46,7 +46,12 @@ const Footer = () => {
             'text-zinc-300'
           )}
         >
-          <li className={classNames('hover:text-zinc-900')}>
+          <li
+            className={classNames(
+              'hover:text-zinc-900',
+              'dark:hover:text-zinc-500'
+            )}
+          >
             <Link
               href="https://github.com/mrbartrns"
               rel="noopener noreferrer"
@@ -55,7 +60,12 @@ const Footer = () => {
               <FaGithubSquare />
             </Link>
           </li>
-          <li className={classNames('hover:text-zinc-900')}>
+          <li
+            className={classNames(
+              'hover:text-zinc-900',
+              'dark:hover:text-zinc-500'
+            )}
+          >
             <Link
               href="https://velog.io/@mrbartrns"
               rel="noopener noreferrer"
@@ -64,12 +74,22 @@ const Footer = () => {
               <ImBlog />
             </Link>
           </li>
-          <li className={classNames('hover:text-zinc-900')}>
-            <Link href="/discussion" rel="noopener noreferrer" target="_blank">
+          <li
+            className={classNames(
+              'hover:text-zinc-900',
+              'dark:hover:text-zinc-500'
+            )}
+          >
+            <Link href="/discussion">
               <FaCommentDots />
             </Link>
           </li>
-          <li className={classNames('hover:text-zinc-900')}>
+          <li
+            className={classNames(
+              'hover:text-zinc-900',
+              'dark:hover:text-zinc-500'
+            )}
+          >
             <Link
               href="https://noble-fisherman-5cc.notion.site/00ca620933e94941900f26f317786c43"
               rel="noopener noreferrer"
