@@ -19,6 +19,7 @@ const SyntaxHighlighter = dynamic(() => import('./SyntaxHighlighter'), {
 const Gist = dynamic(() => import('gist-react').then((module) => module.Gist), {
   ssr: false,
 });
+
 interface Props {
   content: string;
 }
@@ -38,9 +39,9 @@ const transformLanguage = (language: string) => {
 
 const isInImageDomainList = (url: string) => {
   const domainList = [
-    'user-images.githubusercontent.com',
-    'avatars.githubusercontent.com',
-    'github.com',
+    'https://user-images.githubusercontent.com',
+    'https://avatars.githubusercontent.com',
+    'https://github.com',
   ];
 
   return domainList.some((domain) => url.startsWith(domain));
