@@ -60,7 +60,8 @@ const PostList = ({ category = 'posts', posts }: Props) => {
                       'leading',
                       'text-zinc-500',
                       'dark:text-zinc-300',
-                      'text-sm'
+                      'text-sm',
+                      styles['post-card-description']
                     )}
                   >
                     {post.description}
