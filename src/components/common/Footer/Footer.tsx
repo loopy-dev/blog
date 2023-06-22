@@ -25,6 +25,7 @@ const Footer = () => {
       >
         <Link
           href="/"
+          title="home"
           className={classNames(
             'font-medium',
             'flex',
@@ -57,6 +58,7 @@ const Footer = () => {
               href="https://github.com/mrbartrns"
               rel="noopener noreferrer"
               target="_blank"
+              title="github"
             >
               <FaGithubSquare />
             </Link>
@@ -71,6 +73,7 @@ const Footer = () => {
               href="https://velog.io/@mrbartrns"
               rel="noopener noreferrer"
               target="_blank"
+              title="velog"
             >
               <ImBlog />
             </Link>
@@ -81,7 +84,7 @@ const Footer = () => {
               'dark:hover:text-zinc-500'
             )}
           >
-            <Link href="/discussion">
+            <Link href="/discussion" title="feedback">
               <FaCommentDots />
             </Link>
           </li>
@@ -95,6 +98,7 @@ const Footer = () => {
               href="https://noble-fisherman-5cc.notion.site/00ca620933e94941900f26f317786c43"
               rel="noopener noreferrer"
               target="_blank"
+              title="resume(notion)"
             >
               <FaUserCircle />
             </Link>
