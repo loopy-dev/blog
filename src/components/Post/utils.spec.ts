@@ -1,4 +1,4 @@
-import { formatNumber } from './utils';
+import { formatNumber, formatDate } from './utils';
 
 describe('formatNumber', () => {
   test('0 will be formatted to 0', () => {
@@ -31,5 +31,35 @@ describe('formatNumber', () => {
 
   test('9999999999 will be formatted to 9.9B', () => {
     expect(formatNumber(9999999999)).toBe('9.9B');
+  });
+});
+
+// TODO - add test cases
+describe('formatDate', () => {
+  test('date will be formatted to "2023-06-22"', () => {
+    const timestamp = 1687406429;
+
+    expect(formatDate(timestamp)).toBe('2023-06-22');
+  });
+
+  test('date will be formatted to "2023-06-22"', () => {
+    const timestamp = 1687406429000;
+
+    expect(formatDate(timestamp)).toBe('2023-06-22');
+  });
+
+  test('date will be formatted to "2023-06-22"', () => {
+    const timestamp = '2023-06-22';
+
+    expect(formatDate(timestamp)).toBe('2023-06-22');
+  });
+
+  test('date will be formatted to "2023%06%22"', () => {
+    const timestamp = '2023-06-22';
+    const options = {
+      infix: '%',
+    };
+
+    expect(formatDate(timestamp, options)).toBe('2023%06%22');
   });
 });
