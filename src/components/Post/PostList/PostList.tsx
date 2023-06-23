@@ -49,7 +49,8 @@ const PostList = ({ category = 'posts', posts }: Props) => {
                     className={classNames(
                       'font-medium',
                       'tracking-tight',
-                      'text-lg'
+                      'text-lg',
+                      styles['post-card-text']
                     )}
                   >
                     {post.title}
@@ -61,7 +62,7 @@ const PostList = ({ category = 'posts', posts }: Props) => {
                       'text-zinc-500',
                       'dark:text-zinc-300',
                       'text-sm',
-                      styles['post-card-description']
+                      styles['post-card-text']
                     )}
                   >
                     {post.description}
