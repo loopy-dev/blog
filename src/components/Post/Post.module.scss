@@ -61,3 +61,12 @@
     @apply px-6 pb-6;
   }
 }
+
+.post-card-text {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+  line-height: 1.5;
+}

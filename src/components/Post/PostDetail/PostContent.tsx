@@ -2,7 +2,6 @@ import classNames from 'classnames';
 import dynamic from 'next/dynamic';
 import Image from 'next/image';
 import ReactMarkdown from 'react-markdown';
-import { base16AteliersulphurpoolLight } from 'react-syntax-highlighter/dist/cjs/styles/prism';
 import rehypeRaw from 'rehype-raw';
 import remarkBreaks from 'remark-breaks';
 import remarkFrontMatter from 'remark-frontmatter';
@@ -11,6 +10,7 @@ import Skeleton from '~components/common/Skeleton';
 import postStyles from '../Post.module.scss';
 import { setElementId } from '../utils';
 import styles from './Markdown.module.scss';
+import syntaxStyle from './syntaxStyle';
 
 const SyntaxHighlighter = dynamic(() => import('./SyntaxHighlighter'), {
   loading: () => <Skeleton noSpacing height="220px" width="100%" />,
@@ -19,6 +19,7 @@ const SyntaxHighlighter = dynamic(() => import('./SyntaxHighlighter'), {
 const Gist = dynamic(() => import('gist-react').then((module) => module.Gist), {
   ssr: false,
 });
+
 interface Props {
   content: string;
 }
@@ -38,9 +39,9 @@ const transformLanguage = (language: string) => {
 
 const isInImageDomainList = (url: string) => {
   const domainList = [
-    'user-images.githubusercontent.com',
-    'avatars.githubusercontent.com',
-    'github.com',
+    'https://user-images.githubusercontent.com',
+    'https://avatars.githubusercontent.com',
+    'https://github.com',
   ];
 
   return domainList.some((domain) => url.startsWith(domain));
@@ -92,7 +93,7 @@ const Content = ({ content }: Props) => {
               <SyntaxHighlighter
                 PreTag="div"
                 language={language}
-                style={base16AteliersulphurpoolLight}
+                style={syntaxStyle}
                 customStyle={{
                   padding: '34px 16px 32px 32px',
                   fontSize: '14px',

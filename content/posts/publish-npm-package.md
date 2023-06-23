@@ -9,7 +9,7 @@ tags:
   - rollup
 description: 패키지 배포도 처음하면 어렵다
 series: b67c675a-e8fc-47d7-8b3a-44ed363d8956
-coverImage: /thumnails/npmjs.jpg
+coverImage: /thumbnails/npmjs.jpg
 ---
 
 > 틀린 내용이 있을 수도 있습니다.

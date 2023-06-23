@@ -1,9 +1,16 @@
 import classNames from 'classnames';
+import { Noto_Sans_KR } from 'next/font/google';
 import Link from 'next/link';
 import { FaCommentDots, FaGithubSquare, FaUserCircle } from 'react-icons/fa';
 import { ImBlog } from 'react-icons/im';
 import styled from 'styled-components';
 import cssVar from '~/lib/styles/cssVar';
+
+const notoSans = Noto_Sans_KR({
+  weight: ['400', '500'],
+  style: 'normal',
+  subsets: ['latin'],
+});
 
 const Footer = () => {
   return (
@@ -25,12 +32,15 @@ const Footer = () => {
       >
         <Link
           href="/"
+          title="home"
           className={classNames(
             'font-medium',
             'flex',
             'flex-row',
             'sm:flex-col',
-            'gap-1'
+            'gap-1',
+            notoSans.className,
+            'leading-tight'
           )}
         >
           <p>{"© Ben's"}</p>
@@ -57,6 +67,7 @@ const Footer = () => {
               href="https://github.com/mrbartrns"
               rel="noopener noreferrer"
               target="_blank"
+              title="github"
             >
               <FaGithubSquare />
             </Link>
@@ -71,6 +82,7 @@ const Footer = () => {
               href="https://velog.io/@mrbartrns"
               rel="noopener noreferrer"
               target="_blank"
+              title="velog"
             >
               <ImBlog />
             </Link>
@@ -81,7 +93,7 @@ const Footer = () => {
               'dark:hover:text-zinc-500'
             )}
           >
-            <Link href="/discussion">
+            <Link href="/discussion" title="feedback">
               <FaCommentDots />
             </Link>
           </li>
@@ -95,6 +107,7 @@ const Footer = () => {
               href="https://noble-fisherman-5cc.notion.site/00ca620933e94941900f26f317786c43"
               rel="noopener noreferrer"
               target="_blank"
+              title="resume(notion)"
             >
               <FaUserCircle />
             </Link>

@@ -4,7 +4,7 @@ import PostFooter from './PostFooter';
 import PostHeader from './PostHeader';
 import PostSeries from './PostSeries';
 import PostTemplate from './PostTemplate';
-import PostThumnail from './Thumnail';
+import PostThumbnail from './PostThumbnail';
 import type {
   FrontMatter,
   Post as PostModel,
@@ -42,7 +42,7 @@ const Post = ({
         <>
           <PostHeader postMetaData={{ ...frontMatter }} />
           {post.coverImage && (
-            <PostThumnail maxHeight="1024px" src={post.coverImage} />
+            <PostThumbnail maxHeight="1024px" src={post.coverImage} />
           )}
           {series && <PostSeries series={series} />}
           <PostContent content={post.content} />

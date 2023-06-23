@@ -35,6 +35,7 @@ const Button = ({
       [styles['button__full']]: fullWidth,
     },
     styles[`button__shape-${shape}`],
+    'dark:border-transparent',
     className
   );
 

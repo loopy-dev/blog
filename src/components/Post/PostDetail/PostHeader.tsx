@@ -1,15 +1,19 @@
 import classNames from 'classnames';
 import styles from '../Post.module.scss';
+import { formatDate } from '../utils';
 import type { FrontMatter } from '~/models/Post';
 interface Props {
   postMetaData: FrontMatter;
 }
 
 const PostHeader = ({ postMetaData }: Props) => {
-  const date = new Date(postMetaData.createdTime);
-  const postDate = `${date.getFullYear()}-${
-    date.getMonth() + 1 < 10 ? `0${date.getMonth() + 1}` : date.getMonth() + 1
-  }-${date.getDate() < 10 ? `0${date.getDate()}` : date.getDate()}`;
+  const postDate = (() => {
+    try {
+      return formatDate(postMetaData.createdTime);
+    } catch {
+      return postMetaData.createdTime;
+    }
+  })();
 
   return (
     <div className={classNames('my-16', styles.header)}>

@@ -7,7 +7,7 @@ interface Props {
   maxHeight?: string;
 }
 
-const PostThumnail = ({ src, alt, maxHeight }: Props) => {
+const PostThumbnail = ({ src, alt, maxHeight }: Props) => {
   return (
     <div
       className={classNames(
@@ -20,7 +20,7 @@ const PostThumnail = ({ src, alt, maxHeight }: Props) => {
     >
       {/* eslint-disable-next-line @next/next/no-img-element */}
       <img
-        alt={alt ? alt : 'thumnail'}
+        alt={alt ? alt : 'thumbnail'}
         className={classNames('object-cover', 'w-full')}
         loading="lazy"
         src={src}
@@ -30,4 +30,4 @@ const PostThumnail = ({ src, alt, maxHeight }: Props) => {
   );
 };
 
-export default PostThumnail;
+export default PostThumbnail;

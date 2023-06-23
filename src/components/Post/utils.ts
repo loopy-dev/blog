@@ -55,3 +55,26 @@ export const shuffle = <T>(arr: T[]) => {
 
   return ret;
 };
+
+// TODO - support format variations
+interface FormatDateOptions {
+  infix?: string;
+}
+
+export const formatDate = (
+  timestamp: string | number,
+  options?: FormatDateOptions
+) => {
+  let unix = timestamp;
+
+  if (typeof timestamp === 'number' && Math.floor(timestamp / 10 ** 10) === 0) {
+    unix = timestamp * 1000;
+  }
+
+  const date = new Date(unix);
+  const infix = options?.infix || '-';
+
+  return `${date.getFullYear()}${infix}${
+    date.getMonth() + 1 < 10 ? `0${date.getMonth() + 1}` : date.getMonth() + 1
+  }${infix}${date.getDate() < 10 ? `0${date.getDate()}` : date.getDate()}`;
+};

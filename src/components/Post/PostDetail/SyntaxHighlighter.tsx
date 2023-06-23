@@ -4,7 +4,7 @@ import styles from '../Post.module.scss';
 import { capitalize } from '../utils';
 import type { SyntaxHighlighterProps } from 'react-syntax-highlighter';
 
-const filterMap: Record<string, string> = {
+const languageTable: Record<string, string> = {
   jsx: 'JavaScript JSX',
   tsx: 'TypeScript JSX',
   bash: 'Bash',
@@ -16,7 +16,9 @@ const filterMap: Record<string, string> = {
 const transformLanguage = (language: string | undefined) => {
   if (!language) return '';
 
-  return filterMap[language] ? filterMap[language] : capitalize(language);
+  return languageTable[language]
+    ? languageTable[language]
+    : capitalize(language);
 };
 
 const SyntaxHighlighter = ({
