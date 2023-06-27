@@ -5,6 +5,7 @@ import GlobalLayout from '~/components/layouts/GlobalLayout';
 import postService from '~/lib/post';
 import { parseFileName } from '~/lib/post/postService';
 import { PostSkeleton, PostTemplate } from '~components/Post';
+import PostNavbar from '~components/Post/PostDetail/PostNavbar';
 import type { GetStaticPaths, GetStaticProps } from 'next';
 import type { FrontMatter, Post as PostModel, Series } from '~/models/Post';
 
@@ -106,6 +107,7 @@ const Page = ({ post, recommendedPosts, series }: Props) => {
           property="og:description"
         />
       </Head>
+      <PostNavbar />
       <Post post={post} recommendedPosts={recommendedPosts} series={series} />
     </GlobalLayout>
   );
