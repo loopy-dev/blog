@@ -1,38 +1,18 @@
-import { useCallback, useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import classNames from 'classnames';
 import { setElementId } from '../utils';
+import { getHeadings } from '../utils';
+import useHeadings from './useHeadings';
 
 const PostAside = () => {
-  const [heads, setHeads] = useState<HTMLHeadingElement[]>([]);
   const headingsRef = useRef<IntersectionObserverEntry[]>([]);
   const [activeIndex, setActiveIndex] = useState(-1);
-
-  const getHeadings = useCallback(() => {
-    const $content = document.querySelector('.post-content');
-
-    if (!$content) return [];
-
-    const $headings = [
-      ...Array.from($content.querySelectorAll('h1')),
-      ...Array.from($content.querySelectorAll('h2')),
-      ...Array.from($content.querySelectorAll('h3')),
-    ];
-
-    return $headings;
-  }, []);
-
-  useEffect(() => {
-    const $headings = getHeadings().sort(
-      (a, b) => (Number(a.dataset.index) ?? 0) - (Number(b.dataset.index) ?? 0)
-    );
-
-    // element
-    setHeads($headings);
-  }, [getHeadings]);
+  const selector = '.post-content';
+  const heads = useHeadings(selector);
 
   // TODO - multi el-ref intersection observer 추상화
   useEffect(() => {
-    const $headings = getHeadings();
+    const $headings = getHeadings(selector);
 
     const callback: IntersectionObserverCallback = (entries) => {
       headingsRef.current = [...entries];
@@ -69,7 +49,7 @@ const PostAside = () => {
     return () => {
       io.disconnect();
     };
-  }, [getHeadings]);
+  }, []);
 
   return (
     <ul className={classNames('w-full', 'text-[color:var(--primary-variant)]')}>

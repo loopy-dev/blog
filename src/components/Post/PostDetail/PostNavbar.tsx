@@ -14,37 +14,39 @@ interface Props {
  */
 const PostNavbar = ({ category = 'posts' }: Props) => {
   return (
-    <div
-      className={classNames(
-        'flex',
-        'justify-between',
-        'items-center',
-        'sm:hidden',
-        'sticky',
-        'top-0',
-        'left-0',
-        'px-4',
-        'py-2',
-        'z-20',
-        'bg-white',
-        'dark:bg-zinc-900',
-        'shadow'
-      )}
-    >
-      <Link
-        href={`/${category}`}
+    <div>
+      <div
         className={classNames(
           'flex',
+          'justify-between',
           'items-center',
-          'text-zinc-400',
-          'hover:text-zinc-900',
-          'gap-1'
+          'sm:hidden',
+          'sticky',
+          'top-0',
+          'left-0',
+          'px-4',
+          'py-2',
+          'z-20',
+          'bg-white',
+          'dark:bg-zinc-900',
+          'shadow'
         )}
       >
-        <FaArrowLeft />
-        리스트
-      </Link>
-      <div>본문 내 이동</div>
+        <Link
+          href={`/${category}`}
+          className={classNames(
+            'flex',
+            'items-center',
+            'text-zinc-400',
+            'hover:text-zinc-900',
+            'gap-1'
+          )}
+        >
+          <FaArrowLeft />
+          리스트
+        </Link>
+        <div>본문 내 이동</div>
+      </div>
     </div>
   );
 };

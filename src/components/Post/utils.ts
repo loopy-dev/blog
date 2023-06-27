@@ -78,3 +78,32 @@ export const formatDate = (
     date.getMonth() + 1 < 10 ? `0${date.getMonth() + 1}` : date.getMonth() + 1
   }${infix}${date.getDate() < 10 ? `0${date.getDate()}` : date.getDate()}`;
 };
+
+/**
+ * @description
+ * get All Headings that in chosen selector.
+ * IT CAN'T BE USED ON SERVER SIDE.
+ * @example
+ * ```tsx
+ * getHeadings('body') returns heading tags in body tag.
+ * ```
+ */
+export const getHeadings = (selector: string) => {
+  if (!document)
+    throw new Error('This function can not be used on server side.');
+
+  const $content = document.querySelector(selector);
+
+  if (!$content) return [];
+
+  const $headings = [
+    ...Array.from($content.querySelectorAll('h1')),
+    ...Array.from($content.querySelectorAll('h2')),
+    ...Array.from($content.querySelectorAll('h3')),
+    ...Array.from($content.querySelectorAll('h4')),
+    ...Array.from($content.querySelectorAll('h5')),
+    ...Array.from($content.querySelectorAll('h6')),
+  ];
+
+  return $headings;
+};
