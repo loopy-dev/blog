@@ -34,6 +34,7 @@
 .block {
   font-family: 'Noto Sans KR';
   font-weight: 300;
+
   h1 {
     font-size: 1.875em;
     @include heading_style();
@@ -105,9 +106,12 @@
     }
 
     & + blockquote,
-    & + aside,
     & + iframe {
       margin-top: 10px;
+    }
+
+    & + aside {
+      margin-top: 28px;
     }
   }
 
@@ -233,5 +237,27 @@
   aside {
     margin-top: 28px;
     width: 100%;
+
+    & + p {
+      margin-top: 54px;
+    }
+  }
+
+  hr {
+    display: block;
+    text-align: center;
+    border: 0;
+    margin-top: 52px;
+    margin-bottom: 42px;
+    overflow: visible;
+
+    &::before {
+      content: '...';
+      display: inline-block;
+      position: relative;
+      font-size: 30px;
+      top: -30px;
+      letter-spacing: 0.6em;
+    }
   }
 }
