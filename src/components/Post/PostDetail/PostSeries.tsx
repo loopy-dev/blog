@@ -22,7 +22,7 @@ const PostSeries = ({ series }: Props) => {
           'shadow-md',
           'mt-16',
           'bg-white',
-          'dark:bg-zinc-700',
+          'dark:bg-zinc-700/80',
           'rounded'
         )}
         dropdownTrigger={(isOpen) => (
