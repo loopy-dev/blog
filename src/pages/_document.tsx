@@ -35,6 +35,16 @@ export default class MyDocument extends Document {
             href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.6/dist/web/variable/pretendardvariable-dynamic-subset.css"
             rel="preload stylesheet"
           />
+          <link href="https://fonts.googleapis.com" rel="preconnect" />
+          <link
+            crossOrigin=""
+            href="https://fonts.gstatic.com"
+            rel="preconnect"
+          />
+          <link
+            href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&display=swap"
+            rel="stylesheet"
+          />
         </Head>
         <body>
           <ThemeScript />

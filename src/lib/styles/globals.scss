@@ -51,7 +51,7 @@ body {
 }
 
 html {
-  @apply text-zinc-800 bg-white;
+  @apply text-neutral-800 bg-white;
   @include light_variables();
   &.dark {
     @include dark_variables();

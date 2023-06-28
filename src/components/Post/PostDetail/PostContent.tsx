@@ -130,11 +130,12 @@ const Content = ({ content }: Props) => {
             return (
               <blockquote
                 className={classNames(
-                  'bg-zinc-100',
-                  'dark:bg-zinc-700',
-                  'text-zinc-500',
-                  'dark:text-zinc-300',
-                  'italic'
+                  // 'bg-zinc-100/80',
+                  // 'dark:bg-zinc-700/80',
+                  'italic',
+                  'border-l-2',
+                  'border-zinc-700',
+                  'dark:border-zinc-300'
                 )}
                 {...props}
               >
@@ -148,13 +149,14 @@ const Content = ({ content }: Props) => {
                 {...props}
                 className={classNames(
                   'flex',
-                  'border',
-                  'dark:border-none',
                   'gap-2',
-                  'dark:bg-zinc-700',
-                  'text-zinc-500',
-                  'dark:text-zinc-300',
-                  'before:content-["📌"]'
+                  'text-neutral-600',
+                  'dark:text-neutral-200',
+                  'sm:pl-[50px]',
+                  'italic',
+                  'text-2xl',
+                  'leading-[1.48]',
+                  'tracking-[-0.012em]'
                 )}
               >
                 {children}

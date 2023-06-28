@@ -32,6 +32,9 @@
 }
 
 .block {
+  font-family: 'Noto Sans KR';
+  font-weight: 300;
+
   h1 {
     font-size: 1.875em;
     @include heading_style();
@@ -43,9 +46,12 @@
     }
 
     & + blockquote,
-    & + aside,
     & + iframe {
       margin-top: 12px;
+    }
+
+    & + aside {
+      margin-top: 28px;
     }
   }
 
@@ -60,9 +66,12 @@
     }
 
     & + blockquote,
-    & + aside,
     & + iframe {
       margin-top: 12px;
+    }
+
+    & + aside {
+      margin-top: 28px;
     }
   }
 
@@ -77,9 +86,12 @@
     }
 
     & + blockquote,
-    & + aside,
     & + iframe {
       margin-top: 10px;
+    }
+
+    & + aside {
+      margin-top: 28px;
     }
   }
 
@@ -94,9 +106,12 @@
     }
 
     & + blockquote,
-    & + aside,
     & + iframe {
       margin-top: 10px;
+    }
+
+    & + aside {
+      margin-top: 28px;
     }
   }
 
@@ -130,7 +145,10 @@
     word-break: break-word;
     caret-color: rgb(55, 53, 47);
     line-height: 1.75;
-    letter-spacing: -0.003em;
+
+    & + aside {
+      margin-top: 64px;
+    }
 
     @media (max-width: 767px) {
       margin-top: 10px;
@@ -152,7 +170,6 @@
     margin-top: 24px;
     padding: 8px 16px;
     width: 100%;
-    border-left: 2px solid var(--primary);
     font-size: 1em;
 
     & p {
@@ -218,9 +235,29 @@
   }
 
   aside {
-    margin-top: 24px;
+    margin-top: 28px;
     width: 100%;
-    border-radius: 3px;
-    padding: 16px 16px 16px 12px;
+
+    & + p {
+      margin-top: 54px;
+    }
+  }
+
+  hr {
+    display: block;
+    text-align: center;
+    border: 0;
+    margin-top: 52px;
+    margin-bottom: 42px;
+    overflow: visible;
+
+    &::before {
+      content: '...';
+      display: inline-block;
+      position: relative;
+      font-size: 30px;
+      top: -30px;
+      letter-spacing: 0.6em;
+    }
   }
 }
