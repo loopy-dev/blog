@@ -1,9 +1,19 @@
+import { useEffect } from 'react';
 import classNames from 'classnames';
 import Head from 'next/head';
+import { getProjectList } from '~/lib/api/projects';
 import Header from '~components/Header';
 import GlobalLayout from '~components/layouts/GlobalLayout';
 
 const Page = () => {
+  useEffect(() => {
+    (async () => {
+      const response = await getProjectList();
+
+      console.log(response);
+    })();
+  }, []);
+
   return (
     <GlobalLayout>
       <Head>
