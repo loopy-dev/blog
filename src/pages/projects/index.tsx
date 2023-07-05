@@ -4,13 +4,46 @@ import Head from 'next/head';
 import { getProjectList } from '~/lib/api/projects';
 import Header from '~components/Header';
 import GlobalLayout from '~components/layouts/GlobalLayout';
+import type { FrontMatter } from '~models/Post';
+
+const transformToFrontMatter = (data: any): FrontMatter => {
+  const titleProperty = '이름';
+  const title = (() => {
+    try {
+      return data.properties[titleProperty].title[0].plain_text as string;
+    } catch {
+      return '';
+    }
+  })();
+
+  const description = (() => {
+    try {
+      return data.properties.description.rich_text[0].plain_text as string;
+    } catch {
+      return '';
+    }
+  })();
+
+  return {
+    title,
+    url: data.id,
+    createdTime: data.created_time,
+    tags: [],
+    description,
+    coverImage: data.cover || undefined,
+  };
+};
 
 const Page = () => {
   useEffect(() => {
     (async () => {
       const response = await getProjectList();
 
-      console.log(response);
+      const frontMatters = (response.results as any[]).map<FrontMatter>(
+        (data) => transformToFrontMatter(data)
+      );
+
+      console.log(frontMatters);
     })();
   }, []);
 
