@@ -1,9 +1,12 @@
-import { useEffect } from 'react';
+import { useEffect, useState, useDeferredValue } from 'react';
 import classNames from 'classnames';
 import Head from 'next/head';
 import { getProjectList } from '~/lib/api/projects';
 import Header from '~components/Header';
+import { PostTemplate } from '~components/Post';
+import { PostList, NoResult } from '~components/Post';
 import GlobalLayout from '~components/layouts/GlobalLayout';
+import InfiniteScrollComponent from '~hooks/useInfiniteScroll/InfiniteScrollComponent';
 import type { FrontMatter } from '~models/Post';
 
 const transformToFrontMatter = (data: any): FrontMatter => {
@@ -34,7 +37,19 @@ const transformToFrontMatter = (data: any): FrontMatter => {
   };
 };
 
+const INITIAL_POST_COUNTS = 5;
+const NEXT_POST_COUNTS = 5;
+
 const Page = () => {
+  const [posts, setPosts] = useState<FrontMatter[]>([]);
+
+  // used in infinite scroll
+  const [counts, setCounts] = useState(
+    Math.min(INITIAL_POST_COUNTS, posts.length)
+  );
+
+  const filteredPosts = useDeferredValue(posts.slice(0, counts));
+
   useEffect(() => {
     (async () => {
       const response = await getProjectList();
@@ -43,7 +58,7 @@ const Page = () => {
         (data) => transformToFrontMatter(data)
       );
 
-      console.log(frontMatters);
+      setPosts(frontMatters);
     })();
   }, []);
 
@@ -71,6 +86,25 @@ const Page = () => {
           title="Projects"
         />
       </div>
+      <PostTemplate
+        content={
+          <div>
+            {filteredPosts.length > 0 ? (
+              <PostList category="projects" posts={filteredPosts} />
+            ) : (
+              <NoResult message="해당 키워드에 대한 포스트가 아직 없네요." />
+            )}
+            <InfiniteScrollComponent
+              threshold={0.7}
+              onIntersect={() => {
+                setCounts((prev) =>
+                  Math.min(prev + NEXT_POST_COUNTS, posts.length)
+                );
+              }}
+            />
+          </div>
+        }
+      />
     </GlobalLayout>
   );
 };
