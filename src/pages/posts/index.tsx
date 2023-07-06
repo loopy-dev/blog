@@ -1,6 +1,5 @@
 import { useDeferredValue, useState } from 'react';
 import classNames from 'classnames';
-import Lottie from 'lottie-react';
 import dynamic from 'next/dynamic';
 import Head from 'next/head';
 import postService from '~/lib/post';
@@ -12,11 +11,11 @@ import {
   SearchBar,
   TagList,
   useTag,
+  NoResult,
 } from '~components/Post';
 import GlobalLayout from '~components/layouts/GlobalLayout';
 import useDebounce from '~hooks/useDebounce';
 import InfiniteScrollComponent from '~hooks/useInfiniteScroll/InfiniteScrollComponent';
-import itemNotFound from '../../../public/item-not-found.json';
 import type { GetStaticProps } from 'next';
 import type { FrontMatter } from '~/models/Post';
 
@@ -179,28 +178,5 @@ const TagSelectedMessage = ({ selectedTags }: TagMessageProps) => {
       ))}{' '}
       태그가 포함된 포스트를 검색해요.
     </p>
-  );
-};
-
-interface NoResultProps {
-  message?: string;
-}
-
-const NoResult = ({ message }: NoResultProps) => {
-  return (
-    <div
-      className={classNames(
-        'flex',
-        'flex-col',
-        'gap-4',
-        'justify-center',
-        'items-center'
-      )}
-    >
-      <div className={classNames('mx-auto', 'w-full', 'max-w-[400px]')}>
-        <Lottie loop animationData={itemNotFound} />
-      </div>
-      <p>{message}</p>
-    </div>
   );
 };

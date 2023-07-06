@@ -6,3 +6,5 @@ export {
   SearchBar,
   useTag,
 } from './PostList';
+
+export { default as NoResult } from './NoResult';

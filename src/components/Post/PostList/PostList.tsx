@@ -3,6 +3,7 @@ import Link from 'next/link';
 import Card, { CardContent } from '~components/common/Card';
 import Tag from '~components/common/Tag';
 import styles from '../Post.module.scss';
+import { formatDate } from '../utils';
 import type { FrontMatter } from '~models/Post';
 
 interface Props {
@@ -93,7 +94,7 @@ const PostList = ({ category = 'posts', posts }: Props) => {
                     'tracking-[0.003em]'
                   )}
                 >
-                  {post.createdTime}
+                  {formatDate(post.createdTime)}
                 </p>
               </div>
             </div>
