@@ -74,6 +74,14 @@ export const formatDate = (
   const date = new Date(unix);
   const infix = options?.infix || '-';
 
+  if (
+    [date.getFullYear(), date.getMonth(), date.getDate()].some((value) =>
+      Number.isNaN(value)
+    )
+  ) {
+    return timestamp;
+  }
+
   return `${date.getFullYear()}${infix}${
     date.getMonth() + 1 < 10 ? `0${date.getMonth() + 1}` : date.getMonth() + 1
   }${infix}${date.getDate() < 10 ? `0${date.getDate()}` : date.getDate()}`;

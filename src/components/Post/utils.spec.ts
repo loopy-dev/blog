@@ -62,4 +62,13 @@ describe('formatDate', () => {
 
     expect(formatDate(timestamp, options)).toBe('2023%06%22');
   });
+
+  test('"abcde" will be formatted to "abcde"', () => {
+    const timestamp = 'abcde';
+    const options = {
+      infix: '%',
+    };
+
+    expect(formatDate(timestamp, options)).toBe('abcde');
+  });
 });
