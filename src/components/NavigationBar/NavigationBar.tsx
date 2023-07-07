@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
 import classNames from 'classnames';
 import dynamic from 'next/dynamic';
 import { Noto_Sans_KR } from 'next/font/google';
@@ -54,30 +54,9 @@ const NavigationBar = () => {
           'mx-auto'
         )}
       >
-        <div
-          className={classNames(
-            'left',
-            'flex',
-            'items-center',
-            'gap-2',
-            'sm:gap-0'
-          )}
-        >
-          <Link
-            className={classNames(notoSans.className, styles.title)}
-            href="/"
-          >
-            BenLog
-          </Link>
-        </div>
-        <div className={classNames('hidden', 'sm:flex')}>
-          <ThemeToggleButton />
-          <NavigationLinks />
-        </div>
-        <div className={classNames('flex', 'sm:hidden')}>
-          <ThemeToggleButton />
-          <Icon type="hamburger" onClick={toggleHamburgerIcon} />
-        </div>
+        <Left />
+        <Right />
+        <Hidden onClick={toggleHamburgerIcon} />
       </div>
       {/** hidden part of NavigationBar */}
       {isOpen ? (
@@ -90,6 +69,52 @@ const NavigationBar = () => {
 };
 
 export default NavigationBar;
+
+const Left = () => {
+  return (
+    <div
+      className={classNames(
+        'left',
+        'flex',
+        'items-center',
+        'gap-2',
+        'sm:gap-0'
+      )}
+    >
+      <Logo />
+    </div>
+  );
+};
+
+const Logo = () => {
+  return (
+    <Link className={classNames(notoSans.className, styles.title)} href="/">
+      BenLog
+    </Link>
+  );
+};
+
+const Right = () => {
+  return (
+    <div className={classNames('hidden', 'sm:flex')}>
+      <ThemeToggleButton />
+      <NavigationLinks />
+    </div>
+  );
+};
+
+interface HiddenComponentProps {
+  onClick?: React.MouseEventHandler<HTMLDivElement>;
+}
+
+const Hidden = ({ onClick }: HiddenComponentProps) => {
+  return (
+    <div className={classNames('flex', 'sm:hidden')}>
+      <ThemeToggleButton />
+      <Icon type="hamburger" onClick={onClick} />
+    </div>
+  );
+};
 
 interface NavigationLinkProps {
   href: string;
@@ -127,10 +152,13 @@ const NavigationLink = ({ href, children }: NavigationLinkProps) => {
           'px-2',
           'font-medium',
           'text-zinc-600',
+          'dark:text-zinc-300',
           {
             'text-zinc-800': getSubDomain(router.pathname) === pathname,
+            'dark:text-zinc-100': getSubDomain(router.pathname) === pathname,
           },
-          'hover:text-zinc-800'
+          'hover:text-zinc-800',
+          'dark:hover:text-zinc-100'
         )}
       >
         {children}
