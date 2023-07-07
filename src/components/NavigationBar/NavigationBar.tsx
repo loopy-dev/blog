@@ -6,7 +6,6 @@ import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { FaGithub } from 'react-icons/fa';
 import Icon from '../icons';
-import { Item } from './Item';
 import styles from './NavigationBar.module.scss';
 
 const ThemeToggleButton = dynamic(() => import('./ThemeToggleButton'), {
@@ -92,32 +91,76 @@ const NavigationBar = () => {
 
 export default NavigationBar;
 
-const NavigationLinks = () => {
+interface NavigationLinkProps {
+  href: string;
+  children?: React.ReactNode;
+}
+
+const getPathname = (href: string) => {
+  if (href[0] !== '/') {
+    return href;
+  }
+
+  return href.slice(1);
+};
+
+const NavigationLink = ({ href, children }: NavigationLinkProps) => {
   const router = useRouter();
+  const pathname = getPathname(href);
+  const isExternalLink = href === pathname;
+
+  return (
+    <li className={classNames('w-full', 'text-center', 'flex', 'items-center')}>
+      <Link
+        href={href}
+        rel={isExternalLink ? 'noopener noreferrer' : undefined}
+        target={isExternalLink ? '_blank' : undefined}
+        title={typeof children === 'string' ? children : pathname}
+        className={classNames(
+          'flex',
+          'justify-center',
+          'items-center',
+          'w-full',
+          'select-none',
+          'transition-all',
+          'py-1',
+          'px-2',
+          'font-medium',
+          'text-zinc-600',
+          {
+            'text-zinc-800': getSubDomain(router.pathname) === pathname,
+          },
+          'hover:text-zinc-800'
+        )}
+      >
+        {children}
+      </Link>
+    </li>
+  );
+};
+
+const NavigationLinks = () => {
+  const links = [
+    {
+      href: '/posts',
+      children: 'Posts',
+    },
+    {
+      href: '/about',
+      children: 'About',
+    },
+    {
+      href: 'https://github.com/mrbartrns',
+      children: <FaGithub className={classNames('text-xl')} />,
+    },
+  ];
   return (
     <>
-      <Link
-        className={classNames('w-full', 'text-center', 'flex', 'items-center')}
-        href="/posts"
-      >
-        <Item current={getSubDomain(router.pathname) === 'posts'}>Posts</Item>
-      </Link>
-      <Link
-        className={classNames('w-full', 'text-center', 'flex', 'items-center')}
-        href="/about"
-      >
-        <Item current={getSubDomain(router.pathname) === 'posts'}>About</Item>
-      </Link>
-      <Link
-        className={classNames('w-full', 'text-center', 'flex', 'items-center')}
-        href="https://github.com/mrbartrns"
-        rel="noopener noreferrer"
-        target="_blank"
-      >
-        <Item>
-          <FaGithub className={classNames('text-xl')} />
-        </Item>
-      </Link>
+      {links.map((link) => (
+        <NavigationLink key={link.href} href={link.href}>
+          {link.children}
+        </NavigationLink>
+      ))}
     </>
   );
 };
