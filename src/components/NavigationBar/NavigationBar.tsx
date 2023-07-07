@@ -55,6 +55,7 @@ const NavigationBar = () => {
         )}
       >
         <Left />
+        <Middle />
         <Right />
         <Hidden onClick={toggleHamburgerIcon} />
       </div>
@@ -99,6 +100,24 @@ const Right = () => {
     <div className={classNames('hidden', 'sm:flex')}>
       <ThemeToggleButton />
       <NavigationLinks />
+    </div>
+  );
+};
+
+const Middle = () => {
+  return (
+    <div
+      className={classNames(
+        'hidden',
+        'md:flex',
+        'flex-col',
+        'justify-center',
+        'items-center',
+        'w-full',
+        'text-center'
+      )}
+    >
+      Test
     </div>
   );
 };
