@@ -98,7 +98,7 @@ const PostNavbar = ({ category = 'posts' }: Props) => {
         <ul className={classNames('max-h-[280px]', 'overflow-auto')}>
           {headings.map((heading) => (
             <li
-              key={heading.textContent}
+              key={`${heading.textContent}-${heading.dataset.index}`}
               className={classNames(
                 'w-full',
                 'px-4',
@@ -116,7 +116,9 @@ const PostNavbar = ({ category = 'posts' }: Props) => {
             >
               <a
                 className={classNames('hover:underline')}
-                href={`#${setElementId(heading.textContent)}`}
+                href={`#${setElementId(heading.textContent)}-${
+                  heading.dataset.index
+                }`}
                 onClick={() => {
                   setIsOpen(false);
                 }}

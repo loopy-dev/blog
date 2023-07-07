@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import classNames from 'classnames';
 import dynamic from 'next/dynamic';
 import { Noto_Sans_KR } from 'next/font/google';
@@ -105,6 +105,33 @@ const Right = () => {
 };
 
 const Middle = () => {
+  const router = useRouter();
+  const [isShowing, setIsShowing] = useState(false);
+  const [postTitle, setPostTitle] = useState('');
+
+  useEffect(() => {
+    const isPostPath = getSubDomain(router.pathname) === 'posts';
+    setIsShowing(isPostPath);
+  }, [router.pathname]);
+
+  useEffect(() => {
+    const handler = () => {
+      const title = document.querySelector('.post-title');
+
+      if (!title) return;
+
+      setPostTitle(title.textContent || '');
+    };
+
+    handler();
+
+    router.events.on('routeChangeComplete', handler);
+
+    return () => {
+      router.events.off('routeChangeComplete', handler);
+    };
+  }, [router.events]);
+
   return (
     <div
       className={classNames(
@@ -117,7 +144,7 @@ const Middle = () => {
         'text-center'
       )}
     >
-      Test
+      {postTitle}
     </div>
   );
 };
