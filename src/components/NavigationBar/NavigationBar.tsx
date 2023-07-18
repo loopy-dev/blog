@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import classNames from 'classnames';
 import dynamic from 'next/dynamic';
-import { Noto_Sans_KR } from 'next/font/google';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { FaGithub } from 'react-icons/fa';
@@ -10,12 +9,6 @@ import styles from './NavigationBar.module.scss';
 
 const ThemeToggleButton = dynamic(() => import('./ThemeToggleButton'), {
   ssr: false,
-});
-
-const notoSans = Noto_Sans_KR({
-  weight: '500',
-  style: ['normal'],
-  subsets: ['latin'],
 });
 
 // TODO - show floating menu button when display size is under sm
@@ -89,7 +82,11 @@ const Left = () => {
 
 const Logo = () => {
   return (
-    <Link className={classNames(notoSans.className, styles.title)} href="/">
+    <Link
+      className={classNames(styles.title)}
+      href="/"
+      style={{ fontFamily: 'Noto Sans KR' }}
+    >
       BenLog
     </Link>
   );
