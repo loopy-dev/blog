@@ -1,3 +1,4 @@
+import classNames from 'classnames';
 import styled, { css } from 'styled-components';
 import cssVar from '~/lib/styles/cssVar';
 
@@ -28,7 +29,7 @@ const Skeleton = ({
   return (
     <Block
       {...props}
-      className={`animate-pulse${className ? ` ${className}` : ''}`}
+      className={classNames('animate-pulse', className)}
       style={{ width, height, flex, borderRadius }}
     />
   );
