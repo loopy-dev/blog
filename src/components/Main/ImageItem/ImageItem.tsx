@@ -17,13 +17,16 @@ const ImageItem = ({ post }: Props) => {
       }
     >
       <div
+        // TODO - 스타일 수정 필요함
         style={{ minHeight: 'inherit' }}
         className={classNames(
+          'absolute',
+          'bottom-0',
           'flex',
           'flex-col',
           'justify-end',
           'gap-4',
-          'pb-2'
+          'p-4'
         )}
       >
         <h1 className={classNames('text-4xl', 'text-white', 'drop-shadow')}>
