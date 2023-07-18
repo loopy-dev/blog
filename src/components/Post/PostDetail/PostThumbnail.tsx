@@ -22,9 +22,10 @@ const PostThumbnail = ({ src, alt, maxHeight }: Props) => {
       <img
         alt={alt ? alt : 'thumbnail'}
         className={classNames('object-cover', 'w-full')}
-        loading="lazy"
+        // loading="lazy"
         src={src}
         style={{ maxHeight }}
+        // TODO - 전체 커버 이미지로 교체 시 해당 부분 제거
       />
     </div>
   );
