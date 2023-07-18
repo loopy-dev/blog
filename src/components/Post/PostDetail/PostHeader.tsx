@@ -28,7 +28,8 @@ const PostHeader = ({ postMetaData }: Props) => {
             'font-bold',
             'text-[3em]',
             'leading-[1.3]',
-            'mt-[1em]'
+            'mt-[1em]',
+            'post-title'
           )}
         >
           {postMetaData.title}

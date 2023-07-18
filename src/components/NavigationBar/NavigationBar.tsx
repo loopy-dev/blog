@@ -1,22 +1,14 @@
-import { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import classNames from 'classnames';
 import dynamic from 'next/dynamic';
-import { Noto_Sans_KR } from 'next/font/google';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { FaGithub } from 'react-icons/fa';
 import Icon from '../icons';
-import { Item } from './Item';
 import styles from './NavigationBar.module.scss';
 
 const ThemeToggleButton = dynamic(() => import('./ThemeToggleButton'), {
   ssr: false,
-});
-
-const notoSans = Noto_Sans_KR({
-  weight: '500',
-  style: ['normal'],
-  subsets: ['latin'],
 });
 
 // TODO - show floating menu button when display size is under sm
@@ -55,30 +47,10 @@ const NavigationBar = () => {
           'mx-auto'
         )}
       >
-        <div
-          className={classNames(
-            'left',
-            'flex',
-            'items-center',
-            'gap-2',
-            'sm:gap-0'
-          )}
-        >
-          <Link
-            className={classNames(notoSans.className, styles.title)}
-            href="/"
-          >
-            BenLog
-          </Link>
-        </div>
-        <div className={classNames('hidden', 'sm:flex')}>
-          <ThemeToggleButton />
-          <NavigationLinks />
-        </div>
-        <div className={classNames('flex', 'sm:hidden')}>
-          <ThemeToggleButton />
-          <Icon type="hamburger" onClick={toggleHamburgerIcon} />
-        </div>
+        <Left />
+        <Middle />
+        <Right />
+        <Hidden onClick={toggleHamburgerIcon} />
       </div>
       {/** hidden part of NavigationBar */}
       {isOpen ? (
@@ -92,32 +64,174 @@ const NavigationBar = () => {
 
 export default NavigationBar;
 
-const NavigationLinks = () => {
+const Left = () => {
+  return (
+    <div
+      className={classNames(
+        'left',
+        'flex',
+        'items-center',
+        'gap-2',
+        'sm:gap-0'
+      )}
+    >
+      <Logo />
+    </div>
+  );
+};
+
+const Logo = () => {
+  return (
+    <Link
+      className={classNames(styles.title)}
+      href="/"
+      style={{ fontFamily: 'Noto Sans KR' }}
+    >
+      BenLog
+    </Link>
+  );
+};
+
+const Right = () => {
+  return (
+    <div className={classNames('hidden', 'sm:flex')}>
+      <ThemeToggleButton />
+      <NavigationLinks />
+    </div>
+  );
+};
+
+const Middle = () => {
   const router = useRouter();
+  const [isShowing, setIsShowing] = useState(false);
+  const [postTitle, setPostTitle] = useState('');
+
+  useEffect(() => {
+    const isPostPath = getSubDomain(router.pathname) === 'posts';
+    setIsShowing(isPostPath);
+  }, [router.pathname]);
+
+  useEffect(() => {
+    const handler = () => {
+      const title = document.querySelector('.post-title');
+
+      if (!title) return;
+
+      setPostTitle(title.textContent || '');
+    };
+
+    handler();
+
+    router.events.on('routeChangeComplete', handler);
+
+    return () => {
+      router.events.off('routeChangeComplete', handler);
+    };
+  }, [router.events]);
+
+  return (
+    <div
+      className={classNames(
+        'hidden',
+        'md:flex',
+        'flex-col',
+        'justify-center',
+        'items-center',
+        'w-full',
+        'text-center'
+      )}
+    >
+      {postTitle}
+    </div>
+  );
+};
+
+interface HiddenComponentProps {
+  onClick?: React.MouseEventHandler<HTMLDivElement>;
+}
+
+const Hidden = ({ onClick }: HiddenComponentProps) => {
+  return (
+    <div className={classNames('flex', 'sm:hidden')}>
+      <ThemeToggleButton />
+      <Icon type="hamburger" onClick={onClick} />
+    </div>
+  );
+};
+
+interface NavigationLinkProps {
+  href: string;
+  children?: React.ReactNode;
+}
+
+const getPathname = (href: string) => {
+  if (href[0] !== '/') {
+    return href;
+  }
+
+  return href.slice(1);
+};
+
+const NavigationLink = ({ href, children }: NavigationLinkProps) => {
+  const router = useRouter();
+  const pathname = getPathname(href);
+  const isExternalLink = href === pathname;
+
+  return (
+    <li className={classNames('w-full', 'text-center', 'flex', 'items-center')}>
+      <Link
+        href={href}
+        rel={isExternalLink ? 'noopener noreferrer' : undefined}
+        target={isExternalLink ? '_blank' : undefined}
+        title={typeof children === 'string' ? children : pathname}
+        className={classNames(
+          'flex',
+          'justify-center',
+          'items-center',
+          'w-full',
+          'select-none',
+          'transition-all',
+          'py-1',
+          'px-2',
+          'font-medium',
+          'text-zinc-600',
+          'dark:text-zinc-300',
+          {
+            'text-zinc-800': getSubDomain(router.pathname) === pathname,
+            'dark:text-zinc-100': getSubDomain(router.pathname) === pathname,
+          },
+          'hover:text-zinc-800',
+          'dark:hover:text-zinc-100'
+        )}
+      >
+        {children}
+      </Link>
+    </li>
+  );
+};
+
+const NavigationLinks = () => {
+  const links = [
+    {
+      href: '/posts',
+      children: 'Posts',
+    },
+    {
+      href: '/about',
+      children: 'About',
+    },
+    {
+      href: 'https://github.com/mrbartrns',
+      children: <FaGithub className={classNames('text-xl')} />,
+    },
+  ];
   return (
     <>
-      <Link
-        className={classNames('w-full', 'text-center', 'flex', 'items-center')}
-        href="/posts"
-      >
-        <Item current={getSubDomain(router.pathname) === 'posts'}>Posts</Item>
-      </Link>
-      <Link
-        className={classNames('w-full', 'text-center', 'flex', 'items-center')}
-        href="/about"
-      >
-        <Item current={getSubDomain(router.pathname) === 'posts'}>About</Item>
-      </Link>
-      <Link
-        className={classNames('w-full', 'text-center', 'flex', 'items-center')}
-        href="https://github.com/mrbartrns"
-        rel="noopener noreferrer"
-        target="_blank"
-      >
-        <Item>
-          <FaGithub className={classNames('text-xl')} />
-        </Item>
-      </Link>
+      {links.map((link) => (
+        <NavigationLink key={link.href} href={link.href}>
+          {link.children}
+        </NavigationLink>
+      ))}
     </>
   );
 };

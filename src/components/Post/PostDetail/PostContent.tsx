@@ -59,21 +59,21 @@ const Content = ({ content }: Props) => {
         components={{
           h1({ index, children }) {
             return (
-              <h1 data-index={index} id={setElementId(children)}>
+              <h1 data-index={index} id={`${setElementId(children)}-${index}`}>
                 {children}
               </h1>
             );
           },
           h2({ index, children }) {
             return (
-              <h2 data-index={index} id={setElementId(children)}>
+              <h2 data-index={index} id={`${setElementId(children)}-${index}`}>
                 {children}
               </h2>
             );
           },
           h3({ index, children }) {
             return (
-              <h3 data-index={index} id={setElementId(children)}>
+              <h3 data-index={index} id={`${setElementId(children)}-${index}`}>
                 {children}
               </h3>
             );

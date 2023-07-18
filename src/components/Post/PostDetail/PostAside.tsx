@@ -55,7 +55,7 @@ const PostAside = () => {
     <ul className={classNames('w-full', 'text-[color:var(--primary-variant)]')}>
       {heads.map((head) => (
         <li
-          key={head.textContent}
+          key={`${head.textContent}-${head.dataset.index}`}
           className={classNames('text-[90%]', 'leading-[1.7]', {
             'font-bold': activeIndex === Number(head.dataset.index),
           })}
@@ -70,7 +70,7 @@ const PostAside = () => {
         >
           <a
             className={classNames('hover:underline')}
-            href={`#${setElementId(head.textContent)}`}
+            href={`#${setElementId(head.textContent)}-${head.dataset.index}`}
           >
             {head.textContent}
           </a>

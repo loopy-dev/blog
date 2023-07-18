@@ -1,16 +1,9 @@
 import classNames from 'classnames';
-import { Noto_Sans_KR } from 'next/font/google';
 import Link from 'next/link';
 import { FaCommentDots, FaGithubSquare, FaUserCircle } from 'react-icons/fa';
 import { ImBlog } from 'react-icons/im';
 import styled from 'styled-components';
 import cssVar from '~/lib/styles/cssVar';
-
-const notoSans = Noto_Sans_KR({
-  weight: ['400', '500'],
-  style: 'normal',
-  subsets: ['latin'],
-});
 
 const Footer = () => {
   return (
@@ -32,6 +25,7 @@ const Footer = () => {
       >
         <Link
           href="/"
+          style={{ fontFamily: 'Noto Sans KR' }}
           title="home"
           className={classNames(
             'font-medium',
@@ -39,7 +33,6 @@ const Footer = () => {
             'flex-row',
             'sm:flex-col',
             'gap-1',
-            notoSans.className,
             'leading-tight'
           )}
         >

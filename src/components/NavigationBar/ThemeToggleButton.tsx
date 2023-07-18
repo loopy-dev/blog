@@ -1,16 +1,33 @@
 import classNames from 'classnames';
 import { MdOutlineLightMode, MdOutlineDarkMode } from 'react-icons/md';
 import useTheme from '~/lib/styles/useTheme';
-import { Item } from './Item';
 import type { Theme } from '~/lib/styles/types';
 
 const ThemeToggleButton = () => {
   const [theme, toggle] = useTheme();
 
   return (
-    <Item onClick={toggle}>
+    <div
+      className={classNames(
+        'flex',
+        'justify-center',
+        'items-center',
+        'w-full',
+        'select-none',
+        'transition-all',
+        'cursor-pointer',
+        'font-medium',
+        'py-1',
+        'px-2',
+        'dark:text-zinc-300',
+        'dark:hover:text-zinc-100',
+        'text-zinc-600',
+        'hover:text-zinc-800'
+      )}
+      onClick={toggle}
+    >
       <ThemeToggleIcon theme={theme} />
-    </Item>
+    </div>
   );
 };
 
