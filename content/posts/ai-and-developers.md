@@ -3,7 +3,7 @@ title: ai의 발전과 개발자의 미래
 createdTime: 2023-06-29
 tags:
   - article
-description: chat gpt의 새상에서 살고 있는 우리의 세상은 앞으로 어떻게 변화할까?
+description: chat gpt의 등장은 어떻게 삶을 변화시킬까?
 coverImage: /thumbnails/openAI-chat-gpt-1.jpg
 ---
 
