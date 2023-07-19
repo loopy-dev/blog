@@ -7,6 +7,7 @@ interface Props {
 
 const BackgroundImage = ({ src, children }: Props) => {
   return (
+    // TODO - position sticky on mobile, fixed on laptop
     <div className={classNames('fixed', 'top-0', 'left-0', 'w-full', 'z-[-1]')}>
       <div className={classNames('relative', 'w-full', 'mx-auto')}>
         {src && (
