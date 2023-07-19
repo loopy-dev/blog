@@ -107,7 +107,7 @@ const Page = ({ post, recommendedPosts, series }: Props) => {
           property="og:description"
         />
       </Head>
-      <PostNavbar />
+      {/* <PostNavbar /> */}
       <Post post={post} recommendedPosts={recommendedPosts} series={series} />
     </GlobalLayout>
   );
