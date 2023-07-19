@@ -1,10 +1,12 @@
+import classNames from 'classnames';
 import dynamic from 'next/dynamic';
 import PostContent from './PostContent';
 import PostFooter from './PostFooter';
 import PostHeader from './PostHeader';
+import PostHeaderWithImage from './PostHeader.new';
 import PostSeries from './PostSeries';
 import PostTemplate from './PostTemplate';
-import PostThumbnail from './PostThumbnail';
+
 import type {
   FrontMatter,
   Post as PostModel,
@@ -36,24 +38,34 @@ const Post = ({
   };
 
   return (
-    <PostTemplate
-      aside={<PostAside />}
-      content={
-        <>
-          <PostHeader postMetaData={{ ...frontMatter }} />
-          {post.coverImage && (
-            <PostThumbnail maxHeight="1024px" src={post.coverImage} />
-          )}
-          {series && <PostSeries series={series} />}
-          <PostContent content={post.content} />
-          <PostFooter
-            category={category}
-            recommendedPosts={recommendedPosts}
-            url={frontMatter.url}
-          />
-        </>
-      }
-    />
+    <>
+      {frontMatter.coverImage && (
+        <PostHeaderWithImage postMetaData={{ ...frontMatter }} />
+      )}
+      <PostTemplate
+        aside={<PostAside />}
+        className={classNames({
+          'mt-[552px]': frontMatter.coverImage,
+        })}
+        content={
+          <>
+            {!frontMatter.coverImage && (
+              <PostHeader postMetaData={{ ...frontMatter }} />
+            )}
+            {/* {post.coverImage && (
+              <PostThumbnail maxHeight="1024px" src={post.coverImage} />
+            )} */}
+            {series && <PostSeries series={series} />}
+            <PostContent content={post.content} />
+            <PostFooter
+              category={category}
+              recommendedPosts={recommendedPosts}
+              url={frontMatter.url}
+            />
+          </>
+        }
+      />
+    </>
   );
 };
 
