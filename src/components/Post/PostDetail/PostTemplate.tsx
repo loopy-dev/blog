@@ -6,6 +6,7 @@ interface Props {
   aside?: React.ReactNode;
   showAsideOnMobile?: boolean;
   orderAsideFirst?: boolean;
+  className?: string;
 }
 
 const PostTemplate = ({
@@ -13,55 +14,60 @@ const PostTemplate = ({
   aside,
   showAsideOnMobile,
   orderAsideFirst,
+  className,
 }: Props) => {
   return (
-    <div
-      className={classNames(
-        'flex',
-        'flex-col',
-        'lg:flex-row',
-        'w-full',
-        'justify-between',
-        'relative',
-        'max-w-screen-lg',
-        'mx-auto',
-        'items-start',
-        'block'
-      )}
-    >
-      <article
+    <div className={classNames('relative', 'bg-white', 'dark:bg-zinc-900')}>
+      <div
         className={classNames(
+          'flex',
+          'flex-col',
+          'lg:flex-row',
           'w-full',
-          'max-w-[44rem]',
+          'justify-between',
+          'relative',
+          'max-w-screen-lg',
           'mx-auto',
-          styles.article
+          'items-start',
+          'block',
+          className
         )}
       >
-        {content}
-      </article>
-      {aside ? (
-        <aside
+        <article
           className={classNames(
-            'lg:sticky',
-            'lg:mt-[10%]',
-            'lg:block',
-            'lg:w-[300px]',
+            'w-full',
             'max-w-[44rem]',
             'mx-auto',
-            'p-6',
-            'top-[20%]',
-            'lg:order-none',
-            {
-              'order-first': orderAsideFirst,
-            },
-            {
-              hidden: !showAsideOnMobile,
-            }
+            'mt-12',
+            styles.article
           )}
         >
-          {aside}
-        </aside>
-      ) : null}
+          {content}
+        </article>
+        {aside ? (
+          <aside
+            className={classNames(
+              'lg:sticky',
+              'lg:mt-[10%]',
+              'lg:block',
+              'lg:w-[300px]',
+              'max-w-[44rem]',
+              'mx-auto',
+              'p-6',
+              'top-[20%]',
+              'lg:order-none',
+              {
+                'order-first': orderAsideFirst,
+              },
+              {
+                hidden: !showAsideOnMobile,
+              }
+            )}
+          >
+            {aside}
+          </aside>
+        ) : null}
+      </div>
     </div>
   );
 };
