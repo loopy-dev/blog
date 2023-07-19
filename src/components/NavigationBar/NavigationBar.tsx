@@ -33,31 +33,42 @@ const NavigationBar = () => {
         'dark:bg-zinc-900/80'
       )}
     >
-      {/** upper part of NavigationBar */}
-      <div
-        className={classNames(
-          'flex',
-          'justify-between',
-          'items-center',
-          'py-2',
-          'px-6',
-          'w-full',
-          'max-w-5xl',
-          'my-0',
-          'mx-auto'
-        )}
-      >
-        <Left />
-        <Middle />
-        <Right />
-        <Hidden onClick={toggleHamburgerIcon} />
-      </div>
-      {/** hidden part of NavigationBar */}
-      {isOpen ? (
-        <div className={classNames('block', 'sm:hidden')}>
-          <NavigationLinks />
+      <div className={classNames('relative')}>
+        {/** upper part of NavigationBar */}
+        <div
+          className={classNames(
+            'flex',
+            'justify-between',
+            'items-center',
+            'py-2',
+            'px-6',
+            'w-full',
+            'max-w-5xl',
+            'my-0',
+            'mx-auto'
+          )}
+        >
+          <Left />
+          <Middle />
+          <Right />
+          <Hidden onClick={toggleHamburgerIcon} />
         </div>
-      ) : null}
+        {/** hidden part of NavigationBar */}
+        {isOpen ? (
+          <ul
+            className={classNames(
+              'block',
+              'sm:hidden',
+              'absolute',
+              'bg-white/80',
+              'dark:bg-zinc-900/80',
+              'w-full'
+            )}
+          >
+            <NavigationLinks />
+          </ul>
+        ) : null}
+      </div>
     </nav>
   );
 };
@@ -178,7 +189,15 @@ const NavigationLink = ({ href, children }: NavigationLinkProps) => {
   const isExternalLink = href === pathname;
 
   return (
-    <li className={classNames('w-full', 'text-center', 'flex', 'items-center')}>
+    <li
+      className={classNames(
+        'w-full',
+        'text-center',
+        'flex',
+        'items-center',
+        'py-0.5'
+      )}
+    >
       <Link
         href={href}
         rel={isExternalLink ? 'noopener noreferrer' : undefined}
