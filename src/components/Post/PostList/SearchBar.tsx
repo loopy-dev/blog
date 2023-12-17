@@ -5,7 +5,7 @@ import Input from '~components/common/Input';
 const SearchBar = ({ ...props }: InputHTMLAttributes<HTMLInputElement>) => {
   return (
     <Input
-      frameSize="lg"
+      $frameSize="lg"
       left={<SearchIcon />}
       placeholder="포스트를 검색해보세요."
       shape="rounded"

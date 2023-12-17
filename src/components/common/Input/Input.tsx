@@ -10,7 +10,7 @@ export interface Props extends InputHTMLAttributes<HTMLInputElement> {
   label?: string;
   variant?: Color;
   shape?: 'normal' | 'rounded';
-  frameSize?: 'md' | 'lg';
+  $frameSize?: 'md' | 'lg';
   left?: React.ReactNode;
 }
 
@@ -19,7 +19,7 @@ const Input = (
     label,
     variant = 'default',
     shape = 'normal',
-    frameSize = 'md',
+    $frameSize = 'md',
     left,
     ...props
   }: Props,
@@ -29,8 +29,8 @@ const Input = (
     <Container>
       {label && <Label htmlFor={props.id}>{label}</Label>}
       <InputFrame
+        $frameSize={$frameSize}
         disabled={props.disabled}
-        frameSize={frameSize}
         shape={shape}
         variant={variant}
         className={classNames('dark:bg-zinc-800', {
@@ -40,7 +40,7 @@ const Input = (
         {left && <Left>{left}</Left>}
         <InputBase
           ref={ref}
-          frameSize={frameSize}
+          $frameSize={$frameSize}
           variant={variant}
           {...props}
         />
@@ -80,7 +80,7 @@ const InputBase = styled.input<Props>`
   width: 100%;
   height: 100%;
   background-color: transparent;
-  font-size: ${({ frameSize }) => (frameSize === 'lg' ? '16px' : '14px')};
+  font-size: ${({ $frameSize }) => ($frameSize === 'lg' ? '16px' : '14px')};
   line-height: 1.5;
   text-overflow: ellipsis;
 

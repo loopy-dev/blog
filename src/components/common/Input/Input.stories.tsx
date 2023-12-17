@@ -19,5 +19,5 @@ Default.args = {
   disabled: false,
   variant: 'default',
   shape: 'normal',
-  frameSize: 'md',
+  $frameSize: 'md',
 };

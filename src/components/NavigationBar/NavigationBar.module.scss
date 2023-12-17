@@ -1,9 +1,11 @@
 .title {
-  @apply font-medium text-[24px] select-none;
+  @apply font-medium text-2xl select-none tracking-wider uppercase;
+  display: flex;
+  align-items: center;
 
   &:after {
-    content: '.';
-    @apply pl-1 text-[color:var(--primary)];
+    content: ';)';
+    @apply pl-1 text-[color:var(--primary)] tracking-normal text-lg;
   }
 }
 

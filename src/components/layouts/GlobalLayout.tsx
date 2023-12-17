@@ -1,3 +1,5 @@
+'use client';
+
 import classNames from 'classnames';
 import Footer from '~components/common/Footer';
 import NavigationBar from '../NavigationBar';
