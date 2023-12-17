@@ -35,6 +35,8 @@ const Layout = ({ children }: Props) => {
           content={metadata.description ?? DEFAULT_PAGE_DESCRIPTION}
           property="og:description"
         />
+      </head>
+      <body>
         <Script
           id="ga-init"
           strategy="afterInteractive"
@@ -53,8 +55,6 @@ const Layout = ({ children }: Props) => {
           src={`https://www.googletagmanager.com/gtag/js?id=${GA_TRACKING_ID}`}
           strategy="afterInteractive"
         />
-      </head>
-      <body>
         <StyledComponentsRegistry>{children}</StyledComponentsRegistry>
       </body>
     </html>
