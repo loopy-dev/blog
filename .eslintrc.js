@@ -47,32 +47,6 @@ module.exports = {
     '@typescript-eslint/no-explicit-any': 'off',
     '@typescript-eslint/no-unused-vars': ['warn', { ignoreRestSiblings: true }],
     '@typescript-eslint/no-use-before-define': 'off',
-    'import/order': [
-      'error',
-      {
-        groups: [
-          'builtin',
-          'external',
-          'internal',
-          'parent',
-          'sibling',
-          'index',
-          'object',
-          'type',
-          'unknown',
-        ],
-        pathGroups: [
-          {
-            pattern: 'react',
-            group: 'external',
-            position: 'before',
-          },
-        ],
-        pathGroupsExcludedImportTypes: ['react'],
-        alphabetize: { order: 'asc', caseInsensitive: false },
-        warnOnUnassignedImports: true,
-      },
-    ],
     'no-console': ['warn', { allow: ['warn', 'error'] }],
     radix: 'error',
     'react/function-component-definition': [
