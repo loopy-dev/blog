@@ -40,7 +40,7 @@
     "remark-parse-frontmatter": "^1.0.3",
     "remark-stringify": "^10.0.2",
     "slick-carousel": "^1.8.1",
-    "styled-components": "^5.3.8",
+    "styled-components": "^6.1.1",
     "unified": "^10.1.2",
     "uuid": "^9.0.0"
   },
