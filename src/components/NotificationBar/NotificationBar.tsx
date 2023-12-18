@@ -1,3 +1,4 @@
+'use client';
 import classNames from 'classnames';
 import { useDispatch, useSelector } from 'react-redux';
 import Button from '~components/common/Button';
