@@ -5,7 +5,7 @@ import cssVar from '~/lib/styles/cssVar';
 interface Props {
   // color?: 'default'
   circle?: boolean;
-  noSpacing?: boolean;
+  $noSpacing?: boolean;
   className?: string;
   width?: number | string;
   height?: number | string;
@@ -47,8 +47,8 @@ const Block = styled.span<Props>`
       border-radius: 9999px;
     `}
 
-  ${({ noSpacing }) =>
-    !noSpacing &&
+  ${({ $noSpacing }) =>
+    !$noSpacing &&
     css`
       & + & {
         margin-left: 8px;

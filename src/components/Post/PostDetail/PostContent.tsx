@@ -13,7 +13,7 @@ import styles from './Markdown.module.scss';
 import syntaxStyle from './syntaxStyle';
 
 const SyntaxHighlighter = dynamic(() => import('./SyntaxHighlighter'), {
-  loading: () => <Skeleton noSpacing height="220px" width="100%" />,
+  loading: () => <Skeleton $noSpacing height="220px" width="100%" />,
 });
 
 const Gist = dynamic(() => import('gist-react').then((module) => module.Gist), {

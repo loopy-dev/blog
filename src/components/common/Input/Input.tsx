@@ -8,7 +8,7 @@ import type { Color } from './styles';
 
 export interface Props extends InputHTMLAttributes<HTMLInputElement> {
   label?: string;
-  variant?: Color;
+  $variant?: Color;
   shape?: 'normal' | 'rounded';
   $frameSize?: 'md' | 'lg';
   left?: React.ReactNode;
@@ -17,7 +17,7 @@ export interface Props extends InputHTMLAttributes<HTMLInputElement> {
 const Input = (
   {
     label,
-    variant = 'default',
+    $variant = 'default',
     shape = 'normal',
     $frameSize = 'md',
     left,
@@ -30,9 +30,9 @@ const Input = (
       {label && <Label htmlFor={props.id}>{label}</Label>}
       <InputFrame
         $frameSize={$frameSize}
+        $variant={$variant}
         disabled={props.disabled}
         shape={shape}
-        variant={variant}
         className={classNames('dark:bg-zinc-800', {
           'bg-zinc-900/[0.12]': props.disabled,
         })}
@@ -41,7 +41,7 @@ const Input = (
         <InputBase
           ref={ref}
           $frameSize={$frameSize}
-          variant={variant}
+          $variant={$variant}
           {...props}
         />
       </InputFrame>
