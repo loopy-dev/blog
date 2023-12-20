@@ -4,13 +4,7 @@ import { parseFileName } from '~/lib/post/postService';
 import PostDetailBuilder from '~/posts/PostDetailBuilder';
 import { DEFAULT_PAGE_TITLE } from '~lib/constants';
 import type { Metadata } from 'next';
-import type { FrontMatter, Post as PostModel, Series } from '~/models/Post';
-
-interface Props {
-  post: PostModel;
-  recommendedPosts: FrontMatter[];
-  series: Series | null;
-}
+import type { Series } from '~/models/Post';
 
 type GenerateMetadataProps = {
   params: { id: string };
@@ -24,7 +18,7 @@ export const generateMetadata = async ({
   const postMetadata = await postService.decodeMetaData(`${id}.md`);
 
   return {
-    title: `postMetadata.title - ${DEFAULT_PAGE_TITLE}`,
+    title: `${postMetadata.title} - ${DEFAULT_PAGE_TITLE}`,
     description: postMetadata.description,
   };
 };
