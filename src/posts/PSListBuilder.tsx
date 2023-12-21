@@ -1,22 +1,26 @@
-import { useState, useDeferredValue } from 'react';
+'use client';
+import { useState, useDeferredValue, Fragment } from 'react';
 import classNames from 'classnames';
 import Lottie from 'lottie-react';
 import dynamic from 'next/dynamic';
-import Head from 'next/head';
 import { psService } from '~/lib/post';
 import { filterPostsByKeywordsAndTags } from '~/lib/post/postQuery-client';
 import Header from '~components/Header';
-import { PostListSkeleton } from '~components/Post';
-import { PostTemplate, SearchBar, TagList, useTag } from '~components/Post';
-import GlobalLayout from '~components/layouts/GlobalLayout';
+import {
+  PostListSkeleton,
+  PostTemplate,
+  SearchBar,
+  TagList,
+  useTag,
+} from '~components/Post';
 import useDebounce from '~hooks/useDebounce';
 import InfiniteScrollComponent from '~hooks/useInfiniteScroll/InfiniteScrollComponent';
-import itemNotFound from '../../../public/item-not-found.json';
+import itemNotFound from 'public/item-not-found.json';
 import type { GetStaticProps } from 'next';
 import type { FrontMatter } from '~models/Post';
 
 const PostList = dynamic(
-  () => import('../../components/Post').then((module) => module.PostList),
+  () => import('~components/Post').then((module) => module.PostList),
   {
     loading: () => <PostListSkeleton />,
   }
@@ -25,27 +29,11 @@ const PostList = dynamic(
 const INITIAL_POST_COUNTS = 5;
 const NEXT_POST_COUNTS = 5;
 
-export const getStaticProps: GetStaticProps = async () => {
-  try {
-    const posts = await psService.getPostListMetaData();
-
-    return {
-      props: {
-        posts,
-      },
-    };
-  } catch {
-    return {
-      notFound: true,
-    };
-  }
-};
-
 interface Props {
   posts: FrontMatter[];
 }
 
-const Page = ({ posts }: Props) => {
+const PSListBuilder = ({ posts }: Props) => {
   const [keywords, setKeywords] = useState<string>('');
   const debounced = useDebounce((target: string) => {
     setKeywords(target);
@@ -71,16 +59,7 @@ const Page = ({ posts }: Props) => {
     )
   );
   return (
-    <GlobalLayout>
-      <Head>
-        <title>Posts - Benlog</title>
-        <meta key="title" content="Posts - Benlog" property="og:title" />
-        <meta
-          key="description"
-          content="작성한 글들을 모아볼 수 있어요."
-          property="og:description"
-        />
-      </Head>
+    <Fragment>
       <div
         className={classNames(
           'max-w-[44rem]',
@@ -133,11 +112,11 @@ const Page = ({ posts }: Props) => {
           </div>
         }
       />
-    </GlobalLayout>
+    </Fragment>
   );
 };
 
-export default Page;
+export default PSListBuilder;
 
 interface InputMessageProps {
   keywords: string;

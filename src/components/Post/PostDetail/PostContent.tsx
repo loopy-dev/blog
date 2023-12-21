@@ -1,6 +1,7 @@
-import classNames from 'classnames';
 import dynamic from 'next/dynamic';
 import Image from 'next/image';
+import { Noto_Sans_KR } from 'next/font/google';
+import classNames from 'classnames';
 import ReactMarkdown from 'react-markdown';
 import rehypeRaw from 'rehype-raw';
 import remarkBreaks from 'remark-breaks';
@@ -13,7 +14,7 @@ import styles from './Markdown.module.scss';
 import syntaxStyle from './syntaxStyle';
 
 const SyntaxHighlighter = dynamic(() => import('./SyntaxHighlighter'), {
-  loading: () => <Skeleton noSpacing height="220px" width="100%" />,
+  loading: () => <Skeleton $noSpacing height="220px" width="100%" />,
 });
 
 const Gist = dynamic(() => import('gist-react').then((module) => module.Gist), {
@@ -37,6 +38,11 @@ const transformLanguage = (language: string) => {
   }
 };
 
+const notoSans = Noto_Sans_KR({
+  subsets: ['latin'],
+  weight: ['300', '400', '700'],
+});
+
 const isInImageDomainList = (url: string) => {
   const domainList = [
     'https://user-images.githubusercontent.com',
@@ -50,7 +56,12 @@ const isInImageDomainList = (url: string) => {
 const Content = ({ content }: Props) => {
   return (
     <div
-      className={classNames('post-content', styles.block, postStyles.content)}
+      className={classNames(
+        'post-content',
+        styles.block,
+        postStyles.content,
+        notoSans.className
+      )}
     >
       <ReactMarkdown
         includeElementIndex

@@ -7,13 +7,13 @@ import Hobbies from './Hobbies';
 
 const Body = () => {
   return (
-    <>
+    <div>
       <Content sticky contents={projects} title="Projects" />
       <Content contents={educations} title="Educations" />
       <Content contents={activities} title="Activities" />
       <Content contents={prize} title="Prize" />
       <Hobbies />
-    </>
+    </div>
   );
 };
 

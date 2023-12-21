@@ -8,15 +8,15 @@ interface Props extends HTMLAttributes<HTMLElement> {
 }
 
 const Hamburger = ({ onClick, ...props }: Props) => {
-  const [isActive, setActive] = useState(false);
+  const [isActive, setIsActive] = useState(false);
 
   const toggle = () => {
-    setActive((prev) => !prev);
+    setIsActive((prev) => !prev);
   };
 
   return (
     <Container
-      isActive={isActive}
+      $isActive={isActive}
       onClick={(e) => {
         toggle();
         onClick?.(e);
@@ -33,7 +33,7 @@ const Hamburger = ({ onClick, ...props }: Props) => {
 export default Hamburger;
 
 interface Props {
-  isActive?: boolean;
+  $isActive?: boolean;
 }
 
 const Container = styled.span<Props>`
@@ -74,8 +74,8 @@ const Container = styled.span<Props>`
       background-color: ${theme.text};
     `}
 
-    ${({ isActive }) =>
-      isActive &&
+    ${({ $isActive }) =>
+      $isActive &&
       css`
         &:nth-of-type(1) {
           transform: translateY(6.55px) rotate(-45deg);

@@ -1,9 +1,8 @@
+'use client';
 import { useDeferredValue, useState } from 'react';
 import classNames from 'classnames';
 import Lottie from 'lottie-react';
 import dynamic from 'next/dynamic';
-import Head from 'next/head';
-import postService from '~/lib/post';
 import { filterPostsByKeywordsAndTags } from '~/lib/post/postQuery-client';
 import Header from '~components/Header';
 import {
@@ -13,31 +12,13 @@ import {
   TagList,
   useTag,
 } from '~components/Post';
-import GlobalLayout from '~components/layouts/GlobalLayout';
 import useDebounce from '~hooks/useDebounce';
 import InfiniteScrollComponent from '~hooks/useInfiniteScroll/InfiniteScrollComponent';
-import itemNotFound from '../../../public/item-not-found.json';
-import type { GetStaticProps } from 'next';
+import itemNotFound from 'public/item-not-found.json';
 import type { FrontMatter } from '~/models/Post';
 
-export const getStaticProps: GetStaticProps = async () => {
-  try {
-    const posts = await postService.getPostListMetaData();
-
-    return {
-      props: {
-        posts,
-      },
-    };
-  } catch {
-    return {
-      notFound: true,
-    };
-  }
-};
-
 const PostList = dynamic(
-  () => import('../../components/Post').then((module) => module.PostList),
+  () => import('~components/Post').then((module) => module.PostList),
   {
     loading: () => <PostListSkeleton />,
   }
@@ -50,7 +31,7 @@ interface Props {
   posts: FrontMatter[];
 }
 
-const Page = ({ posts }: Props) => {
+const PostListBuilder = ({ posts }: Props) => {
   // input values
   const [keywords, setKeywords] = useState<string>('');
   const debounced = useDebounce((target: string) => {
@@ -78,16 +59,7 @@ const Page = ({ posts }: Props) => {
   );
 
   return (
-    <GlobalLayout>
-      <Head>
-        <title>Posts - Benlog</title>
-        <meta key="title" content="Posts - Benlog" property="og:title" />
-        <meta
-          key="description"
-          content="작성한 글들을 모아볼 수 있어요."
-          property="og:description"
-        />
-      </Head>
+    <>
       <div
         className={classNames(
           'max-w-[44rem]',
@@ -140,11 +112,11 @@ const Page = ({ posts }: Props) => {
           </div>
         }
       />
-    </GlobalLayout>
+    </>
   );
 };
 
-export default Page;
+export default PostListBuilder;
 
 interface InputMessageProps {
   keywords: string;

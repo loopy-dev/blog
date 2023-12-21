@@ -44,22 +44,22 @@ const PostSkeleton = () => {
           </h1>
         </div>
         <div className="subinfo">
-          <Skeleton noSpacing width="30%" />
-          <Skeleton noSpacing width="30%" />
+          <Skeleton $noSpacing width="30%" />
+          <Skeleton $noSpacing width="30%" />
         </div>
       </div>
       {/** post content */}
       <div className="content">
         <h1>
-          <Skeleton noSpacing height="1.5em" width="25%" />
+          <Skeleton $noSpacing height="1.5em" width="25%" />
         </h1>
         {SkeletonParagraph}
         <h2>
-          <Skeleton noSpacing height="1.5em" width="20%" />
+          <Skeleton $noSpacing height="1.5em" width="20%" />
         </h2>
         {SkeletonParagraph}
         <h2>
-          <Skeleton noSpacing height="1.5em" width="30%" />
+          <Skeleton $noSpacing height="1.5em" width="30%" />
         </h2>
         {SkeletonParagraph}
       </div>

@@ -1,12 +1,11 @@
-import type { HTMLAttributes } from 'react';
-import { useEffect } from 'react';
 import classNames from 'classnames';
 import Link from 'next/link';
-import { useRouter } from 'next/router';
+// import { useRouter } from 'next/router';
 import { FaAngleDown } from 'react-icons/fa';
 import { Dropdown, DropdownTrigger } from '~components/common/Dropdown';
 import { useDropdownContext } from '~components/common/Dropdown/Dropdown';
 import styles from '../Post.module.scss';
+import type { HTMLAttributes } from 'react';
 import type { Series as SeriesType } from '~models/Post';
 
 interface Props {
@@ -127,18 +126,19 @@ const DropdownMenu = ({
   ...props
 }: HTMLAttributes<HTMLUListElement>) => {
   const { isOpen, close } = useDropdownContext();
-  const router = useRouter();
+  // const router = useRouter();
 
-  useEffect(() => {
-    const callback = () => {
-      close();
-    };
+  // useEffect(() => {
+  //   const callback = () => {
+  //     close();
+  //   };
 
-    router.events.on('routeChangeComplete', callback);
+  //   router.events.on('routeChangeComplete', callback);
 
-    return () => {
-      router.events.off('routeChangeComplete', callback);
-    };
-  }, [close, router.events]);
+  //   return () => {
+  //     router.events.off('routeChangeComplete', callback);
+  //   };
+  // }, [close, router.events]);
+
   return !isOpen ? null : <ul {...props}>{children}</ul>;
 };

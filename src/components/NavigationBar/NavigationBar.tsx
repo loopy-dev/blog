@@ -1,11 +1,14 @@
+'use client';
+
 import React, { useEffect, useState } from 'react';
 import classNames from 'classnames';
 import dynamic from 'next/dynamic';
 import Link from 'next/link';
-import { useRouter } from 'next/router';
+import { useRouter, usePathname } from 'next/navigation';
 import { FaGithub } from 'react-icons/fa';
 import Icon from '../icons';
 import styles from './NavigationBar.module.scss';
+import { DEFAULT_PAGE_TITLE } from '~lib/constants';
 
 const ThemeToggleButton = dynamic(() => import('./ThemeToggleButton'), {
   ssr: false,
@@ -82,12 +85,8 @@ const Left = () => {
 
 const Logo = () => {
   return (
-    <Link
-      className={classNames(styles.title)}
-      href="/"
-      style={{ fontFamily: 'Noto Sans KR' }}
-    >
-      BenLog
+    <Link className={classNames(styles.title)} href="/">
+      {DEFAULT_PAGE_TITLE}
     </Link>
   );
 };
@@ -103,31 +102,32 @@ const Right = () => {
 
 const Middle = () => {
   const router = useRouter();
+  const pathname = usePathname();
   const [isShowing, setIsShowing] = useState(false);
   const [postTitle, setPostTitle] = useState('');
 
-  useEffect(() => {
-    const isPostPath = getSubDomain(router.pathname) === 'posts';
-    setIsShowing(isPostPath);
-  }, [router.pathname]);
+  // useEffect(() => {
+  //   const isPostPath = getSubDomain(pathname) === 'posts';
+  //   setIsShowing(isPostPath);
+  // }, [pathname]);
 
-  useEffect(() => {
-    const handler = () => {
-      const title = document.querySelector('.post-title');
+  // useEffect(() => {
+  //   const handler = () => {
+  //     const title = document.querySelector('.post-title');
 
-      if (!title) return;
+  //     if (!title) return;
 
-      setPostTitle(title.textContent || '');
-    };
+  //     setPostTitle(title.textContent || '');
+  //   };
 
-    handler();
+  //   handler();
 
-    router.events.on('routeChangeComplete', handler);
+  //   router.events.on('routeChangeComplete', handler);
 
-    return () => {
-      router.events.off('routeChangeComplete', handler);
-    };
-  }, [router.events]);
+  //   return () => {
+  //     router.events.off('routeChangeComplete', handler);
+  //   };
+  // }, [router.events]);
 
   return (
     <div
@@ -173,7 +173,6 @@ const getPathname = (href: string) => {
 };
 
 const NavigationLink = ({ href, children }: NavigationLinkProps) => {
-  const router = useRouter();
   const pathname = getPathname(href);
   const isExternalLink = href === pathname;
 
@@ -197,8 +196,8 @@ const NavigationLink = ({ href, children }: NavigationLinkProps) => {
           'text-zinc-600',
           'dark:text-zinc-300',
           {
-            'text-zinc-800': getSubDomain(router.pathname) === pathname,
-            'dark:text-zinc-100': getSubDomain(router.pathname) === pathname,
+            'text-zinc-800': getSubDomain(pathname) === pathname,
+            'dark:text-zinc-100': getSubDomain(pathname) === pathname,
           },
           'hover:text-zinc-800',
           'dark:hover:text-zinc-100'

@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import classNames from 'classnames';
 import Link from 'next/link';
-import { useRouter } from 'next/router';
+import { usePathname } from 'next/navigation';
 import { AiOutlineComment } from 'react-icons/ai';
 import { BsShareFill } from 'react-icons/bs';
 import { MdOutlineRemoveRedEye } from 'react-icons/md';
@@ -9,8 +9,10 @@ import { getPostComments, getPostHits } from '~/lib/api/post';
 import { notificate } from '~components/common/Alert';
 import Card from '~components/common/Card';
 import { CardContent } from '~components/common/Card/Card';
-import { SideBarProvider, useSideBarContext } from '~components/common/SideBar';
-import SideBar from '~components/common/SideBar';
+import SideBar, {
+  SideBarProvider,
+  useSideBarContext,
+} from '~components/common/SideBar';
 import Icon from '~components/icons';
 import useClipboard from '~hooks/useClipboard';
 import styles from '../Post.module.scss';
@@ -73,29 +75,29 @@ type MetaContainerProps = Pick<Props, 'url'>;
 
 const MetaContainer = ({ url }: MetaContainerProps) => {
   const { open } = useSideBarContext();
-  const router = useRouter();
+  const pathname = usePathname();
   const [, writeText] = useClipboard();
   const [commentCounts, setCommentCounts] = useState<string | number>('...');
   const [hits, setHits] = useState('...');
 
-  useEffect(() => {
-    (async () => {
-      const comments = await getPostComments(url);
-      setCommentCounts(comments.comments);
-    })();
-  }, [url]);
+  // useEffect(() => {
+  //   (async () => {
+  //     const comments = await getPostComments(url);
+  //     setCommentCounts(comments.comments);
+  //   })();
+  // }, [url]);
 
-  useEffect(() => {
-    (async () => {
-      try {
-        const hitsData = await getPostHits(url);
-        setHits(formatNumber(Number(hitsData.message)));
-      } catch {
-        // eslint-disable-next-line no-console
-        console.log('hit is not available on development mode.');
-      }
-    })();
-  }, [url]);
+  // useEffect(() => {
+  //   (async () => {
+  //     try {
+  //       const hitsData = await getPostHits(url);
+  //       setHits(formatNumber(Number(hitsData.message)));
+  //     } catch {
+  //       // eslint-disable-next-line no-console
+  //       console.log('hit is not available on development mode.');
+  //     }
+  //   })();
+  // }, [url]);
 
   return (
     <div
@@ -121,9 +123,7 @@ const MetaContainer = ({ url }: MetaContainerProps) => {
             'hover:dark:text-zinc-300',
             'cursor-pointer'
           )}
-          onClick={() => {
-            open();
-          }}
+          onClick={open}
         >
           {/** TODO - refactor Icon */}
           <span className={classNames('text-3xl', 'mr-1.5')}>
@@ -163,7 +163,7 @@ const MetaContainer = ({ url }: MetaContainerProps) => {
           )}
           onClick={() => {
             const BASE_URL = window.location.origin;
-            const url = BASE_URL.concat(router.asPath);
+            const url = BASE_URL.concat(pathname);
             writeText(url)?.then(
               () => {
                 notificate(`링크가 복사되었습니다.`, 1500, 'success');
