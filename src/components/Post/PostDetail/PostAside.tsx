@@ -1,7 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import classNames from 'classnames';
-import { setElementId } from '../utils';
-import { getHeadings } from '../utils';
+import { setElementId, getHeadings } from '../utils';
 import useHeadings from './useHeadings';
 
 const PostAside = () => {
