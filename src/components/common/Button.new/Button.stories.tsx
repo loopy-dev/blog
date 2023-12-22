@@ -10,7 +10,11 @@ export default {
   component: Button,
 } as ComponentMeta;
 
-const Template: StoryTemplate = () => <Button>Hello, World!</Button>;
+const Template: StoryTemplate = (...args) => (
+  <Button radius="medium" size="lg" variant="soft">
+    Hello, World!
+  </Button>
+);
 
 export const Default: StoryComponent = {
   render: Template,
