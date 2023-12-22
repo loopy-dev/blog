@@ -10,7 +10,7 @@ export default {
   component: Button,
 } as ComponentMeta;
 
-const Template: StoryTemplate = () => <Button />;
+const Template: StoryTemplate = () => <Button>Hello, World!</Button>;
 
 export const Default: StoryComponent = {
   render: Template,
