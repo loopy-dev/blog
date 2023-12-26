@@ -1,6 +1,8 @@
+import { forwardRef, useCallback } from 'react';
 import classNames from 'classnames';
+import styled from 'styled-components';
+import { noop } from '~lib/util/function';
 import type { ButtonHTMLAttributes } from 'react';
-import { styled } from 'styled-components';
 
 interface Props extends ButtonHTMLAttributes<HTMLButtonElement> {
   // TODO - color 옵션 추가
@@ -8,18 +10,90 @@ interface Props extends ButtonHTMLAttributes<HTMLButtonElement> {
   radius?: 'none' | 'small' | 'medium' | 'large' | 'full';
   size?: 'sm' | 'md' | 'lg' | 'xl';
   color?: 'accent';
+  loading?: boolean;
 }
 
 // TODO - 모바일 환경에서 hover 효과 변경하기
-const Button = ({
-  children,
-  variant = 'soft',
-  radius = 'medium',
-  size = 'md',
-  color = 'accent',
-}: Props) => {
+const Button = (
+  {
+    children,
+    variant = 'soft',
+    radius = 'medium',
+    size = 'md',
+    color = 'accent',
+    loading = false,
+    onClick = noop,
+    onMouseDown = noop,
+    onMouseLeave = noop,
+    onMouseEnter = noop,
+    onMouseMove = noop,
+    onMouseUp = noop,
+    disabled,
+    ...props
+  }: Props,
+  ref: React.ForwardedRef<HTMLButtonElement>
+) => {
+  const handleClick: React.MouseEventHandler<HTMLButtonElement> = useCallback(
+    (e) => {
+      if (!loading) {
+        onClick?.(e);
+      }
+    },
+    [loading, onClick]
+  );
+
+  const handleMouseDown: React.MouseEventHandler<HTMLButtonElement> =
+    useCallback(
+      (e) => {
+        if (!loading) {
+          onMouseDown?.(e);
+        }
+      },
+      [loading, onMouseDown]
+    );
+
+  const handleMouseUp: React.MouseEventHandler<HTMLButtonElement> = useCallback(
+    (e) => {
+      if (!loading) {
+        onMouseUp?.(e);
+      }
+    },
+    [loading, onMouseUp]
+  );
+
+  const handleMouseEnter: React.MouseEventHandler<HTMLButtonElement> =
+    useCallback(
+      (e) => {
+        if (!loading) {
+          onMouseEnter?.(e);
+        }
+      },
+      [loading, onMouseEnter]
+    );
+
+  const handleMouseMove: React.MouseEventHandler<HTMLButtonElement> =
+    useCallback(
+      (e) => {
+        if (!loading) {
+          onMouseMove?.(e);
+        }
+      },
+      [loading, onMouseMove]
+    );
+
+  const handleMouseLeave: React.MouseEventHandler<HTMLButtonElement> =
+    useCallback(
+      (e) => {
+        if (!loading) {
+          onMouseLeave?.(e);
+        }
+      },
+      [loading, onMouseLeave]
+    );
+
   return (
     <Container
+      ref={ref}
       className={classNames(
         'button',
         {
@@ -46,13 +120,20 @@ const Button = ({
           'radius--full': radius === 'full',
         }
       )}
+      onClick={handleClick}
+      onMouseDown={handleMouseDown}
+      onMouseEnter={handleMouseEnter}
+      onMouseLeave={handleMouseLeave}
+      onMouseMove={handleMouseMove}
+      onMouseUp={handleMouseUp}
+      {...props}
     >
       {children}
     </Container>
   );
 };
 
-export default Button;
+export default forwardRef(Button);
 
 const Container = styled.button`
   display: inline-flex;
@@ -64,6 +145,10 @@ const Container = styled.button`
   flex-shrink: 0;
   font-weight: 500;
   transition: color 100ms cubic-bezier(0.075, 0.82, 0.165, 1);
+
+  &:disabled {
+    cursor: not-allowed;
+  }
 
   &.radius--none {
     border-radius: 0;
@@ -90,13 +175,19 @@ const Container = styled.button`
       background-color: var(--accent-9);
       color: var(--accent-9-contrast);
 
-      &.button:hover {
+      &.button:hover:enabled {
         background-color: var(--accent-10);
       }
 
-      &.button:active {
+      &.button:active:enabled {
         background-color: var(--accent-11);
       }
+    }
+
+    &:disabled {
+      color: var(--gray-a8);
+      background-color: var(--gray-a3);
+      filter: none;
     }
   }
 
@@ -105,13 +196,19 @@ const Container = styled.button`
       background-color: var(--accent-a3);
       color: var(--accent-a11);
 
-      &.button:hover {
+      &.button:hover:not(:disabled) {
         background-color: var(--accent-a4);
       }
 
-      &.button:active {
+      &.button:active:not(:disabled) {
         background-color: var(--accent-a5);
       }
+    }
+
+    &:disabled {
+      color: var(--gray-a8);
+      background-color: var(--gray-a3);
+      filter: none;
     }
   }
 
@@ -121,13 +218,19 @@ const Container = styled.button`
       box-shadow: inset 0 0 0 1px var(--accent-a7);
       color: var(--accent-a11);
 
-      &.button:hover {
+      &.button:hover:not(:disabled) {
         box-shadow: inset 0 0 0 1px var(--accent-a8);
       }
 
-      &.button:active {
+      &.button:active:not(:disabled) {
         box-shadow: inset 0 0 0 1px var(--accent-a9);
       }
+    }
+
+    &:disabled {
+      color: var(--gray-a8);
+      box-shadow: inset 0 0 0 1px var(--gray-a6);
+      background-color: var(--gray-a2);
     }
   }
 
@@ -136,13 +239,19 @@ const Container = styled.button`
       box-shadow: inset 0 0 0 1px var(--accent-a8);
       color: var(--accent-a11);
 
-      &.button:hover {
+      &.button:hover:not(:disabled) {
         background-color: var(--accent-a2);
       }
 
-      &.button:active {
+      &.button:active:not(:disabled) {
         background-color: var(--accent-a3);
       }
+    }
+
+    &:disabled {
+      color: var(--gray-a8);
+      box-shadow: inset 0 0 0 1px var(--gray-a7);
+      background-color: transparent;
     }
   }
 
@@ -150,16 +259,22 @@ const Container = styled.button`
     &.color--accent {
       color: var(--accent-11);
 
-      &.button:hover {
+      &.button:hover:not(:disabled) {
         background-color: var(--accent-a3);
       }
 
-      &.button:active {
+      &.button:active:not(:disabled) {
         background-color: var(--accent-a4);
       }
     }
+
+    &:disabled {
+      color: var(--gray-a8);
+      background-color: transparent;
+    }
   }
 
+  /** size */
   &:where(:not(.variant--ghost)) {
     &.size--sm {
       height: calc(24px * 1);
@@ -194,6 +309,8 @@ const Container = styled.button`
   }
 
   &:where(.variant--ghost) {
+    font-weight: 400;
+
     &.size--sm {
       padding: 4px 8px;
       font-size: 12px;

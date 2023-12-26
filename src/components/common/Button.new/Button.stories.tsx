@@ -11,9 +11,7 @@ export default {
 } as ComponentMeta;
 
 const Template: StoryTemplate = (...args) => (
-  <Button radius="medium" size="lg" variant="soft">
-    Hello, World!
-  </Button>
+  <Button {...args}>Hello, World!</Button>
 );
 
 export const Default: StoryComponent = {
