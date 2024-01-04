@@ -1,11 +1,22 @@
 import NavigationBar from './NavigationBar';
-import type { ComponentMeta, ComponentStory } from '@storybook/react';
+import type { Meta, StoryObj, StoryFn } from '@storybook/react';
+
+type ComponentMeta = Meta<typeof NavigationBar>;
+type StoryTemplate = StoryFn<typeof NavigationBar>;
+type StoryComponent = StoryObj<typeof NavigationBar>;
 
 export default {
   title: 'Components/NavigationBar',
   component: NavigationBar,
-} as ComponentMeta<typeof NavigationBar>;
+  parameters: {
+    nextjs: {
+      appDirectory: true,
+    },
+  },
+} as ComponentMeta;
 
-const Template: ComponentStory<typeof NavigationBar> = () => <NavigationBar />;
+const Template: StoryTemplate = () => <NavigationBar />;
 
-export const Default = Template.bind({});
+export const Default: StoryComponent = {
+  render: Template,
+};

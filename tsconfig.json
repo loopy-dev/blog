@@ -32,6 +32,9 @@
       "~lib/*": [
         "src/lib/*"
       ],
+      "~util/*": [
+        "src/lib/util/*"
+      ],
       "~t/*": [
         "src/types/*"
       ],

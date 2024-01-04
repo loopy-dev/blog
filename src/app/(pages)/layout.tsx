@@ -4,6 +4,7 @@ import { DEFAULT_PAGE_DESCRIPTION, DEFAULT_PAGE_TITLE } from '~lib/constants';
 import { pageview, GA_TRACKING_ID } from '~/lib/ga/gtag';
 import StyledComponentsRegistry from '~lib/registry/styled-components';
 import '~lib/styles/globals.scss';
+import '@radix-ui/themes/styles.css';
 
 export const metadata: Metadata = {
   title: DEFAULT_PAGE_TITLE,
