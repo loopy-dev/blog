@@ -1,6 +1,7 @@
 import { forwardRef, useCallback } from 'react';
 import classNames from 'classnames';
 import styled from 'styled-components';
+import LoadingSpinner from '~components/icons/LoadingSpinner';
 import { noop } from '~lib/util/function';
 import type { ButtonHTMLAttributes } from 'react';
 
@@ -14,6 +15,7 @@ interface Props extends ButtonHTMLAttributes<HTMLButtonElement> {
 }
 
 // TODO - 모바일 환경에서 hover 효과 변경하기
+// TODO - fullsize일 때만 스피너 출현 시 텍스트가 이동되게 하고 그 외의 경우는 뜨지 않게 할 것
 const Button = (
   {
     children,
@@ -35,50 +37,50 @@ const Button = (
 ) => {
   const handleClick: React.MouseEventHandler<HTMLButtonElement> = useCallback(
     (e) => {
-      if (!loading) {
+      if (!loading || disabled) {
         onClick?.(e);
       }
     },
-    [loading, onClick]
+    [disabled, loading, onClick]
   );
 
   const handleMouseDown: React.MouseEventHandler<HTMLButtonElement> =
     useCallback(
       (e) => {
-        if (!loading) {
+        if (!loading || disabled) {
           onMouseDown?.(e);
         }
       },
-      [loading, onMouseDown]
+      [disabled, loading, onMouseDown]
     );
 
   const handleMouseUp: React.MouseEventHandler<HTMLButtonElement> = useCallback(
     (e) => {
-      if (!loading) {
+      if (!loading || disabled) {
         onMouseUp?.(e);
       }
     },
-    [loading, onMouseUp]
+    [disabled, loading, onMouseUp]
   );
 
   const handleMouseEnter: React.MouseEventHandler<HTMLButtonElement> =
     useCallback(
       (e) => {
-        if (!loading) {
+        if (!loading || disabled) {
           onMouseEnter?.(e);
         }
       },
-      [loading, onMouseEnter]
+      [disabled, loading, onMouseEnter]
     );
 
   const handleMouseMove: React.MouseEventHandler<HTMLButtonElement> =
     useCallback(
       (e) => {
-        if (!loading) {
+        if (!loading || disabled) {
           onMouseMove?.(e);
         }
       },
-      [loading, onMouseMove]
+      [disabled, loading, onMouseMove]
     );
 
   const handleMouseLeave: React.MouseEventHandler<HTMLButtonElement> =
@@ -94,10 +96,13 @@ const Button = (
   return (
     <Container
       ref={ref}
+      disabled={disabled}
       className={classNames(
         'button',
+        { 'button-loading': loading },
         {
-          'color--accent': color === 'accent',
+          'color--accent': color === 'accent' && !loading,
+          'color--accent-loading': color === 'accent' && loading,
         },
         {
           'size--sm': size === 'sm',
@@ -118,7 +123,8 @@ const Button = (
           'radius--medium': radius === 'medium',
           'radius--large': radius === 'large',
           'radius--full': radius === 'full',
-        }
+        },
+        'transition-all'
       )}
       onClick={handleClick}
       onMouseDown={handleMouseDown}
@@ -128,7 +134,18 @@ const Button = (
       onMouseUp={handleMouseUp}
       {...props}
     >
-      {children}
+      <span
+        className={classNames(
+          'inner',
+          'inline-flex',
+          'justify-end',
+          'items-center',
+          'transition-all'
+        )}
+      >
+        <LoadingSpinner className={classNames('loading-spinner')} />
+        <span className={classNames('button-child')}>{children}</span>
+      </span>
     </Container>
   );
 };
@@ -139,12 +156,43 @@ const Container = styled.button`
   display: inline-flex;
   justify-content: center;
   align-items: center;
-  gap: 8px;
+  position: relative;
   user-select: none;
   vertical-align: top;
   flex-shrink: 0;
   font-weight: 500;
-  transition: color 100ms cubic-bezier(0.075, 0.82, 0.165, 1);
+  transition: color 200ms cubic-bezier(0.075, 0.82, 0.165, 1);
+
+  .inner,
+  .button-child {
+    display: inline-flex;
+    align-items: center;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    /* padding-left: 18px;
+    width: calc(100% - 18px); */
+  }
+
+  .loading-spinner {
+    position: absolute;
+    opacity: 0;
+    transition: opacity 200ms cubic-bezier(0.075, 0.82, 0.165, 1);
+
+    &::after {
+      content: '';
+    }
+  }
+
+  &.button-loading {
+    .loading-spinner {
+      opacity: 1;
+    }
+
+    .button-child {
+      margin-left: 26px;
+    }
+  }
 
   &:disabled {
     cursor: not-allowed;
@@ -175,13 +223,18 @@ const Container = styled.button`
       background-color: var(--accent-9);
       color: var(--accent-9-contrast);
 
-      &.button:hover:enabled {
+      &.button:hover:not(:disabled) {
         background-color: var(--accent-10);
       }
 
-      &.button:active:enabled {
+      &.button:active:not(:disabled) {
         background-color: var(--accent-11);
       }
+    }
+
+    &.color--accent-loading {
+      background-color: var(--accent-a8);
+      color: var(--accent-9-contrast);
     }
 
     &:disabled {
@@ -203,6 +256,11 @@ const Container = styled.button`
       &.button:active:not(:disabled) {
         background-color: var(--accent-a5);
       }
+    }
+
+    &.color--accent-loading {
+      background-color: var(--accent-a3);
+      color: var(--accent-a8);
     }
 
     &:disabled {
@@ -227,6 +285,12 @@ const Container = styled.button`
       }
     }
 
+    &.color--accent-loading {
+      background-color: var(--color-surface-accent);
+      box-shadow: inset 0 0 0 1px var(--accent-a6);
+      color: var(--accent-a8);
+    }
+
     &:disabled {
       color: var(--gray-a8);
       box-shadow: inset 0 0 0 1px var(--gray-a6);
@@ -248,6 +312,11 @@ const Container = styled.button`
       }
     }
 
+    &.color--accent-loading {
+      box-shadow: inset 0 0 0 1px var(--accent-a6);
+      color: var(--accent-a8);
+    }
+
     &:disabled {
       color: var(--gray-a8);
       box-shadow: inset 0 0 0 1px var(--gray-a7);
@@ -266,6 +335,10 @@ const Container = styled.button`
       &.button:active:not(:disabled) {
         background-color: var(--accent-a4);
       }
+    }
+
+    &.color--accent-loading {
+      color: var(--accent-a8);
     }
 
     &:disabled {
@@ -290,6 +363,14 @@ const Container = styled.button`
       font-size: 14px;
       line-height: 20px;
       letter-spacing: 0em;
+
+      .loading-spinner {
+        width: 18px;
+        height: 18px;
+        left: 12px;
+        border: 2px solid #fff;
+        border-bottom-color: transparent;
+      }
     }
 
     &.size--lg {
@@ -301,6 +382,7 @@ const Container = styled.button`
     }
 
     &.size--xl {
+      height: calc(60px * 1);
       padding: 0 24px;
       font-size: 18px;
       line-height: 26px;
