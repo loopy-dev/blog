@@ -1,7 +1,7 @@
-import { forwardRef, useCallback } from 'react';
+import React, { forwardRef, useCallback } from 'react';
 import classNames from 'classnames';
 import styled from 'styled-components';
-import LoadingSpinner from '~components/icons/LoadingSpinner';
+import Spinner from '~components/common/Spinner';
 import { noop } from '~lib/util/function';
 import type { ButtonHTMLAttributes } from 'react';
 
@@ -12,10 +12,11 @@ interface Props extends ButtonHTMLAttributes<HTMLButtonElement> {
   size?: 'sm' | 'md' | 'lg' | 'xl';
   color?: 'accent';
   loading?: boolean;
+  leftContent?: React.ReactNode;
+  rightContent?: React.ReactNode;
 }
 
 // TODO - 모바일 환경에서 hover 효과 변경하기
-// TODO - fullsize일 때만 스피너 출현 시 텍스트가 이동되게 하고 그 외의 경우는 뜨지 않게 할 것
 const Button = (
   {
     children,
@@ -31,56 +32,58 @@ const Button = (
     onMouseMove = noop,
     onMouseUp = noop,
     disabled,
+    leftContent,
+    rightContent,
     ...props
   }: Props,
   ref: React.ForwardedRef<HTMLButtonElement>
 ) => {
   const handleClick: React.MouseEventHandler<HTMLButtonElement> = useCallback(
     (e) => {
-      if (!loading || disabled) {
+      if (!disabled) {
         onClick?.(e);
       }
     },
-    [disabled, loading, onClick]
+    [disabled, onClick]
   );
 
   const handleMouseDown: React.MouseEventHandler<HTMLButtonElement> =
     useCallback(
       (e) => {
-        if (!loading || disabled) {
+        if (!disabled) {
           onMouseDown?.(e);
         }
       },
-      [disabled, loading, onMouseDown]
+      [disabled, onMouseDown]
     );
 
   const handleMouseUp: React.MouseEventHandler<HTMLButtonElement> = useCallback(
     (e) => {
-      if (!loading || disabled) {
+      if (!disabled) {
         onMouseUp?.(e);
       }
     },
-    [disabled, loading, onMouseUp]
+    [disabled, onMouseUp]
   );
 
   const handleMouseEnter: React.MouseEventHandler<HTMLButtonElement> =
     useCallback(
       (e) => {
-        if (!loading || disabled) {
+        if (!disabled) {
           onMouseEnter?.(e);
         }
       },
-      [disabled, loading, onMouseEnter]
+      [disabled, onMouseEnter]
     );
 
   const handleMouseMove: React.MouseEventHandler<HTMLButtonElement> =
     useCallback(
       (e) => {
-        if (!loading || disabled) {
+        if (!disabled) {
           onMouseMove?.(e);
         }
       },
-      [disabled, loading, onMouseMove]
+      [disabled, onMouseMove]
     );
 
   const handleMouseLeave: React.MouseEventHandler<HTMLButtonElement> =
@@ -134,18 +137,20 @@ const Button = (
       onMouseUp={handleMouseUp}
       {...props}
     >
-      <span
-        className={classNames(
-          'inner',
-          'inline-flex',
-          'justify-end',
-          'items-center',
-          'transition-all'
+      <div className={classNames('spinner-wrapper')}>
+        <Spinner className={classNames('loading-spinner')} />
+      </div>
+      <div className={classNames('content-wrapper')}>
+        {leftContent && (
+          <span className={classNames('side-content')}>{leftContent}</span>
         )}
-      >
-        <LoadingSpinner className={classNames('loading-spinner')} />
-        <span className={classNames('button-child')}>{children}</span>
-      </span>
+        <span className={classNames('inner', { 'inner-loading': loading })}>
+          {children}
+        </span>
+        {rightContent && (
+          <span className={classNames('side-content')}>{rightContent}</span>
+        )}
+      </div>
     </Container>
   );
 };
@@ -163,21 +168,30 @@ const Container = styled.button`
   font-weight: 500;
   transition: color 200ms cubic-bezier(0.075, 0.82, 0.165, 1);
 
-  .inner,
-  .button-child {
+  .content-wrapper {
     display: inline-flex;
+    justify-content: center;
     align-items: center;
+    gap: 6px;
+  }
+
+  .inner {
     text-overflow: ellipsis;
     white-space: nowrap;
     overflow: hidden;
-    /* padding-left: 18px;
-    width: calc(100% - 18px); */
   }
 
-  .loading-spinner {
+  .spinner-wrapper {
     position: absolute;
-    opacity: 0;
-    transition: opacity 200ms cubic-bezier(0.075, 0.82, 0.165, 1);
+    display: none;
+    align-items: center;
+
+    .loading-spinner {
+      width: 20px;
+      height: 20px;
+      border: 2px solid;
+      border-bottom-color: transparent;
+    }
 
     &::after {
       content: '';
@@ -185,12 +199,12 @@ const Container = styled.button`
   }
 
   &.button-loading {
-    .loading-spinner {
-      opacity: 1;
+    .spinner-wrapper {
+      display: flex;
     }
 
-    .button-child {
-      margin-left: 26px;
+    .inner {
+      visibility: hidden;
     }
   }
 
@@ -355,6 +369,11 @@ const Container = styled.button`
       font-size: 12px;
       line-height: 16px;
       letter-spacing: 0.0025em;
+
+      .loading-spinner {
+        width: 14px;
+        height: 14px;
+      }
     }
 
     &.size--md {
@@ -367,9 +386,6 @@ const Container = styled.button`
       .loading-spinner {
         width: 18px;
         height: 18px;
-        left: 12px;
-        border: 2px solid #fff;
-        border-bottom-color: transparent;
       }
     }
 
@@ -379,6 +395,11 @@ const Container = styled.button`
       font-size: 16px;
       line-height: 24px;
       letter-spacing: 0em;
+
+      .loading-spinner {
+        width: 22px;
+        height: 22px;
+      }
     }
 
     &.size--xl {
@@ -387,6 +408,11 @@ const Container = styled.button`
       font-size: 18px;
       line-height: 26px;
       letter-spacing: -0.0025em;
+
+      .loading-spinner {
+        width: 24px;
+        height: 24px;
+      }
     }
   }
 
