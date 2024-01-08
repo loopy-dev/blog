@@ -1,6 +1,7 @@
-import { forwardRef, useCallback } from 'react';
+import React, { forwardRef, useCallback } from 'react';
 import classNames from 'classnames';
 import styled from 'styled-components';
+import Spinner from '~components/common/Spinner';
 import { noop } from '~lib/util/function';
 import type { ButtonHTMLAttributes } from 'react';
 
@@ -11,6 +12,8 @@ interface Props extends ButtonHTMLAttributes<HTMLButtonElement> {
   size?: 'sm' | 'md' | 'lg' | 'xl';
   color?: 'accent';
   loading?: boolean;
+  leftContent?: React.ReactNode;
+  rightContent?: React.ReactNode;
 }
 
 // TODO - 모바일 환경에서 hover 효과 변경하기
@@ -29,56 +32,58 @@ const Button = (
     onMouseMove = noop,
     onMouseUp = noop,
     disabled,
+    leftContent,
+    rightContent,
     ...props
   }: Props,
   ref: React.ForwardedRef<HTMLButtonElement>
 ) => {
   const handleClick: React.MouseEventHandler<HTMLButtonElement> = useCallback(
     (e) => {
-      if (!loading) {
+      if (!disabled) {
         onClick?.(e);
       }
     },
-    [loading, onClick]
+    [disabled, onClick]
   );
 
   const handleMouseDown: React.MouseEventHandler<HTMLButtonElement> =
     useCallback(
       (e) => {
-        if (!loading) {
+        if (!disabled) {
           onMouseDown?.(e);
         }
       },
-      [loading, onMouseDown]
+      [disabled, onMouseDown]
     );
 
   const handleMouseUp: React.MouseEventHandler<HTMLButtonElement> = useCallback(
     (e) => {
-      if (!loading) {
+      if (!disabled) {
         onMouseUp?.(e);
       }
     },
-    [loading, onMouseUp]
+    [disabled, onMouseUp]
   );
 
   const handleMouseEnter: React.MouseEventHandler<HTMLButtonElement> =
     useCallback(
       (e) => {
-        if (!loading) {
+        if (!disabled) {
           onMouseEnter?.(e);
         }
       },
-      [loading, onMouseEnter]
+      [disabled, onMouseEnter]
     );
 
   const handleMouseMove: React.MouseEventHandler<HTMLButtonElement> =
     useCallback(
       (e) => {
-        if (!loading) {
+        if (!disabled) {
           onMouseMove?.(e);
         }
       },
-      [loading, onMouseMove]
+      [disabled, onMouseMove]
     );
 
   const handleMouseLeave: React.MouseEventHandler<HTMLButtonElement> =
@@ -94,10 +99,13 @@ const Button = (
   return (
     <Container
       ref={ref}
+      disabled={disabled}
       className={classNames(
         'button',
+        { 'button-loading': loading },
         {
-          'color--accent': color === 'accent',
+          'color--accent': color === 'accent' && !loading,
+          'color--accent-loading': color === 'accent' && loading,
         },
         {
           'size--sm': size === 'sm',
@@ -118,7 +126,8 @@ const Button = (
           'radius--medium': radius === 'medium',
           'radius--large': radius === 'large',
           'radius--full': radius === 'full',
-        }
+        },
+        'transition-all'
       )}
       onClick={handleClick}
       onMouseDown={handleMouseDown}
@@ -128,7 +137,20 @@ const Button = (
       onMouseUp={handleMouseUp}
       {...props}
     >
-      {children}
+      <div className={classNames('spinner-wrapper')}>
+        <Spinner className={classNames('loading-spinner')} />
+      </div>
+      <div className={classNames('content-wrapper')}>
+        {leftContent && (
+          <span className={classNames('side-content')}>{leftContent}</span>
+        )}
+        <span className={classNames('inner', { 'inner-loading': loading })}>
+          {children}
+        </span>
+        {rightContent && (
+          <span className={classNames('side-content')}>{rightContent}</span>
+        )}
+      </div>
     </Container>
   );
 };
@@ -139,12 +161,52 @@ const Container = styled.button`
   display: inline-flex;
   justify-content: center;
   align-items: center;
-  gap: 8px;
+  position: relative;
   user-select: none;
   vertical-align: top;
   flex-shrink: 0;
   font-weight: 500;
-  transition: color 100ms cubic-bezier(0.075, 0.82, 0.165, 1);
+  transition: color 200ms cubic-bezier(0.075, 0.82, 0.165, 1);
+
+  .content-wrapper {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .inner {
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+  }
+
+  .spinner-wrapper {
+    position: absolute;
+    display: none;
+    align-items: center;
+
+    .loading-spinner {
+      width: 20px;
+      height: 20px;
+      border: 2px solid;
+      border-bottom-color: transparent;
+    }
+
+    &::after {
+      content: '';
+    }
+  }
+
+  &.button-loading {
+    .spinner-wrapper {
+      display: flex;
+    }
+
+    .inner {
+      visibility: hidden;
+    }
+  }
 
   &:disabled {
     cursor: not-allowed;
@@ -175,13 +237,18 @@ const Container = styled.button`
       background-color: var(--accent-9);
       color: var(--accent-9-contrast);
 
-      &.button:hover:enabled {
+      &.button:hover:not(:disabled) {
         background-color: var(--accent-10);
       }
 
-      &.button:active:enabled {
+      &.button:active:not(:disabled) {
         background-color: var(--accent-11);
       }
+    }
+
+    &.color--accent-loading {
+      background-color: var(--accent-a8);
+      color: var(--accent-9-contrast);
     }
 
     &:disabled {
@@ -203,6 +270,11 @@ const Container = styled.button`
       &.button:active:not(:disabled) {
         background-color: var(--accent-a5);
       }
+    }
+
+    &.color--accent-loading {
+      background-color: var(--accent-a3);
+      color: var(--accent-a8);
     }
 
     &:disabled {
@@ -227,6 +299,12 @@ const Container = styled.button`
       }
     }
 
+    &.color--accent-loading {
+      background-color: var(--color-surface-accent);
+      box-shadow: inset 0 0 0 1px var(--accent-a6);
+      color: var(--accent-a8);
+    }
+
     &:disabled {
       color: var(--gray-a8);
       box-shadow: inset 0 0 0 1px var(--gray-a6);
@@ -246,6 +324,11 @@ const Container = styled.button`
       &.button:active:not(:disabled) {
         background-color: var(--accent-a3);
       }
+    }
+
+    &.color--accent-loading {
+      box-shadow: inset 0 0 0 1px var(--accent-a6);
+      color: var(--accent-a8);
     }
 
     &:disabled {
@@ -268,6 +351,10 @@ const Container = styled.button`
       }
     }
 
+    &.color--accent-loading {
+      color: var(--accent-a8);
+    }
+
     &:disabled {
       color: var(--gray-a8);
       background-color: transparent;
@@ -282,6 +369,11 @@ const Container = styled.button`
       font-size: 12px;
       line-height: 16px;
       letter-spacing: 0.0025em;
+
+      .loading-spinner {
+        width: 14px;
+        height: 14px;
+      }
     }
 
     &.size--md {
@@ -290,6 +382,11 @@ const Container = styled.button`
       font-size: 14px;
       line-height: 20px;
       letter-spacing: 0em;
+
+      .loading-spinner {
+        width: 18px;
+        height: 18px;
+      }
     }
 
     &.size--lg {
@@ -298,13 +395,24 @@ const Container = styled.button`
       font-size: 16px;
       line-height: 24px;
       letter-spacing: 0em;
+
+      .loading-spinner {
+        width: 22px;
+        height: 22px;
+      }
     }
 
     &.size--xl {
+      height: calc(60px * 1);
       padding: 0 24px;
       font-size: 18px;
       line-height: 26px;
       letter-spacing: -0.0025em;
+
+      .loading-spinner {
+        width: 24px;
+        height: 24px;
+      }
     }
   }
 
